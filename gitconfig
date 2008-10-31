@@ -1,0 +1,7 @@
+[user]
+	name = Drew Olson
+	email = drew@drewolson.org
+[alias]
+	co = checkout
+[apply]
+	whitespace = nowarn

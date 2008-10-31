@@ -1,0 +1,16 @@
+term xterm
+defutf8 on
+defflow off
+vbell off
+startup_message off
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+escape ``
+
+# Testing New Stuff
+defscrollback 1000
+bind s split
+bind j focus down
+bind k focus up
+bind = resize =
+bind + resize +1
+bind - resize -1
