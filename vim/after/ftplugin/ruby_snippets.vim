@@ -7,6 +7,9 @@ let et = g:snip_end_tag
 let cd = g:snip_elem_delim
 
 exec "Snippet do do<CR>".st.et."<CR>end"
+exec "Snippet rw attr_accessor :".st.et.""
+exec "Snippet r attr_reader :".st.et.""
+exec "Snippet w attr_writer :".st.et.""
 exec "Snippet class class ".st."className".et."<CR>".st.et."<CR>end"
 exec "Snippet begin begin<CR>".st.et."<CR>rescue ".st."Exception".et." => ".st."e".et."<CR>".st.et."<CR>end"
 exec "Snippet each_with_index each_with_index do |".st."element".et.", ".st."index".et."|<CR>".st.et."<CR>end"
