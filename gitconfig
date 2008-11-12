@@ -5,3 +5,7 @@
 	co = checkout
 [apply]
 	whitespace = nowarn
+[color]
+	diff = auto
+	status = auto
+	branch = auto
