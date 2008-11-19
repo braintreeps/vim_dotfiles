@@ -37,5 +37,8 @@ if version >= 600
     set foldenable
     set foldmethod=syntax
     set foldlevel=999
+endif
+
+if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 endif
