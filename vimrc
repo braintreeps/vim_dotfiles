@@ -30,8 +30,6 @@ map <silent> \ff :FuzzyFinderTaggedFile<CR>
 map <silent> \ft :FuzzyFinderTag<CR>
 map <silent> \fb :FuzzyFinderBuffer<CR>
 map <silent> \nh :nohls<CR>
-map <silent> \cc :NERDComComment<CR>
-map <silent> \tc :NERDComToggleComment<CR>
 
 if version >= 600
     set foldenable
