@@ -13,6 +13,7 @@ set textwidth=0 nosmartindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 let html_use_css=1
 let html_number_lines=0
+let g:clj_highlight_builtins = 1
 
 autocmd FileType ruby,eruby,io,cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
