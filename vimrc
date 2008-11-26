@@ -22,6 +22,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 map <silent> \rb :!ruby %<CR>
+map <silent> \cj :!clj %<CR>
 map <silent> \rs :!spec %<CR>
 map \rd Orequire 'ruby-debug';debugger<ESC>
 map <silent> \io :!io %<CR>
