@@ -8,6 +8,13 @@
 :VimballList	pi_vimball.txt	/*:VimballList*
 CreateBundleSnippet	snippets_emu.txt	/*CreateBundleSnippet*
 CreateSnippet	snippets_emu.txt	/*CreateSnippet*
+EvaluateSexp	gorilla.txt	/*EvaluateSexp*
+EvaluateTop	gorilla.txt	/*EvaluateTop*
+FindDocumentation	gorilla.txt	/*FindDocumentation*
+LookupDocumentation	gorilla.txt	/*LookupDocumentation*
+LookupWord	gorilla.txt	/*LookupWord*
+MacroExpand	gorilla.txt	/*MacroExpand*
+MacroExpand1	gorilla.txt	/*MacroExpand1*
 MatchError	matchit.txt	/*MatchError*
 NERDChristmasTree	NERD_tree.txt	/*NERDChristmasTree*
 NERDTree	NERD_tree.txt	/*NERDTree*
@@ -67,6 +74,7 @@ NERDTreeTodo	NERD_tree.txt	/*NERDTreeTodo*
 NERDTreeWinPos	NERD_tree.txt	/*NERDTreeWinPos*
 NERDTreeWinSize	NERD_tree.txt	/*NERDTreeWinSize*
 NERD_tree.txt	NERD_tree.txt	/*NERD_tree.txt*
+StartRepl	gorilla.txt	/*StartRepl*
 Vimball-copyright	pi_vimball.txt	/*Vimball-copyright*
 [%	matchit.txt	/*[%*
 ]%	matchit.txt	/*]%*
@@ -96,6 +104,9 @@ buffer-explorer	bufexplorer.txt	/*buffer-explorer*
 clojure.vim	clojure.txt	/*clojure.vim*
 config/rails.vim	rails.txt	/*config\/rails.vim*
 creating-snippets	snippets_emu.txt	/*creating-snippets*
+es	gorilla.txt	/*es*
+et	gorilla.txt	/*et*
+fd	gorilla.txt	/*fd*
 ft-clj-syntax	clojure.txt	/*ft-clj-syntax*
 g%	matchit.txt	/*g%*
 g:bufExplorerDefaultHelp	bufexplorer.txt	/*g:bufExplorerDefaultHelp*
@@ -127,7 +138,11 @@ g:vimball_home	pi_vimball.txt	/*g:vimball_home*
 g:vimball_mkdir	pi_vimball.txt	/*g:vimball_mkdir*
 g:vimball_path_escape	pi_vimball.txt	/*g:vimball_path_escape*
 gist.vim	gist.txt	/*gist.vim*
+gorilla.txt	gorilla.txt	/*gorilla.txt*
+ld	gorilla.txt	/*ld*
 loaded_nerd_tree	NERD_tree.txt	/*loaded_nerd_tree*
+lw	gorilla.txt	/*lw*
+m1	gorilla.txt	/*m1*
 macros/rails.vim	rails.txt	/*macros\/rails.vim*
 matchit	matchit.txt	/*matchit*
 matchit-%	matchit.txt	/*matchit-%*
@@ -154,6 +169,7 @@ matchit-troubleshoot	matchit.txt	/*matchit-troubleshoot*
 matchit-v_%	matchit.txt	/*matchit-v_%*
 matchit.txt	matchit.txt	/*matchit.txt*
 matchit.vim	matchit.txt	/*matchit.vim*
+me	gorilla.txt	/*me*
 named-tags	snippets_emu.txt	/*named-tags*
 o_[%	matchit.txt	/*o_[%*
 o_]%	matchit.txt	/*o_]%*
@@ -330,6 +346,7 @@ snippets_emu-features	snippets_emu.txt	/*snippets_emu-features*
 snippets_emu-options	snippets_emu.txt	/*snippets_emu-options*
 snippets_emu-troubleshooting	snippets_emu.txt	/*snippets_emu-troubleshooting*
 snippets_emu.txt	snippets_emu.txt	/*snippets_emu.txt*
+sr	gorilla.txt	/*sr*
 v_[%	matchit.txt	/*v_[%*
 v_]%	matchit.txt	/*v_]%*
 v_a%	matchit.txt	/*v_a%*
