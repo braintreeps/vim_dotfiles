@@ -19,6 +19,7 @@ autocmd FileType ruby,eruby,io,cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 map <silent> \rb :!ruby %<CR>
@@ -41,4 +42,5 @@ endif
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+    autocmd FileType tex setlocal spell spelllang=en_us
 endif
