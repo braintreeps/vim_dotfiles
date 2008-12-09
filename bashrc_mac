@@ -38,5 +38,7 @@ if [ -f /opt/local/etc/bash_completion ]; then
     source /opt/local/etc/bash_completion
 fi
 
-source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
+if [ -f /opt/local/share/doc/git-core/contrib/completion/git-completion.bash ]; then
+    source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
+fi
 
