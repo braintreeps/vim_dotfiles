@@ -44,5 +44,9 @@ if !exists("no_plugin_maps") && !exists("no_clojure_gorilla_maps")
     ruby Gorilla.setup_maps()
 endif
 
+if exists("gorilla_want_omni") && gorilla_want_omni == 1
+    setlocal omnifunc=GorillaOmniTrampoline
+endif
+
 " Epilog
 let &cpo = s:save_cpo

@@ -57,6 +57,23 @@ if !exists("g:GorillaBrowser")
     endif
 endif
 
+function! GorillaOmniTrampoline(findstart, base)
+    if a:findstart
+        let pos = getpos(".")
+        normal b
+        let pos2 = col(".")
+        call setpos(".", pos)
+        return pos2 - 1
+    else
+        ruby <<EOF
+        base = VIM.evaluate("a:base")
+        result = Gorilla.omni_complete(base)
+        VIM.command("let result = " + result)
+EOF
+        return result
+    endif
+endfunction
+
 " The Gorilla Module
 ruby <<EOF
 require 'net/telnet'
@@ -132,24 +149,24 @@ module Gorilla
     def Gorilla.setup_maps()
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>lw",
                 ":ruby Gorilla.lookup_word(Gorilla.namespace_of($curbuf), Gorilla::Cmd.expand('<cword>'))<CR>")
-        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>ld",
+        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>li",
                 ":ruby Gorilla.lookup_word()<CR>")
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>fd",
                 ":ruby Gorilla.find_doc()<CR>")
 
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>gw",
                 ":ruby Gorilla.go_word(Gorilla.namespace_of($curbuf), Gorilla::Cmd.expand('<cword>'))<CR>")
-        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>gd",
+        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>gi",
                 ":ruby Gorilla.go_word()<CR>")
 
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>sw",
                 ":ruby Gorilla.show_word(Gorilla.namespace_of($curbuf), Gorilla::Cmd.expand('<cword>'))<CR>")
-        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>sd",
+        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>si",
                 ":ruby Gorilla.show_word()<CR>")
 
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>jw",
                 ":ruby Gorilla.javadoc_word(Gorilla.namespace_of($curbuf), Gorilla::Cmd.expand('<cword>'))<CR>")
-        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>jd",
+        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>ji",
                 ":ruby Gorilla.javadoc_word()<CR>")
 
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>et",
@@ -160,6 +177,9 @@ module Gorilla
                 ":ruby Gorilla.send_block()<CR>")
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>ef",
                 ":ruby Gorilla.send_file()<CR>")
+
+        Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>rf",
+                ":ruby Gorilla.require_file()<CR>")
 
         Cmd.map("n", false, "<buffer> <silent>", "<LocalLeader>me",
                 ":ruby Gorilla.expand_macro(true)<CR>")
@@ -239,7 +259,7 @@ module Gorilla
     end
 
     def Gorilla.command(t, cmd)
-        result = t.cmd(cmd)
+        result = t.cmd(cmd + 0x00.chr)
         return result.sub(/^Gorilla=> /, "")
     end
 
@@ -256,6 +276,18 @@ module Gorilla
         Gorilla.print_in_buffer($curbuf, res)
         Cmd.normal("ggdd")
         Cmd.resize([$curbuf.length, 3].max)
+    end
+
+    def Gorilla.omni_complete(base)
+        klass, stem = base.split(/\//)
+        stem = stem.nil? ? "" : stem
+        ns = Gorilla.namespace_of($curbuf)
+        cmd = "(de.kotka.gorilla/get-static-info #{klass})"
+        completions = Gorilla.one_command_in_ns(ns, cmd).split(/\n/)
+        completions.pop
+        completions = completions.select { |c| !c.nil? && c =~ /^#{stem}/ }
+        completions = completions.map { |c| "{ 'word': '#{klass + "/" + c}', 'abbr': '#{c}' }" }
+        return "[" + completions.join(",") + "]"
     end
 
     def Gorilla.word_or_input(args)
@@ -372,6 +404,13 @@ module Gorilla
 
     def Gorilla.check_completeness(text)
         cmd = "(de.kotka.gorilla/check-completeness \"#{text}\")"
+        Gorilla.show_result(Gorilla.one_command(cmd))
+    end
+
+    def Gorilla.require_file()
+        ns = Gorilla.namespace_of($curbuf)
+        return if ns == "user"
+        cmd = "(clojure.core/require :reload '#{ns})"
         Gorilla.show_result(Gorilla.one_command(cmd))
     end
 
