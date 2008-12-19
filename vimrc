@@ -15,7 +15,7 @@ let html_use_css=1
 let html_number_lines=0
 let g:clj_highlight_builtins = 1
 
-autocmd FileType ruby,eruby,io,cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType ruby,eruby,io,cpp,html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
