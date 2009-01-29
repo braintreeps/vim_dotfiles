@@ -12,6 +12,10 @@ factor is, that it's a two-way street where the screen interface is only one
 way. This makes eg. balloons with docstrings possible. Also using a second
 channel to send expressions doesn't interfere with the user command history.
 
+Unfortunately Vim itself is quite powerful but in some strange way incapable
+of doing what we want. So we have to resort to the Ruby interface to connect
+via the network to a running Clojure repl server.
+
 For Windows users the Ruby dependency might be also more tolerable than the
 Cygwin dependency for screen.
 
@@ -30,6 +34,17 @@ to kill it. Example invocation:
         java -cp clojure.jar:clojure-contrib.jar:gorilla.jar de.kotka.gorilla
 <
 This may look different depending on your system.
+
+Requirements
+------------
+
+As stated above, Gorilla needs a Ruby enabled Vim, in particular this
+means that Ruby must be installed on your system. Note: The Windows
+installers and MacVim already ship with Ruby enabled. For Unix, your vendor
+probably provides similar packages.
+
+Gorilla depends on the VimClojure to extract s-expressions. Make sure that
+syntax highlighting and filetype plugins are activated.
 
 Keybindings
 -----------
@@ -109,6 +124,9 @@ Keybindings
 <LocalLeader>sr                                 *sr* *StartRepl*
                         Start a new Vim Repl in a fresh buffer. There
                         might be multiple Repls at the same time.
+
+Note: <LocalLeader> is a Vim feature. More information can be found
+under the |maplocalleader| help topic.
 
 Vim Repl
 --------

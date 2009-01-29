@@ -13,19 +13,18 @@ set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 let html_use_css=1
 let html_number_lines=0
+
 let g:clj_highlight_builtins = 1
 
-autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 map <silent> \rb :!ruby %<CR>
 map <silent> \cj :!clj %<CR>
-map <silent> \rs :!spec %<CR>
 map \rd Orequire 'ruby-debug';debugger<ESC>
-map <silent> \io :!io %<CR>
 map <silent> \rt :!ctags -R -f TAGS --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
 map <silent> \nt :NERDTreeToggle<CR>
 map <silent> \ff :FuzzyFinderTaggedFile<CR>

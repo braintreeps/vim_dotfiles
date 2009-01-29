@@ -7,6 +7,10 @@ The clojure syntax highlighting provides two options:
 		are highlighted. This useful to distuingish macros and special
 		forms from functions.
 
+	g:clj_highlight_contrib
+		If it exists and is nonzero, then Clojure-Contrib's functions
+		are highlighted.
+
 	g:clj_paren_rainbow
 		If it exists and is nonzero, then differing levels of
 		parenthesisation will receive different highlighting.

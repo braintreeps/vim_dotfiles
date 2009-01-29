@@ -1,7 +1,6 @@
 " Vim filetype plugin file
 " Language:     Clojure
 " Maintainer:   Meikel Brandmeyer <mb@kotka.de>
-" Last Change:  2008 Aug 19
 
 " Only do this when not done yet for this buffer
 if exists("b:did_ftplugin")
@@ -27,6 +26,17 @@ setlocal commentstring=;%s
 " Set 'comments' to format dashed lists in comments.
 setlocal comments=sO:;\ -,mO:;\ \ ,n:;
 
+" Take all directories of the CLOJURE_SOURCE_DIRS environment variable
+" and add them to the path option.
+if has("win32") || has("win64")
+	let s:delim = ";"
+else
+	let s:delim = ":"
+endif
+for dir in split($CLOJURE_SOURCE_DIRS, s:delim)
+	call vimclojure#AddPathToOption(dir . "/**", 'path')
+endfor
+
 " When the matchit plugin is loaded, this makes the % command skip parens and
 " braces in comments.
 let b:match_words = &matchpairs
@@ -39,16 +49,8 @@ if has("gui_win32") && !exists("b:browsefilter")
 				\ "All Files (*.*)\t*.*\n"
 endif
 
-let s:completions = split(globpath(&rtp, "ftplugin/clojure/completions"), '\n')
-if s:completions != []
-	if exists("*fnameescape")
-		let dictionary = fnameescape(s:completions[0])
-	else
-		let dictionary = s:completions[0]
-	endif
-
-	execute "setlocal complete+=k" . dictionary
-endif
-unlet s:completions
+for ns in ['clojure.core', 'clojure.set', 'clojure.xml', 'clojure.zip']
+	call vimclojure#AddCompletions(ns)
+endfor
 
 let &cpo = s:cpo_save
