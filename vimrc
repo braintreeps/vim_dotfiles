@@ -19,6 +19,8 @@ let g:clj_highlight_builtins = 1
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
+let g:rubycomplete_buffer_loading = 1
+
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
