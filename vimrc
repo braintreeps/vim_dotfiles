@@ -1,6 +1,7 @@
 set nocompatible
 syntax on
 filetype plugin indent on
+compiler ruby
 
 set hlsearch
 set number

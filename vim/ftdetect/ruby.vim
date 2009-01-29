@@ -1,6 +1,9 @@
 " Ruby
 au BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspec	set filetype=ruby
 
+" Rack
+au BufNewFile,BufRead config.ru set filetype=ruby
+
 " Ruby on Rails
 au BufNewFile,BufRead *.builder,*.rxml,*.rjs		set filetype=ruby
 
