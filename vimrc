@@ -22,15 +22,17 @@ let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
 
+let g:fuzzy_ceiling = 50000
+
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 map <silent> \rb :!ruby %<CR>
 map <silent> \cj :!clj %<CR>
 map \rd Orequire 'ruby-debug';debugger<ESC>
-map <silent> \rt :!ctags -R -f TAGS --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
+map <silent> \rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
 map <silent> \nt :NERDTreeToggle<CR>
-map <silent> \ff :FuzzyFinderTaggedFile<CR>
+map <silent> \ff :FuzzyFinderFile<CR>
 map <silent> \ft :FuzzyFinderTag<CR>
 map <silent> \fb :FuzzyFinderBuffer<CR>
 map <silent> \nh :nohls<CR>
