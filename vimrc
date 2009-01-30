@@ -32,7 +32,7 @@ map <silent> \cj :!clj %<CR>
 map \rd Orequire 'ruby-debug';debugger<ESC>
 map <silent> \rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
 map <silent> \nt :NERDTreeToggle<CR>
-map <silent> \ff :FuzzyFinderFile<CR>
+map <silent> \ff :FuzzyFinderTextMate<CR>
 map <silent> \ft :FuzzyFinderTag<CR>
 map <silent> \fb :FuzzyFinderBuffer<CR>
 map <silent> \nh :nohls<CR>
