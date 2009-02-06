@@ -1,0 +1,3 @@
+map \nh :nohls<CR>
+set complete=bhSs
+autocmd LocationChange .* js modes.passAllKeys = /(www|mail)\.google\.com/.test(buffer.URL)

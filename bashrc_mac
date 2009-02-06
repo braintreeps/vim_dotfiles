@@ -8,6 +8,7 @@ export EDITOR='vim'
 
 alias slice='ssh drew@drewolson.org'
 alias sbcl='sbcl --noinform'
+alias sd='screen -x drew'
 
 parse_git_branch() { 
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' 

@@ -24,6 +24,8 @@ let g:rubycomplete_buffer_loading = 1
 
 let g:fuzzy_ceiling = 50000
 
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
