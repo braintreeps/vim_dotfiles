@@ -15,7 +15,7 @@ all_platforms = Dir.glob(File.join(working_dir,"all","*"))
 (platform_specific + all_platforms).each do |filename|
   sym_link = File.join(home_dir,".#{File.basename(filename)}")
 
-  FileUtils.rm sym_link
+  FileUtils.rm sym_link if File.exist?(sym_link)
   FileUtils.ln_s filename,sym_link
 end
 
