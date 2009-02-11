@@ -29,15 +29,15 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
-map <silent> \rb :!ruby %<CR>
-map <silent> \cj :!clj %<CR>
-map \rd Orequire 'ruby-debug';debugger<ESC>
-map <silent> \rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
-map <silent> \nt :NERDTreeToggle<CR>
-map <silent> \ff :FuzzyFinderTextMate<CR>
-map <silent> \ft :FuzzyFinderTag<CR>
-map <silent> \fb :FuzzyFinderBuffer<CR>
-map <silent> \nh :nohls<CR>
+map <silent> <LocalLeader>rb :!ruby %<CR>
+map <silent> <LocalLeader>cj :!clj %<CR>
+map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
+map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
+map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
+map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
+map <silent> <LocalLeader>ft :FuzzyFinderTag<CR>
+map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
+map <silent> <LocalLeader>nh :nohls<CR>
 
 if version >= 600
     set foldenable
