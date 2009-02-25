@@ -38,6 +38,7 @@ map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
 map <silent> <LocalLeader>ft :FuzzyFinderTag<CR>
 map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
+map <silent> <LocalLeader>aw :Ack <C-R><C-W><CR>
 
 if version >= 600
     set foldenable
