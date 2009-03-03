@@ -1,11 +1,15 @@
 command RunRubyFocusedUnitTest :call <SID>RunRubyFocusedUnitTest()
 
 function! s:RunRubyFocusedUnitTest()
-  ruby RubyFocusedUnitTest.new.run_test
+  ruby RubyTestRunner.new.run_test
+endfunction
+
+function! s:RunAllRubyTests()
+  ruby RubyTestRunner.new.run_all
 endfunction
 
 ruby << EOF
-class RubyFocusedUnitTest
+class RubyTestRunner
   def run_test
     @file_name = VIM::Buffer.current.name
     @line_number = VIM::Buffer.current.line_number 
@@ -23,15 +27,24 @@ class RubyFocusedUnitTest
       if lines[line_number] =~ /def (test_\w+)/ 
         method_name = $1
         break
-      elsif lines[line_number] =~ /test "([\w\s]+)"/ 
-        method_name = "test_" + $1.split(" ").join("_")
+      elsif lines[line_number] =~ /test ('|")([^'"]+)('|")/ 
+        method_name = "test_" + $2.split(" ").join("_")
         break
       end
     end
 
     if method_name
-      VIM::command("!ruby #{@file_name} -n #{method_name}")
+      VIM::command("bel new")
+      VIM::command("r !ruby #{@file_name} -n \"#{method_name}\"")
+      VIM::command("setlocal nobuflisted")
     end
+  end
+
+  def run_all
+    @file_name = VIM::Buffer.current.name
+    VIM::command("bel new")
+    VIM::command("r !ruby #{@file_name}")
+    VIM::command("setlocal nobuflisted")
   end
 end
 EOF
