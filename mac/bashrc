@@ -1,4 +1,4 @@
-export PATH=/opt/local/bin:/usr/local/bin:~/bin:$PATH
+export PATH=/opt/local/bin:/usr/local/bin:~/bin:/Applications/plt_scheme/bin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export JAVA_HOME=/Library/Java/Home
 export VIM_APP_DIR=/Applications/MacVim/
