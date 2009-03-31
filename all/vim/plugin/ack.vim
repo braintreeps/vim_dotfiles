@@ -38,6 +38,7 @@ function! s:Ack(...)
 
   cgetexpr system(join(args, ' '))
   silent exec g:AckOpenWinCmd
+  echo 'Ack finished!'
 endfunction
 
 command! -nargs=* -complete=file Ack :call s:Ack(<f-args>)
