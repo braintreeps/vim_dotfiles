@@ -16,6 +16,10 @@ let html_use_css=1
 let html_number_lines=0
 
 let g:clj_highlight_builtins = 1
+let g:clj_highlight_contrib = 1
+let g:clj_paren_rainbow = 1 
+
+let g:clj_wants_gorilla = 1
 
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
@@ -29,8 +33,8 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
-map <silent> <LocalLeader>rb :RunAllRubyTests<CR>
-map <silent> <LocalLeader>rf :RunRubyFocusedUnitTest<CR>
+map <silent> <LocalLeader>rb :!ruby %<CR>
+map <silent> <LocalLeader>rt :RunRubyFocusedUnitTest<CR>
 map <silent> <LocalLeader>cj :!clj %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
