@@ -19,8 +19,6 @@ let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
 let g:clj_paren_rainbow = 1 
 
-let g:xxxxclj_want_gorilla = 1
-
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
@@ -37,6 +35,7 @@ map <silent> <LocalLeader>rb :!ruby %<CR>
 map <silent> <LocalLeader>rs :!ruby -c %<CR>
 map <silent> <LocalLeader>cj :!clj %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
+map <silent> <LocalLeader>rf :RunRubyFocusedUnitTest<CR>
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
