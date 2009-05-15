@@ -32,6 +32,7 @@ autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 map <silent> <LocalLeader>rb :!ruby %<CR>
+map <silent> <LocalLeader>sr :!spec %<CR>
 map <silent> <LocalLeader>rs :!ruby -c %<CR>
 map <silent> <LocalLeader>cj :!clj %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
