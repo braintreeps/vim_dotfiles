@@ -15,6 +15,8 @@ set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 let html_use_css=1
 let html_number_lines=0
 
+
+let clj_want_gorilla = 1
 let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
 let g:clj_paren_rainbow = 1 
@@ -32,11 +34,10 @@ autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 map <silent> <LocalLeader>rb :!ruby %<CR>
-map <silent> <LocalLeader>sr :!spec %<CR>
-map <silent> <LocalLeader>rs :!ruby -c %<CR>
+map <silent> <LocalLeader>rs :!spec %<CR>
 map <silent> <LocalLeader>cj :!clj %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
-map <silent> <LocalLeader>rf :RunRubyFocusedUnitTest<CR>
+map <silent> <LocalLeader>rr :RunRubyFocusedUnitTest<CR>
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
