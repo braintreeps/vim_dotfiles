@@ -16,7 +16,6 @@ set dir=/tmp
 let html_use_css=1
 let html_number_lines=0
 
-
 let clj_want_gorilla = 1
 let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
@@ -45,7 +44,7 @@ map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
 map <silent> <LocalLeader>ft :FuzzyFinderTag<CR>
 map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
-map <silent> <LocalLeader>aw :Ack <C-R><C-W><CR>
+map <LocalLeader>aw :Ack <C-R><C-W> 
 map <silent> <LocalLeader>sd :VCSDiff<CR>
 map <silent> <LocalLeader>sb :VCSBlame<CR>
 map <silent> <LocalLeader>sl :VCSLog<CR>
