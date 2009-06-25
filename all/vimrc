@@ -34,7 +34,7 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
-map <silent> <LocalLeader>rb :!ruby %<CR>
+map <silent> <LocalLeader>rb :RunAllRubyTests<CR>
 map <silent> <LocalLeader>rs :!spec %<CR>
 map <silent> <LocalLeader>cj :!clj %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
@@ -49,6 +49,7 @@ map <silent> <LocalLeader>aw :Ack <C-R><C-W><CR>
 map <silent> <LocalLeader>sd :VCSDiff<CR>
 map <silent> <LocalLeader>sb :VCSBlame<CR>
 map <silent> <LocalLeader>sl :VCSLog<CR>
+map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
