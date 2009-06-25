@@ -56,10 +56,22 @@ class RubyFocusedUnitTest
       buffer.bdelete! 
     end
 
-    test_output = `#{test_command}`
+    buffer = VIM::Buffer.create DEFAULT_OUTPUT_BUFFER, :location => :below, :text => "--- Run Focused Unit Test ---\n\n"
+    VIM.command("setlocal buftype=nowrite")
 
-    VIM::Buffer.create DEFAULT_OUTPUT_BUFFER, :location => :below, :text => test_output
-    VIM::command("setlocal buftype=nowrite")
+    open("| #{test_command}", "r") do |io|
+      begin
+        loop do
+          input = io.readpartial(1024)
+          first, *rest = input.split(/\n/, -1)
+          buffer[buffer.length] = buffer[buffer.length] + first
+          rest.each {|l| buffer.append buffer.length, l }
+          VIM.command "redraw"
+        end
+      rescue EOFError
+      end
+    end
+
   end
 
   def current_file
