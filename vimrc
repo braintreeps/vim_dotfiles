@@ -40,7 +40,7 @@ map <silent> <LocalLeader>rs :!spec %<CR>
 map <silent> <LocalLeader>cj :!clj %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
 map <silent> <LocalLeader>rr :RunRubyFocusedUnitTest<CR>
-map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
+map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
@@ -51,7 +51,9 @@ map <LocalLeader>aw :Ack <C-R><C-W>
 map <silent> <LocalLeader>sd :VCSDiff<CR>
 map <silent> <LocalLeader>sb :VCSBlame<CR>
 map <silent> <LocalLeader>sl :VCSLog<CR>
+map <silent> <LocalLeader>sr :VCSRevert<CR>
 map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
+map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
