@@ -34,12 +34,9 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
-map <silent> <LocalLeader>rb :RunAllRubyTests<CR>
-map <silent> <LocalLeader>rc :!ruby -c %<CR>
-map <silent> <LocalLeader>rs :!spec %<CR>
+
+autocmd FileType ruby runtime ruby_mappings.vim
 map <silent> <LocalLeader>cj :!clj %<CR>
-map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
-map <silent> <LocalLeader>rr :RunRubyFocusedUnitTest<CR>
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|vendor\|db\|pkg" --extra=+f<CR>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
