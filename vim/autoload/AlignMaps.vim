@@ -1,13 +1,13 @@
 " AlignMaps.vim : support functions for AlignMaps
 "   Author: Charles E. Campbell, Jr.
-"   Date:   Oct 24, 2008
-" Version:           40
+"   Date:   Mar 03, 2009
+" Version:           41
 " ---------------------------------------------------------------------
 "  Load Once: {{{1
 if &cp || exists("g:loaded_AlignMaps")
  finish
 endif
-let g:loaded_AlignMaps= "v40"
+let g:loaded_AlignMaps= "v41"
 let s:keepcpo         = &cpo
 set cpo&vim
 
@@ -16,7 +16,7 @@ set cpo&vim
 
 " ---------------------------------------------------------------------
 " AlignMaps#WrapperStart: {{{2
-fun! AlignMaps#WrapperStart(vis)
+fun! AlignMaps#WrapperStart(vis) range
 "  call Dfunc("AlignMaps#WrapperStart(vis=".a:vis.")")
 
   if a:vis
@@ -55,7 +55,7 @@ endfun
 
 " ---------------------------------------------------------------------
 " AlignMaps#WrapperEnd:	{{{2
-fun! AlignMaps#WrapperEnd()
+fun! AlignMaps#WrapperEnd() range
 "  call Dfunc("AlignMaps#WrapperEnd() alignmaps_wrapcnt=".s:alignmaps_wrapcnt." my=".line("'y")." mz=".line("'z"))
 
   " remove trailing white space introduced by whatever in the modification zone
@@ -103,7 +103,7 @@ endfun
 
 " ---------------------------------------------------------------------
 " AlignMaps#StdAlign: some semi-standard align calls {{{2
-fun! AlignMaps#StdAlign(mode)
+fun! AlignMaps#StdAlign(mode) range
 "  call Dfunc("AlignMaps#StdAlign(mode=".a:mode.")")
   if     a:mode == 1
    " align on @
@@ -157,12 +157,12 @@ endfun
 
 " ---------------------------------------------------------------------
 " AlignMaps#Equals: supports \t= and \T= {{{2
-fun! AlignMaps#Equals()
+fun! AlignMaps#Equals() range
 "  call Dfunc("AlignMaps#Equals()")
   'a,'zs/\s\+\([*/+\-%|&\~^]\==\)/ \1/e
   'a,'zs@ \+\([*/+\-%|&\~^]\)=@\1=@ge
-  'a,'zs/==/\="\<Char-0xff>\<Char-0xff>"/ge
-  'a,'zs/!=/\="!\<Char-0xff>"/ge
+  'a,'zs/==/\="\<Char-0x0f>\<Char-0x0f>"/ge
+  'a,'zs/\([!<>:]\)=/\=submatch(1)."\<Char-0x0f>"/ge
   norm g'zk
   AlignCtrl mIp1P1=l =
   AlignCtrl g =
@@ -174,15 +174,15 @@ fun! AlignMaps#Equals()
    'a,'z-1v/^\s*\/[*/]/s/\/[*/]/@&@/e
    'a,'z-1v/^\s*\/[*/]/s/\*\//@&/e
    if exists("g:mapleader")
-	exe "norm 'zk"
-	call AlignMaps#StdAlign(1)
+    exe "norm 'zk"
+    call AlignMaps#StdAlign(1)
    else
-	exe "norm 'zk"
-	call AlignMaps#StdAlign(1)
+    exe "norm 'zk"
+    call AlignMaps#StdAlign(1)
    endif
    'y,'zs/^\(\s*\) @/\1/e
   endif
-  'a,'z-1s/\%xff/=/ge
+  'a,'z-1s/\%x0f/=/ge
   'y,'zs/ @//eg
 "  call Dret("AlignMaps#Equals")
 endfun

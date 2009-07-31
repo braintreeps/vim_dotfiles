@@ -1,7 +1,7 @@
 " Align: tool to align multiple fields based on one or more separators
 "   Author:		Charles E. Campbell, Jr.
-"   Date:		Oct 08, 2008
-"   Version:	34
+"   Date:		Mar 03, 2009
+"   Version:	35
 " GetLatestVimScripts: 294 1 :AutoInstall: Align.vim
 " GetLatestVimScripts: 1066 1 :AutoInstall: cecutil.vim
 " Copyright:    Copyright (C) 1999-2007 Charles E. Campbell, Jr. {{{1
@@ -21,10 +21,10 @@
 
 " ---------------------------------------------------------------------
 " Load Once: {{{1
-if exists("g:loaded_align") || &cp
+if exists("g:loaded_Align") || &cp
  finish
 endif
-let g:loaded_align = "v34"
+let g:loaded_Align = "v35"
 if v:version < 700
  echohl WarningMsg
  echo "***warning*** this version of Align needs vim 7.0"
@@ -36,8 +36,18 @@ set cpo&vim
 "DechoTabOn
 
 " ---------------------------------------------------------------------
-" Debugging Support:
+" Debugging Support: {{{1
 "if !exists("g:loaded_Decho") | runtime plugin/Decho.vim | endif
+
+" ---------------------------------------------------------------------
+" Options: {{{1
+if !exists("g:Align_xstrlen")
+ if &enc == "latin1" || $LANG == "en_US.UTF-8" || !has("multi_byte")
+  let g:Align_xstrlen= 0
+ else
+  let g:Align_xstrlen= 1
+ endif
+endif
 
 " ---------------------------------------------------------------------
 " Align#AlignCtrl: enter alignment patterns here {{{1
@@ -333,9 +343,14 @@ endfun
 fun! Align#Align(hasctrl,...) range
 "  call Dfunc("Align#Align(hasctrl=".a:hasctrl.",...) a:0=".a:0)
 
-  " sanity check
+  " sanity checks
   if string(a:hasctrl) != "0" && string(a:hasctrl) != "1"
    echohl Error|echo 'usage: Align#Align(hasctrl<'.a:hasctrl.'> (should be 0 or 1),"separator(s)"  (you have '.a:0.') )'|echohl None
+"   call Dret("Align#Align")
+   return
+  endif
+  if exists("s:AlignStyle") && s:AlignStyle == ":"
+   echohl Error |echo '(Align#Align) your AlignStyle is ":", which implies "do-no-alignment"!'|echohl None
 "   call Dret("Align#Align")
    return
   endif
@@ -986,12 +1001,12 @@ fun! s:Strlen(x)
    " 'tabstop', wide CJK as 2 rather than 1, Arabic alif as zero when immediately 
    " preceded by lam, one otherwise, etc.)
    " (comment from TM, solution from me)
-   let modkeep= &mod
+   let modkeep= &l:mod
    exe "norm! o\<esc>"
    call setline(line("."),a:x)
    let ret= virtcol("$") - 1
    d
-   let &mod= modkeep
+   let &l:mod= modkeep
 
   else
    " at least give a decent default
