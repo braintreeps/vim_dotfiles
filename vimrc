@@ -22,6 +22,9 @@ let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
 let g:clj_paren_rainbow = 1 
 
+let g:AckAllFiles = 0
+let g:AckCmd = 'ack --ignore-dir=tmp'
+
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
