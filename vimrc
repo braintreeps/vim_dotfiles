@@ -56,6 +56,7 @@ map <silent> <LocalLeader>sr :VCSRevert<CR>
 map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
+command Wsudo w !sudo tee %
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
