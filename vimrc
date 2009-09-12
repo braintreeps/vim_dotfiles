@@ -46,6 +46,7 @@ map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
 map <silent> <LocalLeader>ft :FuzzyFinderTag<CR>
 map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
+map <silent> <LocalLeader>fr :ruby finder.rescan!<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
 map <LocalLeader>aw :Ack <C-R><C-W> 
 map <silent> <LocalLeader>sd :VCSDiff<CR>
