@@ -33,6 +33,8 @@ let g:rubycomplete_buffer_loading = 1
 
 let g:fuzzy_ceiling = 50000
 
+let g:no_html_toolbar = 'yes'
+
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 autocmd FileType tex setlocal textwidth=78
