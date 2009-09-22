@@ -35,6 +35,8 @@ let g:fuzzy_ceiling = 50000
 
 let g:no_html_toolbar = 'yes'
 
+let g:bufExplorerSortBy='fullpath'
+
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 autocmd FileType tex setlocal textwidth=78
