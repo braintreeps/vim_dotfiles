@@ -62,6 +62,7 @@ map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal bu
 map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
 command Wsudo w !sudo tee %
+cnoremap <Tab> <C-L><C-D>
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
