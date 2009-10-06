@@ -1,6 +1,7 @@
 " Vim filetype plugin
 " Language:		eRuby
 " Maintainer:		Tim Pope <vimNOSPAM@tpope.info>
+" Info:			$Id: eruby.vim,v 1.10 2007/05/06 16:05:40 tpope Exp $
 " URL:			http://vim-ruby.rubyforge.org
 " Anon CVS:		See above site
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
@@ -26,7 +27,7 @@ if !exists("b:eruby_subtype")
   let s:lines = getline(1)."\n".getline(2)."\n".getline(3)."\n".getline(4)."\n".getline(5)."\n".getline("$")
   let b:eruby_subtype = matchstr(s:lines,'eruby_subtype=\zs\w\+')
   if b:eruby_subtype == ''
-    let b:eruby_subtype = matchstr(substitute(expand("%:t"),'\c\%(\.erb\|\.eruby\)\+$','',''),'\.\zs\w\+$')
+    let b:eruby_subtype = matchstr(substitute(expand("%:t"),'\c\%(\.erb\)\+$','',''),'\.\zs\w\+$')
   endif
   if b:eruby_subtype == 'rhtml'
     let b:eruby_subtype = 'html'
@@ -97,4 +98,4 @@ let b:undo_ftplugin = "setl cms< "
 
 let &cpo = s:save_cpo
 
-" vim: nowrap sw=2 sts=2 ts=8:
+" vim: nowrap sw=2 sts=2 ts=8 ff=unix:

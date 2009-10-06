@@ -1,6 +1,7 @@
 " Vim indent file
 " Language:		Ruby
 " Maintainer:		Nikolai Weibull <now at bitwi.se>
+" Info:			$Id: ruby.vim,v 1.40 2007/03/20 13:54:25 dkearns Exp $
 " URL:			http://vim-ruby.rubyforge.org
 " Anon CVS:		See above site
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
@@ -33,26 +34,26 @@ set cpo&vim
 " ============
 
 " Regex of syntax group names that are or delimit string or are comments.
-let s:syng_strcom = '\<ruby\%(String\|StringEscape\|ASCIICode' .
-      \ '\|Interpolation\|NoInterpolation\|Comment\|Documentation\)\>'
+let s:syng_strcom = '\<ruby\%(String\|StringDelimiter\|ASCIICode' .
+      \ '\|Interpolation\|NoInterpolation\|Escape\|Comment\|Documentation\)\>'
 
 " Regex of syntax group names that are strings.
 let s:syng_string =
-      \ '\<ruby\%(String\|Interpolation\|NoInterpolation\|StringEscape\)\>'
+      \ '\<ruby\%(String\|StringDelimiter\|Interpolation\|NoInterpolation\|Escape\)\>'
 
 " Regex of syntax group names that are strings or documentation.
 let s:syng_stringdoc =
-  \'\<ruby\%(String\|Interpolation\|NoInterpolation\|StringEscape\|Documentation\)\>'
+  \'\<ruby\%(String\|StringDelimiter\|Interpolation\|NoInterpolation\|Escape\|Documentation\)\>'
 
 " Expression used to check whether we should skip a match with searchpair().
 let s:skip_expr =
-      \ "synIDattr(synID(line('.'),col('.'),1),'name') =~ '".s:syng_strcom."'"
+      \ "synIDattr(synID(line('.'),col('.'),0),'name') =~ '".s:syng_strcom."'"
 
 " Regex used for words that, at the start of a line, add a level of indent.
 let s:ruby_indent_keywords = '^\s*\zs\<\%(module\|class\|def\|if\|for' .
       \ '\|while\|until\|else\|elsif\|case\|when\|unless\|begin\|ensure' .
       \ '\|rescue\)\>' .
-      \ '\|\%([*+/,=-]\|<<\|>>\|:\s\)\s*\zs' .
+      \ '\|\%([*+/,=:-]\|<<\|>>\)\s*\zs' .
       \    '\<\%(if\|for\|while\|until\|case\|unless\|begin\)\>'
 
 " Regex used for words that, at the start of a line, remove a level of indent.
@@ -64,7 +65,7 @@ let s:ruby_deindent_keywords =
 " TODO: the do here should be restricted somewhat (only at end of line)?
 let s:end_start_regex = '^\s*\zs\<\%(module\|class\|def\|if\|for' .
       \ '\|while\|until\|case\|unless\|begin\)\>' .
-      \ '\|\%([*+/,=-]\|<<\|>>\|:\s\)\s*\zs' .
+      \ '\|\%([*+/,=:-]\|<<\|>>\)\s*\zs' .
       \    '\<\%(if\|for\|while\|until\|case\|unless\|begin\)\>' .
       \ '\|\<do\>'
 
@@ -77,15 +78,15 @@ let s:end_end_regex = '\%(^\|[^.:@$]\)\@<=\<end\>'
 " Expression used for searchpair() call for finding match for 'end' keyword.
 let s:end_skip_expr = s:skip_expr .
       \ ' || (expand("<cword>") == "do"' .
-      \ ' && getline(".") =~ "^\\s*\\<\\(while\\|until\\|for\\)\\>")'
+      \ ' && getline(".") =~ "^\\s*\\<while\\|until\\|for\\>")'
 
 " Regex that defines continuation lines, not including (, {, or [.
-let s:continuation_regex = '\%([\\*+/.,:]\|\%(<%\)\@<![=-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
+let s:continuation_regex = '\%([\\*+/.,=:-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
 
 " Regex that defines continuation lines.
 " TODO: this needs to deal with if ...: and so on
 let s:continuation_regex2 =
-      \ '\%([\\*+/.,:({[]\|\%(<%\)\@<![=-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
+      \ '\%([\\*+/.,=:({[-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
 
 " Regex that defines blocks.
 let s:block_regex =
@@ -96,17 +97,17 @@ let s:block_regex =
 
 " Check if the character at lnum:col is inside a string, comment, or is ascii.
 function s:IsInStringOrComment(lnum, col)
-  return synIDattr(synID(a:lnum, a:col, 1), 'name') =~ s:syng_strcom
+  return synIDattr(synID(a:lnum, a:col, 0), 'name') =~ s:syng_strcom
 endfunction
 
 " Check if the character at lnum:col is inside a string.
 function s:IsInString(lnum, col)
-  return synIDattr(synID(a:lnum, a:col, 1), 'name') =~ s:syng_string
+  return synIDattr(synID(a:lnum, a:col, 0), 'name') =~ s:syng_string
 endfunction
 
 " Check if the character at lnum:col is inside a string or documentation.
 function s:IsInStringOrDocumentation(lnum, col)
-  return synIDattr(synID(a:lnum, a:col, 1), 'name') =~ s:syng_stringdoc
+  return synIDattr(synID(a:lnum, a:col, 0), 'name') =~ s:syng_stringdoc
 endfunction
 
 " Find line above 'lnum' that isn't empty, in a comment, or in a string.
@@ -258,11 +259,6 @@ function GetRubyIndent()
   " Find a non-blank, non-multi-line string line above the current line.
   let lnum = s:PrevNonBlankNonString(v:lnum - 1)
 
-  " If the line is empty and inside a string, use the previous line.
-  if line =~ '^\s*$' && lnum != prevnonblank(v:lnum - 1)
-    return indent(prevnonblank(v:lnum))
-  endif
-
   " At the start of the file use zero indent.
   if lnum == 0
     return 0
@@ -374,4 +370,4 @@ endfunction
 let &cpo = s:cpo_save
 unlet s:cpo_save
 
-" vim:set sw=2 sts=2 ts=8 noet:
+" vim:set sw=2 sts=2 ts=8 noet ff=unix:

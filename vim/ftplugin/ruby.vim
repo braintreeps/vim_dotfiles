@@ -1,6 +1,7 @@
 " Vim filetype plugin
 " Language:		Ruby
 " Maintainer:		Gavin Sinclair <gsinclair at gmail.com>
+" Info:			$Id: ruby.vim,v 1.39 2007/05/06 16:38:40 tpope Exp $
 " URL:			http://vim-ruby.rubyforge.org
 " Anon CVS:		See above site
 " Release Coordinator:  Doug Kearns <dougkearns@gmail.com>
@@ -114,23 +115,6 @@ if !exists("g:no_plugin_maps") && !exists("g:no_ruby_maps")
   let b:undo_ftplugin = b:undo_ftplugin
         \."| sil! exe 'unmap <buffer> [[' | sil! exe 'unmap <buffer> ]]' | sil! exe 'unmap <buffer> []' | sil! exe 'unmap <buffer> ]['"
         \."| sil! exe 'unmap <buffer> [m' | sil! exe 'unmap <buffer> ]m' | sil! exe 'unmap <buffer> [M' | sil! exe 'unmap <buffer> ]M'"
-
-  if maparg("\<C-]>",'n') == ''
-    nnoremap <silent> <buffer> <C-]>       :<C-U>exe  v:count1."tag <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> g<C-]>      :<C-U>exe         "tjump <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> g]          :<C-U>exe       "tselect <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> <C-W>]      :<C-U>exe v:count1."stag <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> <C-W><C-]>  :<C-U>exe v:count1."stag <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> <C-W>g<C-]> :<C-U>exe        "stjump <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> <C-W>g]     :<C-U>exe      "stselect <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> <C-W>}      :<C-U>exe          "ptag <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    nnoremap <silent> <buffer> <C-W>g}     :<C-U>exe        "ptjump <C-R>=RubyCursorIdentifier()<CR>"<CR>
-    let b:undo_ftplugin = b:undo_ftplugin
-          \."| sil! exe 'nunmap <buffer> <C-]>'| sil! exe 'nunmap <buffer> g<C-]>'| sil! exe 'nunmap <buffer> g]'"
-          \."| sil! exe 'nunmap <buffer> <C-W>]'| sil! exe 'nunmap <buffer> <C-W><C-]>'"
-          \."| sil! exe 'nunmap <buffer> <C-W>g<C-]>'| sil! exe 'nunmap <buffer> <C-W>g]'"
-          \."| sil! exe 'nunmap <buffer> <C-W>}'| sil! exe 'nunmap <buffer> <C-W>g}'"
-  endif
 endif
 
 let &cpo = s:cpo_save
@@ -213,20 +197,6 @@ function! s:synname()
     return synIDattr(synID(line('.'),col('.'),0),'name')
 endfunction
 
-function! RubyCursorIdentifier()
-  let asciicode    = '\%(\w\|[]})\"'."'".']\)\@<!\%(?\%(\\M-\\C-\|\\C-\\M-\|\\M-\\c\|\\c\\M-\|\\c\|\\C-\|\\M-\)\=\%(\\\o\{1,3}\|\\x\x\{1,2}\|\\\=\S\)\)'
-  let number       = '\%(\%(\w\|[]})\"'."'".']\s*\)\@<!-\)\=\%(\<[[:digit:]_]\+\%(\.[[:digit:]_]\+\)\=\%([Ee][[:digit:]_]\+\)\=\>\|\<0[xXbBoOdD][[:xdigit:]_]\+\>\)\|'.asciicode
-  let operator     = '\%(\[\]\|<<\|<=>\|[!<>]=\=\|===\=\|[!=]\~\|>>\|\*\*\|\.\.\.\=\|=>\|[~^&|*/%+-]\)'
-  let method       = '\%(\<[_a-zA-Z]\w*\>\%([?!]\|\s*=>\@!\)\=\)'
-  let global       = '$\%([!$&"'."'".'*+,./:;<=>?@\`~]\|-\=\w\+\>\)'
-  let symbolizable = '\%(\%(@@\=\)\w\+\>\|'.global.'\|'.method.'\|'.operator.'\)'
-  let pattern      = '\C\s*\%('.number.'\|\%(:\@<!:\)\='.symbolizable.'\)'
-  let [lnum, col]  = searchpos(pattern,'bcn',line('.'))
-  let raw          = matchstr(getline('.')[col-1 : ],pattern)
-  let stripped     = substitute(substitute(raw,'\s\+=$','=',''),'^\s*:\=','','')
-  return stripped == '' ? expand("<cword>") : stripped
-endfunction
-
 "
 " Instructions for enabling "matchit" support:
 "
@@ -257,4 +227,4 @@ endfunction
 " differs on Windows.  Email gsinclair@soyabean.com.au if you need help.
 "
 
-" vim: nowrap sw=2 sts=2 ts=8:
+" vim: nowrap sw=2 sts=2 ts=8 ff=unix:

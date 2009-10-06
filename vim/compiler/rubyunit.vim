@@ -1,6 +1,7 @@
 " Vim compiler file
 " Language:		Test::Unit - Ruby Unit Testing Framework
 " Maintainer:		Doug Kearns <dougkearns@gmail.com>
+" Info:			$Id: rubyunit.vim,v 1.11 2006/04/15 12:01:18 dkearns Exp $
 " URL:			http://vim-ruby.rubyforge.org
 " Anon CVS:		See above site
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
@@ -31,4 +32,4 @@ CompilerSet errorformat=\%W\ %\\+%\\d%\\+)\ Failure:,
 let &cpo = s:cpo_save
 unlet s:cpo_save
 
-" vim: nowrap sw=2 sts=2 ts=8:
+" vim: nowrap sw=2 sts=2 ts=8 ff=unix:
