@@ -51,12 +51,6 @@ map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
 map <silent> <LocalLeader>fr :ruby finder.rescan!<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
 map <LocalLeader>aw :Ack <C-R><C-W> 
-map <silent> <LocalLeader>sd :VCSDiff<CR>
-map <silent> <LocalLeader>sb :VCSBlame<CR>
-map <silent> <LocalLeader>sl :VCSLog<CR>
-map <silent> <LocalLeader>sr :VCSRevert<CR>
-map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
-map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
 command Wsudo w !sudo tee %
 cnoremap <Tab> <C-L><C-D>
