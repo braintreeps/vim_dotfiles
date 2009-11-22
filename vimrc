@@ -14,6 +14,7 @@ set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set ruler
 set dir=/tmp
 set nowrap
+set scrolloff=5
 
 let html_use_css=1
 let html_number_lines=0
@@ -31,6 +32,7 @@ let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
 
+let g:fuzzy_ignore = "*.log,tmp/*,db/sphinx/*"
 let g:fuzzy_ceiling = 50000
 
 let g:no_html_toolbar = 'yes'
@@ -48,7 +50,9 @@ map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
 map <silent> <LocalLeader>ft :FuzzyFinderTag<CR>
 map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
-map <silent> <LocalLeader>fr :ruby finder.rescan!<CR>
+map <silent> <LocalLeader>fr :FuzzyFinderTextMateRefreshFiles<CR>
+map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
+map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
 map <LocalLeader>aw :Ack <C-R><C-W> 
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
@@ -60,3 +64,16 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
+if has("gui_running")
+  set fuopt=maxhorz,maxvert
+end
+
+set laststatus=2
+set statusline=
+set statusline+=%<\                       " cut at start
+set statusline+=%2*[%n%H%M%R%W]%*\        " buffer number, and flags
+set statusline+=%-40f\                    " relative path
+set statusline+=%=                        " seperate between right- and left-aligned
+set statusline+=%1*%y%*%*\                " file type
+set statusline+=%10((%l/%L)%)\            " line and column
+set statusline+=%P                        " percentage of file
