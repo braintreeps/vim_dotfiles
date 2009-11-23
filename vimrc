@@ -55,6 +55,8 @@ map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal bu
 map <silent> <LocalLeader>nh :nohls<CR>
 map <LocalLeader>aw :Ack <C-R><C-W> 
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
+map <silent> <LocalLeader>cc :s/^#\?/#<CR>:nohls<CR>
+map <silent> <LocalLeader>uc :s/^#//<CR>:nohls<CR>
 command Wsudo w !sudo tee %
 cnoremap <Tab> <C-L><C-D>
 
