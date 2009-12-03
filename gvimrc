@@ -1,4 +1,4 @@
 colorscheme wombat
-set guifont=Monaco:h12.00
+" set guifont=Monaco:h12.00
 set lines=47
 set columns=161

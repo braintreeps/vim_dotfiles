@@ -27,6 +27,11 @@
 :NERDTreeFromBookmark	NERD_tree.txt	/*:NERDTreeFromBookmark*
 :NERDTreeMirror	NERD_tree.txt	/*:NERDTreeMirror*
 :NERDTreeToggle	NERD_tree.txt	/*:NERDTreeToggle*
+:TComment	tComment.txt	/*:TComment*
+:TCommentAs	tComment.txt	/*:TCommentAs*
+:TCommentBlock	tComment.txt	/*:TCommentBlock*
+:TCommentInline	tComment.txt	/*:TCommentInline*
+:TCommentRight	tComment.txt	/*:TCommentRight*
 Align-copyright	Align.txt	/*Align-copyright*
 DocLookupInteractive	clojure.txt	/*DocLookupInteractive*
 DocLookupWord	clojure.txt	/*DocLookupWord*
@@ -102,6 +107,7 @@ RequireFileAll	clojure.txt	/*RequireFileAll*
 SourceLookupInteractive	clojure.txt	/*SourceLookupInteractive*
 SourceLookupWord	clojure.txt	/*SourceLookupWord*
 StartRepl	clojure.txt	/*StartRepl*
+TCommentDefineType()	tComment.txt	/*TCommentDefineType()*
 [%	matchit.txt	/*[%*
 ]%	matchit.txt	/*]%*
 align	Align.txt	/*align*
@@ -321,6 +327,11 @@ g:rails_statusline	rails.txt	/*g:rails_statusline*
 g:rails_syntax	rails.txt	/*g:rails_syntax*
 g:rails_tabstop	rails.txt	/*g:rails_tabstop*
 g:rails_url	rails.txt	/*g:rails_url*
+g:tcommentMapLeader1	tComment.txt	/*g:tcommentMapLeader1*
+g:tcommentMapLeader2	tComment.txt	/*g:tcommentMapLeader2*
+g:tcommentMapLeaderOp1	tComment.txt	/*g:tcommentMapLeaderOp1*
+g:tcommentMapLeaderOp2	tComment.txt	/*g:tcommentMapLeaderOp2*
+g:tcommentOpModeExtra	tComment.txt	/*g:tcommentOpModeExtra*
 gi	clojure.txt	/*gi*
 gw	clojure.txt	/*gw*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
@@ -518,6 +529,11 @@ surround-replacements	surround.txt	/*surround-replacements*
 surround-targets	surround.txt	/*surround-targets*
 surround.txt	surround.txt	/*surround.txt*
 sw	clojure.txt	/*sw*
+tComment-Installation	tComment.txt	/*tComment-Installation*
+tComment-Key-Bindings	tComment.txt	/*tComment-Key-Bindings*
+tComment-Usage	tComment.txt	/*tComment-Usage*
+tComment-commands	tComment.txt	/*tComment-commands*
+tComment.txt	tComment.txt	/*tComment.txt*
 v_[%	matchit.txt	/*v_[%*
 v_]%	matchit.txt	/*v_]%*
 v_a%	matchit.txt	/*v_a%*
