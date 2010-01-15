@@ -22,7 +22,7 @@ let html_number_lines=0
 let clj_want_gorilla = 1
 let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
-let g:clj_paren_rainbow = 1 
+let g:clj_paren_rainbow = 1
 
 let g:AckAllFiles = 0
 let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp'
@@ -54,7 +54,7 @@ map <silent> <LocalLeader>fr :FuzzyFinderTextMateRefreshFiles<CR>
 map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
-map <LocalLeader>aw :Ack <C-R><C-W> 
+map <LocalLeader>aw :Ack <C-R><C-W>
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
 map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
@@ -69,6 +69,13 @@ endif
 if has("gui_running")
   set fuopt=maxhorz,maxvert
 end
+
+" Highlight trailing whitespace
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+" Set up highlight group & retain through colorscheme changes
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 set laststatus=2
 set statusline=
