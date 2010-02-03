@@ -71,11 +71,16 @@ if has("gui_running")
 end
 
 " Highlight trailing whitespace
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 " Set up highlight group & retain through colorscheme changes
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" Highlight too-long lines
+autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
+highlight LineLengthError ctermfg=red guifg=red
+autocmd ColorScheme * highlight LineLengthError ctermfg=red guifg=red
 
 set laststatus=2
 set statusline=
