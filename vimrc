@@ -76,11 +76,12 @@ autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 " Set up highlight group & retain through colorscheme changes
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
 " Highlight too-long lines
 autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
-highlight LineLengthError ctermfg=red guifg=red
-autocmd ColorScheme * highlight LineLengthError ctermfg=red guifg=red
+highlight LineLengthError ctermbg=black guibg=black
+autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 
 set laststatus=2
 set statusline=
