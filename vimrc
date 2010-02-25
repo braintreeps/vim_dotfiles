@@ -75,11 +75,12 @@ autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 " Set up highlight group & retain through colorscheme changes
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
 " Highlight too-long lines
 autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
-highlight LineLengthError ctermfg=red guifg=red
-autocmd ColorScheme * highlight LineLengthError ctermfg=red guifg=red
+highlight LineLengthError ctermbg=black guibg=black
+autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 
 set laststatus=2
 set statusline=
@@ -91,3 +92,17 @@ set statusline+=%1*%y%*%*\                " file type
 set statusline+=%10(L(%l/%L)%)\           " line
 set statusline+=%2(C(%v/125)%)\           " column
 set statusline+=%P                        " percentage of file
+
+" http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
+function! DivHtml(line1, line2)
+  " exec a:line1.','.a:line2.'TOhtml'
+  " %g/<style/normal $dgg
+  " %s/<\/style>\n<\/head>\n//
+  " %s/.vim_block {/.vim_block {/
+  " %s/<body\(.*\)>\n/<div class="vim_block"\1>/
+  " %s/<\/body>\n<\/html>/<\/div>
+  " %s/<br>//g
+
+  set nonu
+endfunction
+command -range=% DivHtml :call DivHtml(<line1>,<line2>)
