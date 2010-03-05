@@ -17,6 +17,7 @@ set scrolloff=5
 
 let html_use_css=1
 let html_number_lines=0
+let html_no_pre=1
 
 let clj_want_gorilla = 1
 let g:clj_highlight_builtins = 1
@@ -36,6 +37,7 @@ let g:fuzzy_ceiling = 50000
 
 let g:no_html_toolbar = 'yes'
 
+autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 autocmd FileType tex setlocal textwidth=78
@@ -95,13 +97,13 @@ set statusline+=%P                        " percentage of file
 
 " http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
 function! DivHtml(line1, line2)
-  " exec a:line1.','.a:line2.'TOhtml'
-  " %g/<style/normal $dgg
-  " %s/<\/style>\n<\/head>\n//
-  " %s/.vim_block {/.vim_block {/
-  " %s/<body\(.*\)>\n/<div class="vim_block"\1>/
-  " %s/<\/body>\n<\/html>/<\/div>
-  " %s/<br>//g
+  exec a:line1.','.a:line2.'TOhtml'
+  %g/<style/normal $dgg
+  %s/<\/style>\n<\/head>\n//
+  %s/body {/.vim_block {/
+  %s/<body\(.*\)>\n/<div class="vim_block"\1>/
+  %s/<\/body>\n<\/html>/<\/div>
+  "%s/\n/<br \/>\r/g
 
   set nonu
 endfunction
