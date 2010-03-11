@@ -5,4 +5,5 @@ map <silent> <LocalLeader>rl :wa<CR> :RunLastRubyTest<CR>
 map <silent> <LocalLeader>rs :!ruby -c %<CR>
 map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
 imap <C-L> <SPACE>=><SPACE>
+setlocal isk+=?
 
