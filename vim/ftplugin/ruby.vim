@@ -52,6 +52,7 @@ setlocal formatoptions-=t formatoptions+=croql
 setlocal include=^\\s*\\<\\(load\\\|\w*require\\)\\>
 setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
 setlocal suffixesadd=.rb
+setlocal iskeyword+=?
 
 if exists("&ofu") && has("ruby")
   setlocal omnifunc=rubycomplete#Complete
