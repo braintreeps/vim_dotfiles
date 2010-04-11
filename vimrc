@@ -16,8 +16,12 @@ set dir=/tmp//
 set nowrap
 set scrolloff=5
 
+set ignorecase
+set smartcase
+
 let html_use_css=1
 let html_number_lines=0
+let html_no_pre=1
 
 let clj_want_gorilla = 1
 let g:clj_highlight_builtins = 1
@@ -37,6 +41,7 @@ let g:fuzzy_ceiling = 50000
 
 let g:no_html_toolbar = 'yes'
 
+autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 autocmd FileType tex setlocal textwidth=78
@@ -54,7 +59,7 @@ map <silent> <LocalLeader>fr :FuzzyFinderTextMateRefreshFiles<CR>
 map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>nh :nohls<CR>
-map <LocalLeader>aw :Ack <C-R><C-W>
+map <LocalLeader>aw :Ack '<C-R><C-W>'
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
 map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
@@ -93,3 +98,17 @@ set statusline+=%1*%y%*%*\                " file type
 set statusline+=%10(L(%l/%L)%)\           " line
 set statusline+=%2(C(%v/125)%)\           " column
 set statusline+=%P                        " percentage of file
+
+" http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
+function! DivHtml(line1, line2)
+  exec a:line1.','.a:line2.'TOhtml'
+  %g/<style/normal $dgg
+  %s/<\/style>\n<\/head>\n//
+  %s/body {/.vim_block {/
+  %s/<body\(.*\)>\n/<div class="vim_block"\1>/
+  %s/<\/body>\n<\/html>/<\/div>
+  "%s/\n/<br \/>\r/g
+
+  set nonu
+endfunction
+command -range=% DivHtml :call DivHtml(<line1>,<line2>)
