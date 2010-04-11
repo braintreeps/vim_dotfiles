@@ -71,7 +71,7 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
-if has("gui_running")
+if has("gui_running") && has("mac")
   set fuopt=maxhorz,maxvert
 end
 
