@@ -12,8 +12,8 @@ set hidden
 set backspace=indent,eol,start
 set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set ruler
+set wrap
 set dir=/tmp//
-set nowrap
 set scrolloff=5
 
 set ignorecase
