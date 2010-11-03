@@ -82,7 +82,7 @@ RUBY
   " Configuration option: g:fuzzy_roots
   " Specifies roots in which the FuzzyFinder will search.
   if !exists('g:fuzzy_roots')
-    let g:fuzzy_roots = ['.']
+    let g:fuzzy_roots = '.'
   endif
 
   " Configuration option: g:fuzzy_ceiling
