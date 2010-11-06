@@ -1,3 +1,0 @@
-[submodule "ruby_focused_unit_test"]
-	path = ruby_focused_unit_test
-	url = git://github.com/drewolson/ruby_focused_unit_test_vim.git
