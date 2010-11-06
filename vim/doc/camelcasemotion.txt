@@ -1,0 +1,1 @@
+../bundle/camelcasemotion/doc/camelcasemotion.txt

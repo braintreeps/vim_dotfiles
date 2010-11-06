@@ -1,6 +1,10 @@
 set nocompatible
 syntax on
+
+filetype off
+call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
+
 compiler ruby
 
 set hlsearch
@@ -19,8 +23,6 @@ set scrolloff=5
 set ignorecase
 set smartcase
 
-call pathogen#runtime_append_all_bundles()
-
 let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
@@ -28,9 +30,6 @@ let html_no_pre=1
 let vimclojure#WantNailgun = 1
 let vimclojure#HighlightBuiltins = 1
 let vimclojure#ParenRainbow = 1
-
-let g:AckAllFiles = 0
-let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
 
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
