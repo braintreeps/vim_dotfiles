@@ -1,1 +1,2 @@
+rm *.txt
 find .. -path "*doc/*txt" | xargs -I % -n 1 ln -s % .
