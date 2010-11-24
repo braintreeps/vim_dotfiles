@@ -95,7 +95,7 @@ catch /.*/
 	echohl None
 endtry
 
-call vimclojure#MapPlug("n", "aw", "AddToLispWords")
+" call vimclojure#MapPlug("n", "aw", "AddToLispWords")
 
 call vimclojure#MapCommandPlug("n", "lw", "DocLookupWord")
 call vimclojure#MapCommandPlug("n", "li", "DocLookupInteractive")
