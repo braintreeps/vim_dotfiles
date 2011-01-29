@@ -1,6 +1,7 @@
 colorscheme wombat
 if has("mac")
   set guifont=Monaco:h12.00
+  set fuopt=maxhorz,maxvert
 else
   set gfn=DejaVu\ Sans\ Mono\ Bold\ 10
 end
