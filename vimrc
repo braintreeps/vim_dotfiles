@@ -77,10 +77,6 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
-if &t_Co == 256
-  colorscheme ir_black
-endif
-
 " Highlight trailing whitespace
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
