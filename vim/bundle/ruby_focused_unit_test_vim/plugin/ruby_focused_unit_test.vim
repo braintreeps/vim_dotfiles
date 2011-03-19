@@ -172,7 +172,12 @@ class RubyFocusedUnitTest
   end
 
   def spec_command
-    system("which rspec > /dev/null 2>&1") ? "rspec --no-color" : "spec"
+    if File.exists?("Gemfile") && match = `bundle show rspec`.match(/(\d\.\d\.\d)$/)
+      match.to_a.last.to_f < 2 ? "bundle exec spec" : "bundle exec rspec"
+    else
+      system("which rspec > /dev/null 2>&1") ? "rspec --no-color" : "spec"
+    end
   end
+
 end
 EOF
