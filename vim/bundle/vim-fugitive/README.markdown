@@ -17,7 +17,8 @@ mofo.  And guess what `:Gcommit` does!
 
 `:Gblame` brings up an interactive vertical split with `git blame`
 output.  Press enter on a line to reblame the file as it stood in that
-commit, or `o` to open that commit in a split.
+commit, or `o` to open that commit in a split.  When you're done, use
+`:Gedit` in the historic buffer to go back to the work tree version.
 
 `:Gmove` does a `git mv` on a file and simultaneously renames the
 buffer.  `:Gremove` does a `git rm` on a file and simultaneously deletes
@@ -35,6 +36,10 @@ and you never get any warnings about the file changing outside Vim.
 making it like `git add` when called from a work tree file and like
 `git checkout` when called from the index or a blob in history.
 
+Use `:Gbrowse` to open the current file on GitHub, with optional line
+range (try it in visual mode!).  If your current repository isn't on
+GitHub, `git instaweb` will be spun up instead.
+
 Add `%{fugitive#statusline()}` to `'statusline'` to get an indicator
 with the current branch in (surprise!) your statusline.
 
@@ -43,3 +48,23 @@ Oh, and of course there's `:Git` for running any arbitrary command.
 Like fugitive.vim? Follow the repository on
 [GitHub](http://github.com/tpope/vim-fugitive) and vote for it on
 [vim.org](http://www.vim.org/scripts/script.php?script_id=2975).
+
+FAQ
+---
+
+> I installed the plugin and started Vim.  Why don't any of the commands
+> exist?
+
+Fugitive cares about the current file, not the current working
+directory.  Edit a file from the repository.
+
+> I opened a new tab.  Why don't any of the commands exist?
+
+Fugitive cares about the current file, not the current working
+directory.  Edit a file from the repository.
+
+> I changed the current working directory.  Why do all the commands use
+> the old directory?
+
+Fugitive cares about the current file, not the current working
+directory.  Edit a file from the repository.
