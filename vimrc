@@ -45,6 +45,8 @@ let g:fuzzy_matching_limit = 10
 
 let g:no_html_toolbar = 'yes'
 
+let coffee_no_trailing_space_error = 1
+
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
