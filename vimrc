@@ -96,6 +96,10 @@ autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
 highlight LineLengthError ctermbg=black guibg=black
 autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 
+" Pretty colors for fuzzyfinder menus
+highlight Pmenu ctermfg=black ctermbg=gray
+highlight PmenuSel ctermfg=black ctermbg=white
+
 set laststatus=2
 set statusline=
 set statusline+=%<\                       " cut at start
