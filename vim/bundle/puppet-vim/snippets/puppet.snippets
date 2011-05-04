@@ -1,0 +1,45 @@
+# vim: nofoldenable foldmethod=manual
+snippet file
+	file { 
+	    "${1:filename}": 
+	        source => "puppet:///${2:source}",
+	        ensure => ${3:file},
+	        owner => ${4:root},
+	        group => ${5:root},
+	        mode => ${6:0755};
+	}
+snippet exec
+	exec {
+	    "${1:name}":
+	        command => "${2:command}",
+	        refreshonly => "${3:true}",
+	        onlyif => "${4:run_if_true}",
+	        unless => "${5:run_if_false}",
+	}
+snippet encap
+	encap {
+	    "${1:package_name}":
+	        ensure => ${2:package_version};
+	}
+snippet package
+	package {
+	    "${1:package_name}":
+	        provider => yum,
+	        ensure => ${2:package_version};
+	}
+snippet tidy
+	tidy {
+	    "${1:directory}":
+	        age => ${2:0},
+	        matches => [ "${3:pattern}" ],
+	        recurse => ${4:true},
+	        rmdirs => ${5:true};
+	}
+snippet cron
+	cron {
+	    "${1:name}":
+	        command => "${2:command}",
+	        hour => ${3:hour},
+	        minute => ${4:minute},
+	        day => ${5:day};
+	}
