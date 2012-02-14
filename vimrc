@@ -132,3 +132,20 @@ set undofile
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
+function! GitGrepWord()
+  cgetexpr system('git grep -n '.expand("<cword>"))
+  cwin
+  echo 'Number of matches: ' . len(getqflist())
+endfunction
+command! -nargs=0 GitGrepWord :call GitGrepWord()
+nnoremap <silent> <Leader>gw :GitGrepWord<CR>
+
+function! Trim()
+  %s/\s*$//
+endfunction
+command! -nargs=0 Trim :call Trim()
+nnoremap <silent> <Leader>cw :Trim<CR>
+
+if &shell == "/usr/bin/sudosh"
+  set shell=/bin/bash
+endif
