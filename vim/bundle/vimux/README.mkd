@@ -1,0 +1,97 @@
+# vimux
+
+Easily interact with tmux from vim. This project is still in development so some features are still missing.
+
+## Installation
+
+With **[vim-bundle](https://github.com/benmills/vim-bundle)**: `vim-bundle install benmills/vimux`
+
+Otherwise download the latest [tarball](https://github.com/benmills/vimux/tarball/master), extract it and move `plugin/vimux.vim` inside `~/.vim/plugin`. If you're using [pathogen](https://github.com/tpope/vim-pathogen) than move the entire folder extracted from the tarball into `~/.vim/bundle`.
+
+## Usage
+
+### RunVimTmuxCommand
+Run a system command in a small horizontal split bellow the current pane vim is in.
+
+```viml
+" Run the current file with rspec
+map <Leader>rb :call RunVimTmuxCommand("clear; rspec " . bufname("%"))<CR>
+```
+
+### PromptVimTmuxCommand
+Prompt for a command and run it in a small horizontal split bellow the current pane.
+
+```viml
+" Prompt for a command to run
+map <Leader>rp :PromptVimTmuxCommand<CR>
+```
+
+### RunLastVimTmuxCommand
+Run the last command executed by `RunVimTmuxCommand`
+
+```viml
+" Run last command executed by RunVimTmuxCommand
+map <Leader>rl :call RunLastVimTmuxCommand<CR>
+```
+
+### InspectVimTmuxRunner
+Move into the tmux runner pane created by `RunVimTmuxCommand` and enter copy mode (scroll mode).
+
+```viml
+" Inspect runner pane
+map <Leader>ri :InspectVimTmuxRunner<CR>
+```
+
+### CloseVimTmuxWindows
+Close all other tmux panes in the current window.
+
+```viml
+" Close all other tmux panes in current window
+map <Leader>rx :CloseVimTmuxWindows<CR>
+```
+
+### InterruptVimTmuxRunner
+Interrupt any command that is running inside the runner pane.
+
+```viml
+" Interrupt any command running in the runner pane
+map <Leader>rs :InterruptVimTmuxRunner<CR>
+```
+
+### Full Keybind Example
+
+```viml
+" Run the current file with rspec
+map <Leader>rb :call RunVimTmuxCommand("clear; rspec " . bufname("%"))<CR>
+
+" Prompt for a command to run
+map <Leader>rp :PromptVimTmuxCommand<CR>
+
+" Run last command executed by RunVimTmuxCommand
+map <Leader>rl :call RunLastVimTmuxCommand<CR>
+
+" Inspect runner pane
+map <Leader>ri :InspectVimTmuxRunner<CR>
+
+" Close all other tmux panes in current window
+map <Leader>rx :CloseVimTmuxWindows<CR>
+
+" Interrupt any command running in the runner pane
+map <Leader>rs :InterruptVimTmuxRunner<CR>
+```
+
+## Options
+
+### VimuxHeight
+Set the percent height of the runner pane opened by `RunVimTmuxCommand`.
+**Default: `"20"`**
+
+```viml
+let VimuxHeight = "50"
+```
+
+## Todo
+
+The features I would like to add in the near future.
+
+* Add the ability to target any tmux session, window and pane
