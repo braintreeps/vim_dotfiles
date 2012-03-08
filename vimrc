@@ -94,7 +94,12 @@ map <Leader>rp :wa<CR> :PromptVimTmuxCommand<CR>
 map <Leader>ri :wa<CR> :InspectVimTmuxRunner<CR>
 
 function RunVimuxRspec(args)
-  let l:spec_command = "rspec"
+  if system("which rspec > /dev/null; echo $?") == "0\n"
+    let l:spec_command = "rspec"
+  else
+    let l:spec_command = "spec"
+  endif
+
   let l:command = "clear && " . l:spec_command . " " . a:args
   call RunVimTmuxCommand(l:command)
 endfunction
