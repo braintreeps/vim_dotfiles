@@ -85,6 +85,9 @@ if &t_Co == 256
   colorscheme vibrantink
 endif
 
+au FileType diff colorscheme desert
+au FileType git colorscheme desert
+
 " Highlight trailing whitespace
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
