@@ -56,7 +56,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 autocmd FileType help setlocal nospell
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-" autocmd FileType ruby runtime ruby_mappings.vim
+autocmd FileType ruby runtime ruby_mappings.vim
 autocmd FileType tex setlocal textwidth=78
 
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
@@ -85,25 +85,6 @@ map <silent> <LocalLeader>uc :TComment<CR>
 vmap <silent> <LocalLeader>al :Align =><CR>
 command! Wsudo w !sudo tee %
 cnoremap <Tab> <C-L><C-D>
-
-map <Leader>rb :wa<CR> :call RunVimuxRspec(bufname("%"))<CR>
-map <Leader>rf :wa<CR> :call RunVimuxRspec(bufname("%") . " -l " . line("."))<CR>
-map <Leader>rl :wa<CR> :RunLastVimTmuxCommand<CR>
-map <Leader>rx :wa<CR> :CloseVimTmuxWindows<CR>
-map <Leader>rp :wa<CR> :PromptVimTmuxCommand<CR>
-map <Leader>ri :wa<CR> :InspectVimTmuxRunner<CR>
-
-function RunVimuxRspec(args)
-  if system("which rspec > /dev/null; echo $?") == "0\n"
-    let l:spec_command = "rspec"
-  else
-    let l:spec_command = "spec"
-  endif
-
-  let l:command = "clear && " . l:spec_command . " " . a:args
-  call RunVimTmuxCommand(l:command)
-endfunction
-
 
 " fat fingers: map f1 to escape instead of help
 map <F1> <Esc>
