@@ -1,6 +1,10 @@
 set nocompatible
 syntax on
 
+if &shell == "/usr/bin/sudosh"
+  set shell=/bin/bash
+endif
+
 filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
@@ -130,10 +134,12 @@ function! DivHtml(line1, line2)
 endfunction
 command -range=% DivHtml :call DivHtml(<line1>,<line2>)
 
-set undodir=~/.vim/undodir
-set undofile
+if version >= 703
+  set undodir=~/.vim/undodir
+  set undofile
+  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+endif
 set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 function! GitGrepWord()
   cgetexpr system('git grep -n '.expand("<cword>"))
@@ -148,7 +154,3 @@ function! Trim()
 endfunction
 command! -nargs=0 Trim :call Trim()
 nnoremap <silent> <Leader>cw :Trim<CR>
-
-if &shell == "/usr/bin/sudosh"
-  set shell=/bin/bash
-endif
