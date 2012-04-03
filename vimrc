@@ -80,6 +80,9 @@ map <silent> <LocalLeader>uc :TComment<CR>
 command SudoW w !sudo tee %
 cnoremap <Tab> <C-L><C-D>
 
+nnoremap <silent> k gk
+nnoremap <silent> j gj
+
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
     autocmd FileType tex setlocal spell spelllang=en_us
