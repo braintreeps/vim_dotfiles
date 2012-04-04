@@ -43,7 +43,7 @@ let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
 
-let g:fuzzy_ignore = "*.log,tmp/*,db/sphinx/*,data"
+let g:fuzzy_ignore = "*.log,tmp/*,db/sphinx/*,data,*.class,*.pyc"
 let g:fuzzy_ceiling = 50000
 let g:fuzzy_matching_limit = 10
 
@@ -79,6 +79,9 @@ map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
 command SudoW w !sudo tee %
 cnoremap <Tab> <C-L><C-D>
+
+nnoremap <silent> k gk
+nnoremap <silent> j gj
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
