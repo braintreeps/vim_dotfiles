@@ -1,0 +1,125 @@
+# vimux
+
+Easily interact with tmux from vim. This project is still in development, so some features are still missing.
+
+What inspired me to write vimux was [tslime.vim](https://github.com/kikijump/tslime.vim), a plugin that lets you send input to tmux. While tslime.vim works well, I felt it wasn't optimized for my primary use case which was having a smaller tmux pane that I would use to run tests or play with a REPL. 
+
+My goal with vimux is to make interacting with tmux from vim effortless. By default when you call `RunVimTmuxCommand` vimux will create a 20% tall horizontal pane under your current tmux pane and execute a command in it without losing focus of vim. Once that pane exists whenever you call `RunVimTmuxCommand` again the command will be executed in that pane. As I was using vimux myself I wanted to rerun commands over and over. An example of this was running the current file through rspec. Rather than typing that over and over I wrote `RunLastVimTmuxCommand` that will execute the last command you called with `RunVimTmuxCommand`. 
+
+Other auxiliary functions and the ones I talked about above can be found bellow with a full description and example key binds for your vimrc.
+
+## Installation
+
+With **[vim-bundle](https://github.com/benmills/vim-bundle)**: `vim-bundle install benmills/vimux`
+
+Otherwise download the latest [tarball](https://github.com/benmills/vimux/tarball/master), extract it and move `plugin/vimux.vim` inside `~/.vim/plugin`. If you're using [pathogen](https://github.com/tpope/vim-pathogen), then move the entire folder extracted from the tarball into `~/.vim/bundle`.
+
+## Platform-specific Plugins
+
+* [vimux-ruby-test](https://github.com/pgr0ss/vimux-ruby-test) a set of commands to easily run ruby tests
+
+## Usage
+
+### RunVimTmuxCommand
+Run a system command in a small horizontal split bellow the current pane vim is in.
+
+```viml
+" Run the current file with rspec
+map <Leader>rb :call RunVimTmuxCommand("clear; rspec " . bufname("%"))<CR>
+```
+
+### PromptVimTmuxCommand
+Prompt for a command and run it in a small horizontal split bellow the current pane.
+
+```viml
+" Prompt for a command to run
+map <Leader>rp :PromptVimTmuxCommand<CR>
+```
+
+### RunLastVimTmuxCommand
+Run the last command executed by `RunVimTmuxCommand`
+
+```viml
+" Run last command executed by RunVimTmuxCommand
+map <Leader>rl :RunLastVimTmuxCommand<CR>
+```
+
+### InspectVimTmuxRunner
+Move into the tmux runner pane created by `RunVimTmuxCommand` and enter copy mode (scroll mode).
+
+```viml
+" Inspect runner pane
+map <Leader>ri :InspectVimTmuxRunner<CR>
+```
+
+### CloseVimTmuxPanes
+Close all other tmux panes in the current window.
+
+```viml
+" Close all other tmux panes in current window
+map <Leader>rx :CloseVimTmuxPanes<CR>
+```
+
+### InterruptVimTmuxRunner
+Interrupt any command that is running inside the runner pane.
+
+```viml
+" Interrupt any command running in the runner pane
+map <Leader>rs :InterruptVimTmuxRunner<CR>
+```
+
+### Full Keybind Example
+
+```viml
+" Run the current file with rspec
+map <Leader>rb :call RunVimTmuxCommand("clear; rspec " . bufname("%"))<CR>
+
+" Prompt for a command to run
+map <Leader>rp :PromptVimTmuxCommand<CR>
+
+" Run last command executed by RunVimTmuxCommand
+map <Leader>rl :RunLastVimTmuxCommand<CR>
+
+" Inspect runner pane
+map <Leader>ri :InspectVimTmuxRunner<CR>
+
+" Close all other tmux panes in current window
+map <Leader>rx :CloseVimTmuxPanes<CR>
+
+" Interrupt any command running in the runner pane
+map <Leader>rs :InterruptVimTmuxRunner<CR>
+```
+
+### tslime replacement
+
+Here is how to use vimux to send code to a REPL. This is similar to tslime. First, add some helpful mappings.
+
+```viml
+
+" Prompt for a command to run
+map <LocalLeader>vp :PromptVimTmuxCommand<CR>
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader>vs "vy :call RunVimTmuxCommand(@v)<CR>
+
+" Select current paragraph and send it to tmux
+nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+```
+
+Now, open a clojure file. Let's say your leader is backslash (\). Type \vp, and then type lein repl at the prompt. This opens a tmux split running a REPL. Then, select text or put the cursor on a function and type \vs. This will send it to the REPL and evaluate it.
+
+## Options
+
+### VimuxHeight
+Set the percent height of the runner pane opened by `RunVimTmuxCommand`.
+**Default: `"20"`**
+
+```viml
+let VimuxHeight = "50"
+```
+
+## Todo
+
+The features I would like to add in the near future.
+
+* Add the ability to target any tmux session, window and pane
