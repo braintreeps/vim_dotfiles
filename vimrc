@@ -142,7 +142,7 @@ endif
 set undolevels=1000 "maximum number of changes that can be undone
 
 function! GitGrepWord()
-  cgetexpr system('git grep -n '.expand("<cword>"))
+  cgetexpr system("git grep -n '" . expand("<cword>") . "'")
   cwin
   echo 'Number of matches: ' . len(getqflist())
 endfunction
