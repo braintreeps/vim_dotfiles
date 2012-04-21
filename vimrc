@@ -77,6 +77,14 @@ map <LocalLeader>aw :Ack '<C-R><C-W>'
 map <silent> <LocalLeader>bd :bufdo :bd<CR>
 map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
+
+map <silent> <LocalLeader>rl :wa<CR> :RunLastVimTmuxCommand<CR>
+map <silent> <LocalLeader>ri :wa<CR> :InspectVimTmuxRunner<CR>
+map <silent> <LocalLeader>rx :wa<CR> :CloseVimTmuxPanes<CR>
+map <silent> <LocalLeader>vp :PromptVimTmuxCommand<CR>
+vmap <silent> <LocalLeader>vs "vy :call RunVimTmuxCommand(@v)<CR>
+nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
+
 command SudoW w !sudo tee %
 cnoremap <Tab> <C-L><C-D>
 
