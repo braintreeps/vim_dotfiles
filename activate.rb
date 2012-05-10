@@ -6,7 +6,7 @@ home_dir = File.expand_path("~")
 dot_files = Dir.glob(File.join(working_dir,"*"))
 
 dot_files.each do |filename|
-  next if filename =~ /activate\.rb$/
+  next if filename =~ /activate\.rb$/ || filename =~ /README\.txt$/
 
   sym_link = File.join(home_dir,".#{File.basename(filename)}")
 
