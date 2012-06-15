@@ -148,9 +148,9 @@ RUBY
       matches = finder.find(text, limit)
       matches.sort_by { |a| [-a[:score], a[:path]] }.each_with_index do |match, index|
         word = match[:path]
-        abbr = "%2d: %s" % [index+1, match[:abbr]]
+        abbr = "%2d: %s" % [index + 1, match[:name].slice(0, 80)]
         menu = "[%5d]" % [match[:score] * 10000]
-        VIM.evaluate("add(result, { 'word' : #{word.inspect}, 'abbr' : #{abbr.inspect}, 'menu' : #{menu.inspect} })")
+        VIM.evaluate("add(result, { 'word' : #{word.inspect}, 'abbr' : #{abbr.inspect}, 'menu' : #{match[:directory].sub(File.expand_path(VIM.evaluate("g:fuzzy_roots")), '.').inspect} })")
       end
 RUBY
 
