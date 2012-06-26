@@ -51,11 +51,18 @@ function! s:InferiorSlimeSpecLine(...)
   silent exec g:InferiorSlimeOpenWinCmd
 endfunction
 
+function! s:InferiorSlimeSpecLast(...)
+  let args = [g:InferiorSlimeCmd, 'spec', 'last']
+  cgetexpr system(join(args, ' '))
+  silent exec g:InferiorSlimeOpenWinCmd
+endfunction
+
 command! -nargs=* -complete=file InferiorSlime :call s:InferiorSlime(<f-args>)
 command! -nargs=* -complete=file InferiorSlimeRestart :call s:InferiorSlimeRestart(<f-args>)
 command! -nargs=* -complete=file InferiorSlimeSpecAll :call s:InferiorSlimeSpecAll(<f-args>)
 command! -nargs=* -complete=file InferiorSlimeSpecFile :call s:InferiorSlimeSpecFile(<f-args>)
 command! -nargs=* -complete=file InferiorSlimeSpecLine :call s:InferiorSlimeSpecLine(<f-args>)
+command! -nargs=* -complete=file InferiorSlimeSpecLast :call s:InferiorSlimeSpecLast(<f-args>)
 
 " vim: syntax=vim
 
