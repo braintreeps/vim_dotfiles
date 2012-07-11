@@ -12,10 +12,11 @@ CONTENTS                                        *command-t-contents*
  7. Mappings                |command-t-mappings|
  8. Options                 |command-t-options|
  9. Authors                 |command-t-authors|
-10. Website                 |command-t-website|
-11. Donations               |command-t-donations|
-12. License                 |command-t-license|
-13. History                 |command-t-history|
+10. Development             |command-t-development|
+11. Website                 |command-t-website|
+12. Donations               |command-t-donations|
+13. License                 |command-t-license|
+14. History                 |command-t-history|
 
 
 INTRODUCTION                                    *command-t-intro*
@@ -147,11 +148,27 @@ you can build the extension with:
   ruby extconf.rb
   make
 
-Note: If you are an RVM user, you must perform the build using the same
-version of Ruby that Vim itself is linked against. This will often be the
-system Ruby, which can be selected before issuing the "make" command with:
+Note: If you are an RVM or rbenv user, you must perform the build using the
+same version of Ruby that Vim itself is linked against. This will often be the
+system Ruby, which can be selected before issuing the "make" command with one
+of the following commands:
 
   rvm use system
+  rbenv local system
+
+Note: Make sure you compile targeting the same architecture Vim was built for.
+For instance, MacVim binaries are built for i386, but sometimes GCC compiles
+for x86_64. First you have to check the platfom Vim was built for:
+
+  vim --version
+  ...
+  Compilation: gcc ... -arch i386 ...
+  ...
+
+and make sure you use the correct ARCHFLAGS during compilation:
+
+  export ARCHFLAGS="-arch i386"
+  make
 
 
 MANAGING USING PATHOGEN                         *command-t-pathogen*
@@ -189,8 +206,9 @@ Or you can switch to a specific release with:
 
 After installing or updating you must build the extension:
 
-  cd ~/.vim/bundle/command-t
-  rake make
+  cd ~/.vim/bundle/command-t/ruby/command-t
+  ruby extconf.rb
+  make
 
 While the Vimball installation automatically generates the help tags, under
 Pathogen it is necessary to do so explicitly from inside Vim:
@@ -304,6 +322,7 @@ has focus:
     <C-k>       select previous file in the file listing
     <C-p>       select previous file in the file listing
     <Up>        select previous file in the file listing
+    <C-f>       flush the cache (see |:CommandTFlush| for details)
     <C-c>       cancel (dismisses file listing)
 
 The following is also available on terminals which support it:
@@ -332,13 +351,29 @@ COMMANDS                                        *command-t-commands*
                 except that the selection is limited to files that
                 you already have open in buffers.
 
+                                                *:CommandTJumps*
+|:CommandTJump| Brings up the Command-T jumplist window.
+                This works exactly like the standard file window,
+                except that the selection is limited to files that
+                you already have in the jumplist. Note that jumps
+                can persist across Vim sessions (see Vim's |jumplist|
+                documentation for more info).
+
+                                                *:CommandTTag*
+|:CommandTTag| Brings up the Command-T window tags window, which can
+                be used to select from the tags, if any, returned by
+                Vim's |taglist()| function. See Vim's |tag| documentation
+                for general info on tags.
+
                                                 *:CommandTFlush*
 |:CommandTFlush|Instructs the plug-in to flush its path cache, causing
                 the directory to be rescanned for new or deleted paths
-                the next time the file window is shown. In addition, all
-                configuration settings are re-evaluated, causing any
-                changes made to settings via the |:let| command to be picked
-                up.
+                the next time the file window is shown (pressing <C-f> when
+                a match listing is visible flushes the cache immediately; this
+                mapping is configurable via the |g:CommandTRefreshMap|
+                setting). In addition, all configuration settings are
+                re-evaluated, causing any changes made to settings via the
+                |:let| command to be picked up.
 
 
 MAPPINGS                                        *command-t-mappings*
@@ -351,8 +386,8 @@ By default Command-T comes with only two mappings:
 However, Command-T won't overwrite a pre-existing mapping so if you prefer
 to define different mappings use lines like these in your ~/.vimrc:
 
-  nmap <silent> <Leader>t :CommandT<CR>
-  nmap <silent> <Leader>b :CommandTBuffer<CR>
+  nnoremap <silent> <Leader>t :CommandT<CR>
+  nnoremap <silent> <Leader>b :CommandTBuffer<CR>
 
 Replacing "<Leader>t" or "<Leader>b" with your mapping of choice.
 
@@ -399,12 +434,29 @@ Following is a list of all available options:
       current directory. Any directories at levels beyond this depth will be
       skipped.
 
+                                               *g:CommandTMaxCachedDirectories*
+  |g:CommandTMaxCachedDirectories|                           number (default 1)
+
+      The maximum number of directories whose contents should be cached when
+      recursively scanning. With the default value of 1, each time you change
+      directories the cache will be emptied and Command-T will have to
+      rescan. Higher values will make Command-T hold more directories in the
+      cache, bringing performance at the cost of memory usage. If set to 0,
+      there is no limit on the number of cached directories.
+
                                                *g:CommandTMaxHeight*
   |g:CommandTMaxHeight|                          number (default: 0)
 
       The maximum height in lines the match window is allowed to expand to.
       If set to 0, the window will occupy as much of the available space as
       needed to show matching entries.
+
+                                               *g:CommandTMinHeight*
+  |g:CommandTMinHeight|                          number (default: 0)
+
+      The minimum height in lines the match window is allowed to shrink to.
+      If set to 0, will default to a single line. If set above the max height,
+      will default to |g:CommandTMaxHeight|.
 
                                                *g:CommandTAlwaysShowDotFiles*
   |g:CommandTAlwaysShowDotFiles|                 boolean (default: 0)
@@ -470,6 +522,12 @@ Following is a list of all available options:
       you want the best match to appear in a fixed location on the screen
       but still be near the prompt at the bottom.
 
+                                                *g:CommandTTagIncludeFilenames*
+  |g:CommandTTagIncludeFilenames|                 boolean (default: 0)
+
+      When this setting is off (the default) the matches in the |:CommandTTag|
+      listing do not include filenames.
+
 As well as the basic options listed above, there are a number of settings that
 can be used to override the default key mappings used by Command-T. For
 example, to set <C-x> as the mapping for cancelling (dismissing) the Command-T
@@ -524,6 +582,9 @@ Following is a list of all map settings and their defaults:
                                       *g:CommandTClearMap*
                   |g:CommandTClearMap|  <C-u>
 
+                                      *g:CommandTRefreshMap*
+                |g:CommandTRefreshMap|  <C-f>
+
                                       *g:CommandTCursorLeftMap*
              |g:CommandTCursorLeftMap|  <Left>
                                       <C-h>
@@ -565,15 +626,14 @@ Command-T is written and maintained by Wincent Colaiuta <win@wincent.com>.
 Other contributors that have submitted patches include (in alphabetical
 order):
 
-  Daniel Hahler
-  Lucas de Vries
-  Matthew Todd
-  Mike Lundy
-  Scott Bronson
-  Steven Moazami
-  Sung Pae
-  Victor Hugo Borja
-  Zak Johnson
+  Anthony Panozzo           Mike Lundy                Steven Moazami
+  Daniel Hahler             Nate Kane                 Sung Pae
+  Felix Tjandrawibawa       Nicholas Alpi             Thomas Pelletier
+  Gary Bernhardt            Nadav Samet               Victor Hugo Borja
+  Jeff Kreeftmeijer         Noon Silk                 Woody Peterson
+  Lucas de Vries            Rainux Luo                Yan Pritzker
+  Marian Schubert           Scott Bronson             Zak Johnson
+  Matthew Todd              Seth Fowler
 
 As this was the first Vim plug-in I had ever written I was heavily influenced
 by the design of the LustyExplorer plug-in by Stephen Bach, which I understand
@@ -590,6 +650,38 @@ LustyExplorer is available from:
   http://www.vim.org/scripts/script.php?script_id=1890
 
 
+DEVELOPMENT                                     *command-t-development*
+
+Development in progress can be inspected via the project's Git web-based
+repository browser at:
+
+  https://wincent.com/repos/command-t
+
+the clone URL for which is:
+
+  git://git.wincent.com/command-t.git
+
+Mirrors exist on GitHub and Gitorious; these are automatically updated once
+per hour from the authoritative repository:
+
+  https://github.com/wincent/command-t
+  https://gitorious.org/command-t/command-t
+
+Patches are welcome via the usual mechanisms (pull requests, email, posting to
+the project issue tracker etc).
+
+As many users choose to track Command-T using Pathogen, which often means
+running a version later than the last official release, the intention is that
+the "master" branch should be kept in a stable and reliable state as much as
+possible.
+
+Riskier changes are first cooked on the "next" branch for a period before
+being merged into master. You can track this branch if you're feeling wild and
+experimental, but note that the "next" branch may periodically be rewound
+(force-updated) to keep it in sync with the "master" branch after each
+official release.
+
+
 WEBSITE                                         *command-t-website*
 
 The official website for Command-T is:
@@ -597,11 +689,6 @@ The official website for Command-T is:
   https://wincent.com/products/command-t
 
 The latest release will always be available from there.
-
-Development in progress can be inspected via the project's Git repository
-browser at:
-
-  https://wincent.com/repos/command-t
 
 A copy of each release is also available from the official Vim scripts site
 at:
@@ -624,7 +711,7 @@ PayPal to win@wincent.com:
 
 LICENSE                                         *command-t-license*
 
-Copyright 2010-2011 Wincent Colaiuta. All rights reserved.
+Copyright 2010-2012 Wincent Colaiuta. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -647,8 +734,31 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 
-
 HISTORY                                         *command-t-history*
+
+1.4 (20 June 2012)
+
+- added |:CommandTTag| command (patches from Noon Silk)
+- turn off |'colorcolumn'| and |'relativenumber'| in the match window (patch
+  from Jeff Kreeftmeijer)
+- documentation update (patch from Nicholas Alpi)
+- added |:CommandTMinHeight| option (patch from Nate Kane)
+- highlight (by underlining) matched characters in the match listing (requires
+  Vim to have been compiled with the +conceal feature, which is available in
+  Vim 7.3 or later; patch from Steven Moazami)
+- added the ability to flush the cache while the match window is open using
+  <C-f>
+
+1.3.1 (18 December 2011)
+
+- fix jumplist navigation under Ruby 1.9.x (patch from Woody Peterson)
+
+1.3 (27 November 2011)
+
+- added the option to maintain multiple caches when changing among
+  directories; see the accompanying |g:CommandTMaxCachedDirectories| setting
+- added the ability to navigate using the Vim jumplist (patch from Marian
+  Schubert)
 
 1.2.1 (30 April 2011)
 

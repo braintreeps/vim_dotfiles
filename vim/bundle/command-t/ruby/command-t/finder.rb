@@ -1,4 +1,4 @@
-# Copyright 2010-2011 Wincent Colaiuta. All rights reserved.
+# Copyright 2010-2012 Wincent Colaiuta. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -31,6 +31,8 @@ module CommandT
   # Specialized subclasses use different kinds of scanners adapted for
   # different kinds of search (files, buffers).
   class Finder
+    include VIM::PathUtilities
+
     def initialize path = Dir.pwd, options = {}
       raise RuntimeError, 'Subclass responsibility'
     end
@@ -41,8 +43,8 @@ module CommandT
       @matcher.sorted_matches_for str, options
     end
 
-    def flush
-      @scanner.flush
+    def open_selection command, selection, options = {}
+      ::VIM::command "silent #{command} #{selection}"
     end
 
     def path= path

@@ -1,4 +1,4 @@
-# Copyright 2010-2012 Wincent Colaiuta. All rights reserved.
+# Copyright 2011-2012 Wincent Colaiuta. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -22,18 +22,23 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 require 'command-t/ext' # CommandT::Matcher
+require 'command-t/scanner/tag_scanner'
 require 'command-t/finder'
-require 'command-t/scanner/file_scanner'
 
 module CommandT
-  class FileFinder < Finder
-    def initialize path = Dir.pwd, options = {}
-      @scanner = FileScanner.new path, options
-      @matcher = Matcher.new @scanner, options
+  class TagFinder < Finder
+    def initialize options = {}
+      @scanner = TagScanner.new options
+      @matcher = Matcher.new @scanner, :always_show_dot_files => true
     end
 
-    def flush
-      @scanner.flush
+    def open_selection command, selection, options = {}
+      if @scanner.include_filenames
+        selection = selection[0, selection.index(':')]
+      end
+
+      #  open the tag and center the screen on it
+      ::VIM::command "silent! tag #{selection} | :normal zz"
     end
-  end # class FileFinder
-end # CommandT
+  end # class TagFinder
+end # module CommandT
