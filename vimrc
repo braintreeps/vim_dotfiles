@@ -53,6 +53,10 @@ let coffee_no_trailing_space_error = 1
 
 let NERDTreeIgnore=['\.pyc']
 
+let g:CommandTMaxHeight = 15
+let g:CommandTMatchWindowAtTop = 1
+let g:CommandTCancelMap='<Esc>'
+
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
@@ -66,10 +70,9 @@ map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
-map <silent> <LocalLeader>ff :FuzzyFinderTextMate<CR>
-map <silent> <LocalLeader>ft :FuzzyFinderTag<CR>
-map <silent> <LocalLeader>fb :FuzzyFinderBuffer<CR>
-map <silent> <LocalLeader>fr :FuzzyFinderTextMateRefreshFiles<CR>
+map <silent> <leader>ff :CommandT<CR>
+map <silent> <leader>fb :CommandTBuffer<CR>
+map <silent> <leader>fr :CommandTFlush<CR>
 map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
 map <silent> <LocalLeader>nh :nohls<CR>

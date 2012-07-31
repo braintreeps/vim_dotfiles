@@ -86,7 +86,7 @@ The general release sequence is:
   rake prerelease
   rake gem
   rake push
-  bin/rake upload:all
+  bundle exec rake upload:all
   rake archive
 
 Most of the Rake tasks run fine without Bundler, and in fact, we
@@ -101,13 +101,13 @@ end
 
 task :check_bundler do
   unless ENV.has_key? 'BUNDLE_GEMFILE'
-    warn 'warning: Bundler is not loaded; try running with bin/rake'
+    warn 'warning: Bundler is not loaded; try running with `bundle exec rake`'
   end
 end
 
 desc 'Run specs'
 task :spec do
-  system 'bin/rspec spec'
+  system 'bundle exec rspec spec'
   bail_on_failure
 end
 
@@ -121,7 +121,8 @@ end
 desc 'Clean compiled products'
 task :clean do
   Dir.chdir 'ruby/command-t' do
-    system 'make clean'
+    system 'make clean' if File.exists?('Makefile')
+    system 'rm -f Makefile'
   end
 end
 
@@ -134,7 +135,9 @@ desc 'Compile extension'
 task :make do
   Dir.chdir 'ruby/command-t' do
     ruby 'extconf.rb'
-    system 'make clean && make'
+    system 'make clean'
+    bail_on_failure
+    system 'make'
     bail_on_failure
   end
 end
@@ -211,9 +214,4 @@ end
 desc 'Push gem to Gemcutter ("gem push")'
 task :push => :gem do
   sh "gem push command-t-#{rubygems_version}.gem"
-end
-
-desc 'Install the command-t ruby gem'
-task :install => :gem  do
-  sh "gem install command-t-#{rubygems_version}.gem"
 end

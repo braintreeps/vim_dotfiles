@@ -1,4 +1,4 @@
-# Copyright 2010 Wincent Colaiuta. All rights reserved.
+# Copyright 2010-2012 Wincent Colaiuta. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -30,8 +30,24 @@ module CommandT
       ::VIM::evaluate('has("syntax")').to_i != 0
     end
 
+    def self.exists? str
+      ::VIM::evaluate(%{exists("#{str}")}).to_i != 0
+    end
+
+    def self.has_conceal?
+      ::VIM::evaluate('has("conceal")').to_i != 0
+    end
+
     def self.pwd
       ::VIM::evaluate 'getcwd()'
+    end
+
+    # Execute cmd, capturing the output into a variable and returning it.
+    def self.capture cmd
+      ::VIM::command 'silent redir => g:command_t_captured_output'
+      ::VIM::command cmd
+      ::VIM::command 'silent redir END'
+      ::VIM::evaluate 'g:command_t_captured_output'
     end
 
     # Escape a string for safe inclusion in a Vim single-quoted string
