@@ -90,6 +90,7 @@ cnoremap <Tab> <C-L><C-D>
 
 nnoremap <silent> k gk
 nnoremap <silent> j gj
+nnoremap <silent> Y y$
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
