@@ -1,1 +1,1 @@
-../bundle/NERD_tree/doc/NERD_tree.txt
+../bundle/nerdtree/doc/NERD_tree.txt
