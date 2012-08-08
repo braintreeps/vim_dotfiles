@@ -117,7 +117,9 @@ let g:VimuxUseNearestPane = 1
 
 let g:CommandTMaxHeight = 15
 let g:CommandTMatchWindowAtTop = 1
-let g:CommandTCancelMap='<Esc>'
+let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 
 " ========= Shortcuts ========
 
