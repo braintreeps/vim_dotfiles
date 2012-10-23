@@ -39,9 +39,7 @@ endif
 set undolevels=1000 "maximum number of changes that can be undone
 
 " Color
-if &t_Co == 256
-  colorscheme vibrantink
-endif
+colorscheme Tomorrow-Night
 
 au FileType diff colorscheme desert
 au FileType git colorscheme desert
@@ -142,11 +140,12 @@ map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
 
 " Vimux
-map <silent> <LocalLeader>rl :wa<CR> :RunLastVimTmuxCommand<CR>
-map <silent> <LocalLeader>ri :wa<CR> :InspectVimTmuxRunner<CR>
-map <silent> <LocalLeader>rx :wa<CR> :CloseVimTmuxPanes<CR>
-map <silent> <LocalLeader>vp :PromptVimTmuxCommand<CR>
-vmap <silent> <LocalLeader>vs "vy :call RunVimTmuxCommand(@v)<CR>
+map <silent> <LocalLeader>rl :wa<CR> :VimuxRunLastCommand<CR>
+map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
+map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
+map <silent> <LocalLeader>vx :wa<CR> :VimuxClosePanes<CR>
+map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
+vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
@@ -203,3 +202,9 @@ function! Trim()
 endfunction
 command! -nargs=0 Trim :call Trim()
 nnoremap <silent> <Leader>cw :Trim<CR>
+
+function! StartInferiorSlimeServer()
+  let g:__InferiorSlimeRunning = 1
+  call VimuxRunCommand("inferior-slime")
+endfunction
+command! -nargs=0 StartInferiorSlimeServer :call StartInferiorSlimeServer()
