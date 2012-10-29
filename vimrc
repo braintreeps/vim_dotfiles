@@ -29,7 +29,7 @@ set dir=/tmp//
 set scrolloff=5
 set ignorecase
 set smartcase
-set wildignore+=*.pyc
+set wildignore+=*.pyc,*.o,*.class
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -110,7 +110,7 @@ let g:no_html_toolbar = 'yes'
 
 let coffee_no_trailing_space_error = 1
 
-let NERDTreeIgnore=['\.pyc']
+let NERDTreeIgnore=['\.pyc', '\.o', '\.class']
 
 let g:VimuxUseNearestPane = 1
 
