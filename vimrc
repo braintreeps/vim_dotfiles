@@ -43,6 +43,7 @@ colorscheme vibrantink
 
 au FileType diff colorscheme desert
 au FileType git colorscheme desert
+au BufWinLeave * colorscheme vibrantink
 
 " File Types
 
