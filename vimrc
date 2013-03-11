@@ -212,3 +212,16 @@ function! StartInferiorSlimeServer()
   call VimuxRunCommand("inferior-slime")
 endfunction
 command! -nargs=0 StartInferiorSlimeServer :call StartInferiorSlimeServer()
+
+function! __Edge()
+  map <leader>nf :e%:h<CR>
+  map <C-p> :CommandT<CR>
+endfunction
+
+function! __HardMode()
+  nmap h <nop>
+  nmap j <nop>
+  nmap k <nop>
+  nmap l <nop>
+  call __Edge()
+endfunction
