@@ -29,7 +29,7 @@ set dir=/tmp//
 set scrolloff=5
 set ignorecase
 set smartcase
-set wildignore+=*.pyc,*.o,*.class,*.lo
+set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -214,8 +214,16 @@ endfunction
 command! -nargs=0 StartInferiorSlimeServer :call StartInferiorSlimeServer()
 
 function! __Edge()
+  colorscheme Tomorrow-Night
+  au BufWinLeave * colorscheme Tomorrow-Night
+
+  set ttyfast
+
   map <leader>nf :e%:h<CR>
   map <C-p> :CommandT<CR>
+
+  let g:VimuxOrientation = "h"
+  let g:VimuxHeight = "40"
 endfunction
 
 function! __HardMode()
@@ -223,5 +231,4 @@ function! __HardMode()
   nmap j <nop>
   nmap k <nop>
   nmap l <nop>
-  call __Edge()
 endfunction
