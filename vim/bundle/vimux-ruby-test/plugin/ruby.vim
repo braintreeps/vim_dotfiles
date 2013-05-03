@@ -70,7 +70,7 @@ class RubyTest
   end
 
   def run_spec
-    send_to_vimux("#{spec_command} '#{current_file}' -l #{line_number}")
+    send_to_vimux("#{spec_command} #{current_file}:#{line_number}")
   end
 
   def run_unit_test(rails=false, ruby_command='ruby')
@@ -117,7 +117,7 @@ class RubyTest
 
     if method_name
       if spec_file?
-        send_to_vimux("#{spec_command} #{current_file} -l #{context_line_number}")
+        send_to_vimux("#{spec_command} #{current_file}:#{context_line_number}")
       else
         method_name = Regexp.escape(method_name)
         send_to_vimux("#{ruby_command} #{current_file} -n /'#{method_name}'/")
