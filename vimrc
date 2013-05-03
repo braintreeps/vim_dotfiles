@@ -45,6 +45,11 @@ au FileType diff colorscheme desert
 au FileType git colorscheme desert
 au BufWinLeave * colorscheme vibrantink
 
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
 " File Types
 
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
