@@ -47,7 +47,7 @@ if has("gui_running")
     highlight CursorLine guibg=#323300
 else
     set t_Co=256
-    highlight Normal ctermfg=White ctermbg=Black 
+    highlight Normal ctermfg=White ctermbg=NONE
     highlight Cursor ctermfg=Black ctermbg=Yellow 
     highlight Keyword ctermfg=202 
     highlight Define ctermfg=202 
