@@ -30,6 +30,7 @@ set scrolloff=5
 set ignorecase
 set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*
+set tags+=gems.tags
 
 if version >= 703
   set undodir=~/.vim/undodir
