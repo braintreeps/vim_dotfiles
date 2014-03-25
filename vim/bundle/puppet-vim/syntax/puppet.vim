@@ -69,7 +69,7 @@ syn match   puppetNotVariable   "\\$\w\+" contained
 syn match   puppetNotVariable   "\\${\w\+}" contained
 
 syn keyword puppetKeyword       import inherits include
-syn keyword puppetControl       case default if else elsif
+syn keyword puppetControl       case default if else elsif unless
 syn keyword puppetSpecial       true false undef
 
 " comments last overriding everything else
