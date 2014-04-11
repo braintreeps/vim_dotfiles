@@ -29,7 +29,7 @@ set dir=/tmp//
 set scrolloff=5
 set ignorecase
 set smartcase
-set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*
+set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*,node_modules/**
 set tags+=gems.tags
 
 if version >= 703
