@@ -7,7 +7,7 @@ if &shell == "/usr/bin/sudosh"
 endif
 
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect('bundle/{}', 'bundle_local/{}')
 filetype plugin indent on
 
 
