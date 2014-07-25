@@ -96,6 +96,9 @@ set statusline+=%10(L(%l/%L)%)\           " line
 set statusline+=%2(C(%v/125)%)\           " column
 set statusline+=%P                        " percentage of file
 
+" Prevent O delay
+set timeout timeoutlen=3000 ttimeoutlen=100
+
 " ========= Plugin Options ========
 
 let g:AckAllFiles = 0
