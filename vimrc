@@ -179,6 +179,8 @@ nnoremap <silent> Y y$
 
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
+nnoremap <CR> :noh<CR><CR>
+
 " Pasting over a selection does not replace the clipboard
 xnoremap <expr> p 'pgv"'.v:register.'y'
 
