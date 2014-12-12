@@ -73,7 +73,7 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Autoremove trailing spaces when saving the buffer
-autocmd FileType c,cpp,eruby,html,java,javascript,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Highlight too-long lines
 autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
