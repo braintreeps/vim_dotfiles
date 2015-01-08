@@ -1,6 +1,6 @@
 task :default => :compile_command_t
 
-desc 'compile Comamnd-T'
+desc 'compile Command-T'
 task :compile_command_t do
   Dir.chdir(File.dirname(__FILE__) + "/vim/bundle/command-t") do
     sh "rake make"
