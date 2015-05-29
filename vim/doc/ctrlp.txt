@@ -1,0 +1,1 @@
+../bundle/ctrlp.vim/doc/ctrlp.txt
