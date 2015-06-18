@@ -1,1 +1,1 @@
-../bundle/vim-clojure-static/doc/clojure.txt
+../bundle/vimclojure/doc/clojure.txt

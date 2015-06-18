@@ -127,7 +127,11 @@ let g:netrw_banner = 0
 
 let g:VimuxUseNearestPane = 1
 
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:15,results:15'
+let g:CommandTMaxHeight = 15
+let g:CommandTMatchWindowAtTop = 1
+let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 
 " ========= Shortcuts ========
 
@@ -136,10 +140,10 @@ map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
-" CtrlP
-map <silent> <leader>ff :CtrlP<CR>
-map <silent> <leader>fr :CtrlPClearCache<CR>
-map <silent> <leader>fb :CtrlPBuffer<CR>
+" CommandT
+map <silent> <leader>ff :CommandT<CR>
+map <silent> <leader>fb :CommandTBuffer<CR>
+map <silent> <leader>fr :CommandTFlush<CR>
 
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'

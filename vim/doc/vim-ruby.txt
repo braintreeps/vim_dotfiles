@@ -1,1 +1,0 @@
-../bundle/vim-ruby/doc/vim-ruby.txt

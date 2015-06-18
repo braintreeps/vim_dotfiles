@@ -1,1 +1,0 @@
-../bundle/vim-classpath/doc/classpath.txt
