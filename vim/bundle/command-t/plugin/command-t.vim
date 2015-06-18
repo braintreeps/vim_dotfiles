@@ -167,7 +167,7 @@ ruby << EOF
     require 'command-t/vim'
     require 'command-t/controller'
     $command_t = CommandT::Controller.new
-  rescue LoadError
+  rescue LoadError, Gem::Ext::BuildError
     load_path_modified = false
     ::VIM::evaluate('&runtimepath').to_s.split(',').each do |path|
       lib = "#{path}/ruby"
