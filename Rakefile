@@ -1,13 +1,6 @@
-task :default => :compile_command_t
+task :default => :activate
 
-desc 'compile Command-T'
-task :compile_command_t do
-  Dir.chdir(File.dirname(__FILE__) + "/vim/bundle/command-t") do
-    sh "rake make"
-  end
-end
-
-desc 'symlink files into home directory'
+desc 'symlink files into home directory and install plugins'
 task :activate do
   working_dir = File.expand_path(File.dirname(__FILE__))
   home_dir = File.expand_path("~")
@@ -21,4 +14,6 @@ task :activate do
     rm_rf(sym_link) if File.symlink?(sym_link) || File.exist?(sym_link)
     ln_s filename, sym_link
   end
+
+  sh 'vim +PlugInstall +PlugClean! +qall'
 end
