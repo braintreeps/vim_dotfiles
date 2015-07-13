@@ -6,9 +6,10 @@ if &shell == "/usr/bin/sudosh"
   set shell=/bin/bash
 endif
 
-filetype off
-call pathogen#infect('bundle/{}', 'bundle_local/{}')
-filetype plugin indent on
+" Install vim plugins
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 
 
 " ========= Options ========

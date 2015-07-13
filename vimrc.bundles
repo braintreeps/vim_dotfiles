@@ -1,0 +1,56 @@
+if &compatible
+  set nocompatible
+end
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'jlanzarotta/bufexplorer'
+Plug 'mileszs/ack.vim'
+Plug 'vim-scripts/Align'
+Plug 'bkad/CamelCaseMotion'
+Plug 'flazz/vim-colorschemes'
+Plug 'wincent/Command-T', { 'do': 'rake make' }
+Plug 'mattn/emmet-vim'
+Plug 'henrik/vim-indexed-search'
+Plug 'vim-scripts/mako.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'vim-scripts/matchit.zip'
+Plug 'scrooloose/nerdtree'
+Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'jergason/scala.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'davidzchen/vim-bazel'
+Plug 'tpope/vim-classpath'
+Plug 'vim-scripts/VimClojure'
+Plug 'guns/vim-clojure-static'
+Plug 'kchmck/vim-coffee-script'
+Plug 'benmills/vim-commadown'
+Plug 'tpope/vim-cucumber'
+Plug 'elixir-lang/vim-elixir'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fireplace'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'tpope/vim-fugitive'
+Plug 'fatih/vim-go'
+Plug 'tfnico/vim-gradle'
+Plug 'pangloss/vim-javascript'
+Plug 'uarun/vim-protobuf'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-surround'
+Plug 'jgdavey/vim-turbux'
+Plug 'benmills/vimux'
+Plug 'drewolson/vimux-maven-test'
+Plug 'drewolson/vimux-elixir-test'
+Plug 'pitluga/vimux-nose-test'
+Plug 'pgr0ss/vimux-ruby-test'
+Plug 'tpope/vim-vinegar'
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.bundles.local
+endif
+
+call plug#end()
