@@ -2,7 +2,11 @@ if &compatible
   set nocompatible
 end
 
-call plug#begin('~/.vim/plugged')
+if expand('%') == '/etc/vim/vimrc.bundles'
+  call plug#begin('/etc/vim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
 
 Plug 'jlanzarotta/bufexplorer'
 Plug 'mileszs/ack.vim'
