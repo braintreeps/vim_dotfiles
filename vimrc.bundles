@@ -12,7 +12,6 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/Align'
 Plug 'bkad/CamelCaseMotion'
-Plug 'flazz/vim-colorschemes'
 Plug 'braintreeps/command-t', { 'do': 'rake make' }
 Plug 'mattn/emmet-vim'
 Plug 'henrik/vim-indexed-search'
