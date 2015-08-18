@@ -8,7 +8,7 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-Plug 'jlanzarotta/bufexplorer'
+Plug 'braintreeps/bufexplorer'
 Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/Align'
 Plug 'bkad/CamelCaseMotion'
