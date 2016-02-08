@@ -223,6 +223,7 @@ nnoremap <silent> <Leader>gw :GitGrepWord<CR>
 
 function! Trim()
   %s/\s*$//
+  ''
 endfunction
 command! -nargs=0 Trim :call Trim()
 nnoremap <silent> <Leader>cw :Trim<CR>
