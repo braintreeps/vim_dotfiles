@@ -111,10 +111,6 @@ let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
 
-let vimclojure#WantNailgun = 0
-let vimclojure#HighlightBuiltins = 1
-let vimclojure#ParenRainbow = 1
-
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
@@ -139,6 +135,11 @@ let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
 let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 
 let g:vim_markdown_folding_disabled=1
+
+autocmd VimEnter *       RainbowParenthesesToggle
+autocmd Syntax   clojure RainbowParenthesesLoadRound
+autocmd Syntax   clojure RainbowParenthesesLoadSquare
+autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
 " ========= Shortcuts ========
 
