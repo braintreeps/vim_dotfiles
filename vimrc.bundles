@@ -25,8 +25,8 @@ Plug 'jergason/scala.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'davidzchen/vim-bazel'
 Plug 'tpope/vim-classpath'
-Plug 'vim-scripts/VimClojure'
 Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
 Plug 'kchmck/vim-coffee-script'
 Plug 'benmills/vim-commadown'
 Plug 'tpope/vim-cucumber'
@@ -51,6 +51,7 @@ Plug 'drewolson/vimux-elixir-test'
 Plug 'pitluga/vimux-nose-test'
 Plug 'pgr0ss/vimux-ruby-test'
 Plug 'tpope/vim-vinegar'
+Plug 'kien/rainbow_parentheses.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
