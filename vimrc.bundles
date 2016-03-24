@@ -8,6 +8,7 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
+
 Plug 'benmills/vim-commadown'
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
@@ -15,6 +16,7 @@ Plug 'braintreeps/puppet-syntax-vim'
 Plug 'chase/vim-ansible-yaml'
 Plug 'davidzchen/vim-bazel'
 Plug 'derekwyatt/vim-scala'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'drewolson/vimux-elixir-test'
 Plug 'drewolson/vimux-maven-test'
 Plug 'elixir-lang/vim-elixir'
@@ -24,14 +26,14 @@ Plug 'guns/vim-clojure-static'
 Plug 'henrik/vim-indexed-search'
 Plug 'jergason/scala.vim'
 Plug 'jgdavey/vim-turbux'
-Plug 'drewolson/vim_dotfiles', {'rtp': 'vim/bundle/bufexplorer'}
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
-Plug 'pforman/vim-terraform'
+Plug 'markcornick/vim-bats'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'pforman/vim-terraform'
 Plug 'pgr0ss/vimux-bazel-test'
 Plug 'pgr0ss/vimux-ruby-test'
 Plug 'pitluga/vimux-nose-test'
@@ -55,7 +57,6 @@ Plug 'vim-scripts/Align'
 Plug 'vim-scripts/mako.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/VimClojure'
-
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
