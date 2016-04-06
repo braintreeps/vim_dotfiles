@@ -55,6 +55,10 @@ augroup markdown
   au!
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
+augroup Drakefile
+  au!
+  au BufNewFile,BufRead Drakefile,drakefile setlocal filetype=ruby
+augroup END
 
 " File Types
 

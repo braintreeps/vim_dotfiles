@@ -52,6 +52,7 @@ Plug 'pitluga/vimux-nose-test'
 Plug 'pgr0ss/vimux-ruby-test'
 Plug 'tpope/vim-vinegar'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
