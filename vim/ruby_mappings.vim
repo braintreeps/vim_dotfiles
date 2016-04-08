@@ -5,6 +5,9 @@ map <silent> <LocalLeader>rl :wa<CR> :call _RunLast()<CR>
 map <silent> <LocalLeader>rx :wa<CR> :VimuxCloseRunner<CR>
 map <silent> <LocalLeader>ri :wa<CR> :VimuxInspectRunner<CR>
 map <silent> <LocalLeader>rs :!ruby -c %<CR>
+map <silent> <LocalLeader>AA   :A<CR>
+map <silent> <LocalLeader>AV   :AV<CR>
+map <silent> <LocalLeader>AS   :AS<CR>
 
 map <silent> <LocalLeader>sa :wa<CR> :InferiorSlimeSpecAll<CR>
 map <silent> <LocalLeader>sr :wa<CR> :InferiorSlimeRestart<CR>
