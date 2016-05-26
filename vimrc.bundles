@@ -2,7 +2,7 @@ if &compatible
   set nocompatible
 end
 
-if expand('%') == '/etc/vim/vimrc.bundles'
+if expand('<sfile>') == '/etc/vim/vimrc.bundles'
   call plug#begin('/etc/vim/plugged')
 else
   call plug#begin('~/.vim/plugged')
