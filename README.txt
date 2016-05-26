@@ -11,11 +11,11 @@ plugins requires an extra step:
 
     vim +:PlugInstall
 
-If you plan on using command-t, you'll need to build the C extension. Make sure
-to use the ruby you built vim against:
+If you plan on using command-t, you'll need to build the C extension. Vim-plug
+will do this automatically, but if it fails for some reason, you can do it
+manually, however make sure to use the ruby you built vim against:
 
     cd ~/.vim/plugged/command-t/ruby/command-t
     rvm use system
     ruby extconf.rb
     make
-
