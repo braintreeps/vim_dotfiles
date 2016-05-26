@@ -141,10 +141,12 @@ let g:CommandTWildIgnore=&wildignore . ",vendor/*,node_modules/**,bower_componen
 
 let g:vim_markdown_folding_disabled=1
 
-autocmd VimEnter *       RainbowParenthesesToggle
-autocmd Syntax   clojure RainbowParenthesesLoadRound
-autocmd Syntax   clojure RainbowParenthesesLoadSquare
-autocmd Syntax   clojure RainbowParenthesesLoadBraces
+if exists(':RainbowParenthesesToggle')
+  autocmd VimEnter *       RainbowParenthesesToggle
+  autocmd Syntax   clojure RainbowParenthesesLoadRound
+  autocmd Syntax   clojure RainbowParenthesesLoadSquare
+  autocmd Syntax   clojure RainbowParenthesesLoadBraces
+endif
 
 " ========= Shortcuts ========
 
