@@ -42,7 +42,7 @@ Plug 'uarun/vim-protobuf'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'commit': 'c9f55233d752b8ba69c5f3b28e94304e60f3c45b' }
 Plug 'tpope/vim-surround'
 Plug 'jgdavey/vim-turbux'
 Plug 'benmills/vimux'
