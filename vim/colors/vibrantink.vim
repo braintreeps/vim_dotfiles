@@ -65,4 +65,5 @@ else
     highlight String ctermfg=82 
     highlight Search ctermbg=White 
     highlight CursorLine cterm=NONE ctermbg=235
+    highlight PmenuSel ctermfg=NONE
 endif
