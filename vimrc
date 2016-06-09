@@ -142,6 +142,8 @@ let g:ctrlp_prompt_mappings = {
 
 let g:vim_markdown_folding_disabled = 1
 
+let g:go_fmt_command = "goimports"
+
 " ========= Shortcuts ========
 
 " NERDTree
