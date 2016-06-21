@@ -262,6 +262,52 @@ function! __HardMode()
   nmap l <nop>
 endfunction
 
+" cleans up the way the default tabline looks
+" will show tab numbers next to the basename of the file
+" from :help setting-tabline
+function MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    let s .= '[' . (i + 1) . ']' " set the tab page number (for viewing)
+    let s .= '%' . (i + 1) . 'T' " set the tab page number (for mouse clicks)
+    let s .= '%{MyTabLabel(' . (i + 1) . ')} ' " the label is made by MyTabLabel()
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+  return s
+endfunction
+
+" with help from http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
+function MyTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let bufnr = buflist[winnr - 1]
+  let file = bufname(bufnr)
+  let buftype = getbufvar(bufnr, 'buftype')
+
+  if buftype == 'nofile'
+    if file =~ '\/.'
+      let file = substitute(file, '.*\/\ze.', '', '')
+    endif
+  else
+    let file = fnamemodify(file, ':p:t')
+  endif
+  if file == ''
+    let file = '[No Name]'
+  endif
+  return file
+endfunction
+
+set tabline=%!MyTabLine()
+
 "-------- Local Overrides
 ""If you have options you'd like to override locally for
 "some reason (don't want to store something in a
