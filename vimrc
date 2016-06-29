@@ -260,6 +260,10 @@ function! __HardMode()
   nmap j <nop>
   nmap k <nop>
   nmap l <nop>
+  nmap <up> <nop>
+  nmap <down> <nop>
+  nmap <left> <nop>
+  nmap <right> <nop>
 endfunction
 
 "-------- Local Overrides
