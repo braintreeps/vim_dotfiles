@@ -19,7 +19,7 @@ Plug 'vim-scripts/mako.vim'
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdtree'
-Plug 'braintreeps/puppet-syntax-vim'
+Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487fa2' }
 Plug 'derekwyatt/vim-scala'
 Plug 'jergason/scala.vim'
 Plug 'tomtom/tcomment_vim'

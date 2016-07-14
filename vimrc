@@ -148,6 +148,8 @@ if exists(':RainbowParenthesesToggle')
   autocmd Syntax   clojure RainbowParenthesesLoadBraces
 endif
 
+let g:puppet_align_hashes = 0
+
 " ========= Shortcuts ========
 
 " NERDTree
