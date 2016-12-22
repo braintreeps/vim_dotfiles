@@ -37,7 +37,7 @@ Plug 'jtratner/vim-flavored-markdown'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'tfnico/vim-gradle'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
 Plug 'uarun/vim-protobuf'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
