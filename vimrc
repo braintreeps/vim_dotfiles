@@ -116,6 +116,19 @@ set statusline+=%P                        " percentage of file
 let g:AckAllFiles = 0
 let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
 
+" Side Search {{{
+let g:side_search_prg = 'ack-grep --word-regexp'
+       \. " --heading -C 2 --group"
+let g:side_search_splitter = 'vnew'
+let g:side_search_split_pct = 0.4
+
+" SideSearch current word and return to original window
+nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
+
+" SS shortcut and return to original window
+ command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
+" }}}
+
 let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
