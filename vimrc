@@ -166,6 +166,12 @@ let g:puppet_align_hashes = 0
 
 " ========= Shortcuts ========
 
+" Split Pane Management
+map <silent> <Leader>j <C-w>j
+map <silent> <Leader>k <C-w>k
+map <silent> <Leader>l <C-w>l
+map <silent> <Leader>h <C-w>h
+
 " NERDTree
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
