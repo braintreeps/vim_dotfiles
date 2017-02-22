@@ -133,6 +133,9 @@ let g:netrw_banner = 0
 let g:VimuxUseNearestPane = 1
 
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:15,results:15'
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\(node_modules\|bower_components\|vendor\)$'
+  \ }
 let g:ctrlp_prompt_mappings = {
   \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
   \ 'PrtSelectMove("k")':   ['<c-p>','<c-k>', '<up>'],
