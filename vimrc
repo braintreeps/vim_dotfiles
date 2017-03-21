@@ -75,10 +75,6 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
-" Highlight trailing whitespace
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
-
 " Autoremove trailing spaces when saving the buffer
 autocmd FileType c,cpp,elixir,eruby,html,java,javascript,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
 
@@ -147,6 +143,7 @@ let g:ctrlp_prompt_mappings = {
 let g:vim_markdown_folding_disabled = 1
 
 let g:go_fmt_command = "goimports"
+let g:go_highlight_trailing_whitespace_error = 0
 
 " ========= Shortcuts ========
 
