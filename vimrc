@@ -75,6 +75,10 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
+" Highlight trailing whitespace
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
+
 " Autoremove trailing spaces when saving the buffer
 autocmd FileType c,cpp,elixir,eruby,html,java,javascript,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
 
