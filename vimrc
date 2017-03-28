@@ -1,245 +1,102 @@
-" ========= Setup ========
-
 set nocompatible
 
-if &shell == "/usr/bin/sudosh"
-  set shell=/bin/bash
-endif
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-filetype off
-call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
+Bundle 'SuperTab'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle 'https://github.com/vim-scripts/VimClojure.git'
+Bundle 'https://github.com/tpope/vim-fugitive.git'
+Bundle 'https://github.com/kien/ctrlp.vim.git'
 
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard']
 
-" ========= Options ========
-
-compiler ruby
-syntax on
-set hlsearch
 set number
-set showmatch
-set incsearch
-set background=dark
-set hidden
-set backspace=indent,eol,start
-set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set ruler
-set wrap
-set dir=/tmp//
-set scrolloff=5
+syntax on
+
+" Set Leader Key
+let mapleader = ","
+
+" Whitespace stuff
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set list listchars=tab:\ \ ,trail:·
+
+" Searching
+set hlsearch
+set incsearch
 set ignorecase
 set smartcase
-set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*
+map <Leader>s :nohlsearch<CR>
 
-if version >= 703
-  set undodir=~/.vim/undodir
-  set undofile
-  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-endif
-set undolevels=1000 "maximum number of changes that can be undone
+" Tab completion
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc
 
-" Color
-colorscheme vibrantink
-
-au FileType diff colorscheme desert
-au FileType git colorscheme desert
-au BufWinLeave * colorscheme vibrantink
-
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
-
-" File Types
-
-autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-
-autocmd FileType tex setlocal textwidth=78
-autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
-
-autocmd FileType ruby runtime ruby_mappings.vim
-
-if version >= 700
-    autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
-    autocmd FileType tex setlocal spell spelllang=en_us
-endif
-
-" Highlight trailing whitespace
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
-
-" Autoremove trailing spaces when saving the buffer
-autocmd FileType ruby,c,cpp,java,php,html autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-" Highlight too-long lines
-autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
-highlight LineLengthError ctermbg=black guibg=black
-autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
-
-" Set up highlight group & retain through colorscheme changes
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-
-" Status
+" Status bar
 set laststatus=2
-set statusline=
-set statusline+=%<\                       " cut at start
-set statusline+=%2*[%n%H%M%R%W]%*\        " buffer number, and flags
-set statusline+=%-40f\                    " relative path
-set statusline+=%=                        " seperate between right- and left-aligned
-set statusline+=%1*%y%*%*\                " file type
-set statusline+=%10(L(%l/%L)%)\           " line
-set statusline+=%2(C(%v/125)%)\           " column
-set statusline+=%P                        " percentage of file
+set statusline+=[%F]
+set statusline+=[FORMAT=%{&ff}]
+set statusline+=[TYPE=%Y]
+set statusline+=[POS=%04l,%04v]
+set statusline+=[%p%%]
+set statusline+=%*
 
-" ========= Plugin Options ========
+" NERDTree configuration
+let NERDTreeIgnore=['\.rbc$', '\~$']
+map <Leader>n :NERDTreeToggle<CR>
 
-let g:AckAllFiles = 0
-let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
+" Command-T configuration
+let g:CommandTMaxHeight=20
 
-let html_use_css=1
-let html_number_lines=0
-let html_no_pre=1
+" Remember last location in file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
+endif
 
-let vimclojure#WantNailgun = 0
-let vimclojure#HighlightBuiltins = 1
-let vimclojure#ParenRainbow = 1
-
-let g:gist_clip_command = 'pbcopy'
-let g:gist_detect_filetype = 1
-
-let g:rubycomplete_buffer_loading = 1
-
-
-let g:no_html_toolbar = 'yes'
-
-let coffee_no_trailing_space_error = 1
-
-let NERDTreeIgnore=['\.pyc', '\.o', '\.class', '\.lo']
-let NERDTreeHijackNetrw = 0
-
-let g:netrw_banner = 0
-
-let g:VimuxUseNearestPane = 1
-
-let g:CommandTMaxHeight = 15
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
-
-" ========= Shortcuts ========
-
-" Split Pane Management
-map <silent> <Leader>j <C-w>j
-map <silent> <Leader>k <C-w>k
-map <silent> <Leader>l <C-w>l
-map <silent> <Leader>h <C-w>h
-
-" NERDTree
-map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
-map <silent> <LocalLeader>nr :NERDTree<CR>
-map <silent> <LocalLeader>nf :NERDTreeFind<CR>
-
-" CommandT
-map <silent> <leader>ff :CommandT<CR>
-map <silent> <leader>fb :CommandTBuffer<CR>
-map <silent> <leader>fr :CommandTFlush<CR>
-
-" Ack
-map <LocalLeader>aw :Ack '<C-R><C-W>'
-
-" TComment
-map <silent> <LocalLeader>cc :TComment<CR>
-map <silent> <LocalLeader>uc :TComment<CR>
-
-" Vimux
-map <silent> <LocalLeader>rl :wa<CR> :VimuxRunLastCommand<CR>
-map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
-map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
-map <silent> <LocalLeader>vx :wa<CR> :VimuxClosePanes<CR>
-map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
-vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
-nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
-
-map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
-
-map <silent> <LocalLeader>cj :!clj %<CR>
-
-map <silent> <LocalLeader>gd :e product_diff.diff<CR>:%!git diff<CR>:setlocal buftype=nowrite<CR>
-map <silent> <LocalLeader>pd :e product_diff.diff<CR>:%!svn diff<CR>:setlocal buftype=nowrite<CR>
-
-map <silent> <LocalLeader>nh :nohls<CR>
-
-map <silent> <LocalLeader>bd :bufdo :bd<CR>
-
-cnoremap <Tab> <C-L><C-D>
-
-nnoremap <silent> k gk
-nnoremap <silent> j gj
-nnoremap <silent> Y y$
-
-map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
-
-" ========= Insert Shortcuts ========
-
-imap <C-L> <SPACE>=><SPACE>
-
-" ========= Functions ========
-
-command SudoW w !sudo tee %
-
-" http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
-function! DivHtml(line1, line2)
-  exec a:line1.','.a:line2.'TOhtml'
-  %g/<style/normal $dgg
-  %s/<\/style>\n<\/head>\n//
-  %s/body {/.vim_block {/
-  %s/<body\(.*\)>\n/<div class="vim_block"\1>/
-  %s/<\/body>\n<\/html>/<\/div>
-  "%s/\n/<br \/>\r/g
-
-  set nonu
-endfunction
-command -range=% DivHtml :call DivHtml(<line1>,<line2>)
-
-function! GitGrepWord()
-  cgetexpr system("git grep -n '" . expand("<cword>") . "'")
-  cwin
-  echo 'Number of matches: ' . len(getqflist())
-endfunction
-command! -nargs=0 GitGrepWord :call GitGrepWord()
-nnoremap <silent> <Leader>gw :GitGrepWord<CR>
-
-function! Trim()
-  %s/\s*$//
-endfunction
-command! -nargs=0 Trim :call Trim()
-nnoremap <silent> <Leader>cw :Trim<CR>
-
-function! StartInferiorSlimeServer()
-  let g:__InferiorSlimeRunning = 1
-  call VimuxRunCommand("inferior-slime")
-endfunction
-command! -nargs=0 StartInferiorSlimeServer :call StartInferiorSlimeServer()
-
-function! __Edge()
-  colorscheme Tomorrow-Night
-  au BufWinLeave * colorscheme Tomorrow-Night
-
-  set ttyfast
-
-  map <leader>nf :e%:h<CR>
-  map <C-p> :CommandT<CR>
-
-  let g:VimuxOrientation = "h"
-  let g:VimuxHeight = "40"
+function s:setupWrapping()
+  set wrap
+  set wm=2
+  set textwidth=72
 endfunction
 
-function! __HardMode()
-  nmap h <nop>
-  nmap j <nop>
-  nmap k <nop>
-  nmap l <nop>
-endfunction
+" Thorfile, Rakefile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
+au BufRead,BufNewFile *.txt call s:setupWrapping()
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" load the plugin and indent settings for the detected filetype
+filetype plugin indent on
+
+" Change Tabs
+map <C-Left> :tabp<CR>
+map <C-Right> :tabn<CR>
+
+" Change split panes
+map <Leader>j <C-w>j
+map <Leader>k <C-w>k
+map <Leader>l <C-w>l
+map <Leader>h <C-w>h
+
+" Use modeline overrides
+set modeline
+set modelines=10
+
+" Default color scheme
+color molokai
+set t_Co=256
+
+"Directories for swp files
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
