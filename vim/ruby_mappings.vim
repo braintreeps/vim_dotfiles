@@ -11,6 +11,7 @@ map <silent> <LocalLeader>AS   :AS<CR>
 
 map <silent> <LocalLeader>sa :wa<CR> :InferiorSlimeSpecAll<CR>
 map <silent> <LocalLeader>sr :wa<CR> :InferiorSlimeRestart<CR>
+map <silent> <LocalLeader>bp :call pry#insert()<cr>
 
 map <LocalLeader>ir :call _BounceInferiorSlime()<CR>
 
