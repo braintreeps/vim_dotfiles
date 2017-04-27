@@ -60,6 +60,10 @@ Plug 'vim-scripts/Align'
 Plug 'vim-scripts/mako.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/VimClojure'
+if v:version >= 800 || has('nvim')
+  Plug 'w0rp/ale'
+  Plug 'maralla/completor.vim'
+endif
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
