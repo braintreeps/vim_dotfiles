@@ -149,6 +149,12 @@ let g:vim_markdown_folding_disabled = 1
 let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
 
+let g:pymode_python = 'python3'
+let g:pymode_folding = 0
+let g:pymode_rope_completion = 0
+let g:pymode_rope = 0
+let g:pymode_rope_complete_on_dot = 0
+
 " ========= Shortcuts ========
 
 " NERDTree
