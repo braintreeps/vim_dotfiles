@@ -108,6 +108,9 @@ set statusline+=%P                        " percentage of file
 let g:AckAllFiles = 0
 let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
 
+let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
+let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
+
 let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
