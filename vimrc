@@ -161,6 +161,7 @@ map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
 " FZF
 map <silent> <leader>ff :FZF --reverse<CR>
+map <silent> <C-p> :FZF --reverse<CR>
 
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'
