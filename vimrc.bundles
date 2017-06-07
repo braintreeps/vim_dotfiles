@@ -31,6 +31,7 @@ Plug 'jergason/scala.vim'
 Plug 'jgdavey/vim-turbux'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'junegunn/fzf', { 'tag': '0.16.7', 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim', {'commit': '990834ab6cb86961e61c55a8e012eb542ceff10e'}
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'markcornick/vim-bats'
