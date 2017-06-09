@@ -4,9 +4,9 @@ set -e
 
 dotfiles_dir=$(cd "$(dirname "$0")"; pwd)
 
-ln -s --backup -T ${dotfiles_dir}/vim ~/.vim
-ln -s --backup ${dotfiles_dir}/vimrc ~/.vimrc
-ln -s --backup ${dotfiles_dir}/gvimrc ~/.gvimrc
-ln -s --backup ${dotfiles_dir}/vimrc.bundles ~/.vimrc.bundles
+for name in vim vimrc gvimrc vimrc.bundles; do
+  rm -rf "${HOME}/.${name}"
+  ln -s "${dotfiles_dir}/${name}" "${HOME}/.${name}"
+done
 
 vim +PlugInstall +PlugClean! +GoInstallBinaries +qall
