@@ -3,7 +3,7 @@
 After cloning this project, you can run the following to link these dotfiles
 into your home directory:
 
-    rake
+    ./activate.sh
 
 Be warned: this will overwrite any existing .vimrc, .gvimrc or .vim/ files you
 have in your home directory.
@@ -21,12 +21,12 @@ The file explorer - NERD Tree:
 ? - in NERD Tree to see all its shortcuts
 ```
 
-File search - CtrlP:
+File search - fzf:
 
 ```
 \ff - find a file
 \fb - find an open buffer
-\fr - refresh the search index
+\ft - find ctags
 ```
 
 Comments (watch out for \'s):

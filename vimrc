@@ -36,6 +36,8 @@ set ignorecase
 set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*,node_modules/**,bower_components/**,*/build_gradle/*,*/build_intellij/*,*/build/*,*/cassandra_data/*
 set tags+=gems.tags
+set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
+set signcolumn=yes
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -107,6 +109,13 @@ set statusline+=%P                        " percentage of file
 let g:AckAllFiles = 0
 let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
 
+let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
+let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
+
+let g:ale_linters = {
+\   'java': []
+\ }
+
 let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
@@ -132,15 +141,18 @@ let g:netrw_banner = 0
 
 let g:VimuxUseNearestPane = 1
 
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:15,results:15'
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
-  \ 'PrtSelectMove("k")':   ['<c-p>','<c-k>', '<up>'],
-  \ 'PrtHistory(-1)':       ['<c-j>'],
-  \ 'PrtHistory(1)':        ['<c-k>'],
-  \ }
+let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps|_build|node_modules|vendor|build_intellij"'
+let $FZF_DEFAULT_OPTS = '--reverse'
+let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
 
 let g:vim_markdown_folding_disabled = 1
+
+let g:go_fmt_command = "goimports"
+let g:go_highlight_trailing_whitespace_error = 0
+
+let g:terraform_fmt_on_save = 1
+
+let g:completor_auto_trigger = 0
 
 " ========= Shortcuts ========
 
@@ -149,10 +161,13 @@ map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
-" CtrlP
-map <silent> <leader>ff :CtrlP<CR>
-map <silent> <leader>fr :CtrlPClearCache<CR>
-map <silent> <leader>fb :CtrlPBuffer<CR>
+" FZF
+map <silent> <leader>ff :Files<CR>
+map <silent> <leader>fg :GFiles<CR>
+map <silent> <leader>fb :Buffers<CR>
+map <silent> <leader>ft :Tags<CR>
+
+map <silent> <C-p> :Files<CR>
 
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'

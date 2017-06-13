@@ -45,6 +45,7 @@ if has("gui_running")
     highlight String guifg=#66FF00
     highlight Search guibg=White
     highlight CursorLine guibg=#323300
+    highlight clear SignColumn
 else
     set t_Co=256
     highlight Normal ctermfg=White ctermbg=NONE
@@ -65,4 +66,5 @@ else
     highlight String ctermfg=82 
     highlight Search ctermbg=White 
     highlight CursorLine cterm=NONE ctermbg=235
+    highlight clear SignColumn
 endif
