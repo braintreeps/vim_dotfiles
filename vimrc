@@ -155,6 +155,15 @@ let g:CommandTWildIgnore=&wildignore . ",vendor/*,node_modules/**,bower_componen
 
 let g:vim_markdown_folding_disabled=1
 
+let g:rails_projections = {
+      \   "script/*.rb": { 
+      \     "test": "spec/script/{}_spec.rb"
+      \   },
+      \   "spec/script/*_spec.rb": {
+      \     "alternate": "script/{}.rb"
+      \   }
+      \ }
+
 if exists(':RainbowParenthesesToggle')
   autocmd VimEnter *       RainbowParenthesesToggle
   autocmd Syntax   clojure RainbowParenthesesLoadRound
