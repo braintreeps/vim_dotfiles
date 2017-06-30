@@ -11,7 +11,6 @@ endif
 Plug 'benmills/vim-commadown'
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
-Plug 'braintreeps/command-t', { 'do': 'rake make' }
 Plug 'chase/vim-ansible-yaml'
 Plug 'davidzchen/vim-bazel'
 Plug 'ddrscott/vim-side-search'
@@ -65,6 +64,7 @@ Plug 'vim-scripts/VimClojure'
 Plug 'vim-scripts/mako.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487fa2' }
+
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
   Plug 'maralla/completor.vim'
