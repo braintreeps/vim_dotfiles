@@ -247,6 +247,10 @@ xnoremap <expr> p 'pgv"'.v:register.'y'
 
 imap <C-L> <SPACE>=><SPACE>
 
+" ========= Map jk to switch to command mode ========
+
+imap jk <Esc>
+
 " ========= Functions ========
 
 command! SudoW w !sudo tee %
