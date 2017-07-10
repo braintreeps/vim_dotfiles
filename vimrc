@@ -97,6 +97,9 @@ autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
+" Run terraform fmt on terraform files
+autocmd BufWritePre *.tf call terraform#fmt()
+
 " Status
 set laststatus=2
 set statusline=
@@ -172,8 +175,6 @@ let g:vim_markdown_folding_disabled = 1
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
-
-let g:terraform_fmt_on_save = 1
 
 let g:completor_auto_trigger = 0
 
