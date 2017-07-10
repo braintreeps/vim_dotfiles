@@ -158,6 +158,15 @@ let g:netrw_banner = 0
 
 let g:VimuxUseNearestPane = 1
 
+let g:rails_projections = {
+      \   "script/*.rb": { 
+      \     "test": "spec/script/{}_spec.rb"
+      \   },
+      \   "spec/script/*_spec.rb": {
+      \     "alternate": "script/{}.rb"
+      \   }
+      \ }
+
 if exists(':RainbowParenthesesToggle')
   autocmd VimEnter *       RainbowParenthesesToggle
   autocmd Syntax   clojure RainbowParenthesesLoadRound
