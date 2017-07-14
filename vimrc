@@ -130,6 +130,7 @@ nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
  command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 " }}}
 
+let g:ale_enabled = 0                     " Disable linting by default
 let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
 let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
 
