@@ -39,6 +39,7 @@ set tags+=gems.tags
 set mouse=
 set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
 set signcolumn=yes
+set complete-=t " Don't use tags for autocomplete
 
 if version >= 703
   set undodir=~/.vim/undodir
