@@ -51,10 +51,6 @@ set undolevels=1000 "maximum number of changes that can be undone
 " Color
 colorscheme vibrantink
 
-au FileType diff colorscheme desert
-au FileType git colorscheme desert
-au BufWinLeave * colorscheme vibrantink
-
 augroup markdown
   au!
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
