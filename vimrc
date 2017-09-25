@@ -140,7 +140,7 @@ let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
-
+let g:ruby_indent_assignment_style = 'variable'
 
 let g:no_html_toolbar = 'yes'
 
