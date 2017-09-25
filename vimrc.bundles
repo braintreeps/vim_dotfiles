@@ -64,7 +64,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'uarun/vim-protobuf'
-Plug 'vim-ruby/vim-ruby', { 'commit': 'c9f55233d752b8ba69c5f3b28e94304e60f3c45b' }
+Plug 'vim-ruby/vim-ruby', { 'commit': '074200ffa39b19baf9d9750d399d53d97f21ee07' }
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/VimClojure'
 Plug 'vim-scripts/mako.vim'
