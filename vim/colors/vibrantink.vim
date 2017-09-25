@@ -26,6 +26,12 @@ endif
 
 let g:colors_name = "vibrantink"
 
+highlight link diffAdded String
+highlight link diffRemoved Statement
+highlight link diffLine PreProc
+highlight link diffSubname Comment
+highlight clear SignColumn
+
 if has("gui_running")
     highlight Normal guifg=White   guibg=Black
     highlight Cursor guifg=Black   guibg=Yellow
@@ -45,7 +51,10 @@ if has("gui_running")
     highlight String guifg=#66FF00
     highlight Search guibg=White
     highlight CursorLine guibg=#323300
-    highlight clear SignColumn
+    highlight DiffAdd guibg=DarkBlue
+    highlight DiffChange guibg=DarkMagenta
+    highlight DiffDelete gui=bold guifg=Blue guibg=DarkCyan
+    highlight DiffText gui=bold guibg=Red
 else
     set t_Co=256
     highlight Normal ctermfg=White ctermbg=NONE
@@ -67,5 +76,8 @@ else
     highlight Search ctermbg=White 
     highlight CursorLine cterm=NONE ctermbg=235
     highlight PmenuSel ctermfg=NONE
-    highlight clear SignColumn
+    highlight DiffAdd ctermbg=4
+    highlight DiffChange ctermbg=5
+    highlight DiffDelete ctermfg=12 ctermbg=6
+    highlight DiffText ctermbg=DarkRed cterm=bold ctermbg=9
 endif
