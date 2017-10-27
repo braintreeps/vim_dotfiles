@@ -20,7 +20,7 @@ Plug 'drewolson/vimux-maven-test'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'elubow/cql-vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'google/vim-jsonnet'

@@ -9,4 +9,4 @@ for name in vim vimrc gvimrc vimrc.bundles; do
   ln -s "${dotfiles_dir}/${name}" "${HOME}/.${name}"
 done
 
-vim +PlugInstall +PlugClean! +GoInstallBinaries +qall
+vim +PlugInstall +PlugClean! +qall
