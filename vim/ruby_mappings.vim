@@ -53,5 +53,5 @@ function! _IsInferiorSlimeRunning()
   end
 endfunction
 
-map <LocalLeader>rd Orequire 'ruby-debug';debugger<ESC>
+map <LocalLeader>rd Orequire "pry"; binding.pry<ESC>
 setlocal isk+=?
