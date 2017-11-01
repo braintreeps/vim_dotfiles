@@ -1,12 +1,20 @@
 ## Overview
 
-After cloning this project, you can run the following to link these dotfiles
-into your home directory:
+Clone this project directy into `~/.vim`:
 
-    ./activate.sh
+```bash
+# Clean up old unnecessary files or symlinks
+rm -f ~/.vimrc ~/.gvimrc ~/.vimrc.bundles ~/.vim
 
-Be warned: this will overwrite any existing .vimrc or .vim/ files you have in
-your home directory.
+# Clone directly into ~/.vim
+git clone git@github.com:braintreeps/vim_dotfiles ~/.vim
+```
+
+After cloning this project, you can run the following to update the plugins:
+
+```bash
+./activate.sh
+```
 
 Uses `vim-plug` to manage bundles.
 

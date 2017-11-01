@@ -9,6 +9,8 @@ endif
 " Install vim plugins
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
+elseif filereadable(expand("~/.vim/vimrc.bundles"))
+  source ~/.vim/vimrc.bundles
 endif
 
 if filereadable(expand("/etc/vim/vimrc.bundles"))
