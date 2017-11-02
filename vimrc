@@ -188,6 +188,17 @@ let g:go_highlight_trailing_whitespace_error = 0
 
 let g:completor_auto_trigger = 0
 
+
+function! Ctag()
+  let ruby = match(expand("%"), ".rb")
+  let exclusions = '\".git\|.svn\|log\|tmp\|db\|pkg\"'
+  if ruby != -1
+    exec ':!ctags -R --languages=ruby --exclude=' . exclusions . ' . $(bundle list --paths)'
+  else
+    exec ':!ctags -R --exclude=' . exclusions . ' --extra=+f --langmap=Lisp:+.clj'
+  endif
+endfunction
+
 " ========= Shortcuts ========
 
 " NERDTree
@@ -220,7 +231,7 @@ vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
 
-map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
+map <silent> <LocalLeader>rt :call Ctag()<CR>
 
 map <silent> <LocalLeader>cj :!clj %<CR>
 
