@@ -127,6 +127,17 @@ nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
  command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 " }}}
 
+" Visual * search, modified from: https://git.io/vFGBB
+function! s:VSetSearch()
+	let temp = @@
+	norm! gvy
+	let @/ = '\V' . substitute(escape(@@, '\'), '\_s\+', '\\_s\\+', 'g')
+	call histadd('/', substitute(@/, '[?/]', '\="\\%d".char2nr(submatch(0))', 'g'))
+	let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
+
 let g:ale_enabled = 0                     " Disable linting by default
 let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
 let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
@@ -157,7 +168,7 @@ let g:netrw_banner = 0
 let g:VimuxUseNearestPane = 1
 
 let g:rails_projections = {
-      \   "script/*.rb": { 
+      \   "script/*.rb": {
       \     "test": "spec/script/{}_spec.rb"
       \   },
       \   "spec/script/*_spec.rb": {
