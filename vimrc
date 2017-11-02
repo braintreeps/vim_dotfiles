@@ -79,6 +79,21 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
+" File IO Helpers
+" --------------
+
+" rename current file from Gary Bernhardt
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'))
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+command! Rename call RenameFile()
+
 " Highlight trailing whitespace
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
