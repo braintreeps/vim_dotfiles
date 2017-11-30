@@ -2,7 +2,7 @@ Please use the following structure when proposing changes to our shared Vim conf
 
 # What
 
-Summarize your changes.
+Summarize your change.
 
 _Example: Specify full path when running focused specs._
 
