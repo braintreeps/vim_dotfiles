@@ -272,14 +272,14 @@ endfunction
 command! -nargs=0 GitGrepWord :call GitGrepWord()
 nnoremap <silent> <Leader>gw :GitGrepWord<CR>
 
-function! GitWebURL() range
+function! GitHubURL() range
   let repo = systemlist("git config --get remote.origin.url | sed 's/\.git$//' | sed 's_^git@\\(.*\\):_https://\\1/_'")[0]
   let branch = systemlist("git rev-parse HEAD")[0]
   let path = systemlist("git ls-files --full-name " . @%)[0]
   let url = repo . "/blob/" . branch . "/" . path . "#L" . a:firstline . "-L" . a:lastline
   echomsg url
 endfunction
-command! -range GitWebURL <line1>,<line2>call GitWebURL()
+command! -range GitHubURL <line1>,<line2>call GitHubURL()
 
 function! Trim()
   %s/\s*$//
