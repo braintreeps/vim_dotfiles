@@ -39,7 +39,9 @@ set tags+=gems.tags
 set mouse=
 set ttymouse=
 set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
-set signcolumn=yes
+if v:version > 704 || v:version == 704 && has('patch2201') " signcolumn wasn't added until vim 7.4.2201
+  set signcolumn=yes
+endif
 set complete-=t " Don't use tags for autocomplete
 
 if version >= 703
