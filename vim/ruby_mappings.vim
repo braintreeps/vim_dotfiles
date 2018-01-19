@@ -1,7 +1,6 @@
-map <silent> <LocalLeader>rb :wa<CR> :call _RunAll()<CR>
-map <silent> <LocalLeader>rc :wa<CR> :RunRubyFocusedContext<CR>
-map <silent> <LocalLeader>rf :wa<CR> :call _RunLine()<CR>
-map <silent> <LocalLeader>rl :wa<CR> :call _RunLast()<CR>
+map <silent> <LocalLeader>rb :wa<CR> :TestFile<CR>
+map <silent> <LocalLeader>rf :wa<CR> :TestNearest<CR>
+map <silent> <LocalLeader>rl :wa<CR> :TestLast<CR>
 map <silent> <LocalLeader>rx :wa<CR> :VimuxCloseRunner<CR>
 map <silent> <LocalLeader>ri :wa<CR> :VimuxInspectRunner<CR>
 map <silent> <LocalLeader>rs :!ruby -c %<CR>
@@ -18,30 +17,6 @@ function! _BounceInferiorSlime()
   if _IsInferiorSlimeRunning()
     call VimuxInterruptRunner()
     call VimuxRunCommand("inferior-slime")
-  endif
-endfunction
-
-function! _RunLast()
-  if _IsInferiorSlimeRunning()
-    execute "InferiorSlimeSpecLast"
-  else
-    execute "VimuxRunLastCommand"
-  endif
-endfunction
-
-function! _RunAll()
-  if _IsInferiorSlimeRunning()
-    execute "InferiorSlimeSpecFile"
-  else
-    execute "RunAllRubyTests"
-  endif
-endfunction
-
-function! _RunLine()
-  if _IsInferiorSlimeRunning()
-    execute "InferiorSlimeSpecLine"
-  else
-    execute "RunRubyFocusedTest"
   endif
 endfunction
 
