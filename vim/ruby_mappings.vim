@@ -1,7 +1,37 @@
-map <silent> <LocalLeader>rb :wa<CR> :call _RunAll()<CR>
-map <silent> <LocalLeader>rc :wa<CR> :RunRubyFocusedContext<CR>
-map <silent> <LocalLeader>rf :wa<CR> :call _RunLine()<CR>
-map <silent> <LocalLeader>rl :wa<CR> :call _RunLast()<CR>
+let s:context_start_pattern =
+    \ '\C^\s*#\@!\s*\%(RSpec\.\)\=\zs' .
+    \ '\<\%(module\|class\|if\|for\|while\|until\|case\|unless\|begin\|def' .
+    \ '\|\%(public\|protected\|private\)\=\s*def\):\@!\>' .
+    \ '\|\%(^\|[^.:@$]\)\@<=\<do:\@!\>'
+let s:context_end_pattern = '\%(^\|[^.:@$]\)\@<=\<end:\@!\>'
+let s:context_test_pattern =
+    \ '\C^\s*#\@!\s*\%(RSpec\.\)\=\zs' .
+    \ '\<\%(describe\|context\|shared_examples\|shared_context\)\>'
+
+function! TestContext()
+  wall
+  normal 0
+  let [_, lnum, cnum, _] = getpos('.')
+  if getline('.') !~ s:context_test_pattern
+    let prev_line = line('.')
+    while line('.') != 1
+      call searchpair(s:context_start_pattern, '', s:context_end_pattern, 'Wb')
+      if getline('.') =~ s:context_test_pattern || line('.') == prev_line
+        break
+      endif
+      let prev_line = line('.')
+    endwhile
+  endif
+  TestNearest
+  call cursor(lnum, cnum)
+endfunction
+
+command! TestContext :call TestContext()
+
+map <silent> <LocalLeader>rc :TestContext<CR>
+map <silent> <LocalLeader>rb :wa<CR> :TestFile<CR>
+map <silent> <LocalLeader>rf :wa<CR> :TestNearest<CR>
+map <silent> <LocalLeader>rl :wa<CR> :TestLast<CR>
 map <silent> <LocalLeader>rx :wa<CR> :VimuxCloseRunner<CR>
 map <silent> <LocalLeader>ri :wa<CR> :VimuxInspectRunner<CR>
 map <silent> <LocalLeader>rs :!ruby -c %<CR>
@@ -18,30 +48,6 @@ function! _BounceInferiorSlime()
   if _IsInferiorSlimeRunning()
     call VimuxInterruptRunner()
     call VimuxRunCommand("inferior-slime")
-  endif
-endfunction
-
-function! _RunLast()
-  if _IsInferiorSlimeRunning()
-    execute "InferiorSlimeSpecLast"
-  else
-    execute "VimuxRunLastCommand"
-  endif
-endfunction
-
-function! _RunAll()
-  if _IsInferiorSlimeRunning()
-    execute "InferiorSlimeSpecFile"
-  else
-    execute "RunAllRubyTests"
-  endif
-endfunction
-
-function! _RunLine()
-  if _IsInferiorSlimeRunning()
-    execute "InferiorSlimeSpecLine"
-  else
-    execute "RunRubyFocusedTest"
   endif
 endfunction
 
