@@ -73,7 +73,6 @@ autocmd FileType cs setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
-autocmd FileType ruby runtime ruby_mappings.vim
 autocmd FileType python runtime python_mappings.vim
 
 if version >= 700
@@ -144,6 +143,17 @@ let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
 let g:ruby_indent_assignment_style = 'variable'
+
+" Ruby test
+map <silent> <LocalLeader>rc :TestContext<CR>
+map <silent> <LocalLeader>rb :wa<CR> :TestFile<CR>
+map <silent> <LocalLeader>rf :wa<CR> :TestNearest<CR>
+map <silent> <LocalLeader>rl :wa<CR> :TestLast<CR>
+map <silent> <LocalLeader>rx :wa<CR> :VimuxCloseRunner<CR>
+map <silent> <LocalLeader>ri :wa<CR> :VimuxInspectRunner<CR>
+map <silent> <LocalLeader>rs :!ruby -c %<CR>
+
+setlocal isk+=?
 
 let g:no_html_toolbar = 'yes'
 
@@ -240,9 +250,15 @@ nnoremap <silent> k gk
 nnoremap <silent> j gj
 nnoremap <silent> Y y$
 
+map <silent> <LocalLeader>AA   :A<CR>
+map <silent> <LocalLeader>AV   :AV<CR>
+map <silent> <LocalLeader>AS   :AS<CR>
+
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
 map <silent> <LocalLeader>pp :set paste!<CR>
+
+map <LocalLeader>rd Orequire "pry"; binding.pry<ESC>
 
 " Pasting over a selection does not replace the clipboard
 xnoremap <expr> p 'pgv"'.v:register.'y'
