@@ -144,17 +144,6 @@ let g:gist_detect_filetype = 1
 let g:rubycomplete_buffer_loading = 1
 let g:ruby_indent_assignment_style = 'variable'
 
-" Ruby test
-map <silent> <LocalLeader>rc :TestContext<CR>
-map <silent> <LocalLeader>rb :wa<CR> :TestFile<CR>
-map <silent> <LocalLeader>rf :wa<CR> :TestNearest<CR>
-map <silent> <LocalLeader>rl :wa<CR> :TestLast<CR>
-map <silent> <LocalLeader>rx :wa<CR> :VimuxCloseRunner<CR>
-map <silent> <LocalLeader>ri :wa<CR> :VimuxInspectRunner<CR>
-map <silent> <LocalLeader>rs :!ruby -c %<CR>
-
-setlocal isk+=?
-
 let g:no_html_toolbar = 'yes'
 
 let coffee_no_trailing_space_error = 1
@@ -232,6 +221,15 @@ map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
 vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
+
+" Vim test: Ruby
+noremap <silent> <LocalLeader>rc :TestContext<CR>
+noremap <silent> <LocalLeader>rb :wa<CR> :TestFile<CR>
+noremap <silent> <LocalLeader>rf :wa<CR> :TestNearest<CR>
+noremap <silent> <LocalLeader>rl :wa<CR> :TestLast<CR>
+noremap <silent> <LocalLeader>rx :wa<CR> :VimuxCloseRunner<CR>
+noremap <silent> <LocalLeader>ri :wa<CR> :VimuxInspectRunner<CR>
+noremap <silent> <LocalLeader>rs :!ruby -c %<CR>
 
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
 
