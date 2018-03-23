@@ -173,6 +173,9 @@ let g:rails_projections = {
       \   },
       \   "spec/script/*_spec.rb": {
       \     "alternate": "script/{}.rb"
+      \   },
+      \   "app/lib/*.rb": {
+      \     "test": "spec/lib/{}_spec.rb"
       \   }
       \ }
 
