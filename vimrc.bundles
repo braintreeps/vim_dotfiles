@@ -31,6 +31,7 @@ Plug 'jergason/scala.vim'
 Plug 'jgdavey/vim-turbux'
 Plug 'hashivim/vim-terraform'
 Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104325c3' }
+Plug 'jparise/vim-graphql', { 'commit': '7ecedede603d16de5cca5ccefbde14d642b0d697' }
 Plug 'jtratner/vim-flavored-markdown'
 if expand('<sfile>') == '/etc/vim/vimrc.bundles'
   Plug 'junegunn/fzf', { 'tag': '0.16.7', 'dir': '/etc/vim/fzf', 'do': './install --bin' }
