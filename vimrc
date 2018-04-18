@@ -328,7 +328,7 @@ endfunction
 " cleans up the way the default tabline looks
 " will show tab numbers next to the basename of the file
 " from :help setting-tabline
-function MyTabLine()
+function! MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -349,7 +349,7 @@ function MyTabLine()
 endfunction
 
 " with help from http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
-function MyTabLabel(n)
+function! MyTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   let bufnr = buflist[winnr - 1]
