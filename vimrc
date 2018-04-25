@@ -372,6 +372,10 @@ function! MyTabLabel(n)
   return file
 endfunction
 
+" CTRL-J/K navigation in popups
+inoremap <expr> <c-j> (pumvisible()?"\<C-n>":"\<c-j>")
+inoremap <expr> <c-k> (pumvisible()?"\<C-p>":"\<c-k>")
+
 set tabline=%!MyTabLine()
 
 " ========= Aliases ========
