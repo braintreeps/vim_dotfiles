@@ -8,11 +8,12 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
 Plug 'benmills/vim-commadown'
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
 Plug 'chase/vim-ansible-yaml'
-Plug 'davidzchen/vim-bazel'
 Plug 'dewyze/vim-ruby-block-helpers'
 Plug 'ddrscott/vim-side-search'
 Plug 'derekwyatt/vim-scala'

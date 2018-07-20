@@ -382,6 +382,12 @@ set tabline=%!MyTabLine()
 
 command! W w
 
+
+" Autoformat for bazel files
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+augroup END
+
 "-------- Local Overrides
 ""If you have options you'd like to override locally for
 "some reason (don't want to store something in a
