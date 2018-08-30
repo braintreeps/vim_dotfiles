@@ -62,6 +62,10 @@ augroup Drakefile
   au!
   au BufNewFile,BufRead Drakefile,drakefile setlocal filetype=ruby
 augroup END
+augroup Jenkinsfile
+  au!
+  au BufNewFile,BufRead Jenkinsfile,jenkinsfile setlocal filetype=groovy
+augroup END
 
 " File Types
 
