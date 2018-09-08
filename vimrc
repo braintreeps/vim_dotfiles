@@ -6,6 +6,12 @@ if &shell == "/usr/bin/sudosh"
   set shell=/bin/bash
 endif
 
+if !isdirectory(expand("~/.vim/plugged"))
+  echom "Pluggins Not Installed, installing and then restart vim..."
+  autocmd VimEnter * PlugInstall --sync
+  autocmd VimEnter * qall
+endif
+
 " Install vim plugins
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
