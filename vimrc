@@ -45,7 +45,9 @@ set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*,node_modules/**,bower_components/**,*/build_gradle/*,*/build_intellij/*,*/build/*,*/cassandra_data/*
 set tags+=gems.tags
 set mouse=
-set ttymouse=
+if !has('nvim')
+  set ttymouse=
+endif
 set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
 if v:version > 704 || v:version == 704 && has('patch2201') " signcolumn wasn't added until vim 7.4.2201
   set signcolumn=yes
