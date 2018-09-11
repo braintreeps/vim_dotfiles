@@ -9,7 +9,6 @@ endif
 if !isdirectory(expand("~/.vim/plugged"))
   echom "Pluggins Not Installed, installing and then restart vim..."
   autocmd VimEnter * PlugInstall --sync
-  autocmd VimEnter * qall
 endif
 
 " Install vim plugins

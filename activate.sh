@@ -11,4 +11,4 @@ if ! vim --version | grep -q '2nd user vimrc file'; then
   done
 fi
 
-vim +PlugInstall +PlugClean! +qall
+vim +qall
