@@ -5,8 +5,8 @@ into your home directory:
 
     ./activate.sh
 
-Be warned: this will overwrite any existing .vimrc, .gvimrc or .vim/ files you
-have in your home directory.
+Be warned: this will overwrite any existing .vimrc or .vim/ files you have in
+your home directory.
 
 Uses `vim-plug` to manage bundles.
 
