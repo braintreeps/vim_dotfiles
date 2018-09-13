@@ -21,7 +21,6 @@ if filereadable(expand("/etc/vim/vimrc.bundles"))
 endif
 
 if !isdirectory(expand(plugged_path))
-  echom "Plugins Not Installed, installing and then restart vim..."
   autocmd VimEnter * PlugInstall --sync
 endif
 

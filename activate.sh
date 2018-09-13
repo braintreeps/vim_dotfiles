@@ -9,8 +9,6 @@ if ! vim --version | grep -q '2nd user vimrc file'; then
     rm -rf "${HOME}/.${name}"
     ln -s "${dotfiles_dir}/${name}" "${HOME}/.${name}"
   done
-  vim +PlugInstall +PlugClean! +qall
-else
-  vim +qall
 fi
 
+vim +PlugInstall +PlugClean! +qall

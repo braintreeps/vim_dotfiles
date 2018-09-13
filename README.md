@@ -10,7 +10,7 @@ rm -f ~/.vimrc ~/.gvimrc ~/.vimrc.bundles; rm -rf ~/.vim
 git clone git@github.com:braintreeps/vim_dotfiles ~/.vim
 ```
 
-After cloning this project, the first time you run vim, it will install your plugins.
+After cloning this project, run `~/.vim/activate.sh`.
 
 Uses `vim-plug` to manage bundles.
 
