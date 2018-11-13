@@ -227,21 +227,18 @@ map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
 " FZF
-function! s:in_git_repo()
+function! SmartFuzzy()
   let root = split(system('git rev-parse --show-toplevel'), '\n')
+  echo "HERE"
   if len(root) == 0 || v:shell_error
-    return 0
+    Files
   else
-    return 1
-  end
+    GFiles -c -m -o --exclude-standard -- ':!:vendor/*' | sort
+  endif
 endfunction
 
-if s:in_git_repo()
-  map <silent> <leader>ff :GFiles -c -m -o --exclude-standard -- ':!:vendor/*' \| sort<CR>
-else
-  map <silent> <leader>ff :Files<CR>
-endif
-
+command! -nargs=* SmartFuzzy :call SmartFuzzy()
+map <silent> <leader>ff :SmartFuzzy<CR>
 map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
