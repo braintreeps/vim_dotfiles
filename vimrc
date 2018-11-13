@@ -227,7 +227,21 @@ map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
 " FZF
-map <silent> <leader>ff :Files<CR>
+function! s:in_git_repo()
+  let root = split(system('git rev-parse --show-toplevel'), '\n')
+  if len(root) == 0 || v:shell_error
+    return 0
+  else
+    return 1
+  end
+endfunction
+
+if s:in_git_repo()
+  map <silent> <leader>ff :GFiles -c -m -o --exclude-standard -- ':!:vendor/*' \| sort<CR>
+else
+  map <silent> <leader>ff :Files<CR>
+endif
+
 map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
