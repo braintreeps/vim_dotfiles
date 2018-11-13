@@ -233,7 +233,7 @@ function! SmartFuzzy()
   if len(root) == 0 || v:shell_error
     Files
   else
-    GFiles -c -m -o --exclude-standard -- ':!:vendor/*' | sort
+    GFiles -co --exclude-standard -- ':!:vendor/*'
   endif
 endfunction
 
