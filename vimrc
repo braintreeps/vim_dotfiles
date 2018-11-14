@@ -229,7 +229,6 @@ map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 " FZF
 function! SmartFuzzy()
   let root = split(system('git rev-parse --show-toplevel'), '\n')
-  echo "HERE"
   if len(root) == 0 || v:shell_error
     Files
   else
