@@ -150,9 +150,10 @@ let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
 let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
 
 let g:ale_linters_explicit = 1
-let g:ale_linters = {
-\   'ruby': ['rubocop']
-\ }
+let g:ale_linters = {}
+if filereadable(expand(".rubocop.yml"))
+  let g:ale_linters['ruby'] = ['rubocop']
+endif
 
 let html_use_css=1
 let html_number_lines=0
