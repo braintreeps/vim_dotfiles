@@ -145,7 +145,7 @@ endfunction
 
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
 
-let g:ale_enabled = 1                     " Disable linting by default
+let g:ale_enabled = 1                     " Enable linting by default
 let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
 let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
 
