@@ -87,6 +87,7 @@ autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 autocmd FileType ruby runtime ruby_mappings.vim
 autocmd FileType python runtime python_mappings.vim
+autocmd FileType java runtime java_mappings.vim
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
@@ -212,7 +213,9 @@ let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
 
 let test#strategy = "vimux"
+let test#custom_runners = {'java': ['bazeltest']}
 let test#python#runner = 'nose'
+let test#java#runner = 'bazeltest'
 
 " ========= Shortcuts ========
 
