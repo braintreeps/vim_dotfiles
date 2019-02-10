@@ -216,6 +216,7 @@ let test#strategy = "vimux"
 let test#custom_runners = {'java': ['bazeltest']}
 let test#python#runner = 'nose'
 let test#java#runner = 'bazeltest'
+let g:test#java#bazeltest#test_executable = './bazel test'
 
 " ========= Shortcuts ========
 

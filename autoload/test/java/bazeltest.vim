@@ -1,5 +1,9 @@
-if !exists('g:test#java#bazeltest#executable')
-  let g:test#java#bazeltest#executable = 'bazel'
+if !exists('g:test#java#bazeltest#test_executable')
+  let g:test#java#bazeltest#test_executable = 'bazel test'
+endif
+
+if !exists('g:test#java#bazeltest#query_executable')
+  let g:test#java#bazeltest#query_executable = 'bazel query'
 endif
 
 if !exists('g:test#java#bazeltest#file_pattern')
@@ -13,11 +17,11 @@ function! test#java#bazeltest#test_file(file) abort
 endfunction
 
 function! test#java#bazeltest#executable() abort
-  return g:test#java#bazeltest#executable
+  return g:test#java#bazeltest#test_executable
 endfunction
 
 function! test#java#bazeltest#build_args(args) abort
-  return ['test'] + a:args
+  return a:args
 endfunction
 
 function! test#java#bazeltest#build_position(type, position) abort
@@ -43,13 +47,13 @@ function! test#java#bazeltest#build_position(type, position) abort
 endfunction
 
 function! s:bazel_target(file) abort
-  let package = s:bazel_command('query --output=package ' . a:file)
-  let label = s:bazel_command('query --output=label ' . a:file)
-  let target = s:bazel_command('query ''attr("srcs", "' . label . '", "//' . package . ':*")''')
+  let package = s:bazel_query('--output=package ' . a:file)
+  let label = s:bazel_query('--output=label ' . a:file)
+  let target = s:bazel_query('''attr("srcs", "' . label . '", "//' . package . ':*")''')
   return target
 endfunction
 
-function! s:bazel_command(args) abort
-  let output = system(g:test#java#bazeltest#executable . ' ' . a:args . ' 2> /dev/null')
+function! s:bazel_query(args) abort
+  let output = system(g:test#java#bazeltest#query_executable . ' ' . a:args . ' 2> /dev/null')
   return substitute(output, '\n$', '', '')
 endfunction
