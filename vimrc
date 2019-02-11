@@ -213,10 +213,14 @@ let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
 
 let test#strategy = "vimux"
-let test#custom_runners = {'java': ['bazeltest']}
+let test#custom_runners = {}
 let test#python#runner = 'nose'
-let test#java#runner = 'bazeltest'
-let g:test#java#bazeltest#test_executable = './bazel test'
+
+if filereadable(expand('WORKSPACE'))
+  let test#custom_runners['java'] = ['bazeltest']
+  let test#java#runner = 'bazeltest'
+  let g:test#java#bazeltest#test_executable = './bazel test'
+endif
 
 " ========= Shortcuts ========
 
