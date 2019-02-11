@@ -32,7 +32,7 @@ function! test#java#bazeltest#build_position(type, position) abort
     let nearest = test#base#nearest_test(a:position, g:test#java#patterns)
     let classname = get(nearest['namespace'], 0, '')
     let testname = get(nearest['test'], 0, '')
-    let filter = join([classname] + [testname], '#')
+    let filter = join([classname, testname], '#')
     if !empty(filter)
       return [target, '--test_filter=' . filter]
     endif
