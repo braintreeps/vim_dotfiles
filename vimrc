@@ -215,7 +215,7 @@ let test#strategy = "vimux"
 let test#python#runner = 'nose'
 
 " Remove unused imports for Java
-autocmd FileType java autocmd BufWritePost * :UnusedImportsRemove
+autocmd FileType java autocmd BufWritePre * :UnusedImportsRemove
 
 " ========= Shortcuts ========
 
