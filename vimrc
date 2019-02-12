@@ -220,6 +220,7 @@ if filereadable(expand('WORKSPACE'))
   let test#custom_runners['java'] = ['bazeltest']
   let test#java#runner = 'bazeltest'
   let g:test#java#bazeltest#test_executable = './bazel test'
+  let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
 endif
 
 " ========= Shortcuts ========
