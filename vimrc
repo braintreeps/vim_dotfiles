@@ -214,6 +214,9 @@ let g:go_highlight_trailing_whitespace_error = 0
 let test#strategy = "vimux"
 let test#python#runner = 'nose'
 
+" Remove unused imports for Java
+autocmd FileType java autocmd BufWritePost * :UnusedImportsRemove
+
 " ========= Shortcuts ========
 
 " NERDTree
