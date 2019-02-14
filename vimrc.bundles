@@ -8,6 +8,7 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
+Plug 'akhaku/vim-java-unused-imports'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'benmills/vim-commadown'
@@ -75,7 +76,6 @@ Plug 'vim-scripts/groovyindent-unix'
 Plug 'vim-scripts/mako.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487fa2' }
-Plug 'akhaku/vim-java-unused-imports'
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
