@@ -87,6 +87,7 @@ autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 autocmd FileType ruby runtime ruby_mappings.vim
 autocmd FileType python runtime python_mappings.vim
+autocmd FileType java runtime java_mappings.vim
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
@@ -212,7 +213,15 @@ let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
 
 let test#strategy = "vimux"
+let test#custom_runners = {}
 let test#python#runner = 'nose'
+
+if filereadable(expand('WORKSPACE'))
+  let test#custom_runners['java'] = ['bazeltest']
+  let test#java#runner = 'bazeltest'
+  let g:test#java#bazeltest#test_executable = './bazel test'
+  let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
+endif
 
 " Remove unused imports for Java
 autocmd FileType java autocmd BufWritePre * :UnusedImportsRemove
