@@ -79,8 +79,13 @@ augroup END
 
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType java setlocal textwidth=120
 autocmd FileType cs setlocal tabstop=4 shiftwidth=4 softtabstop=4
+
+if filereadable(expand('.ijwd'))
+  autocmd FileType java setlocal tabstop=2 shiftwidth=2 softtabstop=2
+else
+  autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
+endif
 
 autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
