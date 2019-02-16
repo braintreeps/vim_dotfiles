@@ -81,7 +81,7 @@ autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType cs setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-if filereadable(expand('.ijwd'))
+if isdirectory(expand('.ijwb'))
   autocmd FileType java setlocal tabstop=2 shiftwidth=2 softtabstop=2
 else
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
