@@ -223,6 +223,9 @@ if filereadable(expand('WORKSPACE'))
   let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
 endif
 
+" Remove unused imports for Java
+autocmd FileType java autocmd BufWritePre * :UnusedImportsRemove
+
 " ========= Shortcuts ========
 
 " NERDTree
