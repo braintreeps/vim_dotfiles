@@ -81,10 +81,10 @@ autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType cs setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-if isdirectory(expand('.ijwb'))
-  autocmd FileType java setlocal tabstop=2 shiftwidth=2 softtabstop=2
-else
+if fnamemodify(getcwd(), ':t') == 'braintree-java'
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
+else
+  autocmd FileType java setlocal tabstop=2 shiftwidth=2 softtabstop=2
 endif
 
 autocmd FileType tex setlocal textwidth=78
