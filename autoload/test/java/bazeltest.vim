@@ -49,7 +49,7 @@ endfunction
 function! s:bazel_target(file) abort
   let package = s:bazel_query('--output=package ' . a:file)
   let label = s:bazel_query('--output=label ' . a:file)
-  let target = s:bazel_query('''attr("srcs", "' . label . '", "//' . package . ':*")''')
+  let target = substitute(s:bazel_query('''attr("srcs", "' . label . '", "//' . package . ':*")'''), '\n', ' ', 'g')
   return target
 endfunction
 
