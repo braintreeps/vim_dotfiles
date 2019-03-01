@@ -51,6 +51,7 @@ if v:version > 704 || v:version == 704 && has('patch2201') " signcolumn wasn't a
   set signcolumn=yes
 endif
 set complete-=t " Don't use tags for autocomplete
+set updatetime=200
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -293,6 +294,9 @@ nnoremap <silent> Y y$
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
 map <silent> <LocalLeader>pp :set paste!<CR>
+
+" YAML
+let g:vim_yaml_helper#auto_display_path = 1
 
 " Pasting over a selection does not replace the clipboard
 xnoremap <expr> p 'pgv"'.v:register.'y'
