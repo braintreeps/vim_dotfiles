@@ -230,7 +230,7 @@ if filereadable(expand('WORKSPACE'))
 endif
 
 " Remove unused imports for Java
-autocmd FileType java autocmd BufWritePre * :UnusedImportsRemove
+autocmd FileType java autocmd BufWritePre * :UnusedImports
 
 " ========= Shortcuts ========
 
