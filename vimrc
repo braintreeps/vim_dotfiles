@@ -158,6 +158,7 @@ let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving inse
 let g:ale_set_signs = 0                   " Disable signs showing in the gutter to reduce interruptive visuals
 let g:ale_linters_explicit = 1            " Only run linters that are explicitly listed below
 let g:ale_linters = {}
+let g:ale_linters['puppet'] = ['puppetlint']
 if filereadable(expand(".rubocop.yml"))
   let g:ale_linters['ruby'] = ['rubocop']
 endif
