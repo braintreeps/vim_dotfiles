@@ -100,14 +100,6 @@ if version >= 700
     autocmd FileType tex setlocal spell spelllang=en_us
 endif
 
-" Highlight trailing whitespace
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
-
-" Set up highlight group & retain through colorscheme changes
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-
 " Run terraform fmt on terraform files
 autocmd BufWritePre *.tf call terraform#fmt()
 
@@ -294,7 +286,8 @@ nnoremap <silent> k gk
 nnoremap <silent> j gj
 nnoremap <silent> Y y$
 
-map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
+" search for trailing whitespace
+map <silent> <LocalLeader>ws /\s\+$<CR>
 
 map <silent> <LocalLeader>pp :set paste!<CR>
 
