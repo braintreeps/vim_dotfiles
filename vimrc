@@ -100,7 +100,7 @@ autocmd FileType java runtime java_mappings.vim
 let g:wstrip_highlight = 0
 " strip trailing whitespace on save for any lines modified for the following
 " languages
-autocmd FileType ruby,java,pyhon,c,cpp,sql,puppet let b:wstrip_auto = 1
+autocmd FileType ruby,java,python,c,cpp,sql,puppet let b:wstrip_auto = 1
 
 if version >= 700
     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
