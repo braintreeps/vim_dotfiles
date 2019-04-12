@@ -79,7 +79,7 @@ augroup END
 " File Types
 
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtabs
 autocmd FileType cs setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 if fnamemodify(getcwd(), ':t') == 'braintree-java'
