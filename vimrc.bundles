@@ -9,6 +9,7 @@ else
 endif
 
 Plug 'akhaku/vim-java-unused-imports'
+Plug 'aklt/plantuml-syntax'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'benmills/vim-commadown'
