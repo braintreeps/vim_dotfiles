@@ -235,10 +235,10 @@ endif
 autocmd FileType java autocmd BufWritePre * :UnusedImports
 
 " Language server for Java
-if executable("java-language-server")
+if executable('java-language-server')
   autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'java-language-server',
-    \ 'cmd': {server_info->["java-language-server", '--quiet']},
+    \ 'cmd': {server_info->['java-language-server', '--quiet']},
     \ 'whitelist': ['java'],
     \ })
   autocmd FileType java nmap <C-e> <plug>(lsp-document-diagnostics)
