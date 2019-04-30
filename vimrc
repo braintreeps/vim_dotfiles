@@ -89,7 +89,6 @@ else
 endif
 
 autocmd FileType tex setlocal textwidth=78
-autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
 autocmd FileType ruby runtime ruby_mappings.vim
 autocmd FileType python runtime python_mappings.vim
