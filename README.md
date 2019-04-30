@@ -83,7 +83,7 @@ Ruby Specific Mappings
 Python-Specific Mappings
 
 ```
-\rb - run all nosetests in the current buffer
-\rf - run the current nose test (requires nose-run-line-number)
+\rb - run all pytests in the current buffer
+\rf - run the current pytest
 \rl - run the last spec
 ```
