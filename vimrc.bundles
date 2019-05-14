@@ -84,6 +84,7 @@ Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487f
 " use diff-error branch until the PR is merged into master, as it fixes wstrip
 " usage outside of git repos
 Plug 'tweekmonster/wstrip.vim', { 'branch': 'diff-error' }
+Plug 'leafgarland/typescript-vim'
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
