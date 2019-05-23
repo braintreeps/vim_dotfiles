@@ -223,6 +223,10 @@ let g:go_highlight_trailing_whitespace_error = 0
 let test#strategy = "vimux"
 let test#custom_runners = {}
 let test#python#runner = 'pytest'
+let nose_test = system('grep -q "nose" requirements.txt')
+if v:shell_error == 0
+  let test#python#runner = 'nose'
+endif
 
 if filereadable(expand('WORKSPACE'))
   let test#custom_runners['java'] = ['bazeltest']
