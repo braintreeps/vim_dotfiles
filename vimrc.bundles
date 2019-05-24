@@ -64,7 +64,12 @@ Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve', { 'for': 'clojure' }
+Plug 'tpope/vim-projectionist', { 'for': 'clojure' }
+Plug 'tpope/vim-dispatch', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
