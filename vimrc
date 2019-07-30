@@ -460,6 +460,36 @@ augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
 augroup END
 
+" Enable shfmt to automatically fix or format shell source code. This feature
+" can be disabled by touching .shfmt_disable in a repo's root directory.
+function s:EnableShfmt()
+  let l:cur_file_dir = expand('%:p:h')
+  if strlen(l:cur_file_dir) == 0
+    let l:git_dir = getcwd()
+  else
+    let l:git_dir = l:cur_file_dir
+  endif
+  let l:git_cmd = 'git -C ' . l:git_dir . ' rev-parse --show-toplevel 2>/dev/null'
+  let l:git_root = substitute(system(l:git_cmd), '\n\+$', '', '')
+  if v:shell_error == 0 && filereadable(l:git_root . '/.shfmt_disable')
+    augroup shells
+      autocmd!
+      autocmd FileType sh setlocal expandtab
+    augroup END
+    if has_key(g:ale_fixers, 'sh')
+      unlet g:ale_fixers.sh
+    endif
+  else
+    augroup shells
+      autocmd!
+      autocmd FileType sh setlocal noexpandtab
+    augroup END
+    let g:ale_fixers.sh = ['shfmt']
+  endif
+endfunction
+
+call s:EnableShfmt()
+
 "-------- Local Overrides
 ""If you have options you'd like to override locally for
 "some reason (don't want to store something in a
