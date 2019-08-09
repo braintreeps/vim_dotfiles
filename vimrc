@@ -289,6 +289,9 @@ map <silent> <C-p> :Files<CR>
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'
 
+" GitHubURL
+map <silent> <LocalLeader>gh :GitHubURL<CR>
+
 " TComment
 map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
