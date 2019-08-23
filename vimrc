@@ -140,8 +140,9 @@ vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
 let g:ale_enabled = 1                     " Enable linting by default
 let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
 let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
-let g:ale_set_signs = 0                   " Disable signs showing in the gutter to reduce interruptive visuals
+let g:ale_set_signs = 1                   " Enable signs showing in the gutter to reduce interruptive visuals
 let g:ale_linters_explicit = 1            " Only run linters that are explicitly listed below
+let g:ale_set_highlights = 0              " Disable highlighting as it interferes with readability and accessibility
 let g:ale_linters = {}
 let g:ale_linters['puppet'] = ['puppetlint']
 if filereadable(expand(".rubocop.yml"))
