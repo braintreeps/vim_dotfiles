@@ -145,11 +145,13 @@ let g:ale_linters_explicit = 1            " Only run linters that are explicitly
 let g:ale_set_highlights = 0              " Disable highlighting as it interferes with readability and accessibility
 let g:ale_linters = {}
 let g:ale_linters['puppet'] = ['puppetlint']
+let g:ale_linters['elixir'] = ['mix']
 if filereadable(expand(".rubocop.yml"))
   let g:ale_linters['ruby'] = ['rubocop']
 endif
 
 let g:ale_fixers = {}
+let g:ale_fixers['elixir'] = ['mix_format']
 let g:ale_fix_on_save = 1
 
 let black = system('grep -q black Pipfile')
