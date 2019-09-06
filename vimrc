@@ -216,6 +216,8 @@ let g:rbpt_colorpairs = [
     \ ['red',         'firebrick3'],
     \ ]
 
+let g:sexp_enable_insert_mode_mappings = 0
+
 let g:puppet_align_hashes = 0
 
 let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null                                                         
