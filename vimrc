@@ -261,12 +261,12 @@ if executable('java-language-server')
     \ 'cmd': {server_info->['java-language-server', '--quiet']},
     \ 'whitelist': ['java'],
     \ })
-  autocmd FileType java nmap <C-e> <plug>(lsp-document-diagnostics)
-  autocmd FileType java nmap <C-i> <plug>(lsp-hover)
-  autocmd FileType java nmap <C-]> <plug>(lsp-definition)
-  autocmd FileType java nmap gr <plug>(lsp-references)
-  autocmd FileType java nmap go <plug>(lsp-document-symbol)
-  autocmd FileType java nmap gS <plug>(lsp-workspace-symbol)
+  autocmd FileType java nmap <buffer> <C-e> <plug>(lsp-document-diagnostics)
+  autocmd FileType java nmap <buffer> <C-i> <plug>(lsp-hover)
+  autocmd FileType java nmap <buffer> <C-]> <plug>(lsp-definition)
+  autocmd FileType java nmap <buffer> gr <plug>(lsp-references)
+  autocmd FileType java nmap <buffer> go <plug>(lsp-document-symbol)
+  autocmd FileType java nmap <buffer> gS <plug>(lsp-workspace-symbol)
 
   let g:asyncomplete_smart_completion = 1
   let g:lsp_insert_text_enabled = 1
