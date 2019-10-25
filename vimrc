@@ -339,6 +339,9 @@ map <silent> <LocalLeader>ws /\s\+$<CR>
 
 map <silent> <LocalLeader>pp :set paste!<CR>
 
+" Format document
+map <silent> <LocalLeader>fd :LspDocumentFormat<CR>
+
 " YAML
 let g:vim_yaml_helper#auto_display_path = 1
 
