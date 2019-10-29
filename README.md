@@ -95,3 +95,4 @@ Searching
 
 ```
 \nh - :nohlsearch - stop highlighting the last search
+```
