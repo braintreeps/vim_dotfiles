@@ -59,7 +59,7 @@ g CTRL+] - pop up a selector if there is more than one definition; if there is o
 \rt - rebuild tags
 ```
 
-Git - Fugitive
+Git
 
 ```
 \gw - git grep for the word under the cursor
