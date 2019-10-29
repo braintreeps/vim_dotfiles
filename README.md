@@ -29,6 +29,7 @@ File search - fzf:
 
 ```
 \ff - find a file
+\fg - find a file that is committed to git
 \fb - find an open buffer
 \ft - find ctags
 ```
@@ -58,10 +59,11 @@ g CTRL+] - pop up a selector if there is more than one definition; if there is o
 \rt - rebuild tags
 ```
 
-Git Grep - Fugitive
+Git
 
 ```
 \gw - git grep for the word under the cursor
+\gh - get the github url for the current file
 ```
 
 Whitespace
@@ -78,6 +80,7 @@ Ruby Specific Mappings
 \rf - run the spec under the cursor
 \rl - run the last spec
 \rs - syntax check the current file
+Ctrl+L (in insert mode) - insert a " => " at the current cursor position
 ```
 
 Python-Specific Mappings
@@ -86,4 +89,10 @@ Python-Specific Mappings
 \rb - run all tests in the current buffer (pytest or nose)
 \rf - run the current test
 \rl - run the last test
+```
+
+Searching
+
+```
+\nh - :nohlsearch - stop highlighting the last search
 ```
