@@ -274,6 +274,15 @@ endif
 
 " ========= Shortcuts ========
 
+" ALE
+map <silent> <leader>an :ALENextWrap<CR>
+map <silent> <leader>ap :ALEPreviousWrap<CR>
+map <silent> <leader>aj :ALENextWrap<CR>
+map <silent> <leader>ak :ALEPreviousWrap<CR>
+map <silent> <leader>al :ALELint<CR>
+map <silent> <leader>af :ALEFix<CR>
+map <silent> <leader>ai :ALEInfo<CR>
+
 " NERDTree
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
