@@ -37,11 +37,12 @@ Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104
 Plug 'jparise/vim-graphql', { 'commit': '7ecedede603d16de5cca5ccefbde14d642b0d697' }
 Plug 'jtratner/vim-flavored-markdown'
 if expand('<sfile>') == '/etc/vim/vimrc.bundles'
-  Plug 'junegunn/fzf', { 'tag': '0.16.7', 'dir': '/etc/vim/fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf', { 'tag': '0.19.0', 'dir': '/etc/vim/fzf', 'do': './install --bin' }
+
 else
-  Plug 'junegunn/fzf', { 'tag': '0.16.7', 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf', { 'tag': '0.19.0', 'dir': '~/.fzf', 'do': './install --bin' }
 endif
-Plug 'junegunn/fzf.vim', {'commit': '741d7caabf229ec183364413f8b6d077a9939838'}
+Plug 'junegunn/fzf.vim', {'commit': '65edb6ad99b51514aaf29afc25e35ce5f05281ba'}
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/rainbow_parentheses.vim'
