@@ -146,20 +146,14 @@ let g:ale_set_signs = 1                   " Enable signs showing in the gutter t
 let g:ale_linters_explicit = 1            " Only run linters that are explicitly listed below
 let g:ale_set_highlights = 0              " Disable highlighting as it interferes with readability and accessibility
 let g:ale_linters = {}
-let g:ale_linters['puppet'] = ['puppetlint']
-let g:ale_linters['elixir'] = ['mix']
-if filereadable(expand(".rubocop.yml"))
-  let g:ale_linters['ruby'] = ['rubocop']
-endif
-
 let g:ale_fixers = {}
-let g:ale_fixers['elixir'] = ['mix_format']
-let g:ale_fix_on_save = 1
 
-let black = system('grep -q black Pipfile')
-if v:shell_error == 0
-  let g:ale_fixers['python'] = ['black']
-  let g:ale_python_black_auto_pipenv = 1
+if filereadable(expand(".ale_fix_on_save"))
+  " add an empty file named .ale_fix_on_save
+  " in any repository to enable ale fixers
+  " otherwise set the below line in your vimrc_local
+  " without the conditional
+  let g:ale_fix_on_save = 1
 endif
 
 let html_use_css=1
@@ -222,9 +216,9 @@ let g:sexp_enable_insert_mode_mappings = 0
 
 let g:puppet_align_hashes = 0
 
-let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null                                                         
+let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null
                             \ | grep -v -E "tmp\/|.gitmodules|.git\/|deps\/|_build\/|node_modules\/|vendor\/"
-                            \ | sed "s|^\./||"'                                                                          
+                            \ | sed "s|^\./||"'
 let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
 let g:fzf_action = {
