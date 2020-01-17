@@ -258,10 +258,16 @@ autocmd FileType java autocmd BufWritePre * :UnusedImports
 
 " Language server for Java
 if executable('java-language-server')
+  let extensions = $HOME.'/language-servers/java/extensions'
+  let bundles = [
+        \ glob(extensions.'/debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
+        \ ]
+
   autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'java-language-server',
-    \ 'cmd': {server_info->['java-language-server', '--quiet']},
+    \ 'cmd': {server_info->['java-language-server']},
     \ 'whitelist': ['java'],
+    \ 'initialization_options': {'bundles': bundles },
     \ })
   autocmd FileType java nmap <buffer> <C-e> <plug>(lsp-document-diagnostics)
   autocmd FileType java nmap <buffer> <C-i> <plug>(lsp-hover)
