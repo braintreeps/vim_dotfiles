@@ -58,6 +58,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim', { 'for': 'java' }
 Plug 'prabirshrestha/asyncomplete-lsp.vim', { 'for': 'java' }
 Plug 'prabirshrestha/vim-lsp'
+Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tfnico/vim-gradle'
