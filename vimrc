@@ -238,6 +238,10 @@ let g:vim_markdown_folding_disabled = 1
 let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
 
+" Set Rust autocomplete trigger to control-space
+inoremap <C-@> <C-x><C-o>
+let g:racer_experimental_completer = 1
+
 let test#strategy = "vimux"
 let test#custom_runners = {}
 let test#python#runner = 'pytest'
