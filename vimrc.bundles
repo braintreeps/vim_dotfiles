@@ -85,7 +85,7 @@ Plug 'vim-scripts/VimClojure'
 Plug 'vim-scripts/groovyindent-unix'
 Plug 'vim-scripts/mako.vim'
 Plug 'vim-scripts/matchit.zip'
-Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487fa2' }
+Plug 'rodjek/vim-puppet'
 " use diff-error branch until the PR is merged into master, as it fixes wstrip
 " usage outside of git repos
 Plug 'tweekmonster/wstrip.vim', { 'branch': 'diff-error' }
