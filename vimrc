@@ -362,7 +362,7 @@ imap <C-L> <SPACE>=><SPACE>
 
 " ========= Functions ========
 
-command! SudoW w !sudo tee %
+command! SudoW w !sudo tee "%"
 
 " http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
 function! DivHtml(line1, line2)
