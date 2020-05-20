@@ -109,7 +109,7 @@ if version >= 700
 endif
 
 " Run terraform fmt on terraform files
-autocmd BufWritePre *.tf call terraform#fmt()
+autocmd BufWritePre *.tf,*.tfvars call terraform#fmt()
 
 " Status
 set laststatus=2
