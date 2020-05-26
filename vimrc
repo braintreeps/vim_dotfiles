@@ -480,9 +480,13 @@ command! W w
 " https://vim.fandom.com/wiki/Reverse_order_of_lines
 command! -bar -range=% ReverseLines <line1>,<line2>g/^/m<line1>-1|nohl
 
-" Autoformat for bazel files
+" Autoformat settings
+call glaive#Install()
+Glaive codefmt google_java_executable='java -jar google-java-format-1.7-all-deps.jar'
+
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType java AutoFormatBuffer google-java-format
 augroup END
 
 "-------- Local Overrides
