@@ -1,4 +1,6 @@
 let g:test#csharp#dotnettest#options = '-f netcoreapp2.0'
+"let g:test#csharp#dotnettest#options = '-f netstandard1.3'
+"let g:test#csharp#dotnettest#options = '-f netcoreapp1.0'
 
 map <silent> <LocalLeader>rb :wa<CR> :TestFile<CR>
 map <silent> <LocalLeader>rf :wa<CR> :TestNearest<CR>
