@@ -264,7 +264,6 @@ if executable('java-language-server')
     \ 'cmd': {server_info->['java-language-server', '--quiet']},
     \ 'whitelist': ['java'],
     \ })
-  autocmd FileType java nmap <buffer> <C-e> <plug>(lsp-document-diagnostics)
   autocmd FileType java nmap <buffer> <C-i> <plug>(lsp-hover)
   autocmd FileType java nmap <buffer> <C-]> <plug>(lsp-definition)
   autocmd FileType java nmap <buffer> gr <plug>(lsp-references)
