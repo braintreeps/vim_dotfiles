@@ -474,9 +474,12 @@ command! W w
 " https://vim.fandom.com/wiki/Reverse_order_of_lines
 command! -bar -range=% ReverseLines <line1>,<line2>g/^/m<line1>-1|nohl
 
-" Autoformat settings
-call glaive#Install()
+" Initialize glaive if it's installed.
+if exists('*glaive#Install')
+  call glaive#Install()
+endif
 
+" Autoformat settings
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
 augroup END
