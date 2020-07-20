@@ -104,10 +104,8 @@ let g:wstrip_highlight = 0
 " languages
 autocmd FileType ruby,java,python,c,cpp,sql,puppet let b:wstrip_auto = 1
 
-if version >= 700
-    autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
-    autocmd FileType tex setlocal spell spelllang=en_us
-endif
+autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+autocmd FileType tex,gitcommit setlocal spell spelllang=en_us
 
 " Run terraform fmt on terraform files
 autocmd BufWritePre *.tf call terraform#fmt()
