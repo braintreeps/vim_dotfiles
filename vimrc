@@ -306,6 +306,14 @@ map <silent> <C-p> :Files<CR>
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'
 
+
+" vim-unimpaired
+
+nmap <silent> <C-k> <Plug>unimpairedMoveUp
+nmap <silent> <C-j> <Plug>unimpairedMoveDown
+xmap <silent> <C-k> <Plug>unimpairedMoveSelectionUp<esc>gv
+xmap <silent> <C-j> <Plug>unimpairedMoveSelectionDown<esc>gv
+
 " GitHubURL
 map <silent> <LocalLeader>gh :GitHubURL<CR>
 
