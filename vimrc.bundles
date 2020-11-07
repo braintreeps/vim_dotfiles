@@ -11,6 +11,8 @@ endif
 Plug 'akhaku/vim-java-unused-imports'
 Plug 'aklt/plantuml-syntax'
 Plug 'arthurxavierx/vim-caser'
+" Show git diff via Vim sign column.
+Plug 'airblade/vim-gitgutter'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-glaive'
 Plug 'google/vim-codefmt'
