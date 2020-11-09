@@ -22,6 +22,6 @@ map <silent> <LocalLeader>AS   :AS<CR>
 map <LocalLeader>rd Orequire "pry"; binding.pry<ESC>
 
 " Search for tag
-nmap <silent> gd :Tags '<C-R><C-W> <CR>
+nmap <silent> <LocalLeader>] :Tags '<C-R><C-W> <CR>
 
 setlocal isk+=?
