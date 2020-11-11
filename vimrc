@@ -300,7 +300,6 @@ map <silent> <C-p> :Files<CR>
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'
 
-
 " vim-unimpaired
 
 nmap <silent> <C-k> <Plug>unimpairedMoveUp
