@@ -305,6 +305,8 @@ map <LocalLeader>aw :Ack '<C-R><C-W>'
 
 nmap <silent> <C-k> <Plug>unimpairedMoveUp
 nmap <silent> <C-j> <Plug>unimpairedMoveDown
+nmap <silent> ]h :GitGutterNextHunk<CR>
+nmap <silent> [h :GitGutterPrevHunk<CR>
 xmap <silent> <C-k> <Plug>unimpairedMoveSelectionUp<esc>gv
 xmap <silent> <C-j> <Plug>unimpairedMoveSelectionDown<esc>gv
 
