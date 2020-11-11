@@ -20,7 +20,7 @@ map <silent> <LocalLeader>AV   :AV<CR>
 map <silent> <LocalLeader>AS   :AS<CR>
 
 " Restore vim-diff shortcuts
-unmap ]c
+silent! unmap ]c
 map <silent> ]C :RubyBlockSpecParentContext<CR>
 
 map <LocalLeader>rd Orequire "pry"; binding.pry<ESC>
