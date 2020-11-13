@@ -92,6 +92,7 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'rodjek/vim-puppet'
 Plug 'tweekmonster/wstrip.vim', { 'commit': '02826534e60a492b58f9515f5b8225d86f74fbc8' }
 Plug 'leafgarland/typescript-vim'
+Plug 'wellle/tmux-complete.vim'
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
