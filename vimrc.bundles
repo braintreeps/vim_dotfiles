@@ -97,6 +97,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'machakann/vim-swap'
 Plug 'wellle/targets.vim'
 Plug 'romainl/vim-qf'
+Plug 'wellle/tmux-complete.vim'
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
