@@ -82,6 +82,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-abolish'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby', { 'commit': '84565856e6965144e1c34105e03a7a7e87401acb' }
 Plug 'vim-scripts/Align'
@@ -92,6 +93,10 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'rodjek/vim-puppet'
 Plug 'tweekmonster/wstrip.vim', { 'commit': '02826534e60a492b58f9515f5b8225d86f74fbc8' }
 Plug 'leafgarland/typescript-vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'machakann/vim-swap'
+Plug 'wellle/targets.vim'
+Plug 'romainl/vim-qf'
 Plug 'wellle/tmux-complete.vim'
 
 if v:version >= 800 || has('nvim')
