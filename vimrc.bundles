@@ -95,6 +95,7 @@ Plug 'tweekmonster/wstrip.vim', { 'commit': '02826534e60a492b58f9515f5b8225d86f7
 Plug 'leafgarland/typescript-vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'machakann/vim-swap'
+Plug 'wellle/targets.vim'
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
