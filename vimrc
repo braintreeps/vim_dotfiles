@@ -295,7 +295,10 @@ if executable('java-language-server')
     call lsp#register_server({
           \ 'name': 'java',
           \ 'cmd': {server_info->['java-language-server']},
-          \ 'whitelist': ['java'],
+          \ 'allowlist': ['java'],
+          \ 'initialization_options': {
+          \     'bundles': ['/home/admin/language-servers/java/extensions/debug.jar']
+          \ }
           \ })
   endfunction
 
