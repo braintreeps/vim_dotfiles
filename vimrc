@@ -253,6 +253,7 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <C-]> <Plug>(lsp-definition)
   nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> gi <plug>(lsp-implementation)
   nmap <buffer> gt <plug>(lsp-type-definition)
@@ -260,6 +261,14 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
   nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
   nmap <buffer> K <plug>(lsp-hover)
+  nmap <buffer> <F2> <Plug>(lsp-rename)
+  nmap <buffer> <Leader>rn <Plug>(lsp-rename)
+  nmap <buffer> <Leader>ca <Plug>(lsp-code-action)
+  nmap <buffer> <Leader>ds <Plug>(lsp-document-symbol)
+  nmap <buffer> <Leader>ws <Plug>(lsp-workspace-symbol)
+  nmap <buffer> <Leader>fd <Plug>(lsp-document-format)
+  vmap <buffer> <Leader>fd <Plug>(lsp-document-format)
+  " Additional mappings can be seen with :help vim-lsp-mappings
 endfunction
 
 augroup lsp_install
