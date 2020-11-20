@@ -243,24 +243,66 @@ if filereadable(expand('WORKSPACE'))
   let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
 endif
 
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = '/tmp/vim-lsp.log'
+let g:asyncomplete_auto_popup = 0
+
+" Define settings and shortcuts for language server-enabled buffers.
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <C-]> <Plug>(lsp-definition)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+  nmap <buffer> <F2> <Plug>(lsp-rename)
+  nmap <buffer> <Leader>rn <Plug>(lsp-rename)
+  nmap <buffer> <Leader>ca <Plug>(lsp-code-action)
+  nmap <buffer> <Leader>ds <Plug>(lsp-document-symbol)
+  nmap <buffer> <Leader>ws <Plug>(lsp-workspace-symbol)
+  nmap <buffer> <Leader>fd <Plug>(lsp-document-format)
+  vmap <buffer> <Leader>fd <Plug>(lsp-document-format)
+  " Additional mappings can be seen with :help vim-lsp-mappings
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
 " Remove unused imports for Java
 autocmd FileType java autocmd BufWritePre * :UnusedImports
 
 " Language server for Java
 if executable('java-language-server')
-  autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'java-language-server',
-    \ 'cmd': {server_info->['java-language-server', '--quiet']},
-    \ 'whitelist': ['java'],
-    \ })
-  autocmd FileType java nmap <buffer> <C-i> <plug>(lsp-hover)
-  autocmd FileType java nmap <buffer> <C-]> <plug>(lsp-definition)
-  autocmd FileType java nmap <buffer> gr <plug>(lsp-references)
-  autocmd FileType java nmap <buffer> go <plug>(lsp-document-symbol)
-  autocmd FileType java nmap <buffer> gS <plug>(lsp-workspace-symbol)
+  function! s:register_lsp_java()
+    if exists('*lsp#register_command')
+      function! s:eclipse_jdt_ls_java_apply_workspaceEdit(context)
+        let l:command = get(a:context, 'command', {})
+        call lsp#utils#workspace_edit#apply_workspace_edit(l:command['arguments'][0])
+      endfunction
+      call lsp#register_command('java.apply.workspaceEdit', function('s:eclipse_jdt_ls_java_apply_workspaceEdit'))
+    else
+      echoerr 'Function lsp#register_command() not found, please update your vim-lsp installation'
+    endif
 
-  let g:asyncomplete_smart_completion = 1
-  let g:lsp_insert_text_enabled = 1
+    call lsp#register_server({
+          \ 'name': 'java',
+          \ 'cmd': {server_info->['java-language-server']},
+          \ 'allowlist': ['java'],
+          \ 'initialization_options': {
+          \     'bundles': ['/home/admin/language-servers/java/extensions/debug.jar']
+          \ }
+          \ })
+  endfunction
+
+  autocmd User lsp_setup call s:register_lsp_java()
 endif
 
 " ========= Shortcuts ========
