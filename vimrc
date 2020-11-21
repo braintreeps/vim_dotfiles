@@ -245,6 +245,7 @@ endif
 
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = '/tmp/vim-lsp.log'
+let g:lsp_diagnostics_echo_cursor = 1
 let g:asyncomplete_auto_popup = 0
 
 " Define settings and shortcuts for language server-enabled buffers.
