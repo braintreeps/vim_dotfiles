@@ -1,4 +1,4 @@
-let g:test#csharp#dotnettest#options = '-f netcoreapp2.0'
+let g:test#csharp#dotnettest#options = '-f netcoreapp3.1'
 "let g:test#csharp#dotnettest#options = '-f netstandard1.3'
 "let g:test#csharp#dotnettest#options = '-f netcoreapp1.0'
 
