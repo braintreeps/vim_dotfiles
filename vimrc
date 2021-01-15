@@ -276,6 +276,22 @@ augroup lsp_install
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+if executable('gopls')
+  function! s:register_lsp_golang()
+    if exists('*lsp#register_command')
+      call lsp#register_server({
+            \ 'name': 'go-lang',
+            \ 'cmd': {server_info->['gopls']},
+            \ 'allowlist': ['go'],
+            \ })
+    else
+      echoerr 'Function lsp#register_command() not found, please update your vim-lsp installation'
+    endif
+  endfunction
+
+  autocmd User lsp_setup call s:register_lsp_golang()
+endif
+
 " Remove unused imports for Java
 autocmd FileType java autocmd BufWritePre * :UnusedImports
 
