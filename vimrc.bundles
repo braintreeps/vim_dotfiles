@@ -84,6 +84,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-abolish'
 Plug 'uarun/vim-protobuf'
+Plug 'vim-crystal/vim-crystal'
 Plug 'vim-ruby/vim-ruby', { 'commit': '84565856e6965144e1c34105e03a7a7e87401acb' }
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/VimClojure'
