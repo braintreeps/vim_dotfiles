@@ -48,7 +48,7 @@ Vimux (must be inside a tmux)
 ```
 \vp - prompt for a command to run in vimux
 \vs - send the block of code to the vimux window
-\rl - run the last command
+\vl - run the last vimux command
 ```
 
 Jump to definition - CTags
