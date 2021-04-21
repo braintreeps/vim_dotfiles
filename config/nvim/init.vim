@@ -89,6 +89,33 @@ if has('nvim-0.5')
   if status then
     fzf_lsp.setup()
   end
+
+  local status, treesitter = pcall(require, 'nvim-treesitter.configs')
+  if status then
+    treesitter.setup{
+      -- List of supported languages can be found here: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+      ensure_installed = {"bash", "c_sharp", "clojure", "comment", "css", "go", "graphql", "html", "java", "javascript", "json", "kotlin", "lua", "php", "python", "regex", "ruby", "rust", "scala", "toml", "typescript"},
+      highlight = {
+        enable = true
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
+      indent = {
+        enable = true
+      },
+    }
+
+    vim.wo.foldmethod = 'expr'
+    vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+    vim.o.foldlevelstart = 99
+  end
 EOF
 
 endif
