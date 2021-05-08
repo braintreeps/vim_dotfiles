@@ -547,14 +547,23 @@ augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
 augroup END
 
-"-------- Local Overrides
-""If you have options you'd like to override locally for
-"some reason (don't want to store something in a
-""publicly-accessible repository, machine-specific settings, etc.),
-"you can create a '.local_vimrc' file in your home directory
-""(ie: ~/.vimrc_local) and it will be 'sourced' here and override
-"any settings in this file.
+"-------- System Overrides
+"If you have options you'd like to override globally for some reason (don't
+"want to store something in a publicly-accessible repository, machine-specific
+"settings, etc.), you can create a 'vimrc.global' file in /etc/vim and it will
+"be 'sourced' here and override any settings in this file.
 ""
+if filereadable(expand("/etc/vim/vimrc.global"))
+  source /etc/vim/vimrc.global
+endif
+
+"-------- Local Overrides
+"If you have options you'd like to override locally for some reason (don't
+"want to store something in a publicly-accessible repository, machine-specific
+"settings, etc.), you can create a '.local_vimrc' file in your home directory
+"(ie: ~/.vimrc_local) and it will be 'sourced' here and override any settings
+"in this file or the above global setting.
+"
 "NOTE: YOU MAY NOT WANT TO ADD ANY LINES BELOW THIS
 if filereadable(expand('~/.vimrc_local'))
   source ~/.vimrc_local
