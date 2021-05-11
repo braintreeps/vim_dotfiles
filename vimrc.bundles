@@ -105,6 +105,7 @@ endif
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'gfanto/fzf-lsp.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
