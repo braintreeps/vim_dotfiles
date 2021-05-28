@@ -65,10 +65,6 @@ set undolevels=1000 "maximum number of changes that can be undone
 " Color
 colorscheme vibrantink
 
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
 augroup Drakefile
   au!
   au BufNewFile,BufRead Drakefile,drakefile setlocal filetype=ruby
@@ -223,8 +219,6 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-let g:vim_markdown_folding_disabled = 1
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
