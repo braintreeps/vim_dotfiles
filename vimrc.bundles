@@ -28,7 +28,8 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'elubow/cql-vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
 Plug 'google/vim-jsonnet'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
@@ -39,7 +40,6 @@ Plug 'jgdavey/vim-turbux', { 'branch': 'main' }
 Plug 'hashivim/vim-terraform'
 Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104325c3' }
 Plug 'jparise/vim-graphql', { 'commit': '7ecedede603d16de5cca5ccefbde14d642b0d697' }
-Plug 'jtratner/vim-flavored-markdown'
 Plug 'kshenoy/vim-signature'
 if expand('<sfile>') == '/etc/vim/vimrc.bundles'
   Plug 'junegunn/fzf', { 'tag': '0.19.0', 'dir': '/etc/vim/fzf', 'do': './install --bin' }
