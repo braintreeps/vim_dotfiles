@@ -32,11 +32,12 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'google/vim-jsonnet'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
+Plug 'hashivim/vim-terraform'
 Plug 'henrik/vim-indexed-search'
 Plug 'janko-m/vim-test'
 Plug 'jergason/scala.vim'
 Plug 'jgdavey/vim-turbux', { 'branch': 'main' }
-Plug 'hashivim/vim-terraform'
+Plug 'junegunn/vim-easy-align'
 Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104325c3' }
 Plug 'jparise/vim-graphql', { 'commit': '7ecedede603d16de5cca5ccefbde14d642b0d697' }
 Plug 'jtratner/vim-flavored-markdown'

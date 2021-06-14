@@ -344,6 +344,16 @@ map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" Visually select GHE-flavored markdown table, then press tab to align it
+au FileType markdown vmap <tab> :EasyAlign*<Bar><Enter>
+" In normal mode, press bar (|) to select table and align it
+au FileType markdown map <Bar> vip :EasyAlign*<Bar><Enter>
+
 " FZF
 function! SmartFuzzy()
   let root = split(system('git rev-parse --show-toplevel'), '\n')
