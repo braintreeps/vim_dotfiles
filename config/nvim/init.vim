@@ -68,10 +68,12 @@ if has('nvim-0.5')
       end
     end
 
+    local jdtls_bundles = {vim.env.HOME.."/language-servers/java/extensions/debug.jar"};
+    vim.list_extend(jdtls_bundles, vim.split(vim.fn.glob(vim.env.HOME.."/language-servers/java/extensions/test/extension/server/*.jar"), "\n"))
     nvim_lsp.jdtls.setup{
       cmd = { "java-language-server", "--heap-max", "8G" };
       init_options = {
-        bundles = {vim.env.HOME.."/language-servers/java/extensions/debug.jar"};
+        bundles = jdtls_bundles;
       };
       on_attach = on_attach;
     }
