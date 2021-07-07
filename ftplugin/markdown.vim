@@ -1,3 +1,7 @@
+" Java's syntax highlighting breaks spell check,
+" so remove it, for more info see:
+" https://github.com/tpope/vim-markdown/issues/89
+" \  'java',
 let g:markdown_fenced_languages = [
 \  'bash=sh',
 \  'c',
@@ -5,7 +9,6 @@ let g:markdown_fenced_languages = [
 \  'cpp',
 \  'go',
 \  'html',
-\  'java',
 \  'javascript',
 \  'python',
 \  'ruby',
