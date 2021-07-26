@@ -303,12 +303,14 @@ function! s:setup_vim_lsp() abort
         echoerr 'Function lsp#register_command() not found, please update your vim-lsp installation'
       endif
 
+      let l:bundles = ['/home/admin/language-servers/java/extensions/debug.jar']
+      call extend(l:bundles, split(glob($HOME."/language-servers/java/extensions/test/extension/server/*.jar"), "\n"))
       call lsp#register_server({
             \ 'name': 'java',
             \ 'cmd': {server_info->['java-language-server', '--heap-max', '8G']},
             \ 'allowlist': ['java'],
             \ 'initialization_options': {
-            \     'bundles': ['/home/admin/language-servers/java/extensions/debug.jar']
+            \     'bundles': l:bundles
             \ }
             \ })
     endfunction
