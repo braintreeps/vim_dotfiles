@@ -6,6 +6,30 @@ if has('nvim-0.5')
   lua << EOF
   local status, nvim_lsp = pcall(require, 'lspconfig')
   if status then
+    -- Run an LSP command using a Telescope picker if it's available, otherwise use the fallback.
+    function lsp_do(picker, fallback)
+      if picker == "lsp_code_actions" then
+        print('Getting code actions (this may take a while on first use)...')
+      end
+      vim.schedule(function()
+        local status, telescope = pcall(require, 'telescope.builtin')
+        if status then
+          telescope[picker]{}
+        else
+          fallback()
+        end
+      end)
+    end
+
+    function lsp_workspace_symbols(query)
+      local status, telescope = pcall(require, 'telescope.builtin')
+      if status then
+        telescope.lsp_workspace_symbols{query=query}
+      else
+        vim.lsp.buf.workspace_symbol(query)
+      end
+    end
+
     local on_attach = function(client, bufnr)
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -19,16 +43,16 @@ if has('nvim-0.5')
       -- but with <leader> instead of <space>
 
       -- Navigation
-      buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-      buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      buf_set_keymap('n', '<Leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+      buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      buf_set_keymap('n', 'gd', '<cmd>lua lsp_do("lsp_definitions", vim.lsp.buf.definition)<CR>', opts)
+      buf_set_keymap('n', '<Leader>D', '<cmd>lua lsp_do("lsp_type_definitions", vim.lsp.buf.type_definition)<CR>', opts)
 
       -- Information
       buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
       buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-      buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<Leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+      buf_set_keymap('n', 'gr', '<cmd>lua lsp_do("lsp_references", vim.lsp.buf.references)<CR>', opts)
+      buf_set_keymap('n', '<Leader>ds', '<cmd>lua lsp_do("lsp_document_symbols", vim.lsp.buf.document_symbol)<CR>', opts)
 
       -- Diagnostics
       buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
@@ -38,13 +62,12 @@ if has('nvim-0.5')
 
       -- Refactoring
       buf_set_keymap('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-      buf_set_keymap('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      buf_set_keymap('n', '<Leader>ca', '<cmd>lua lsp_do("lsp_code_actions", vim.lsp.buf.code_action)<CR>', opts)
 
       -- Workspaces
       buf_set_keymap('n', '<Leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
       buf_set_keymap('n', '<Leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
       buf_set_keymap('n', '<Leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-      buf_set_keymap('n', '<Leader>ws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
 
       -- Set some keybinds conditional on server capabilities
       if client.resolved_capabilities.document_formatting then
@@ -87,9 +110,15 @@ if has('nvim-0.5')
     }
   end
 
-  local status, fzf_lsp = pcall(require, 'fzf_lsp')
+  local status, telescope = pcall(require, 'telescope')
   if status then
-    fzf_lsp.setup()
+    telescope.setup{
+      pickers = {
+        ['lsp_code_actions'] = {
+          timeout = 30000
+        }
+      }
+    }
   end
 
   local status, treesitter = pcall(require, 'nvim-treesitter.configs')
@@ -134,13 +163,15 @@ if has('nvim-0.5')
   end
 EOF
 
-" LSP servers may not always pick up changes to relevant files, such as when
-" changing a resource file in a Java project. To help ensure that the language
-" server always has recent changes, send a notification to all active servers
-" whenever a file is changed.
-augroup buffer_updates
-  au!
-  au BufWritePost,FileWritePost * lua notify_file_changed(vim.fn.expand('<abuf>'), 2)
-augroup END
+  " LSP servers may not always pick up changes to relevant files, such as when
+  " changing a resource file in a Java project. To help ensure that the language
+  " server always has recent changes, send a notification to all active servers
+  " whenever a file is changed.
+  augroup buffer_updates
+    au!
+    au BufWritePost,FileWritePost * lua notify_file_changed(vim.fn.expand('<abuf>'), 2)
+  augroup END
+
+  command! -nargs=1 Symbols :lua lsp_workspace_symbols('<args>')
 
 endif
