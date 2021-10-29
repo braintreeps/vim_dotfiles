@@ -108,6 +108,8 @@ if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'gfanto/fzf-lsp.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'mfussenegger/nvim-jdtls'
 endif
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
