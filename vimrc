@@ -236,6 +236,8 @@ if filereadable(expand('WORKSPACE'))
   let test#java#runner = 'bazeltest'
   let g:test#java#bazeltest#test_executable = './bazel test'
   let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
+elseif filereadable('settings.gradle') || executable('gradlew')
+  let test#java#runner = 'gradletest'
 endif
 
 let g:lsp_diagnostics_echo_cursor = 1
