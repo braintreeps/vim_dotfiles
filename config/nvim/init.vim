@@ -118,6 +118,29 @@ if has('nvim-0.5')
     vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
     vim.o.foldlevelstart = 99
   end
+
+  function notify_file_changed(buffer, change)
+    local log = require('vim.lsp.log')
+    local filepath = vim.fn.expand('#'..buffer..':p')
+    for _,client in pairs(vim.lsp.get_active_clients()) do
+      log.info('Notifying LSP server "'..client.name..'" of change to file "'..filepath..'"')
+      local result = client.notify('workspace/didChangeWatchedFiles', {
+        changes = {{ uri = 'file://'..filepath, type = change }},
+      })
+      if not result then
+        log.warn('File change notification failed!')
+      end
+    end
+  end
 EOF
+
+" LSP servers may not always pick up changes to relevant files, such as when
+" changing a resource file in a Java project. To help ensure that the language
+" server always has recent changes, send a notification to all active servers
+" whenever a file is changed.
+augroup buffer_updates
+  au!
+  au BufWritePost,FileWritePost * lua notify_file_changed(vim.fn.expand('<abuf>'), 2)
+augroup END
 
 endif
