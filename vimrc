@@ -236,8 +236,17 @@ if filereadable(expand('WORKSPACE'))
   let test#java#runner = 'bazeltest'
   let g:test#java#bazeltest#test_executable = './bazel test'
   let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
-elseif filereadable('settings.gradle') || executable('gradlew')
+elseif filereadable('settings.gradle') || executable('./gradlew')
   let test#java#runner = 'gradletest'
+  if executable('./gradlew')
+    autocmd BufEnter *.java setlocal makeprg=./gradlew\ compileTestJava
+    autocmd BufEnter *.scala setlocal makeprg=./gradlew\ compileTestScala
+    autocmd BufEnter *.gradle setlocal makeprg=./gradlew\ assemble
+  else
+    autocmd BufEnter *.java setlocal makeprg=gradle\ compileTestJava
+    autocmd BufEnter *.scala setlocal makeprg=gradle\ compileTestScala
+    autocmd BufEnter *.gradle setlocal makeprg=gradle\ assemble
+  endif
 endif
 
 let g:lsp_diagnostics_echo_cursor = 1
