@@ -15,7 +15,7 @@ After cloning this project, run `~/.vim/activate.sh`.
 Uses `vim-plug` to manage bundles.
 
 We have included our `tmux.conf` as `tmux_example.conf`.  To use some of the
-vimmux :magic:, please link that  to ~/.tmux.conf:
+vimmux :magic:, please link that  to `~/.tmux.conf`:
 
 `ln -s ~/.vim/tmux_example.conf ~/.tmux.conf`
 
