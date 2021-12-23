@@ -8,24 +8,23 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-Plug 'akhaku/vim-java-unused-imports'
-Plug 'aklt/plantuml-syntax'
-Plug 'arthurxavierx/vim-caser'
-" Show git diff via Vim sign column.
-Plug 'airblade/vim-gitgutter'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-glaive'
-Plug 'google/vim-codefmt'
-Plug 'benmills/vim-commadown'
-Plug 'benmills/vimux'
-Plug 'bkad/CamelCaseMotion'
-Plug 'cespare/vim-toml', {'branch': 'main'}
-Plug 'chase/vim-ansible-yaml'
-Plug 'dewyze/vim-ruby-block-helpers'
-Plug 'derekwyatt/vim-scala'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'elubow/cql-vim'
+Plug 'akhaku/vim-java-unused-imports' " Java
+Plug 'aklt/plantuml-syntax' " Syntax Global The filetype will be set to plantuml for *.pu, *.uml, *.puml, *.iuml or *.plantuml files or if the first line of a file contains @startuml.
+Plug 'arthurxavierx/vim-caser' " Global
+Plug 'airblade/vim-gitgutter' " Show git diff via Vim sign column.
+Plug 'google/vim-maktaba' " Global vimscript library
+Plug 'google/vim-glaive' " Global maktaba config utility
+Plug 'google/vim-codefmt' " autoformat_settings only bzl now
+Plug 'benmills/vim-commadown' " reflow lists with commas at the end. No shortcut :'<,'>call Commadown()
+Plug 'benmills/vimux' " a bunch of leader shortcuts
+Plug 'bkad/CamelCaseMotion' " Unconfigured?
+Plug 'cespare/vim-toml', {'branch': 'main'} " Syntax Global *.toml,Gopkg.lock,Cargo.lock,*/.cargo/config,*/.cargo/credentials,Pipfile
+Plug 'chase/vim-ansible-yaml' " Syntax ft=ansible or yml/yaml and under roles or next to group_vaes host_vars roles - Unmaintained 2017
+Plug 'dewyze/vim-ruby-block-helpers' " Seems always on for ftplugin/ruby
+Plug 'derekwyatt/vim-scala' " detects scala
+Plug 'ekalinin/Dockerfile.vim' " Dockerfile and Containerfile + docker-compose*.y[a]?ml
+Plug 'elixir-editors/vim-elixir' " ftplugin elixir
+Plug 'elubow/cql-vim' " Cassandra *.cql
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'godlygeek/tabular'
@@ -42,32 +41,38 @@ Plug 'junegunn/vim-easy-align'
 Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104325c3' }
 Plug 'jparise/vim-graphql', { 'commit': '7ecedede603d16de5cca5ccefbde14d642b0d697' }
 Plug 'kshenoy/vim-signature'
+
 if expand('<sfile>') == '/etc/vim/vimrc.bundles'
   Plug 'junegunn/fzf', { 'tag': '0.19.0', 'dir': '/etc/vim/fzf', 'do': './install --bin' }
-
 else
   Plug 'junegunn/fzf', { 'tag': '0.19.0', 'dir': '~/.fzf', 'do': './install --bin' }
 endif
 Plug 'junegunn/fzf.vim', {'commit': '65edb6ad99b51514aaf29afc25e35ce5f05281ba'}
-Plug 'kana/vim-textobj-user'
-Plug 'kchmck/vim-coffee-script'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'lmeijvogel/vim-yaml-helper'
-Plug 'markcornick/vim-bats'
-Plug 'mattn/emmet-vim'
-Plug 'mileszs/ack.vim'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'pgr0ss/vim-github-url'
-Plug 'prabirshrestha/async.vim'
+
+Plug 'kana/vim-textobj-user' " Prereq for vim-textobj-rubyblock
+Plug 'nelstrom/vim-textobj-rubyblock' " adds ar and ir for selecting around/in ruby blocks
+Plug 'kchmck/vim-coffee-script' " adds coffeescript syntax, indenting, compiling, etc
+Plug 'kien/rainbow_parentheses.vim' " Only enabled on Clojure - 2013
+Plug 'lmeijvogel/vim-yaml-helper' " Only enabled on YAML - 2017
+Plug 'markcornick/vim-bats' " Archived - maybe switch to bats.vim?
+Plug 'mattn/emmet-vim' " Global, consider let g:user_emmet_install_global = 0; autocmd FileType html,css EmmetInstall
+Plug 'mileszs/ack.vim' " :Ack
+Plug 'pangloss/vim-javascript' " Detection, syntax, indentation, hiding characters
+Plug 'mxw/vim-jsx' " deprecated, suggests replacing with MaxMEllon/vim-jsx-pretty; claims pangloss javascript broke this in early 2019
+Plug 'pgr0ss/vim-github-url' " \gh for file, repo or blame in GitHub
+
+Plug 'prabirshrestha/async.vim' " Prereq for following packages
 Plug 'prabirshrestha/asyncomplete.vim', { 'for': 'java' }
 Plug 'prabirshrestha/asyncomplete-lsp.vim', { 'for': 'java' }
 Plug 'prabirshrestha/vim-lsp'
+Plug 'wellle/tmux-complete.vim' " Requires async
+
 Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tfnico/vim-gradle'
-Plug 'tomtom/tcomment_vim'
+
+Plug 'preservim/nerdtree' " Help wanted oct 2021 https://github.com/preservim/nerdtree/issues/1280
+Plug 'tfnico/vim-gradle' " Detect gradle as groovy, add compile
+Plug 'tomtom/tcomment_vim' " \cc \uc
+
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
@@ -86,6 +91,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-abolish'
+
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby', { 'commit': '84565856e6965144e1c34105e03a7a7e87401acb' }
 Plug 'vim-scripts/Align'
@@ -96,11 +102,11 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'rodjek/vim-puppet'
 Plug 'tweekmonster/wstrip.vim', { 'commit': '02826534e60a492b58f9515f5b8225d86f74fbc8' }
 Plug 'leafgarland/typescript-vim'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'machakann/vim-swap'
-Plug 'wellle/targets.vim'
-Plug 'romainl/vim-qf'
-Plug 'wellle/tmux-complete.vim'
+
+Plug 'AndrewRadev/splitjoin.vim' " gS and gJ to split/join one-liners
+Plug 'machakann/vim-swap' " g<,gs,g>
+Plug 'wellle/targets.vim' " adds many descriptors for finding inside and outside different structures
+Plug 'romainl/vim-qf' " tool for the QuickFix list
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
