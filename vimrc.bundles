@@ -19,7 +19,7 @@ Plug 'google/vim-codefmt'
 Plug 'benmills/vim-commadown'
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', {'branch': 'main'}
 Plug 'chase/vim-ansible-yaml'
 Plug 'dewyze/vim-ruby-block-helpers'
 Plug 'derekwyatt/vim-scala'
@@ -105,10 +105,10 @@ Plug 'wellle/tmux-complete.vim'
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
 endif
-if has('nvim-0.5')
+if has('nvim-0.5.1')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/plenary.nvim' " Required for telescope
-  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'commit': '80cdb00b221f69348afc4fb4b701f51eb8dd3120' }
   Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
 endif
 if filereadable(expand("~/.vimrc.bundles.local"))
