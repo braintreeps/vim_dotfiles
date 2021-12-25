@@ -26,7 +26,7 @@ The file explorer - NERD Tree:
 ```
 \nt - open/close NERD Tree
 \nf - reveal the current file in NERD Tree
-\nr - refresh the contents of NERT Tree (can also use r or R to refresh a folder)
+\nr - refresh the contents of NERD Tree (can also use r or R to refresh a folder)
 ? - in NERD Tree to see all its shortcuts
 ```
 
