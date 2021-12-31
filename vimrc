@@ -594,6 +594,11 @@ endfunction
 
 call s:EnableShfmt()
 
+function! IsTrustworthyRepo()
+  let s:origin_url = system('git remote get-url origin')
+  return match(s:origin_url, 'git@github.braintreeps.com:') == 0
+endfunction
+
 "-------- Local Overrides
 ""If you have options you'd like to override locally for
 "some reason (don't want to store something in a
@@ -610,6 +615,17 @@ call s:EnableShfmt()
 ""
 if filereadable(expand("/etc/vim/vimrc.global"))
   source /etc/vim/vimrc.global
+endif
+
+"-------- Project Overrides
+"If you have options you'd like to override for a specific project, you can
+"create a '.vimrc` file in your project and it will be sourced here. Note that
+"for security reasons, only projects with a known remote will enable this
+"feature.
+""
+if filereadable('.vimrc') && IsTrustworthyRepo()
+  echomsg 'Project is trusted, sourcing ".vimrc"'
+  source .vimrc
 endif
 
 "-------- Local Overrides

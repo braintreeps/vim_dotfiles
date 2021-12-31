@@ -175,3 +175,8 @@ EOF
   command! -nargs=1 Symbols :lua lsp_workspace_symbols('<args>')
 
 endif
+
+if filereadable('.nvimrc') && IsTrustworthyRepo()
+  echomsg 'Project is trusted, sourcing ".nvimrc"'
+  source .nvimrc
+endif
