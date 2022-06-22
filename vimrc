@@ -431,7 +431,7 @@ map <silent> <LocalLeader>ws /\s\+$<CR>
 map <silent> <LocalLeader>pp :set paste!<CR>
 
 " vim-crosspaste map
-map <silent> <LocalLeader>qp :call CrossQuery()<CR>
+map <silent> <LocalLeader>qp :call CrossPaste()<CR>
 
 " YAML
 let g:vim_yaml_helper#auto_display_path = 1

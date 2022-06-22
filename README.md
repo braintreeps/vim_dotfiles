@@ -101,3 +101,10 @@ Searching
 ```
 \nh - :nohlsearch - stop highlighting the last search
 ```
+
+CrossPaste
+
+```
+\qp - Send current block of text (from blank line before to semicolon after)
+      prompting for text substitutions
+```
