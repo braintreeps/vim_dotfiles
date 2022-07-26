@@ -119,7 +119,7 @@ set statusline+=%P                        " percentage of file
 " ========= Plugin Options ========
 
 let g:AckAllFiles = 0
-let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
+let g:ack_default_options = ' --type-add ruby=.feature --ignore-dir=tmp 2>/dev/null'
 
 " Visual * search, modified from: https://git.io/vFGBB
 function! s:VSetSearch()
