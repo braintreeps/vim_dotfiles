@@ -65,10 +65,6 @@ set undolevels=1000 "maximum number of changes that can be undone
 " Color
 colorscheme vibrantink
 
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
 augroup Drakefile
   au!
   au BufNewFile,BufRead Drakefile,drakefile setlocal filetype=ruby
@@ -93,6 +89,8 @@ endif
 autocmd FileType tex setlocal textwidth=78
 
 autocmd FileType ruby runtime ruby_mappings.vim
+autocmd FileType cs runtime dotnet_mappings.vim
+autocmd FileType javascript runtime javascript_mappings.vim
 autocmd FileType python runtime python_mappings.vim
 autocmd FileType java runtime java_mappings.vim
 
@@ -101,15 +99,10 @@ autocmd FileType java runtime java_mappings.vim
 let g:wstrip_highlight = 0
 " strip trailing whitespace on save for any lines modified for the following
 " languages
-autocmd FileType ruby,java,python,c,cpp,sql,puppet let b:wstrip_auto = 1
+autocmd FileType ruby,java,python,c,cpp,sql,puppet,rust let b:wstrip_auto = 1
 
-if version >= 700
-    autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
-    autocmd FileType tex setlocal spell spelllang=en_us
-endif
-
-" Run terraform fmt on terraform files
-autocmd BufWritePre *.tf call terraform#fmt()
+autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+autocmd FileType tex,gitcommit setlocal spell spelllang=en_us
 
 " Status
 set laststatus=2
@@ -126,7 +119,7 @@ set statusline+=%P                        " percentage of file
 " ========= Plugin Options ========
 
 let g:AckAllFiles = 0
-let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
+let g:ack_default_options = ' --type-add ruby=.feature --ignore-dir=tmp 2>/dev/null'
 
 " Visual * search, modified from: https://git.io/vFGBB
 function! s:VSetSearch()
@@ -146,20 +139,14 @@ let g:ale_set_signs = 1                   " Enable signs showing in the gutter t
 let g:ale_linters_explicit = 1            " Only run linters that are explicitly listed below
 let g:ale_set_highlights = 0              " Disable highlighting as it interferes with readability and accessibility
 let g:ale_linters = {}
-let g:ale_linters['puppet'] = ['puppetlint']
-let g:ale_linters['elixir'] = ['mix']
-if filereadable(expand(".rubocop.yml"))
-  let g:ale_linters['ruby'] = ['rubocop']
-endif
-
 let g:ale_fixers = {}
-let g:ale_fixers['elixir'] = ['mix_format']
-let g:ale_fix_on_save = 1
 
-let black = system('grep -q black Pipfile')
-if v:shell_error == 0
-  let g:ale_fixers['python'] = ['black']
-  let g:ale_python_black_auto_pipenv = 1
+if filereadable(expand(".ale_fix_on_save"))
+  " add an empty file named .ale_fix_on_save
+  " in any repository to enable ale fixers
+  " otherwise set the below line in your vimrc_local
+  " without the conditional
+  let g:ale_fix_on_save = 1
 endif
 
 let html_use_css=1
@@ -222,9 +209,9 @@ let g:sexp_enable_insert_mode_mappings = 0
 
 let g:puppet_align_hashes = 0
 
-let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null                                                         
+let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null
                             \ | grep -v -E "tmp\/|.gitmodules|.git\/|deps\/|_build\/|node_modules\/|vendor\/"
-                            \ | sed "s|^\./||"'                                                                          
+                            \ | sed "s|^\./||"'
 let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
 let g:fzf_action = {
@@ -232,8 +219,6 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-let g:vim_markdown_folding_disabled = 1
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
@@ -255,27 +240,103 @@ if filereadable(expand('WORKSPACE'))
   let test#java#runner = 'bazeltest'
   let g:test#java#bazeltest#test_executable = './bazel test'
   let g:test#java#bazeltest#file_pattern = '.*/test/.*\.java$'
+elseif filereadable('settings.gradle') || executable('./gradlew')
+  let test#java#runner = 'gradletest'
+  if executable('./gradlew')
+    autocmd BufEnter *.java setlocal makeprg=./gradlew\ compileTestJava
+    autocmd BufEnter *.scala setlocal makeprg=./gradlew\ compileTestScala
+    autocmd BufEnter *.gradle setlocal makeprg=./gradlew\ assemble
+  else
+    autocmd BufEnter *.java setlocal makeprg=gradle\ compileTestJava
+    autocmd BufEnter *.scala setlocal makeprg=gradle\ compileTestScala
+    autocmd BufEnter *.gradle setlocal makeprg=gradle\ assemble
+  endif
 endif
 
-" Remove unused imports for Java
-autocmd FileType java autocmd BufWritePre * :UnusedImports
+let g:lsp_diagnostics_echo_cursor = 1
+let g:asyncomplete_auto_popup = 0
 
-" Language server for Java
-if executable('java-language-server')
-  autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'java-language-server',
-    \ 'cmd': {server_info->['java-language-server', '--quiet']},
-    \ 'whitelist': ['java'],
-    \ })
-  autocmd FileType java nmap <buffer> <C-e> <plug>(lsp-document-diagnostics)
-  autocmd FileType java nmap <buffer> <C-i> <plug>(lsp-hover)
-  autocmd FileType java nmap <buffer> <C-]> <plug>(lsp-definition)
-  autocmd FileType java nmap <buffer> gr <plug>(lsp-references)
-  autocmd FileType java nmap <buffer> go <plug>(lsp-document-symbol)
-  autocmd FileType java nmap <buffer> gS <plug>(lsp-workspace-symbol)
+function! s:setup_vim_lsp() abort
+  " Define settings and shortcuts for language server-enabled buffers.
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> <C-]> <Plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nmap <buffer> <F2> <Plug>(lsp-rename)
+    nmap <buffer> <Leader>rn <Plug>(lsp-rename)
+    nmap <buffer> <Leader>ca <Plug>(lsp-code-action)
+    nmap <buffer> <Leader>ds <Plug>(lsp-document-symbol)
+    nmap <buffer> <Leader>ws <Plug>(lsp-workspace-symbol)
+    nmap <buffer> <Leader>fd <Plug>(lsp-document-format)
+    vmap <buffer> <Leader>fd <Plug>(lsp-document-format)
+    " Additional mappings can be seen with :help vim-lsp-mappings
+  endfunction
 
-  let g:asyncomplete_smart_completion = 1
-  let g:lsp_insert_text_enabled = 1
+  augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+
+  if executable('gopls')
+    function! s:register_lsp_golang()
+      if exists('*lsp#register_command')
+        call lsp#register_server({
+              \ 'name': 'go-lang',
+              \ 'cmd': {server_info->['gopls']},
+              \ 'allowlist': ['go'],
+              \ })
+      else
+        echoerr 'Function lsp#register_command() not found, please update your vim-lsp installation'
+      endif
+    endfunction
+
+    autocmd User lsp_setup call s:register_lsp_golang()
+  endif
+
+  " Remove unused imports for Java
+  autocmd FileType java autocmd BufWritePre * :UnusedImports
+
+  " Language server for Java
+  if executable('java-language-server')
+    function! s:register_lsp_java()
+      if exists('*lsp#register_command')
+        function! s:eclipse_jdt_ls_java_apply_workspaceEdit(context)
+          let l:command = get(a:context, 'command', {})
+          call lsp#utils#workspace_edit#apply_workspace_edit(l:command['arguments'][0])
+        endfunction
+        call lsp#register_command('java.apply.workspaceEdit', function('s:eclipse_jdt_ls_java_apply_workspaceEdit'))
+      else
+        echoerr 'Function lsp#register_command() not found, please update your vim-lsp installation'
+      endif
+
+      let l:bundles = ['/home/admin/language-servers/java/extensions/debug.jar']
+      call extend(l:bundles, split(glob($HOME."/language-servers/java/extensions/test/extension/server/*.jar"), "\n"))
+      call lsp#register_server({
+            \ 'name': 'java',
+            \ 'cmd': {server_info->['java-language-server', '--heap-max', '8G']},
+            \ 'allowlist': ['java'],
+            \ 'initialization_options': {
+            \     'bundles': l:bundles
+            \ }
+            \ })
+    endfunction
+
+    autocmd User lsp_setup call s:register_lsp_java()
+  endif
+endfunction
+
+" See config/nvim/init.vim for Neovim-native LSP setup
+if !has('nvim-0.5')
+  call s:setup_vim_lsp()
 endif
 
 " ========= Shortcuts ========
@@ -293,6 +354,16 @@ map <silent> <leader>ai :ALEInfo<CR>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" Visually select GHE-flavored markdown table, then press tab to align it
+au FileType markdown vmap <tab> :EasyAlign*<Bar><Enter>
+" In normal mode, press bar (|) to select table and align it
+au FileType markdown map <Bar> vip :EasyAlign*<Bar><Enter>
 
 " FZF
 function! SmartFuzzy()
@@ -315,6 +386,15 @@ map <silent> <C-p> :Files<CR>
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'
 
+" vim-unimpaired
+
+nmap <silent> <C-k> <Plug>unimpairedMoveUp
+nmap <silent> <C-j> <Plug>unimpairedMoveDown
+nmap <silent> ]h :GitGutterNextHunk<CR>
+nmap <silent> [h :GitGutterPrevHunk<CR>
+xmap <silent> <C-k> <Plug>unimpairedMoveSelectionUp<esc>gv
+xmap <silent> <C-j> <Plug>unimpairedMoveSelectionDown<esc>gv
+
 " GitHubURL
 map <silent> <LocalLeader>gh :GitHubURL<CR>
 
@@ -323,10 +403,10 @@ map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
 
 " Vimux
-map <silent> <LocalLeader>vl :wa<CR> :VimuxRunLastCommand<CR>
-map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
-map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
-map <silent> <LocalLeader>vx :wa<CR> :VimuxClosePanes<CR>
+map <silent> <LocalLeader>vl :wa<CR>:VimuxRunLastCommand<CR>
+map <silent> <LocalLeader>vi :wa<CR>:VimuxInspectRunner<CR>
+map <silent> <LocalLeader>vk :wa<CR>:VimuxInterruptRunner<CR>
+map <silent> <LocalLeader>vx :wa<CR>:VimuxClosePanes<CR>
 map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
 vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
@@ -354,6 +434,9 @@ map <silent> <LocalLeader>ws /\s\+$<CR>
 
 map <silent> <LocalLeader>pp :set paste!<CR>
 
+" vim-crosspaste map
+map <silent> <LocalLeader>qp :call CrossPaste()<CR>
+
 " YAML
 let g:vim_yaml_helper#auto_display_path = 1
 
@@ -366,7 +449,7 @@ imap <C-L> <SPACE>=><SPACE>
 
 " ========= Functions ========
 
-command! SudoW w !sudo tee %
+command! SudoW w !sudo tee "%" > /dev/null
 
 " http://techspeak.plainlystated.com/2009/08/vim-tohtml-customization.html
 function! DivHtml(line1, line2)
@@ -396,12 +479,6 @@ function! Trim()
 endfunction
 command! -nargs=0 Trim :call Trim()
 nnoremap <silent> <Leader>cw :Trim<CR>
-
-function! StartInferiorSlimeServer()
-  let g:__InferiorSlimeRunning = 1
-  call VimuxRunCommand("inferior-slime")
-endfunction
-command! -nargs=0 StartInferiorSlimeServer :call StartInferiorSlimeServer()
 
 function! __Edge()
   colorscheme Tomorrow-Night
@@ -484,10 +561,45 @@ command! W w
 " https://vim.fandom.com/wiki/Reverse_order_of_lines
 command! -bar -range=% ReverseLines <line1>,<line2>g/^/m<line1>-1|nohl
 
-" Autoformat for bazel files
+" Initialize glaive if it's installed.
+if exists('*glaive#Install')
+  call glaive#Install()
+endif
+
+" Autoformat settings
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
 augroup END
+
+" Enable shfmt to automatically fix or format shell source code. This feature
+" can be disabled by touching .shfmt_disable in a repo's root directory.
+function s:EnableShfmt()
+  let l:cur_file_dir = expand('%:p:h')
+  if strlen(l:cur_file_dir) == 0
+    let l:git_dir = getcwd()
+  else
+    let l:git_dir = l:cur_file_dir
+  endif
+  let l:git_cmd = 'git -C ' . l:git_dir . ' rev-parse --show-toplevel 2>/dev/null'
+  let l:git_root = substitute(system(l:git_cmd), '\n\+$', '', '')
+  if v:shell_error == 0 && filereadable(l:git_root . '/.shfmt_disable')
+    augroup shells
+      autocmd!
+      autocmd FileType sh setlocal expandtab
+    augroup END
+    if has_key(g:ale_fixers, 'sh')
+      unlet g:ale_fixers.sh
+    endif
+  else
+    augroup shells
+      autocmd!
+      autocmd FileType sh setlocal noexpandtab
+    augroup END
+    let g:ale_fixers.sh = ['shfmt']
+  endif
+endfunction
+
+call s:EnableShfmt()
 
 "-------- Local Overrides
 ""If you have options you'd like to override locally for
@@ -496,7 +608,24 @@ augroup END
 "you can create a '.local_vimrc' file in your home directory
 ""(ie: ~/.vimrc_local) and it will be 'sourced' here and override
 "any settings in this file.
+
+"-------- System Overrides
+"If you have options you'd like to override globally for some reason (don't
+"want to store something in a publicly-accessible repository, machine-specific
+"settings, etc.), you can create a 'vimrc.global' file in /etc/vim and it will
+"be 'sourced' here and override any settings in this file.
 ""
+if filereadable(expand("/etc/vim/vimrc.global"))
+  source /etc/vim/vimrc.global
+endif
+
+"-------- Local Overrides
+"If you have options you'd like to override locally for some reason (don't
+"want to store something in a publicly-accessible repository, machine-specific
+"settings, etc.), you can create a '.local_vimrc' file in your home directory
+"(ie: ~/.vimrc_local) and it will be 'sourced' here and override any settings
+"in this file or the above global setting.
+"
 "NOTE: YOU MAY NOT WANT TO ADD ANY LINES BELOW THIS
 if filereadable(expand('~/.vimrc_local'))
   source ~/.vimrc_local

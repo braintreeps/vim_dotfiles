@@ -14,6 +14,11 @@ After cloning this project, run `~/.vim/activate.sh`.
 
 Uses `vim-plug` to manage bundles.
 
+We have included our `tmux.conf` as `tmux_example.conf`.  To use some of the
+vimmux :magic:, please link that  to `~/.tmux.conf`:
+
+`ln -s ~/.vim/tmux_example.conf ~/.tmux.conf`
+
 ## Default Shortcuts
 
 The file explorer - NERD Tree:
@@ -21,7 +26,7 @@ The file explorer - NERD Tree:
 ```
 \nt - open/close NERD Tree
 \nf - reveal the current file in NERD Tree
-\nr - refresh the contents of NERT Tree (can also use r or R to refresh a folder)
+\nr - refresh the contents of NERD Tree (can also use r or R to refresh a folder)
 ? - in NERD Tree to see all its shortcuts
 ```
 
@@ -48,7 +53,7 @@ Vimux (must be inside a tmux)
 ```
 \vp - prompt for a command to run in vimux
 \vs - send the block of code to the vimux window
-\rl - run the last command
+\vl - run the last vimux command
 ```
 
 Jump to definition - CTags
@@ -95,4 +100,11 @@ Searching
 
 ```
 \nh - :nohlsearch - stop highlighting the last search
+```
+
+CrossPaste
+
+```
+\qp - Send current block of text (from blank line before to semicolon after)
+      prompting for text substitutions
 ```
