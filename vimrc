@@ -578,19 +578,16 @@ function s:EnableShfmt()
   endif
   let l:git_cmd = 'git -C ' . l:git_dir . ' rev-parse --show-toplevel 2>/dev/null'
   let l:git_root = substitute(system(l:git_cmd), '\n\+$', '', '')
+  augroup shells
+    autocmd!
+    autocmd FileType sh setlocal expandtab
+  augroup END
   if v:shell_error == 0 && filereadable(l:git_root . '/.shfmt_disable')
-    augroup shells
-      autocmd!
-      autocmd FileType sh setlocal expandtab
-    augroup END
     if has_key(g:ale_fixers, 'sh')
       unlet g:ale_fixers.sh
     endif
   else
-    augroup shells
-      autocmd!
-      autocmd FileType sh setlocal noexpandtab
-    augroup END
+    let g:ale_sh_shfmt_options = "-i 2"
     let g:ale_fixers.sh = ['shfmt']
   endif
 endfunction
