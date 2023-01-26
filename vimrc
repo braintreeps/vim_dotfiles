@@ -432,6 +432,8 @@ map <silent> <LocalLeader>pp :set paste!<CR>
 
 " vim-crosspaste map
 map <silent> <LocalLeader>qp :call CrossPaste()<CR>
+map <silent> <LocalLeader>qb :call CrossPasteBlock()<CR>
+map <silent> <LocalLeader>qq :call CrossPasteQuick()<CR>
 
 " YAML
 let g:vim_yaml_helper#auto_display_path = 1
