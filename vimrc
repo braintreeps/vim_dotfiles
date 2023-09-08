@@ -230,6 +230,8 @@ let nose_test = system('grep -q "nose" requirements.txt')
 if v:shell_error == 0
   let test#python#runner = 'nose'
 endif
+let g:test#preserve_screen = 1 " dont clear the screen before running
+let g:test#echo_command = 0 " dont echo the command before running
 
 if filereadable(expand('WORKSPACE'))
   let test#custom_runners['java'] = ['bazeltest']
