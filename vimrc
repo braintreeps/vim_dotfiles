@@ -88,12 +88,6 @@ endif
 
 autocmd FileType tex setlocal textwidth=78
 
-autocmd FileType ruby runtime ruby_mappings.vim
-autocmd FileType cs runtime dotnet_mappings.vim
-autocmd FileType javascript runtime javascript_mappings.vim
-autocmd FileType python runtime python_mappings.vim
-autocmd FileType java runtime java_mappings.vim
-
 " wstrip plugin
 " don't highlight trailing whitespace
 let g:wstrip_highlight = 0
