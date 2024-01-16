@@ -212,7 +212,7 @@ let g:puppet_align_hashes = 0
 let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null
                             \ | grep -v -E "tmp\/|.gitmodules|.git\/|deps\/|_build\/|node_modules\/|vendor\/"
                             \ | sed "s|^\./||"'
-let $FZF_DEFAULT_OPTS = '--reverse'
+let $FZF_DEFAULT_OPTS = '--reverse -i'
 let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
