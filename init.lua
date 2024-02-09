@@ -64,8 +64,7 @@ require("lazy").setup({
   'kshenoy/vim-signature',
   {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build =
-    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+    build = 'make'
   },
   'kana/vim-textobj-user',
   'kchmck/vim-coffee-script',
