@@ -23,14 +23,21 @@ require("lazy").setup({
   'benmills/vim-commadown',
   'benmills/vimux',
   'bkad/CamelCaseMotion',
-  { 'cespare/vim-toml', branch = 'main' },
+  {
+    'cespare/vim-toml',
+    branch = 'main',
+  },
   'chase/vim-ansible-yaml',
   'dewyze/vim-ruby-block-helpers',
   'derekwyatt/vim-scala',
   'ekalinin/Dockerfile.vim',
   'elixir-lang/vim-elixir',
   'elubow/cql-vim',
-  { 'fatih/vim-go',     commit = '8c4db1c61432511a3aa55971dabb2171cbcba7b1', build = ':GoInstallBinaries' },
+  {
+    'fatih/vim-go',
+    commit = '8c4db1c61432511a3aa55971dabb2171cbcba7b1',
+    build = ':GoInstallBinaries',
+  },
   'Glench/Vim-Jinja2-Syntax',
   'godlygeek/tabular',
   'tpope/vim-markdown',
@@ -41,12 +48,25 @@ require("lazy").setup({
   'henrik/vim-indexed-search',
   'janko-m/vim-test',
   'jergason/scala.vim',
-  { 'jgdavey/vim-turbux',      branch = 'main' },
+  {
+    'jgdavey/vim-turbux',
+    branch = 'main'
+  },
   'junegunn/vim-easy-align',
-  { 'jlanzarotta/bufexplorer', commit = 'f3bbe12664b08038912faac586f6c0b5104325c3' },
-  { 'jparise/vim-graphql',     commit = '7ecedede603d16de5cca5ccefbde14d642b0d697' },
+  {
+    'jlanzarotta/bufexplorer',
+    commit = 'f3bbe12664b08038912faac586f6c0b5104325c3'
+  },
+  {
+    'jparise/vim-graphql',
+    commit = '7ecedede603d16de5cca5ccefbde14d642b0d697',
+  },
   'kshenoy/vim-signature',
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
   'kana/vim-textobj-user',
   'kchmck/vim-coffee-script',
   'kien/rainbow_parentheses.vim',
@@ -59,8 +79,14 @@ require("lazy").setup({
   'mxw/vim-jsx',
   'pgr0ss/vim-github-url',
   'prabirshrestha/async.vim',
-  { 'prabirshrestha/asyncomplete.vim',          ft = { 'java' } },
-  { 'prabirshrestha/asyncomplete-lsp.vim',      ft = { 'java' } },
+  {
+    'prabirshrestha/asyncomplete.vim',
+    ft = { 'java' },
+  },
+  {
+    'prabirshrestha/asyncomplete-lsp.vim',
+    ft = { 'java' },
+  },
   'prabirshrestha/vim-lsp',
   'rust-lang/rust.vim',
   'scrooloose/nerdtree',
@@ -68,12 +94,27 @@ require("lazy").setup({
   'tomtom/tcomment_vim',
   'tpope/vim-cucumber',
   'tpope/vim-endwise',
-  { 'tpope/vim-salve',                            ft = { 'clojure' } },
+  {
+    'tpope/vim-salve',
+    ft = { 'clojure' },
+  },
   'tpope/vim-projectionist',
-  { 'tpope/vim-dispatch',                         ft = { 'clojure' } },
-  { 'tpope/vim-fireplace',                        ft = { 'clojure' } },
-  { 'tpope/vim-sexp-mappings-for-regular-people', ft = { 'clojure' } },
-  { 'guns/vim-sexp',                              ft = { 'clojure' } },
+  {
+    'tpope/vim-dispatch',
+    ft = { 'clojure' }
+  },
+  {
+    'tpope/vim-fireplace',
+    ft = { 'clojure' }
+  },
+  {
+    'tpope/vim-sexp-mappings-for-regular-people'
+    ft = { 'clojure' }
+  },
+  {
+    'guns/vim-sexp',
+    ft = { 'clojure' }
+  },
   'tpope/vim-fugitive',
   'tpope/vim-ragtag',
   'tpope/vim-rake',
@@ -85,14 +126,20 @@ require("lazy").setup({
   'tpope/vim-vinegar',
   'tpope/vim-abolish',
   'uarun/vim-protobuf',
-  { 'vim-ruby/vim-ruby',       commit = '84565856e6965144e1c34105e03a7a7e87401acb' },
+  {
+    'vim-ruby/vim-ruby',
+    commit = '84565856e6965144e1c34105e03a7a7e87401acb',
+  },
   'vim-scripts/Align',
   'vim-scripts/VimClojure',
   'vim-scripts/groovyindent-unix',
   'vim-scripts/mako.vim',
   'vim-scripts/matchit.zip',
   'rodjek/vim-puppet',
-  { 'tweekmonster/wstrip.vim', commit = '02826534e60a492b58f9515f5b8225d86f74fbc8' },
+  {
+    'tweekmonster/wstrip.vim',
+    commit = '02826534e60a492b58f9515f5b8225d86f74fbc8',
+  },
   'leafgarland/typescript-vim',
   'AndrewRadev/splitjoin.vim',
   'machakann/vim-swap',
@@ -104,6 +151,13 @@ require("lazy").setup({
   'w0rp/ale',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim', -- Required for telescope
-  { 'nvim-telescope/telescope.nvim',   commit = '80cdb00b221f69348afc4fb4b701f51eb8dd3120' },
-  { 'nvim-treesitter/nvim-treesitter', branch = '0.5-compat',                              build = ':TSUpdate' },
+  {
+    'nvim-telescope/telescope.nvim',
+    commit = '80cdb00b221f69348afc4fb4b701f51eb8dd3120'
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    branch = '0.5-compat',
+    build = ':TSUpdate',
+  },
 })
