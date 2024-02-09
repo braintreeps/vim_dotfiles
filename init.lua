@@ -107,7 +107,7 @@ require("lazy").setup({
     ft = { 'clojure' }
   },
   {
-    'tpope/vim-sexp-mappings-for-regular-people'
+    'tpope/vim-sexp-mappings-for-regular-people',
     ft = { 'clojure' }
   },
   {
