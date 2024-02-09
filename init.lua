@@ -17,9 +17,12 @@ require("lazy").setup({
   'arthurxavierx/vim-caser',
   -- Show git diff via Vim sign column.
   'airblade/vim-gitgutter',
-  'google/vim-maktaba',
-  'google/vim-glaive',
-  'google/vim-codefmt',
+  -- vim-codefmt doesn't seem to work with Lazy
+  -- TODO can this be deprecated in favor of another formatting tool?
+--  {
+--	  'google/vim-codefmt',
+--	  dependencies = { 'google/vim-glaive', 'google/vim-maktaba' },
+--  },
   'benmills/vim-commadown',
   'benmills/vimux',
   'bkad/CamelCaseMotion',
@@ -28,7 +31,7 @@ require("lazy").setup({
     branch = 'main',
   },
   'chase/vim-ansible-yaml',
-  'dewyze/vim-ruby-block-helpers',
+  'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
   'derekwyatt/vim-scala',
   'ekalinin/Dockerfile.vim',
   'elixir-lang/vim-elixir',
@@ -73,7 +76,8 @@ require("lazy").setup({
   'markcornick/vim-bats',
   'mattn/emmet-vim',
   'mileszs/ack.vim',
-  'nelstrom/vim-textobj-rubyblock',
+  -- TODO this doesn't seem to be functional with Lazy. Can we replicate this with TS or another plugin?
+  -- 'nelstrom/vim-textobj-rubyblock',
   'pangloss/vim-javascript',
   'mxw/vim-jsx',
   'pgr0ss/vim-github-url',
