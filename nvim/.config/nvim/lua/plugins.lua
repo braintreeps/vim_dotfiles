@@ -57,10 +57,6 @@ require("lazy").setup({
   },
   'junegunn/vim-easy-align',
   {
-    'jlanzarotta/bufexplorer',
-    commit = 'f3bbe12664b08038912faac586f6c0b5104325c3'
-  },
-  {
     'jparise/vim-graphql',
     commit = '7ecedede603d16de5cca5ccefbde14d642b0d697',
   },
@@ -92,7 +88,13 @@ require("lazy").setup({
   },
   'prabirshrestha/vim-lsp',
   'rust-lang/rust.vim',
-  'scrooloose/nerdtree',
+  {
+    'scrooloose/nerdtree',
+    keys = {
+      { '<Leader>nt', '<cmd>NERDTree<CR>' },
+      { '<Leader>nf', '<cmd>NERDTreeFind<CR>' },
+    },
+  },
   'tfnico/vim-gradle',
   'tomtom/tcomment_vim',
   'tpope/vim-cucumber',
@@ -156,12 +158,83 @@ require("lazy").setup({
   'nvim-lua/plenary.nvim', -- Required for telescope
   {
     'nvim-telescope/telescope.nvim',
-    commit = '80cdb00b221f69348afc4fb4b701f51eb8dd3120'
+    commit = '80cdb00b221f69348afc4fb4b701f51eb8dd3120',
+    keys = {
+      { '<C-p>', '<cmd>Telescope find_files<CR>' },
+      { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
+      { '<Leader>be', '<cmd>Telescope buffers<CR>' },
+      { '<Leader>gw', '<cmd>Telescope grep_string<CR>' },
+    },
+    opts = {
+      pickers = {
+        live_grep = {
+          file_ignore_patterns = { 'node_modules', '.git' },
+          additional_args = function(_)
+            return { "--hidden" }
+          end,
+        },
+        find_files = {
+          file_ignore_patterns = { 'node_modules', '.git' },
+          hidden = true,
+        },
+      },
+    },
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = '0.5-compat',
     build = ':TSUpdate',
+    opts = {
+      highlight = {
+        enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+      ensure_installed = {
+        'bash',
+        'cmake',
+        'diff',
+        'dockerfile',
+        'git_config',
+        'git_rebase',
+        'gitcommit',
+        'gitignore',
+        'go',
+        'groovy',
+        'html',
+        'http',
+        'java',
+        'javascript',
+        'jq',
+        'json',
+        'kotlin',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'properties',
+        'proto',
+        'puppet',
+        'python',
+        'ruby',
+        'rust',
+        'sql',
+        'ssh_config',
+        'terraform',
+        'toml',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'yaml',
+      },
+    },
+    config = function(_, opts)
+      local config = require("nvim-treesitter.configs")
+      config.setup(opts)
+    end,
   },
   {
     "folke/tokyonight.nvim",

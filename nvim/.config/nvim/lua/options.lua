@@ -5,3 +5,5 @@ vim.opt.expandtab = true
 vim.opt.textwidth = 100
 vim.opt.signcolumn = "number"
 vim.opt.completeopt = "menuone,noselect"
+vim.opt.autoindent = true
+vim.opt.smartindent = true
