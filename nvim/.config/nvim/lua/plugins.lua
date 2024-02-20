@@ -88,6 +88,57 @@ require("lazy").setup({
   'prabirshrestha/vim-lsp',
   'rust-lang/rust.vim',
   {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-emoji',
+      'davidsierradz/cmp-conventionalcommits',
+    },
+    opts = function()
+      local cmp = require("cmp")
+      local defaults = require("cmp.config.default")()
+
+      cmp.setup.filetype("gitcommit", {
+        sources = cmp.config.sources({{ name = "conventionalcommits" }})
+      })
+
+      return {
+        sorting = defaults.sorting,
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<S-CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-CR>"] = function(fallback)
+            cmp.abort()
+            fallback()
+          end,
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "path" },
+        }, {
+            { name = "buffer" },
+            { name = "cmdline" },
+            { name = "emoji" },
+        })
+      }
+    end,
+  },
+  {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
     dependencies = {
@@ -328,4 +379,34 @@ require("lazy").setup({
       vim.cmd([[colorscheme tokyonight-moon]])
     end,
   },
+  {
+    "stevearc/conform.nvim",
+    -- we need to add a tool to manage these formatters/tools.
+    -- @see `mason-tools-installer`
+    -- https://github.com/stevearc/conform.nvim/issues/104
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        -- Customize or remove this keymap to your liking
+        "<leader>f",
+        function()
+          require("conform").format({ async = true, lsp_fallback = false })
+        end,
+        mode = "",
+        desc = "Format buffer",
+      },
+    },
+    opts = {
+      log_level = vim.log.levels.INFO,
+      formatters_by_ft = {
+        sql = { "sqlfluff" },
+      },
+      formatters = {
+        sqlfluff = {
+          args = { "fix", "--force", "-" },
+        },
+      },
+    },
+  }
 })
