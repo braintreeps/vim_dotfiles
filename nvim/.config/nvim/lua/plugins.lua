@@ -31,9 +31,8 @@ require("lazy").setup({
     branch = 'main',
   },
   'chase/vim-ansible-yaml',
-  'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
+  -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
   'derekwyatt/vim-scala',
-  'ekalinin/Dockerfile.vim',
   'elixir-lang/vim-elixir',
   'elubow/cql-vim',
   {
@@ -89,16 +88,76 @@ require("lazy").setup({
   'prabirshrestha/vim-lsp',
   'rust-lang/rust.vim',
   {
-    'scrooloose/nerdtree',
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+      {
+        's1n7ax/nvim-window-picker',
+        version = '2.*',
+        config = function()
+            require 'window-picker'.setup({
+                filter_rules = {
+                    include_current_win = false,
+                    autoselect_one = true,
+                    -- filter using buffer options
+                    bo = {
+                        -- if the file type is one of following, the window will be ignored
+                        filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+                        -- if the buffer type is one of following, the window will be ignored
+                        buftype = { 'terminal', "quickfix" },
+                    },
+            },
+        })
+        end,
+      },
+    },
     keys = {
-      { '<Leader>nt', '<cmd>NERDTree<CR>' },
-      { '<Leader>nf', '<cmd>NERDTreeFind<CR>' },
+      { '<Leader>nt', '<cmd>Neotree toggle<CR>' },
+      { '<Leader>nf', '<cmd>Neotree reveal<CR>' },
+    },
+    opts = {
+      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
+      open_files_do_not_replace_types = { 'terminal', 'qf', 'Outline' },
+      filesystem = {
+        bind_to_cwd = false,
+        follow_current_file = { enabled = true },
+        use_libuv_file_watcher = true,
+        filtered_items = {
+          hide_hidden = false,
+          hide_dotfiles = false,
+        },
+      },
+      window = {
+        mappings = {
+          ['<space>'] = 'none',
+          ['Y'] = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            vim.fn.setreg('+', path, 'c')
+          end,
+          ["S"] = "split_with_window_picker",
+          ["s"] = "vsplit_with_window_picker",
+        },
+      },
+      default_component_configs = {
+        indent = {
+          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          expander_collapsed = '',
+          expander_expanded = '',
+          expander_highlight = 'NeoTreeExpander',
+        },
+      },
     },
   },
   'tfnico/vim-gradle',
-  'tomtom/tcomment_vim',
+  {
+    'numToStr/Comment.nvim',
+    opts = {},
+  },
   'tpope/vim-cucumber',
-  'tpope/vim-endwise',
   {
     'tpope/vim-salve',
     ft = { 'clojure' },
@@ -131,10 +190,10 @@ require("lazy").setup({
   'tpope/vim-vinegar',
   'tpope/vim-abolish',
   'uarun/vim-protobuf',
-  {
-    'vim-ruby/vim-ruby',
-    commit = '84565856e6965144e1c34105e03a7a7e87401acb',
-  },
+  -- {
+  --   'vim-ruby/vim-ruby',
+  -- --  commit = '84565856e6965144e1c34105e03a7a7e87401acb',
+  -- },
   'vim-scripts/Align',
   'vim-scripts/VimClojure',
   'vim-scripts/groovyindent-unix',
@@ -158,7 +217,6 @@ require("lazy").setup({
   'nvim-lua/plenary.nvim', -- Required for telescope
   {
     'nvim-telescope/telescope.nvim',
-    commit = '80cdb00b221f69348afc4fb4b701f51eb8dd3120',
     keys = {
       { '<C-p>', '<cmd>Telescope find_files<CR>' },
       { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
@@ -183,15 +241,32 @@ require("lazy").setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'RRethy/nvim-treesitter-endwise',
+    },
     opts = {
       highlight = {
         enable = true,
+        additional_vim_regex_highlighting = { "ruby" },
       },
       incremental_selection = {
         enable = true,
       },
       indent = {
         enable = true,
+        disable = { "ruby" }, -- ruby indenting doesn't seem to be working yet
+      },
+      endwise = {
+        enable = true,
+      },
+      textobjects = {
+        move = {
+          enable = true,
+          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+        },
       },
       ensure_installed = {
         'bash',
@@ -204,6 +279,7 @@ require("lazy").setup({
         'gitignore',
         'go',
         'groovy',
+        'hcl',
         'html',
         'http',
         'java',
@@ -235,6 +311,14 @@ require("lazy").setup({
       local config = require("nvim-treesitter.configs")
       config.setup(opts)
     end,
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
+  {
+    "RRethy/vim-illuminate",
   },
   {
     "folke/tokyonight.nvim",
