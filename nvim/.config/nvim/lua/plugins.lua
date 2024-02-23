@@ -26,17 +26,23 @@ require("lazy").setup({
   'benmills/vim-commadown',
   'benmills/vimux',
   'bkad/CamelCaseMotion',
-  {
-    'cespare/vim-toml',
-    branch = 'main',
-  },
   'chase/vim-ansible-yaml',
   -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
-  'derekwyatt/vim-scala',
-  'elixir-lang/vim-elixir',
-  'elubow/cql-vim',
+  {
+    'derekwyatt/vim-scala',
+    ft = { "scala" },
+  },
+  {
+    'elixir-lang/vim-elixir',
+    ft = { "elixir" },
+  },
+  {
+    'elubow/cql-vim',
+    lazy = true,
+  },
   {
     'fatih/vim-go',
+    ft = { "go" },
     commit = '8c4db1c61432511a3aa55971dabb2171cbcba7b1',
     build = ':GoInstallBinaries',
   },
@@ -273,6 +279,8 @@ require("lazy").setup({
       { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
       { '<Leader>be', '<cmd>Telescope buffers<CR>' },
       { '<Leader>gw', '<cmd>Telescope grep_string<CR>' },
+      { '<Leader>fh', '<cmd>Telescope man_pages<CR>' },
+      { '<Leader>fm', '<cmd>Telescope keymaps<CR>' },
     },
     opts = {
       pickers = {
@@ -408,5 +416,25 @@ require("lazy").setup({
         },
       },
     },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      options = {
+        theme = 'tokyonight',
+      },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 500 -- milliseconds
+    end,
+    opts = {},
   }
 })

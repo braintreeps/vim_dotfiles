@@ -20,6 +20,7 @@
   "emmet-vim": { "branch": "master", "commit": "def5d57a1ae5afb1b96ebe83c4652d1c03640f4d" },
   "groovyindent-unix": { "branch": "master", "commit": "d6fca576272cc13fd747ff47a82b75b9e9586866" },
   "lazy.nvim": { "branch": "main", "commit": "aedcd79811d491b60d0a6577a9c1701063c2a609" },
+  "lualine.nvim": { "branch": "master", "commit": "7d131a8d3ba5016229e8a1d08bf8782acea98852" },
   "mako.vim": { "branch": "master", "commit": "603bf2dd47a9a53a218660308d7df16598c667f4" },
   "matchit.zip": { "branch": "master", "commit": "ced6c409c9beeb0b4142d21906606bd194411d1d" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "f3941c57ec85d7bdb44fa53fd858fd80f159018f" },
@@ -97,5 +98,6 @@
   "vim-vinegar": { "branch": "master", "commit": "bb1bcddf43cfebe05eb565a84ab069b357d0b3d6" },
   "vim-yaml-helper": { "branch": "master", "commit": "403ff568e336def133b55d25a3f9517f406054cc" },
   "vimux": { "branch": "master", "commit": "f7c41607d9246ec4b6cc28587cce84d75d106e3e" },
+  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "wstrip.vim": { "branch": "master", "commit": "02826534e60a492b58f9515f5b8225d86f74fbc8" }
 }
