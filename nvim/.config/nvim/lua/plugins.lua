@@ -96,25 +96,57 @@ require("lazy").setup({
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
+      {
+        "L3MON4D3/LuaSnip",
+        build = (function()
+          -- Build Step is needed for regex support in snippets
+          if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+            return
+          end
+          return "make install_jsregexp"
+        end)(),
+        dependencies = {
+          {
+            "rafamadriz/friendly-snippets",
+            config = function()
+              require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+          },
+        },
+      },
+      "saadparwaiz1/cmp_luasnip",
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
+      -- 'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
       'davidsierradz/cmp-conventionalcommits',
+      'onsails/lspkind-nvim',
     },
-    opts = function()
+    config = function()
       local cmp = require("cmp")
+      local lspkind = require("lspkind")
+      local luasnip = require("luasnip")
+      luasnip.config.setup({})
+
       local defaults = require("cmp.config.default")()
 
       cmp.setup.filetype("gitcommit", {
         sources = cmp.config.sources({{ name = "conventionalcommits" }})
       })
 
-      return {
+      cmp.setup({
         sorting = defaults.sorting,
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         completion = {
           completeopt = "menu,menuone,noinsert",
+        },
+        formatting = {
+          format = lspkind.cmp_format({ mode = "symbol_text" })
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -132,16 +164,29 @@ require("lazy").setup({
             cmp.abort()
             fallback()
           end,
+          -- <c-l> will move you to the right of each of the expansion locations
+          -- <c-h> will move you backwards
+          ["<C-l>"] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            end
+          end, { "i", "s" }),
+          ["<C-h>"] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = "luasnip" },
           { name = "path" },
         }, {
-            { name = "buffer" },
+        --    { name = "buffer" },
             { name = "cmdline" },
             { name = "emoji" },
         })
-      }
+      })
     end,
   },
   {
@@ -383,7 +428,7 @@ require("lazy").setup({
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function(_, opts)
+    config = function(_, _)
       vim.cmd([[colorscheme tokyonight-moon]])
     end,
   },
