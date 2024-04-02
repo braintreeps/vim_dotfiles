@@ -24,7 +24,6 @@ require("lazy").setup({
 --	  dependencies = { 'google/vim-glaive', 'google/vim-maktaba' },
 --  },
   'benmills/vim-commadown',
-  'benmills/vimux',
   'bkad/CamelCaseMotion',
   'chase/vim-ansible-yaml',
   -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
@@ -54,7 +53,26 @@ require("lazy").setup({
   'guns/vim-clojure-static',
   'hashivim/vim-terraform',
   'henrik/vim-indexed-search',
-  'janko-m/vim-test',
+  {
+    'janko-m/vim-test',
+    dependencies = {
+      {
+        'benmills/vimux',
+        keys = {
+          { "<LocalLeader>rx", "<cmd>wa<CR>:VimuxCloseRunner<CR>",   ft = "ruby" },
+          { "<LocalLeader>ri", "<cmd>wa<CR>:VimuxInspectRunner<CR>", ft = "ruby" },
+        },
+        init = function()
+          vim.g["test#strategy"] = "vimux"
+        end,
+      },
+    },
+    keys = {
+      { "<LocalLeader>rb", "<cmd>wa<CR>:TestFile<CR>",    ft = "ruby" },
+      { "<LocalLeader>rf", "<cmd>wa<CR>:TestNearest<CR>", ft = "ruby" },
+      { "<LocalLeader>rl", "<cmd>wa<CR>:TestLast<CR>",    ft = "ruby" },
+    },
+  },
   'jergason/scala.vim',
   {
     'jgdavey/vim-turbux',
@@ -283,7 +301,27 @@ require("lazy").setup({
   },
   'tpope/vim-fugitive',
   'tpope/vim-ragtag',
-  'tpope/vim-rake',
+  {
+    'tpope/vim-rake',
+    keys = {
+      { "<LocalLeader>AA", "<cmd>A<CR>",  ft = "ruby" },
+      { "<LocalLeader>AV", "<cmd>AV<CR>", ft = "ruby" },
+      { "<LocalLeader>AS", "<cmd>AS<CR>", ft = "ruby" },
+    },
+    init = function()
+      vim.g["rails_projections"] = {
+        ["script/*.rb"] = {
+          test = "spec/script/{}_spec.rb",
+        },
+        ["spec/script/*_spec.rb"] = {
+          alternate = "script/{}.rb"
+        },
+        ["app/lib/*.rb"] = {
+          test = "spec/lib/{}_spec.rb"
+        }
+      }
+    end,
+  },
   'tpope/vim-rails',
   'tpope/vim-repeat',
   'tpope/vim-rhubarb',
