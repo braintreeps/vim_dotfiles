@@ -219,6 +219,8 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
+let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 1.0 } } " Increase default size of search window, 1.0 = 100%, 0.1 = 10%
+let g:fzf_preview_window = ['down:50%', 'ctrl-_'] " 1st element is preview position size, 2nd element is shortcut to toggle preview
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_trailing_whitespace_error = 0
