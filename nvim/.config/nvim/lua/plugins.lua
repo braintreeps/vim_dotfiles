@@ -59,8 +59,8 @@ require("lazy").setup({
       {
         'benmills/vimux',
         keys = {
-          { "<LocalLeader>rx", "<cmd>wa<CR>:VimuxCloseRunner<CR>",   ft = "ruby" },
-          { "<LocalLeader>ri", "<cmd>wa<CR>:VimuxInspectRunner<CR>", ft = "ruby" },
+          { "<Leader>rx", "<cmd>wa<CR> <cmd>VimuxCloseRunner<CR>" },
+          { "<Leader>ri", "<cmd>wa<CR> <cmd>VimuxInspectRunner<CR>" },
         },
         init = function()
           vim.g["test#strategy"] = "vimux"
@@ -68,9 +68,9 @@ require("lazy").setup({
       },
     },
     keys = {
-      { "<LocalLeader>rb", "<cmd>wa<CR>:TestFile<CR>",    ft = "ruby" },
-      { "<LocalLeader>rf", "<cmd>wa<CR>:TestNearest<CR>", ft = "ruby" },
-      { "<LocalLeader>rl", "<cmd>wa<CR>:TestLast<CR>",    ft = "ruby" },
+      { "<Leader>rb", "<cmd>wa<CR> <cmd>TestFile<CR>" },
+      { "<Leader>rf", "<cmd>wa<CR> <cmd>TestNearest<CR>" },
+      { "<Leader>rl", "<cmd>wa<CR> <cmd>TestLast<CR>" },
     },
   },
   'jergason/scala.vim',
@@ -150,7 +150,7 @@ require("lazy").setup({
       local defaults = require("cmp.config.default")()
 
       cmp.setup.filetype("gitcommit", {
-        sources = cmp.config.sources({{ name = "conventionalcommits" }})
+        sources = cmp.config.sources({ { name = "conventionalcommits" } })
       })
 
       cmp.setup({
@@ -197,10 +197,9 @@ require("lazy").setup({
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "luasnip" },
+          -- { name = "luasnip" },
           { name = "path" },
         }, {
-        --    { name = "buffer" },
             { name = "cmdline" },
             { name = "emoji" },
         })
@@ -304,9 +303,9 @@ require("lazy").setup({
   {
     'tpope/vim-rake',
     keys = {
-      { "<LocalLeader>AA", "<cmd>A<CR>",  ft = "ruby" },
-      { "<LocalLeader>AV", "<cmd>AV<CR>", ft = "ruby" },
-      { "<LocalLeader>AS", "<cmd>AS<CR>", ft = "ruby" },
+      { "<Leader>AA", "<cmd>A<CR>" },
+      { "<Leader>AV", "<cmd>AV<CR>" },
+      { "<Leader>AS", "<cmd>AS<CR>" },
     },
     init = function()
       vim.g["rails_projections"] = {
@@ -318,7 +317,10 @@ require("lazy").setup({
         },
         ["app/lib/*.rb"] = {
           test = "spec/lib/{}_spec.rb"
-        }
+        },
+        ["lib/tasks/*.rake"] = {
+          test = "spec/lib/tasks/{}_rake_spec.rb",
+        },
       }
     end,
   },
@@ -505,11 +507,22 @@ require("lazy").setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {
-      options = {
-        theme = 'tokyonight',
-      },
-    },
+    opts = function()
+      local conf = require("lualine").get_config()
+
+      local new_conf = vim.tbl_deep_extend("force", conf, {
+        sections = {
+          lualine_c = {
+            {
+              "filename",
+              path = 1,
+            },
+          },
+        },
+      })
+
+      return new_conf
+    end,
   },
   {
     "folke/which-key.nvim",
@@ -519,5 +532,5 @@ require("lazy").setup({
       vim.o.timeoutlen = 500 -- milliseconds
     end,
     opts = {},
-  }
+  },
 })
