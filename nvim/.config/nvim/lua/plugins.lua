@@ -61,6 +61,8 @@ require("lazy").setup({
         keys = {
           { "<Leader>rx", "<cmd>wa<CR> <cmd>VimuxCloseRunner<CR>" },
           { "<Leader>ri", "<cmd>wa<CR> <cmd>VimuxInspectRunner<CR>" },
+          { "<Leader>vs", '"vy :call VimuxRunCommand(@v)<CR>', mode = "v" },
+          { "<Leader>vs", 'vip "vy :call VimuxRunCommand(@v)<CR>' },
         },
         init = function()
           vim.g["test#strategy"] = "vimux"
