@@ -45,13 +45,13 @@ require("lazy").setup({
     commit = '8c4db1c61432511a3aa55971dabb2171cbcba7b1',
     build = ':GoInstallBinaries',
   },
-  'Glench/Vim-Jinja2-Syntax',
+  { 'Glench/Vim-Jinja2-Syntax', ft = { "jinja" } },
   'godlygeek/tabular',
-  'tpope/vim-markdown',
-  'google/vim-jsonnet',
-  'guns/vim-clojure-highlight',
-  'guns/vim-clojure-static',
-  'hashivim/vim-terraform',
+  { 'tpope/vim-markdown', ft = { "markdown" } },
+  { 'google/vim-jsonnet', ft = { "jsonnet" } },
+  { 'guns/vim-clojure-highlight', ft = { "clojure" } },
+  { 'guns/vim-clojure-static', ft = { "clojure" } } ,
+  { 'hashivim/vim-terraform', ft = { "terraform" } },
   'henrik/vim-indexed-search',
   {
     'janko-m/vim-test',
@@ -75,7 +75,7 @@ require("lazy").setup({
       { "<Leader>rl", "<cmd>wa<CR> <cmd>TestLast<CR>" },
     },
   },
-  'jergason/scala.vim',
+  { 'jergason/scala.vim', ft = { "scala" } },
   {
     'jgdavey/vim-turbux',
     branch = 'main'
@@ -91,16 +91,16 @@ require("lazy").setup({
     build = 'make'
   },
   'kana/vim-textobj-user',
-  'kchmck/vim-coffee-script',
+  { 'kchmck/vim-coffee-script', ft = { "coffee" } },
   'kien/rainbow_parentheses.vim',
-  'lmeijvogel/vim-yaml-helper',
+  { 'lmeijvogel/vim-yaml-helper', ft = { "yaml" } },
   'markcornick/vim-bats',
   'mattn/emmet-vim',
   'mileszs/ack.vim',
   -- TODO this doesn't seem to be functional with Lazy. Can we replicate this with TS or another plugin?
   -- 'nelstrom/vim-textobj-rubyblock',
-  'pangloss/vim-javascript',
-  'mxw/vim-jsx',
+  { 'pangloss/vim-javascript', ft = { "javascript", "jsx" } },
+  { 'mxw/vim-jsx', ft = { "jsx" } },
   'pgr0ss/vim-github-url',
   'prabirshrestha/async.vim',
   {
@@ -111,8 +111,8 @@ require("lazy").setup({
     'prabirshrestha/asyncomplete-lsp.vim',
     ft = { 'java' },
   },
-  'prabirshrestha/vim-lsp',
-  'rust-lang/rust.vim',
+  { 'prabirshrestha/vim-lsp', lazy = true },
+  { 'rust-lang/rust.vim', ft = { "rust" } },
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -134,11 +134,8 @@ require("lazy").setup({
           },
         },
       },
-      "saadparwaiz1/cmp_luasnip",
       'hrsh7th/cmp-nvim-lsp',
-      -- 'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
       'davidsierradz/cmp-conventionalcommits',
       'onsails/lspkind-nvim',
@@ -146,9 +143,6 @@ require("lazy").setup({
     config = function()
       local cmp = require("cmp")
       local lspkind = require("lspkind")
-      local luasnip = require("luasnip")
-      luasnip.config.setup({})
-
       local defaults = require("cmp.config.default")()
 
       cmp.setup.filetype("gitcommit", {
@@ -157,11 +151,6 @@ require("lazy").setup({
 
       cmp.setup({
         sorting = defaults.sorting,
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -184,24 +173,11 @@ require("lazy").setup({
             cmp.abort()
             fallback()
           end,
-          -- <c-l> will move you to the right of each of the expansion locations
-          -- <c-h> will move you backwards
-          ["<C-l>"] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { "i", "s" }),
-          ["<C-h>"] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "path" },
         }, {
-            -- { name = "cmdline" },
             { name = "emoji" },
         })
       })
@@ -277,7 +253,7 @@ require("lazy").setup({
     'numToStr/Comment.nvim',
     opts = {},
   },
-  'tpope/vim-cucumber',
+  { 'tpope/vim-cucumber', ft = { "ruby" } },
   {
     'tpope/vim-salve',
     ft = { 'clojure' },
@@ -325,41 +301,36 @@ require("lazy").setup({
       }
     end,
   },
-  'tpope/vim-rails',
+  { 'tpope/vim-rails', ft = { "ruby" } },
   'tpope/vim-repeat',
   'tpope/vim-rhubarb',
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
   'tpope/vim-vinegar',
   'tpope/vim-abolish',
-  'uarun/vim-protobuf',
-  -- {
-  --   'vim-ruby/vim-ruby',
-  -- --  commit = '84565856e6965144e1c34105e03a7a7e87401acb',
-  -- },
-  'vim-scripts/Align',
-  'vim-scripts/VimClojure',
-  'vim-scripts/groovyindent-unix',
-  'vim-scripts/mako.vim',
-  'vim-scripts/matchit.zip',
-  'rodjek/vim-puppet',
+  { 'vim-scripts/Align', lazy = true },
+  { 'vim-scripts/VimClojure', lazy = true },
+  { 'vim-scripts/groovyindent-unix', lazy = true },
+  { 'vim-scripts/mako.vim', lazy = true },
+  { 'vim-scripts/matchit.zip', lazy = true },
+  { 'rodjek/vim-puppet', ft = { "puppet" } },
   {
     'tweekmonster/wstrip.vim',
     commit = '02826534e60a492b58f9515f5b8225d86f74fbc8',
   },
-  'leafgarland/typescript-vim',
+  { 'leafgarland/typescript-vim', ft = { "typescript" } },
   'AndrewRadev/splitjoin.vim',
   'machakann/vim-swap',
   'wellle/targets.vim',
   'romainl/vim-qf',
   'wellle/tmux-complete.vim',
   'samguyjones/vim-crosspaste',
-
-  'w0rp/ale',
   'neovim/nvim-lspconfig',
-  'nvim-lua/plenary.nvim', -- Required for telescope
   {
     'nvim-telescope/telescope.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
     keys = {
       { '<C-p>', '<cmd>Telescope find_files<CR>' },
       { '<Leader>fg', '<cmd>Telescope live_grep<CR>' },
@@ -385,7 +356,7 @@ require("lazy").setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    build = ':TSUpdateSync',
     dependencies = {
       'RRethy/nvim-treesitter-endwise',
     },
