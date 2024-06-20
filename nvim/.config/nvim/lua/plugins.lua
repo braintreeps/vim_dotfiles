@@ -11,10 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local LazyFileEvents = { "BufReadPost", "BufNewFile", "BufWritePre" }
+
 require("lazy").setup({
-  'akhaku/vim-java-unused-imports',
-  'aklt/plantuml-syntax',
-  'arthurxavierx/vim-caser',
+  { 'akhaku/vim-java-unused-imports', ft = { "java" } },
+  { 'aklt/plantuml-syntax', ft = { "plantuml" } },
+  { 'arthurxavierx/vim-caser', event = { "InsertEnter" } },
   -- Show git diff via Vim sign column.
   'airblade/vim-gitgutter',
   -- vim-codefmt doesn't seem to work with Lazy
@@ -25,7 +27,7 @@ require("lazy").setup({
 --  },
   'benmills/vim-commadown',
   'bkad/CamelCaseMotion',
-  'chase/vim-ansible-yaml',
+  { 'chase/vim-ansible-yaml', ft = { "ansible" } },
   -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
   {
     'derekwyatt/vim-scala',
@@ -58,6 +60,9 @@ require("lazy").setup({
     dependencies = {
       {
         'benmills/vimux',
+        dependencies = {
+          'jgdavey/vim-turbux',
+        },
         keys = {
           { "<Leader>rx", "<cmd>wa<CR> <cmd>VimuxCloseRunner<CR>" },
           { "<Leader>ri", "<cmd>wa<CR> <cmd>VimuxInspectRunner<CR>" },
@@ -76,33 +81,28 @@ require("lazy").setup({
     },
   },
   { 'jergason/scala.vim', ft = { "scala" } },
-  {
-    'jgdavey/vim-turbux',
-    branch = 'main'
-  },
+
   'junegunn/vim-easy-align',
   {
-    'jparise/vim-graphql',
-    commit = '7ecedede603d16de5cca5ccefbde14d642b0d697',
+    'jparise/vim-graphql', -- TODO can we deprecate this in favor of Treesitter and an LSP?
+    ft = { "graphql" },
   },
-  'kshenoy/vim-signature',
   {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make'
+    "kshenoy/vim-signature",
+    event = "BufReadPost",
   },
   'kana/vim-textobj-user',
   { 'kchmck/vim-coffee-script', ft = { "coffee" } },
-  'kien/rainbow_parentheses.vim',
   { 'lmeijvogel/vim-yaml-helper', ft = { "yaml" } },
-  'markcornick/vim-bats',
-  'mattn/emmet-vim',
-  'mileszs/ack.vim',
+  { 'markcornick/vim-bats', ft = { "bash" } },
+  { 'mattn/emmet-vim', lazy = true },
+  { 'mileszs/ack.vim', lazy = true },
   -- TODO this doesn't seem to be functional with Lazy. Can we replicate this with TS or another plugin?
   -- 'nelstrom/vim-textobj-rubyblock',
   { 'pangloss/vim-javascript', ft = { "javascript", "jsx" } },
   { 'mxw/vim-jsx', ft = { "jsx" } },
   'pgr0ss/vim-github-url',
-  'prabirshrestha/async.vim',
+  { 'prabirshrestha/async.vim', lazy = true },
   {
     'prabirshrestha/asyncomplete.vim',
     ft = { 'java' },
@@ -115,6 +115,7 @@ require("lazy").setup({
   { 'rust-lang/rust.vim', ft = { "rust" } },
   {
     'hrsh7th/nvim-cmp',
+    event = { "InsertEnter" },
     dependencies = {
       {
         "L3MON4D3/LuaSnip",
@@ -252,6 +253,7 @@ require("lazy").setup({
   {
     'numToStr/Comment.nvim',
     opts = {},
+    event = LazyFileEvents,
   },
   { 'tpope/vim-cucumber', ft = { "ruby" } },
   {
@@ -314,10 +316,7 @@ require("lazy").setup({
   { 'vim-scripts/mako.vim', lazy = true },
   { 'vim-scripts/matchit.zip', lazy = true },
   { 'rodjek/vim-puppet', ft = { "puppet" } },
-  {
-    'tweekmonster/wstrip.vim',
-    commit = '02826534e60a492b58f9515f5b8225d86f74fbc8',
-  },
+  { 'tweekmonster/wstrip.vim', event = { "BufWritePre" } },
   { 'leafgarland/typescript-vim', ft = { "typescript" } },
   'AndrewRadev/splitjoin.vim',
   'machakann/vim-swap',
@@ -325,11 +324,18 @@ require("lazy").setup({
   'romainl/vim-qf',
   'wellle/tmux-complete.vim',
   'samguyjones/vim-crosspaste',
-  'neovim/nvim-lspconfig',
+  {
+    'neovim/nvim-lspconfig',
+    event = LazyFileEvents,
+  },
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make'
+      },
     },
     keys = {
       { '<C-p>', '<cmd>Telescope find_files<CR>' },
@@ -357,8 +363,10 @@ require("lazy").setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdateSync',
+    event = { "BufNewFile", "BufReadPost" },
     dependencies = {
-      'RRethy/nvim-treesitter-endwise',
+      "RRethy/nvim-treesitter-endwise",
+      "RRethy/vim-illuminate",
     },
     opts = {
       highlight = {
@@ -432,9 +440,6 @@ require("lazy").setup({
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
-  },
-  {
-    "RRethy/vim-illuminate",
   },
   {
     "folke/tokyonight.nvim",
