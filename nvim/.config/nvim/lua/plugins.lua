@@ -14,43 +14,22 @@ vim.opt.rtp:prepend(lazypath)
 local LazyFileEvents = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 require("lazy").setup({
-  { 'akhaku/vim-java-unused-imports', ft = { "java" } },
-  { 'aklt/plantuml-syntax', ft = { "plantuml" } },
-  { 'arthurxavierx/vim-caser', event = { "InsertEnter" } },
-  -- Show git diff via Vim sign column.
-  { 'airblade/vim-gitgutter', event = LazyFileEvents },
+  { 'arthurxavierx/vim-caser', event = LazyFileEvents }, -- Change word casing with vim motion
+  {
+    "lewis6991/gitsigns.nvim", -- Show diffs and more!
+    event = LazyFileEvents,
+    opts = {},
+    keys = {
+      { "<Leader>bl", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "[b]lame [l]ine" },
+    },
+  },
   -- vim-codefmt doesn't seem to work with Lazy
   -- TODO can this be deprecated in favor of another formatting tool?
 --  {
 --	  'google/vim-codefmt',
 --	  dependencies = { 'google/vim-glaive', 'google/vim-maktaba' },
 --  },
-  { 'chase/vim-ansible-yaml', ft = { "ansible" } },
   -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
-  {
-    'derekwyatt/vim-scala',
-    ft = { "scala" },
-  },
-  {
-    'elixir-lang/vim-elixir',
-    ft = { "elixir" },
-  },
-  {
-    'elubow/cql-vim',
-    lazy = true,
-  },
-  {
-    'fatih/vim-go',
-    ft = { "go" },
-    commit = '8c4db1c61432511a3aa55971dabb2171cbcba7b1',
-    build = ':GoInstallBinaries',
-  },
-  { 'Glench/Vim-Jinja2-Syntax', ft = { "jinja" } },
-  { 'tpope/vim-markdown', ft = { "markdown" } },
-  { 'google/vim-jsonnet', ft = { "jsonnet" } },
-  { 'guns/vim-clojure-highlight', ft = { "clojure" } },
-  { 'guns/vim-clojure-static', ft = { "clojure" } } ,
-  { 'hashivim/vim-terraform', ft = { "terraform" } },
   {
     'janko-m/vim-test',
     dependencies = {
@@ -77,38 +56,12 @@ require("lazy").setup({
       { "<Leader>rl", "<cmd>wa<CR> <cmd>TestLast<CR>" },
     },
   },
-  { 'jergason/scala.vim', ft = { "scala" } },
-  { 'junegunn/vim-easy-align', event = LazyFileEvents },
-  {
-    'jparise/vim-graphql', -- TODO can we deprecate this in favor of Treesitter and an LSP?
-    ft = { "graphql" },
-  },
-  {
-    "kshenoy/vim-signature",
-    event = "BufReadPost",
-  },
-  'kana/vim-textobj-user',
-  { 'kchmck/vim-coffee-script', ft = { "coffee" } },
-  { 'lmeijvogel/vim-yaml-helper', ft = { "yaml" } },
-  { 'markcornick/vim-bats', ft = { "bash" } },
-  { 'mattn/emmet-vim', lazy = true },
-  { 'mileszs/ack.vim', lazy = true },
-  -- TODO this doesn't seem to be functional with Lazy. Can we replicate this with TS or another plugin?
-  -- 'nelstrom/vim-textobj-rubyblock',
-  { 'pangloss/vim-javascript', ft = { "javascript", "jsx" } },
-  { 'mxw/vim-jsx', ft = { "jsx" } },
+  { 'junegunn/vim-easy-align', event = LazyFileEvents }, -- Used to align text; this should be driven by an LSP
+  { "kshenoy/vim-signature", event = LazyFileEvents }, -- Used to add/remove/go-to marks
+  { 'kana/vim-textobj-user', lazy = true }, -- used to create custom text objects; TODO mark for deletion
+  { 'mattn/emmet-vim', lazy = true }, -- used for a expanding abbreviations/adding tags to HTML; TODO mark for deletion
+  { 'mileszs/ack.vim', lazy = true }, -- used for searching. We use fzf + rg; TODO mark for deletion
   { 'pgr0ss/vim-github-url', event = LazyFileEvents },
-  { 'prabirshrestha/async.vim', lazy = true },
-  {
-    'prabirshrestha/asyncomplete.vim',
-    ft = { 'java' },
-  },
-  {
-    'prabirshrestha/asyncomplete-lsp.vim',
-    ft = { 'java' },
-  },
-  { 'prabirshrestha/vim-lsp', lazy = true },
-  { 'rust-lang/rust.vim', ft = { "rust" } },
   {
     'hrsh7th/nvim-cmp',
     event = { "InsertEnter" },
@@ -250,31 +203,11 @@ require("lazy").setup({
   { 'tfnico/vim-gradle', event = LazyFileEvents },
   {
     'numToStr/Comment.nvim',
-    opts = {},
     event = LazyFileEvents,
+    opts = {},
   },
-  { 'tpope/vim-cucumber', ft = { "ruby" } },
-  {
-    'tpope/vim-salve',
-    ft = { 'clojure' },
-  },
+
   'tpope/vim-projectionist',
-  {
-    'tpope/vim-dispatch',
-    ft = { 'clojure' }
-  },
-  {
-    'tpope/vim-fireplace',
-    ft = { 'clojure' }
-  },
-  {
-    'tpope/vim-sexp-mappings-for-regular-people',
-    ft = { 'clojure' }
-  },
-  {
-    'guns/vim-sexp',
-    ft = { 'clojure' }
-  },
   { 'tpope/vim-fugitive', event = LazyFileEvents },
   { 'tpope/vim-ragtag', event = LazyFileEvents },
   {
@@ -301,7 +234,6 @@ require("lazy").setup({
       }
     end,
   },
-  { 'tpope/vim-rails', ft = { "ruby" } },
   'tpope/vim-repeat',
   { 'tpope/vim-rhubarb', events = LazyFileEvents },
   'tpope/vim-surround',
@@ -312,9 +244,7 @@ require("lazy").setup({
   { 'vim-scripts/groovyindent-unix', lazy = true },
   { 'vim-scripts/mako.vim', lazy = true },
   { 'vim-scripts/matchit.zip', lazy = true },
-  { 'rodjek/vim-puppet', ft = { "puppet" } },
   { 'tweekmonster/wstrip.vim', event = { "BufWritePre" } },
-  { 'leafgarland/typescript-vim', ft = { "typescript" } },
   -- TODO Removable plugins??
   { 'tpope/vim-abolish', event = LazyFileEvents },
   { 'AndrewRadev/splitjoin.vim', event = LazyFileEvents },
@@ -510,4 +440,36 @@ require("lazy").setup({
     end,
     opts = {},
   },
+
+  -- Language-specific plugins
+  { 'chase/vim-ansible-yaml', ft = { "ansible" } },
+  { 'markcornick/vim-bats', ft = { "bash" } },
+  { 'elubow/cql-vim', lazy = true }, -- Cassandra syntax highlighting; can this be replaced with Treesitter?
+  { 'guns/vim-clojure-highlight', ft = { "clojure" } },
+  { 'guns/vim-clojure-static', ft = { "clojure" } } ,
+  { 'guns/vim-sexp', ft = { 'clojure' } },
+  { 'tpope/vim-dispatch', ft = { 'clojure' } },
+  { 'tpope/vim-fireplace', ft = { 'clojure' } },
+  { 'tpope/vim-salve', ft = { 'clojure' } },
+  { 'tpope/vim-sexp-mappings-for-regular-people', ft = { 'clojure' } },
+  { 'kchmck/vim-coffee-script', ft = { "coffee" } },
+  { 'elixir-lang/vim-elixir', ft = { "elixir" } },
+  { 'fatih/vim-go', ft = { "go" }, build = ':GoInstallBinaries' },
+  { 'jparise/vim-graphql', ft = { "graphql" } }, -- TODO can this be deprecated for Treesitter?
+  { 'akhaku/vim-java-unused-imports', ft = { "java" } },
+  { 'pangloss/vim-javascript', ft = { "javascript", "jsx" } },
+  { 'google/vim-jsonnet', ft = { "jsonnet" } },
+  { 'mxw/vim-jsx', ft = { "jsx" } },
+  { 'Glench/Vim-Jinja2-Syntax', ft = { "jinja" } },
+  { 'aklt/plantuml-syntax', ft = { "plantuml" } },
+  { 'tpope/vim-markdown', ft = { "markdown" } },
+  { 'rodjek/vim-puppet', ft = { "puppet" } },
+  { 'tpope/vim-cucumber', ft = { "ruby" } },
+  { 'tpope/vim-rails', ft = { "ruby" } },
+  { 'rust-lang/rust.vim', ft = { "rust" } },
+  { 'jergason/scala.vim', ft = { "scala" } },
+  { 'derekwyatt/vim-scala', ft = { "scala" } },
+  { 'hashivim/vim-terraform', ft = { "terraform" } },
+  { 'leafgarland/typescript-vim', ft = { "typescript" } },
+  { 'lmeijvogel/vim-yaml-helper', ft = { "yaml" } },
 })
