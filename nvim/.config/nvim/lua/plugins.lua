@@ -18,15 +18,13 @@ require("lazy").setup({
   { 'aklt/plantuml-syntax', ft = { "plantuml" } },
   { 'arthurxavierx/vim-caser', event = { "InsertEnter" } },
   -- Show git diff via Vim sign column.
-  'airblade/vim-gitgutter',
+  { 'airblade/vim-gitgutter', event = LazyFileEvents },
   -- vim-codefmt doesn't seem to work with Lazy
   -- TODO can this be deprecated in favor of another formatting tool?
 --  {
 --	  'google/vim-codefmt',
 --	  dependencies = { 'google/vim-glaive', 'google/vim-maktaba' },
 --  },
-  'benmills/vim-commadown',
-  'bkad/CamelCaseMotion',
   { 'chase/vim-ansible-yaml', ft = { "ansible" } },
   -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
   {
@@ -48,13 +46,11 @@ require("lazy").setup({
     build = ':GoInstallBinaries',
   },
   { 'Glench/Vim-Jinja2-Syntax', ft = { "jinja" } },
-  'godlygeek/tabular',
   { 'tpope/vim-markdown', ft = { "markdown" } },
   { 'google/vim-jsonnet', ft = { "jsonnet" } },
   { 'guns/vim-clojure-highlight', ft = { "clojure" } },
   { 'guns/vim-clojure-static', ft = { "clojure" } } ,
   { 'hashivim/vim-terraform', ft = { "terraform" } },
-  'henrik/vim-indexed-search',
   {
     'janko-m/vim-test',
     dependencies = {
@@ -62,6 +58,7 @@ require("lazy").setup({
         'benmills/vimux',
         dependencies = {
           'jgdavey/vim-turbux',
+          'samguyjones/vim-crosspaste',
         },
         keys = {
           { "<Leader>rx", "<cmd>wa<CR> <cmd>VimuxCloseRunner<CR>" },
@@ -81,8 +78,7 @@ require("lazy").setup({
     },
   },
   { 'jergason/scala.vim', ft = { "scala" } },
-
-  'junegunn/vim-easy-align',
+  { 'junegunn/vim-easy-align', event = LazyFileEvents },
   {
     'jparise/vim-graphql', -- TODO can we deprecate this in favor of Treesitter and an LSP?
     ft = { "graphql" },
@@ -101,7 +97,7 @@ require("lazy").setup({
   -- 'nelstrom/vim-textobj-rubyblock',
   { 'pangloss/vim-javascript', ft = { "javascript", "jsx" } },
   { 'mxw/vim-jsx', ft = { "jsx" } },
-  'pgr0ss/vim-github-url',
+  { 'pgr0ss/vim-github-url', event = LazyFileEvents },
   { 'prabirshrestha/async.vim', lazy = true },
   {
     'prabirshrestha/asyncomplete.vim',
@@ -138,6 +134,7 @@ require("lazy").setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-emoji',
+      'andersevenrud/cmp-tmux',
       'davidsierradz/cmp-conventionalcommits',
       'onsails/lspkind-nvim',
     },
@@ -179,7 +176,8 @@ require("lazy").setup({
           { name = "nvim_lsp" },
           { name = "path" },
         }, {
-            { name = "emoji" },
+          { name = "emoji" },
+          { name = "tmux" },
         })
       })
     end,
@@ -249,7 +247,7 @@ require("lazy").setup({
       },
     },
   },
-  'tfnico/vim-gradle',
+  { 'tfnico/vim-gradle', event = LazyFileEvents },
   {
     'numToStr/Comment.nvim',
     opts = {},
@@ -277,8 +275,8 @@ require("lazy").setup({
     'guns/vim-sexp',
     ft = { 'clojure' }
   },
-  'tpope/vim-fugitive',
-  'tpope/vim-ragtag',
+  { 'tpope/vim-fugitive', event = LazyFileEvents },
+  { 'tpope/vim-ragtag', event = LazyFileEvents },
   {
     'tpope/vim-rake',
     keys = {
@@ -305,11 +303,10 @@ require("lazy").setup({
   },
   { 'tpope/vim-rails', ft = { "ruby" } },
   'tpope/vim-repeat',
-  'tpope/vim-rhubarb',
+  { 'tpope/vim-rhubarb', events = LazyFileEvents },
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
   'tpope/vim-vinegar',
-  'tpope/vim-abolish',
   { 'vim-scripts/Align', lazy = true },
   { 'vim-scripts/VimClojure', lazy = true },
   { 'vim-scripts/groovyindent-unix', lazy = true },
@@ -318,12 +315,15 @@ require("lazy").setup({
   { 'rodjek/vim-puppet', ft = { "puppet" } },
   { 'tweekmonster/wstrip.vim', event = { "BufWritePre" } },
   { 'leafgarland/typescript-vim', ft = { "typescript" } },
-  'AndrewRadev/splitjoin.vim',
+  -- TODO Removable plugins??
+  { 'tpope/vim-abolish', event = LazyFileEvents },
+  { 'AndrewRadev/splitjoin.vim', event = LazyFileEvents },
+  { 'godlygeek/tabular', event = LazyFileEvents },
+  { 'bkad/CamelCaseMotion', event = LazyFileEvents },
+  { 'romainl/vim-qf', lazy = true },
+
   'machakann/vim-swap',
   'wellle/targets.vim',
-  'romainl/vim-qf',
-  'wellle/tmux-complete.vim',
-  'samguyjones/vim-crosspaste',
   {
     'neovim/nvim-lspconfig',
     event = LazyFileEvents,
