@@ -13,7 +13,43 @@ vim.opt.rtp:prepend(lazypath)
 
 local LazyFileEvents = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
+-- Allow users to use a key-binding to preview and change theme (for duration of session)
+local SwitchColorschemeKeyMap = { "<leader>uC", function() require("telescope.builtin").colorscheme({ enable_preview = true }) end, desc = "Colorscheme with preview" }
+
 require("lazy").setup({
+  -- Themes!!!
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    keys = { SwitchColorschemeKeyMap },
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      flavour = "mocha",
+      transparent_background = true,
+    },
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin")
+    end,
+  },
+  {
+    "afair/vibrantink2",
+    lazy = true,
+    keys = { SwitchColorschemeKeyMap },
+  },
+
+  -- Everything else!!!
   { 'arthurxavierx/vim-caser', event = LazyFileEvents }, -- Change word casing with vim motion
   {
     "lewis6991/gitsigns.nvim", -- Show diffs and more!
@@ -274,6 +310,7 @@ require("lazy").setup({
       { '<Leader>gw', '<cmd>Telescope grep_string<CR>' },
       { '<Leader>fh', '<cmd>Telescope man_pages<CR>' },
       { '<Leader>fm', '<cmd>Telescope keymaps<CR>' },
+      SwitchColorschemeKeyMap,
     },
     opts = {
       pickers = {
@@ -370,14 +407,6 @@ require("lazy").setup({
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function(_, _)
-      vim.cmd([[colorscheme tokyonight-moon]])
-    end,
   },
   {
     "stevearc/conform.nvim",
