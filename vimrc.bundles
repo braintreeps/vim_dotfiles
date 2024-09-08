@@ -101,6 +101,7 @@ Plug 'wellle/targets.vim'
 Plug 'romainl/vim-qf'
 Plug 'wellle/tmux-complete.vim'
 Plug 'samguyjones/vim-crosspaste'
+Plug 'editorconfig/editorconfig-vim'
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
