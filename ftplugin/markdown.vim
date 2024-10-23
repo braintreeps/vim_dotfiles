@@ -14,5 +14,3 @@ let g:markdown_fenced_languages = [
 \  'ruby',
 \  'rust',
 \]
-" auto format markdown files with pandoc
-let g:ale_fixers['markdown'] = ['pandoc']
