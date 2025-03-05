@@ -218,8 +218,6 @@ ia <buffer> plg println "${}"<Left><Left><C-R>=<SID>RemoveSpace()<CR>
 ia <buffer> pls println ''<Left><C-R>=<SID>RemoveSpace()<CR>
 ia <buffer> sf static final <C-R>=<SID>RemoveSpace()<CR>
 ia <buffer> sw switch(){<CR>}<Esc>kf(a<C-R>=<SID>RemoveSpace()<CR>
-ia <buffer> tc try{<CR>}catch(){<CR>}<Esc>kkA<CR><C-R>=<SID>RemoveSpace()<CR>
-ia <buffer> tcf try{<CR>}catch(){<CR>}finally{<CR>}<Esc>kkkA<CR><C-R>=<SID>RemoveSpace()<CR>
 ia <buffer> wl while(){<CR>}<Esc>kf(a<C-R>=<SID>RemoveSpace()<CR>
 
 " Change the :browse e filter to primarily show Groovy-related files.
