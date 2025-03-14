@@ -367,7 +367,7 @@ function! SmartFuzzy()
   if len(root) == 0 || v:shell_error
     Files
   else
-    GFiles -co --exclude-standard -- . ':!:vendor/*'
+    GFiles -co --exclude-standard -- . ':!:vendor/*' ':!:*.rbi'
   endif
 endfunction
 
