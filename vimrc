@@ -625,3 +625,10 @@ endif
 if filereadable(expand('~/.vimrc_local'))
   source ~/.vimrc_local
 end
+
+" Navigate windows without <C-w>
+
+nmap <silent> <C-h> <C-w><C-h>
+nmap <silent> <C-j> <C-w><C-j>
+nmap <silent> <C-k> <C-w><C-k>
+nmap <silent> <C-l> <C-w><C-l>
