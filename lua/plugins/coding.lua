@@ -36,6 +36,7 @@ return {
 				},
 			},
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-emoji",
 			"andersevenrud/cmp-tmux",
@@ -57,7 +58,15 @@ return {
 					completeopt = "menu,menuone,noinsert",
 				},
 				formatting = {
-					format = lspkind.cmp_format({ mode = "symbol_text" }),
+					format = lspkind.cmp_format({
+						menu = {
+							buffer = "[Buffer]",
+							nvim_lsp = "[LSP]",
+							path = "[Path]",
+							emoji = "[Emoji]",
+							tmux = "[Tmux]",
+						},
+					}),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -75,11 +84,36 @@ return {
 						cmp.abort()
 						fallback()
 					end,
+					["<Tab>"] = cmp.mapping(function(fallback)
+						-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+						if cmp.visible() then
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							end
+							cmp.confirm()
+						else
+							fallback()
+						end
+					end, { "i", "s", "c" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "path" },
 				}, {
+					{
+						name = "buffer",
+						option = {
+							-- show visible buffers
+							get_bufnrs = function()
+								local bufs = {}
+								for _, win in ipairs(vim.api.nvim_list_wins()) do
+									bufs[vim.api.nvim_win_get_buf(win)] = true
+								end
+								return vim.tbl_keys(bufs)
+							end,
+						},
+					},
 					{ name = "emoji" },
 					{ name = "tmux" },
 				}),
