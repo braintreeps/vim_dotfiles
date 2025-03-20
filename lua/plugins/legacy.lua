@@ -20,10 +20,10 @@ return {
 					"samguyjones/vim-crosspaste",
 				},
 				keys = {
-					{ "<Leader>rx", "<cmd>wa<CR> <cmd>VimuxCloseRunner<CR>" },
-					{ "<Leader>ri", "<cmd>wa<CR> <cmd>VimuxInspectRunner<CR>" },
-					{ "<Leader>vs", '"vy :call VimuxRunCommand(@v)<CR>', mode = "v" },
-					{ "<Leader>vs", 'vip "vy :call VimuxRunCommand(@v)<CR>' },
+					{ "<Leader>rx", "<cmd>wa<CR> <cmd>VimuxCloseRunner<CR>", desc = "Close runner pane" },
+					{ "<Leader>ri", "<cmd>wa<CR> <cmd>VimuxInspectRunner<CR>", desc = "Inspect runner pane" },
+					{ "<Leader>vs", '"vy :call VimuxRunCommand(@v)<CR>', mode = "v", desc = "Run highlighted" },
+					{ "<Leader>vs", 'vip "vy :call VimuxRunCommand(@v)<CR>', desc = "Run contiguous lines" },
 				},
 				init = function()
 					vim.g["test#strategy"] = "vimux"
@@ -31,9 +31,9 @@ return {
 			},
 		},
 		keys = {
-			{ "<Leader>rb", "<cmd>wa<CR> <cmd>TestFile<CR>" },
-			{ "<Leader>rf", "<cmd>wa<CR> <cmd>TestNearest<CR>" },
-			{ "<Leader>rl", "<cmd>wa<CR> <cmd>TestLast<CR>" },
+			{ "<Leader>rb", "<cmd>wa<CR> <cmd>TestFile<CR>", desc = "Run buffer" },
+			{ "<Leader>rf", "<cmd>wa<CR> <cmd>TestNearest<CR>", desc = "Run focused" },
+			{ "<Leader>rl", "<cmd>wa<CR> <cmd>TestLast<CR>", desc = "Run last test again" },
 		},
 	},
 	{ "junegunn/vim-easy-align", event = LazyFileEvents }, -- Used to align text; this should be driven by an LSP
@@ -49,9 +49,9 @@ return {
 	{
 		"tpope/vim-rake",
 		keys = {
-			{ "<Leader>AA", "<cmd>A<CR>" },
-			{ "<Leader>AV", "<cmd>AV<CR>" },
-			{ "<Leader>AS", "<cmd>AS<CR>" },
+			{ "<Leader>AA", "<cmd>A<CR>", desc = "Alternate file" },
+			{ "<Leader>AV", "<cmd>AV<CR>", desc = "Alternate w/ Vertical Split" },
+			{ "<Leader>AS", "<cmd>AS<CR>", desc = "Alternate w/ Horizontal Split" },
 		},
 		init = function()
 			vim.g["rails_projections"] = {

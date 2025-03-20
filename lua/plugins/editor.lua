@@ -8,6 +8,15 @@ return {
 		event = "VeryLazy",
 		opts = {
 			preset = "helix",
+			spec = {
+				{ "<leader>A", group = "Alternate" },
+				{ "<leader>a", group = "AI" },
+				{ "<leader>f", group = "Find" },
+				{ "<leader>n", group = "Neotree" },
+				{ "<leader>r", group = "Run tests" },
+				{ "<leader>u", group = "UI" },
+				{ "<leader>v", group = "Vimux" },
+			},
 		},
 	},
 	{
@@ -46,8 +55,8 @@ return {
 			},
 		},
 		keys = {
-			{ "<Leader>nt", "<cmd>Neotree toggle<CR>" },
-			{ "<Leader>nf", "<cmd>Neotree reveal<CR>" },
+			{ "<Leader>nt", "<cmd>Neotree toggle<CR>", desc = "Neotree toggle" },
+			{ "<Leader>nf", "<cmd>Neotree reveal<CR>", desc = "Neotree focus file" },
 		},
 		opts = {
 			sources = { "filesystem", "buffers", "git_status", "document_symbols" },
