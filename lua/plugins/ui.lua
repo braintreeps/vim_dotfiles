@@ -36,6 +36,7 @@ return {
 		},
 		keys = {
 			{ "<Leader><Leader>", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+			{ "<Leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
 			{ "<C-p>", "<cmd>Telescope find_files<CR>", desc = "Find files" },
 			{ "<Leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find (grep)" },
 			{ "<Leader>be", "<cmd>Telescope buffers<CR>", desc = "Buffer Explorer" },
