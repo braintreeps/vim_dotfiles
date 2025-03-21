@@ -376,6 +376,7 @@ map <silent> <leader>ff :SmartFuzzy<CR>
 map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
+map <silent> <leader>fm :Maps<CR>
 
 map <silent> <C-p> :Files<CR>
 
