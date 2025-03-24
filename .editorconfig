@@ -1,0 +1,17 @@
+# top-most EditorConfig file
+root = true
+
+# basic rules for all files
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.lua]
+indent_style = tab
+indent_size = 4
+
+[*.{md,json}]
+indent_style = space
+indent_size = 2
