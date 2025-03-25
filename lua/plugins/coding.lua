@@ -95,7 +95,7 @@ return {
 						else
 							fallback()
 						end
-					end, { "i", "s", "c" }),
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
