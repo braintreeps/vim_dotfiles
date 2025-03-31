@@ -14,4 +14,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+local personal_plugins_exist = vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/personal/plugins") ~= nil
+if personal_plugins_exist then
+	require("lazy").setup({
+		spec = {
+			{ import = "plugins" },
+			{ import = "personal.plugins" },
+		}
+	})
+else
+	require("lazy").setup("plugins")
+end
+
+local personal_init_exists = vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/personal/init.lua") ~= nil
+if personal_init_exists then
+	require("personal.init")
+end
