@@ -93,6 +93,7 @@ autocmd FileType cs runtime dotnet_mappings.vim
 autocmd FileType javascript runtime javascript_mappings.vim
 autocmd FileType python runtime python_mappings.vim
 autocmd FileType java runtime java_mappings.vim
+autocmd FileType rust runtime rust_mappings.vim
 
 " wstrip plugin
 " don't highlight trailing whitespace
