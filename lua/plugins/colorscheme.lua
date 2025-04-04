@@ -1,9 +1,17 @@
 -- Colorscheme: Default color schemes (TokyoNight and Catppuccin).
 
--- Allow users to use a key-binding to preview and change theme (for duration of session)
+-- Users may change colorscheme via \uC. This choice persists locally.
 local SwitchColorschemeKeyMap = require("lazy_utils").SwitchColorschemeKeyMap
 
 return {
+	-- Util for persisting chosen colorscheme
+	{
+		"tingey21/telescope-colorscheme-persist.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		lazy = false,
+		opts = {},
+	},
+	-- Schemes
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -31,7 +39,8 @@ return {
 	},
 	{
 		"afair/vibrantink2",
-		lazy = true,
+		-- Without lazy=false, this scheme doesn't appear in the picker
+		lazy = false,
 		keys = { SwitchColorschemeKeyMap },
 	},
 }
