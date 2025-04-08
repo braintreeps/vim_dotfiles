@@ -43,4 +43,10 @@ return {
 		lazy = false,
 		keys = { SwitchColorschemeKeyMap },
 	},
+	{
+		"shaunsingh/nord.nvim",
+		name = "nord.nvim",
+		lazy = false,
+		keys = { SwitchColorschemeKeyMap },
+	},
 }
