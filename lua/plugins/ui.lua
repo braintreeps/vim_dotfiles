@@ -46,6 +46,9 @@ return {
 			SwitchColorschemeKeyMap,
 		},
 		opts = {
+			defaults = {
+				sorting_strategy = "ascending",
+			},
 			pickers = {
 				live_grep = {
 					file_ignore_patterns = { "node_modules", ".git" },
