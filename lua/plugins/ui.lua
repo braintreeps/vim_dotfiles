@@ -51,13 +51,13 @@ return {
 			},
 			pickers = {
 				live_grep = {
-					file_ignore_patterns = { "node_modules", ".git" },
+					file_ignore_patterns = { "node_modules", ".git", "**/*.rbi" },
 					additional_args = function(_)
 						return { "--hidden" }
 					end,
 				},
 				find_files = {
-					file_ignore_patterns = { "node_modules", ".git" },
+					file_ignore_patterns = { "node_modules", ".git", "**/*.rbi" },
 					hidden = true,
 				},
 			},
