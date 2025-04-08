@@ -92,4 +92,48 @@ return {
 			},
 		},
 	},
+	{
+		'stevearc/resession.nvim',
+		opts = {},
+		lazy = false,
+		keys = {
+			{ "<Leader>ss", "<cmd>SessionSaveWithDefaults<CR>", desc = "[s]ession [s]ave" },
+			{ "<Leader>sl", "<cmd>SessionLoadWithDefaults<CR>", desc = "[s]ession [l]oad" },
+			{ "<Leader>sd", "<cmd>SessionDeleteWithDefaults<CR>", desc = "[s]ession [d]elete" },
+		},
+		config = function(_, _opts)
+			local resession = require("resession")
+			-- explicitly disable periodic autosave to be intentional
+			resession.setup({
+				autosave = {
+					enabled = false,
+				},
+			})
+
+			local function get_session_name()
+				-- let's name it after pwd + git branch
+				local name = vim.fn.getcwd()
+				local branch = vim.trim(vim.fn.system("git branch --show-current"))
+				if vim.v.shell_error == 0 then
+					return name .. ":" .. branch
+				else
+					return name
+				end
+			end
+
+			-- Resession keymaps
+			-- Default all session names to pwd + git branch
+			vim.api.nvim_create_user_command("SessionSaveWithDefaults", function()
+				resession.save(get_session_name())
+			end, { desc = "Save session with name set to cwd + git branch"})
+
+			vim.api.nvim_create_user_command("SessionLoadWithDefaults", function()
+				resession.load(get_session_name())
+			end, { desc = "Load session named for cwd + git branch"})
+
+			vim.api.nvim_create_user_command("SessionDeleteWithDefaults", function()
+				resession.delete(get_session_name())
+			end, { desc = "Delete session named for cwd + git branch"})
+		end
+	}
 }
