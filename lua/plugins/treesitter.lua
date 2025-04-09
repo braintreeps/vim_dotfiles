@@ -1,5 +1,8 @@
 -- TreeSitter: advanced syntax highlighting and plugins that use Treesitter parsers
 
+-- TODO expose this as a configurable value
+local treesitter_highlight_max_file_size = 150 -- Kilobytes
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -13,6 +16,14 @@ return {
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = { "ruby" },
+				disable = function(_lang, buffer)
+					local max_filesize = treesitter_highlight_max_file_size * 1024 -- convert actual kilobytes
+					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buffer))
+
+					if ok and stats and stats.size > max_filesize then
+						return true
+					end
+				end
 			},
 			incremental_selection = {
 				enable = true,
