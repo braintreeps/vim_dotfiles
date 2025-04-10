@@ -80,7 +80,19 @@ return {
 	{ "vim-scripts/groovyindent-unix", lazy = true },
 	{ "vim-scripts/mako.vim", lazy = true },
 	{ "vim-scripts/matchit.zip", lazy = true },
-	{ "tweekmonster/wstrip.vim", event = { "BufWritePre" } },
+	{ "tweekmonster/wstrip.vim",
+		lazy = false,
+		init = function()
+			vim.cmd("let g:wstrip_highlight = 0")
+			-- these settings adapted from https://github.com/braintreeps/vim_dotfiles/blob/master/vimrc#L97-L102
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "ruby", "*.java", "*.python", "*.c", "*.cpp", "*.sql", "*.puppet", "*.rust" },
+				callback = function(_args)
+					vim.cmd("let b:wstrip_auto = 1")
+				end,
+			})
+		end
+	},
 	-- TODO Removable plugins??
 	{ "tpope/vim-abolish", event = LazyFileEvents },
 	{ "AndrewRadev/splitjoin.vim", event = LazyFileEvents },
