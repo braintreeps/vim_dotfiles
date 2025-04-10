@@ -44,7 +44,10 @@ return {
 	{ "pgr0ss/vim-github-url", event = LazyFileEvents },
 	{ "tfnico/vim-gradle", event = LazyFileEvents },
 	{ "tpope/vim-projectionist" },
-	{ "tpope/vim-fugitive", event = LazyFileEvents },
+	{ "tpope/vim-fugitive",
+		lazy = false,
+		event = LazyFileEvents
+	},
 	{ "tpope/vim-ragtag", event = LazyFileEvents },
 	{
 		"tpope/vim-rake",
