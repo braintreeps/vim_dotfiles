@@ -58,6 +58,7 @@ return {
 			{ "<Leader>ff", "<cmd>lua vim.find_files_from_project_git_root()<CR>", desc = "Find files" },
 			{ "<C-p>", "<cmd>lua vim.find_files_from_project_git_root()<CR>", desc = "Find files" },
 			{ "<Leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find (grep)" },
+			{ "<Leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Find Recent" },
 			{ "<Leader>be", "<cmd>Telescope buffers<CR>", desc = "Buffer Explorer" },
 			{ "<Leader>gw", "<cmd>Telescope grep_string<CR>", desc = "Grep word in cursor" },
 			{ "<Leader>fh", "<cmd>Telescope man_pages<CR>", desc = "Find help pages" },
