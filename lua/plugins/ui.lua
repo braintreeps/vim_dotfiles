@@ -91,7 +91,6 @@ return {
 								end)
 							end
 							map("n", "d", delete_buffer)
-							map("i", "<c-d>", delete_buffer)
 							return true
 						end,
 					})
