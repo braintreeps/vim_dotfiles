@@ -97,7 +97,7 @@ return {
 					})
 				end,
 				desc = "Buffer Explorer"
-			}
+			},
 			{ "<Leader>gw", "<cmd>Telescope grep_string<CR>", desc = "Grep word in cursor" },
 			{ "<Leader>fh", "<cmd>Telescope man_pages<CR>", desc = "Find help pages" },
 			{ "<Leader>fm", "<cmd>Telescope keymaps<CR>", desc = "Find keymappings" },
