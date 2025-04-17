@@ -41,7 +41,12 @@ return {
 	{ "kana/vim-textobj-user", lazy = true }, -- used to create custom text objects; TODO mark for deletion
 	{ "mattn/emmet-vim", lazy = true }, -- used for a expanding abbreviations/adding tags to HTML; TODO mark for deletion
 	{ "mileszs/ack.vim", lazy = true }, -- used for searching. We use fzf + rg; TODO mark for deletion
-	{ "pgr0ss/vim-github-url", event = LazyFileEvents },
+	{ "pgr0ss/vim-github-url",
+		event = LazyFileEvents,
+		keys = {
+			{ "<LocalLeader>gh", "<cmd>GitHubURL<CR>", desc = "show URL to view the file under cursor on GitHub"}
+		}
+	},
 	{ "tfnico/vim-gradle", event = LazyFileEvents },
 	{ "tpope/vim-projectionist" },
 	{ "tpope/vim-fugitive" },
