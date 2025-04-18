@@ -1,4 +1,10 @@
 require("options")
+
+local personal_options_exists = vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/personal/options.lua") ~= nil
+if personal_options_exists then
+	require("personal.options")
+end
+
 require("keymaps")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
