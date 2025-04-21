@@ -335,6 +335,30 @@ if !has('nvim-0.5')
   call s:setup_vim_lsp()
 endif
 
+"
+" ========= AI ========
+"
+" Mappings
+" ---------------------
+"
+" [c]opilot [a]uto-completions
+map <silent> <leader>ca :call ToggleCopilotCompletions()<CR>
+
+" Functions
+" ---------------------
+
+" Disable copilot.vim completions by default
+let g:copilot_enabled = 0
+func! ToggleCopilotCompletions()
+  if g:copilot_enabled
+    let g:copilot_enabled = 0
+    echo "Copilot completions disabled"
+  else
+    let g:copilot_enabled = 1
+    echo "Copilot completions enabled"
+  endif
+endfunc
+
 " ========= Shortcuts ========
 
 " ALE

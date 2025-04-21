@@ -103,6 +103,8 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'samguyjones/vim-crosspaste'
 Plug 'nathanaelkane/vim-indent-guides'
 
+Plug 'github/copilot.vim'
+
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'
 endif
