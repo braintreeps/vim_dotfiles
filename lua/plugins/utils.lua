@@ -31,12 +31,15 @@ return {
 						openDirInEditor = '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
 					}
 				}
-			}
-
+			},
+			zen = {},
 		},
 		keys = {
 			{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-			{ "<leader>gb", function() Snacks.git.blame_line() end, desc = "[G]it [B]lame"}
+			{ "<leader>gb", function() Snacks.git.blame_line() end, desc = "[G]it [B]lame"},
+			{ "<leader>b.", function() Snacks.scratch() end, desc = "New Scratch [b]uffer" },
+			{ "<leader>bS", function() Snacks.scratch.select() end, desc = "Scratch [b]uffer [S]elect" },
+			{ "<leader>uZ", function() Snacks.zen() end, desc = "[Z]en mode" },
 		}
 	},
 }
