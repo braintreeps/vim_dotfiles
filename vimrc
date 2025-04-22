@@ -341,11 +341,10 @@ endif
 " Mappings
 " ---------------------
 "
-" [a]i [a]uto-[c]ompletions
+" [a]opilot [a]uto-[c]ompletions
 map <silent> <leader>aac :call ToggleCopilotCompletions()<CR>
- 
 
-" [a]sk [a]i
+" [a]i [a]sk
 noremap <silent> <leader>aa :call ToggleCopilotChat()<CR>
 
 " [a]i [e]xplain
