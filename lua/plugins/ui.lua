@@ -26,6 +26,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
+			"AndreM222/copilot-lualine",
 		},
 		opts = function()
 			local conf = require("lualine").get_config()
@@ -38,6 +39,7 @@ return {
 							path = 1,
 						},
 					},
+					lualine_x = { "copilot", "encoding", "fileformat", "filetype" },
 				},
 			})
 
@@ -53,7 +55,6 @@ return {
 				build = "make",
 			},
 			"echasnovski/mini.bufremove",
-
 		},
 		keys = {
 			{ "<Leader><Leader>", "<cmd>lua vim.find_files_from_project_git_root()<CR>", desc = "Find files" },
@@ -128,5 +129,12 @@ return {
 				},
 			},
 		},
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		config = function(_, _opts)
+			require("telescope").load_extension("ui-select")
+		end,
 	},
 }

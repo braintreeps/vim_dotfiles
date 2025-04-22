@@ -42,6 +42,7 @@ return {
 			"andersevenrud/cmp-tmux",
 			"davidsierradz/cmp-conventionalcommits",
 			"onsails/lspkind-nvim",
+			"zbirenbaum/copilot-cmp",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -58,6 +59,7 @@ return {
 					completeopt = "menu,menuone,noinsert",
 				},
 				formatting = {
+					fields = { "kind", "abbr", "menu" },
 					format = lspkind.cmp_format({
 						menu = {
 							buffer = "[Buffer]",
@@ -89,8 +91,9 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "path" },
+					{ name = "copilot" },
+					{ name = "nvim_lsp", max_item_count = 7 },
+					{ name = "path", max_item_count = 7 },
 				}, {
 					{
 						name = "buffer",
@@ -105,9 +108,12 @@ return {
 							end,
 						},
 					},
-					{ name = "emoji" },
-					{ name = "tmux" },
+					{ name = "tmux", max_item_count = 5 },
+					{ name = "emoji", max_item_count = 5 },
 				}),
+				window = {
+					documentation = cmp.config.window.bordered(),
+				},
 			})
 		end,
 	},
