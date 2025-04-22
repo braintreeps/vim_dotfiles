@@ -49,4 +49,9 @@ return {
 		lazy = false,
 		keys = { SwitchColorschemeKeyMap },
 	},
+	{
+		"hectron/inkline.nvim",
+		lazy = false,
+		keys = { SwitchColorschemeKeyMap },
+	},
 }
