@@ -341,7 +341,7 @@ endif
 " Mappings
 " ---------------------
 "
-" [a]opilot [a]uto-[c]ompletions
+" [a]i [a]uto-[c]ompletions
 map <silent> <leader>aac :call ToggleCopilotCompletions()<CR>
 
 " [a]i [a]sk
