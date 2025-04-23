@@ -365,11 +365,13 @@ func! ToggleCopilotCompletions()
   endif
 endfunc
 
-let g:copilot_chat_toggled = 0
 func! ToggleCopilotChat()
-  if g:copilot_chat_toggled && g:active_chat_buffer
-    let g:copilot_chat_toggled = 0
-    execute 'bd' g:active_chat_buffer
+  if g:copilot_chat_active_buffer != -1
+    execute 'bd' g:copilot_chat_active_buffer
+  else
+    execute 'CopilotChatOpen'
+  endif
+endfunc
   else
     let g:copilot_chat_toggled = 1
     execute 'CopilotChatOpen'
