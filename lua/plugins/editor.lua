@@ -22,7 +22,9 @@ return {
 	{
 		"lewis6991/gitsigns.nvim", -- Show diffs and more!
 		event = LazyFileEvents,
-		opts = {},
+		opts = {
+			current_line_blame = true,
+		},
 		keys = {
 			{ "<Leader>bl", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "[b]lame [l]ine" },
 		},
