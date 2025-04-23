@@ -345,7 +345,10 @@ endif
 map <silent> <leader>aac :call ToggleCopilotCompletions()<CR>
 
 " [a]i [a]sk
-noremap <silent> <leader>aa :call ToggleCopilotChat()<CR>
+noremap <silent> <leader>aa :call GotoCopilotChat()<CR>
+
+" [a]i [a]sk [t]oggle
+noremap <silent> <leader>aat :call ToggleCopilotChat()<CR>
 
 " [a]i [e]xplain
 vmap <leader>ae <Plug>CopilotChatAddSelection
@@ -372,8 +375,11 @@ func! ToggleCopilotChat()
     execute 'CopilotChatOpen'
   endif
 endfunc
+
+func! GotoCopilotChat()
+  if g:copilot_chat_active_buffer != -1
+    execute 'CopilotChatFocus'
   else
-    let g:copilot_chat_toggled = 1
     execute 'CopilotChatOpen'
   endif
 endfunc
