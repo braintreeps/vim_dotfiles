@@ -1,3 +1,6 @@
+Util = require('lazy.util')
+Config = require('lazy.core.config')
+Plugin = require('lazy.core.plugin')
 -- UI: Enhance the user interface with features such as status line, buffer line, indentation guides, dashboard, and icons.
 
 local SwitchColorschemeKeyMap = require("lazy_utils").SwitchColorschemeKeyMap
@@ -6,7 +9,7 @@ local SwitchColorschemeKeyMap = require("lazy_utils").SwitchColorschemeKeyMap
 local is_inside_work_tree = {}
 
 function vim.find_files_from_project_git_root()
-  local opts = {} -- define here if you want to define something
+  opts = Plugin.values(Config.plugins['telescope.nvim'], "opts").pickers.find_files
 
   local cwd = vim.fn.getcwd()
   if is_inside_work_tree[cwd] == nil then
