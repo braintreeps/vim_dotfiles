@@ -22,7 +22,6 @@ return {
 		},
 		config = function(_, opts)
 			require("catppuccin").setup(opts)
-			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	{
@@ -51,7 +50,9 @@ return {
 	},
 	{
 		"hectron/inkline.nvim",
-		lazy = false,
 		keys = { SwitchColorschemeKeyMap },
+		config = function()
+			vim.cmd.colorscheme("inkline")
+		end,
 	},
 }
