@@ -38,14 +38,11 @@ return {
 	},
 	{
 		"afair/vibrantink2",
-		-- Without lazy=false, this scheme doesn't appear in the picker
-		lazy = false,
 		keys = { SwitchColorschemeKeyMap },
 	},
 	{
 		"shaunsingh/nord.nvim",
 		name = "nord.nvim",
-		lazy = false,
 		keys = { SwitchColorschemeKeyMap },
 	},
 	{
