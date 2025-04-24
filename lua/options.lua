@@ -7,3 +7,5 @@ vim.opt.textwidth = 80
 vim.opt.completeopt = "menuone,noselect,popup"
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
