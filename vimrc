@@ -400,7 +400,12 @@ map <silent> <leader>ff :SmartFuzzy<CR>
 map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
+" [f]ind [m]aps (normal mode)
 map <silent> <leader>fm :Maps<CR>
+" [f]ind [m]aps [v]isual mode
+map <silent> <leader>fmv fzf#vim#maps("v")<CR>
+" [f]ind [m]aps [i]nsert mode
+map <silent> <leader>fmi fzf#vim#maps("i")<CR>
 
 map <silent> <C-p> :Files<CR>
 
