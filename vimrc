@@ -343,7 +343,16 @@ endif
 "
 " [a]i [a]uto-[c]ompletions
 map <silent> <leader>aac :call ToggleCopilotCompletions()<CR>
- 
+
+" [a]i [a]sk
+noremap <silent> <leader>aa :call GotoCopilotChat()<CR>
+
+" [a]i [a]sk [t]oggle
+noremap <silent> <leader>aat :call ToggleCopilotChat()<CR>
+
+" [a]i [e]xplain
+vmap <leader>ae <Plug>CopilotChatAddSelection
+
 " Functions
 " ---------------------
 
@@ -356,6 +365,22 @@ func! ToggleCopilotCompletions()
   else
     let g:copilot_enabled = 1
     echo "Copilot completions enabled"
+  endif
+endfunc
+
+func! ToggleCopilotChat()
+  if g:copilot_chat_active_buffer != -1
+    execute 'bd' g:copilot_chat_active_buffer
+  else
+    execute 'CopilotChatOpen'
+  endif
+endfunc
+
+func! GotoCopilotChat()
+  if g:copilot_chat_active_buffer != -1
+    execute 'CopilotChatFocus'
+  else
+    execute 'CopilotChatOpen'
   endif
 endfunc
 
