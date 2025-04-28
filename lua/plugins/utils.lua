@@ -6,7 +6,7 @@ return {
 		---@type snacks.Config
 		opts = {
 			scroll = {
-				enabled = true,
+				enabled = false,
 			},
 			dashboard = {
 				enabled = false,
