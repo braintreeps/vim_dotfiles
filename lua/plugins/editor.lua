@@ -140,6 +140,7 @@ return {
 	},
 	{
 		"luukvbaal/statuscol.nvim",
+		enabled = false, -- Toggle this in your personal dotfiles to enable gutter fold indicators
 		lazy = false,
 		config = function()
 			local builtin = require("statuscol.builtin")
@@ -157,6 +158,7 @@ return {
 	},
 	{
 		"kevinhwang91/nvim-ufo",
+		enabled = false, -- Toggle this in your personal dotfiles to enable pretty folds via treesitter
 		dependencies = {
 			"kevinhwang91/promise-async",
 		},
