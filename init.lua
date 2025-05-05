@@ -50,8 +50,10 @@ vim.lsp.config("*", {
     capabilities = vim.lsp.protocol.make_client_capabilities(),
 })
 
-
 vim.lsp.enable(require("lsp_config").default_lsp_servers)
+
+-- Load auto commands
+require("autocmds")
 
 -- Any post-plugin configurations can be added
 if config_path_exists("/lua/personal/init.lua") then

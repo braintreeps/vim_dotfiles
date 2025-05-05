@@ -283,5 +283,44 @@ return {
 				fold_at_indent_level()
 			end, { desc = "Toggle folds at current indentation level"})
 		end,
+	},
+	{
+		"jinh0/eyeliner.nvim",
+		keys= {
+			"f", "F", "t", "T",
+			{ "<leader>uf", "<cmd>ToggleFTHighlighting<cr>", desc = "Toggle f/t highlight" }
+		},
+		opts = {
+			enabled_by_default = false, -- Toggle this to enable by default
+			highlight_on_key = true, -- Toggle this to switch to "always on" mode
+			dim = false, -- Toggle this to dim other characters on highlight
+			primary_highlight_color = "white", -- Customize the jump target color here
+			secondary_highlight_color = "red", -- Customize the secondary jump target color here
+			disabled_buftypes = { "nofile" }, -- Add disabled buffer types here
+			disabled_filetypes = { "NerdTree", "NvimTree", "NeoTree", "neo-tree" }, -- Add disabled file types here
+		},
+		config = function(_, opts)
+			local eyeliner = require("eyeliner")
+			eyeliner.setup(opts)
+
+			if not opts.enabled_by_default then
+				eyeliner.disable()
+			end
+
+			vim.api.nvim_set_hl(0, "EyelinerPrimary", { fg = opts.primary_highlight_color, bold = true, underline = true })
+			vim.api.nvim_set_hl(0, "EyelinerSecondary", { fg = opts.secondary_highlight_color, underline = true })
+
+			local eyeliner_enabled = require("eyeliner.main")["enabled?"]
+			vim.api.nvim_create_user_command("ToggleFTHighlighting", function()
+				if eyeliner_enabled() then
+					eyeliner.disable()
+					vim.notify("Disabled f/t higlighting (eyeliner.nvim)")
+				else
+					eyeliner.enable()
+					vim.notify("Enabled f/t highlighting (eyeliner.nvim)")
+				end
+			end, { desc = "Toggle f/t highlighting" })
+
+		end,
 	}
 }
