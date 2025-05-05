@@ -9,3 +9,7 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.diagnostic.config({
+    virtual_text = false,
+    virtual_lines = { current_line = true },
+})
