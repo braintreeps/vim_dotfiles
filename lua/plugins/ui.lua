@@ -9,7 +9,7 @@ local SwitchColorschemeKeyMap = require("lazy_utils").SwitchColorschemeKeyMap
 local is_inside_work_tree = {}
 
 function vim.find_files_from_project_git_root()
-  opts = Plugin.values(Config.plugins['telescope.nvim'], "opts").pickers.find_files
+  local opts = Plugin.values(Config.plugins['telescope.nvim'], "opts").pickers.find_files
 
   local cwd = vim.fn.getcwd()
   if is_inside_work_tree[cwd] == nil then
@@ -60,9 +60,9 @@ return {
 			"echasnovski/mini.bufremove",
 		},
 		keys = {
-			{ "<Leader><Leader>", "<cmd>lua vim.find_files_from_project_git_root()<CR>", desc = "Find files" },
-			{ "<Leader>ff", "<cmd>lua vim.find_files_from_project_git_root()<CR>", desc = "Find files" },
-			{ "<C-p>", "<cmd>lua vim.find_files_from_project_git_root()<CR>", desc = "Find files" },
+			{ "<Leader><Leader>", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+			{ "<Leader>ff", vim.find_files_from_project_git_root, desc = "Find (git) files" },
+			{ "<C-p>", vim.find_files_from_project_git_root, desc = "Find (git) files" },
 			{ "<Leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find (grep)" },
 			{
 				"<Leader>be",
