@@ -7,57 +7,48 @@ M.default_lsp_servers = {
 }
 
 function M.on_attach(_, bufnr)
-    local function buf_set_keymap(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    --- Sets keymaps with default options
+    --- @param modes string|string[]
+    --- @param lhs string
+    --- @param rhs string|function
+    --- @param opts? table
+    local function set(modes, lhs, rhs, opts)
+        local defaults = { noremap = true, silent = true, buffer = bufnr }
+        local local_opts = vim.tbl_deep_extend("force", defaults, opts or {})
+
+        vim.keymap.set(modes, lhs, rhs, local_opts)
     end
-
-    -- Mappings.
-    local opts = { noremap = true, silent = true }
-
-    -- Inspired by https://github.com/neovim/nvim-lspconfig/#keybindings-and-completion,
-    -- but with <leader> instead of <space>
 
     -- Navigation
-    buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    buf_set_keymap("n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-    buf_set_keymap("n", "<Leader>cf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-
-    -- HACK: this is a workaround since vim.o.winborder (nvim 0.11 feature) isn't widely supported yet
-    -- by UI plugins.
-    -- see: https://github.com/nvim-telescope/telescope.nvim/issues/3436#issuecomment-2775658101
-    local hover = vim.lsp.buf.hover
-    ---@diagnostic disable-next-line: duplicate-set-field
-    vim.lsp.buf.hover = function()
-        return hover({
-            border = "single",
-            max_width = math.floor(vim.o.columns * 0.7),
-            max_height = math.floor(vim.o.lines * 0.7),
-        })
-    end
+    set("n", "gD", vim.lsp.buf.declaration)
+    set("n", "gd", vim.lsp.buf.definition)
+    set("n", "<Leader>D", vim.lsp.buf.type_definition)
+    set("n", "<Leader>cf", vim.lsp.buf.format)
 
     -- Information
-    buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    buf_set_keymap("n", "<Leader>ds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
+    set("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, { desc = "Hover" })
+    set({ "n", "i" }, "<C-k>", function() vim.lsp.buf.signature_help({ border = "rounded" }) end,
+        { desc = "Signature help" })
+    set("n", "gh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
+    set("n", "gi", vim.lsp.buf.implementation)
+    set("n", "gr", vim.lsp.buf.references)
+    set("n", "<Leader>ds", vim.lsp.buf.document_symbol)
 
-    -- Diagnostics
-    buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-    buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-    buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-    buf_set_keymap("n", "<Leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+    -- -- Diagnostics
+    set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true}) end)
+    set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true}) end)
+    set("n", "<Leader>e", vim.diagnostic.open_float)
+    set("n", "<Leader>q", vim.diagnostic.setloclist)
 
     -- Refactoring
-    buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    buf_set_keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    set("n", "<Leader>rn", vim.lsp.buf.rename)
+    set("n", "<Leader>ca", vim.lsp.buf.code_action)
 
     -- Workspaces
-    buf_set_keymap("n", "<Leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-    buf_set_keymap("n", "<Leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-    buf_set_keymap("n", "<Leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-    buf_set_keymap("n", "<Leader>ws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
+    set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder)
+    set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder)
+    set("n", "<Leader>wl", function() vim.print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
+    set("n", "<Leader>ws", vim.lsp.buf.workspace_symbol)
 end
 
 return M
