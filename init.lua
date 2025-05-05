@@ -1,10 +1,7 @@
-local function config_path_exists(path)
-    return vim.uv.fs_stat(vim.fn.stdpath("config") .. path) ~= nil
-end
-
+local Utils = require("lazy_utils")
 -- set up options and any personal options
 require("options")
-if config_path_exists("/lua/personal/options.lua") then
+if Utils.config_path_exists("/lua/personal/options.lua") then
     require("personal.options")
 end
 
@@ -32,7 +29,7 @@ local lazy_spec = {
     { import = "plugins" },
 }
 
-if config_path_exists("/lua/personal/plugins") then
+if Utils.config_path_exists("/lua/personal/plugins") then
     -- lua indices start at 1, so we load our custom plugins after the base plugins
     table.insert(lazy_spec, 2, { import = "personal.plugins" })
 end
@@ -56,6 +53,6 @@ vim.lsp.enable(require("lsp_config").default_lsp_servers)
 require("autocmds")
 
 -- Any post-plugin configurations can be added
-if config_path_exists("/lua/personal/init.lua") then
+if Utils.config_path_exists("/lua/personal/init.lua") then
     require("personal.init")
 end
