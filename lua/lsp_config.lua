@@ -3,6 +3,7 @@ local M = {}
 --- List of servers to automatically install, configure, and enable.
 ---@type string[]
 M.default_lsp_servers = {
+    "bashls",
     "lua_ls",
 }
 
