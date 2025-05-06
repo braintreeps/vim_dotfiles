@@ -1,11 +1,33 @@
+local Utils = require("config.utils")
 
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+        event = "InsertEnter",
 		opts = {
-			suggestion = { enabled = false },
-			panel = { enabled = false },
+			suggestion = {
+				enabled = false, -- Toggle this to enable suggestions
+                auto_trigger = false, -- Toggle this on to get automatic suggestions as soon as you enter insert mode
+				keymap = {
+					accept = false -- This is handled by the `ai_accept` blink action instead
+				}
+			},
+			panel = {
+				enabled = false,
+			},
+
 		},
+		init = function()
+			Utils.cmp.actions.ai_accept = function()
+				if require("copilot.suggestion").is_visible() then
+					Utils.create_undo()
+					require("copilot.suggestion").accept()
+					return true
+				end
+			end
+		end
+
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
@@ -69,13 +91,6 @@ return {
 
 			chat.setup(opts)
 		end,
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		depdendencies = {
-			{ "zbirenbaum/copilot.lua" },
-		},
-		opts = {},
 	},
 	{
 		'AndreM222/copilot-lualine',

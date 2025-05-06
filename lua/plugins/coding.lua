@@ -1,121 +1,172 @@
 -- Coding: Faster coding with features such as snippets, autocompletion, and more.
 
 local LazyFileEvents = require("lazy_utils").LazyFileEvents
+local Utils = require("config.utils")
 
 return {
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {},
-	},
-	{
-		"numToStr/Comment.nvim",
-		event = LazyFileEvents,
-		opts = {},
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter" },
-		dependencies = {
-			{
-				"L3MON4D3/LuaSnip",
-				build = (function()
-					-- Build Step is needed for regex support in snippets
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-						return
-					end
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
-				},
-			},
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-emoji",
-			"andersevenrud/cmp-tmux",
-			"davidsierradz/cmp-conventionalcommits",
-			"onsails/lspkind-nvim",
-			"zbirenbaum/copilot-cmp",
-		},
-		config = function()
-			local cmp = require("cmp")
-			local lspkind = require("lspkind")
-			local defaults = require("cmp.config.default")()
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {},
+    },
+    {
+        "numToStr/Comment.nvim",
+        event = LazyFileEvents,
+        opts = {},
+    },
+    {
+        "saghen/blink.cmp",
+        version = "*",
+        opts_extend = {
+            "sources.completion.enabled_providers",
+            "sources.compat",
+            "sources.default",
+        },
+        dependencies = {
+            "mgalliou/blink-cmp-tmux",
+            "moyiz/blink-emoji.nvim",
+            "disrupted/blink-cmp-conventional-commits",
+            "rafamadriz/friendly-snippets",
+            "giuxtaposition/blink-cmp-copilot",
+            {
+                "saghen/blink.compat",
+                optional = true, -- make optional so it's only enabled if any extras need it
 
-			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources({ { name = "conventionalcommits" } }),
-			})
+                opts = {},
+            },
+        },
+        event = "InsertEnter",
 
-			cmp.setup({
-				sorting = defaults.sorting,
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
-				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					format = lspkind.cmp_format({
-						menu = {
-							buffer = "[Buffer]",
-							nvim_lsp = "[LSP]",
-							path = "[Path]",
-							emoji = "[Emoji]",
-							tmux = "[Tmux]",
-						},
-					}),
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-						if cmp.visible() then
-							local entry = cmp.get_selected_entry()
-							if not entry then
-								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-							end
-							cmp.confirm()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "copilot" },
-					{ name = "lazydev", group_index = 0 },
-					{ name = "nvim_lsp", max_item_count = 7 },
-					{ name = "path", max_item_count = 7 },
-				}, {
-					{
-						name = "buffer",
-						option = {
-							-- show visible buffers
-							get_bufnrs = function()
-								local bufs = {}
-								for _, win in ipairs(vim.api.nvim_list_wins()) do
-									bufs[vim.api.nvim_win_get_buf(win)] = true
-								end
-								return vim.tbl_keys(bufs)
-							end,
-						},
-					},
-					{ name = "tmux", max_item_count = 5 },
-					{ name = "emoji", max_item_count = 5 },
-				}),
-				window = {
-					documentation = cmp.config.window.bordered(),
-				},
-			})
-		end,
-	},
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            appearance = {
+                -- sets the fallback highlight groups to nvim-cmp's highlight groups
+                -- useful for when your theme doesn't support blink.cmp
+                -- will be removed in a future release, assuming themes add support
+                use_nvim_cmp_as_default = true,
+                -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font' l
+                --
+                -- adjusts spacing to ensure icons are aligned
+                nerd_font_variant = "mono",
+            },
+            completion = {
+                accept = {
+                    -- experimental auto-brackets support
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
+                menu = {
+                    draw = {
+                        treesitter = { "lsp" },
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 200,
+                },
+                ghost_text = {
+                    enabled = vim.g.ai_cmp,
+                },
+            },
+            sources = {
+                -- adding any nvim-cmp sources here will enable them
+                -- with blink.compat
+                compat = {},
+                default = { "copilot", "lazydev", "conventional_commits", "lsp", "path", "snippets", "buffer", "tmux", "emoji" },
+                providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-cmp-copilot",
+                        score_offset = 100,
+                        async = true,
+                    },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100, -- show at a higher priority than lsp
+                    },
+                    tmux = {
+                        module = "blink-cmp-tmux",
+                        name = "tmux",
+                        opts = {
+                            all_panes = false,
+                            capture_history = false,
+                            -- only suggest completions from `tmux` if the `trigger_chars` are used
+                            triggered_only = false,
+                            trigger_chars = { "." },
+                        },
+                    },
+                    emoji = {
+                        module = "blink-emoji",
+                        name = "Emoji",
+                        score_offset = 15, -- Tune by preference
+                        opts = {
+                            trigger_chars = { ":" },
+                        },
+                        should_show_items = function()
+                            return vim.tbl_contains(
+                                -- Enable emoji completion only for git commits and markdown.
+                                -- By default, enabled for all file-types.
+                                { "gitcommit", "markdown" },
+                                vim.o.filetype
+                            )
+                        end,
+                    },
+                    conventional_commits = {
+                        name = "Conventional Commits",
+                        module = "blink-cmp-conventional-commits",
+                        enabled = function()
+                            return vim.bo.filetype == "gitcommit"
+                        end,
+                    },
+                },
+            },
+            keymap = {
+                -- Add personal keymaps to this portion of blink config
+                preset = "none",
+                ["<C-n>"] = { "select_next" },
+                ["<C-p>"] = { "select_prev" },
+                ["<C-b>"] = { "scroll_documentation_up" },
+                ["<C-f>"] = { "scroll_documentation_down" },
+                ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+                ["<C-e>"] = { "cancel" },
+                ["<S-CR>"] = { "select_and_accept" },
+                ["<C-CR>"] = { "cancel", "fallback" },
+                ["<Tab>"] = {
+                    function(cmp)
+                        Utils.create_undo()
+                        if cmp.snippet_active() then
+                            return cmp.accept()
+                        else
+                            return cmp.select_and_accept()
+                        end
+                    end,
+                    Utils.cmp.map({ "snippet_forward", "ai_accept" }),
+                    "fallback",
+                },
+                ["<S-Tab>"] = { "snippet_backward", "fallback" },
+            },
+        },
+        ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
+        config = function(_, opts)
+            -- setup compat sources
+            local enabled = opts.sources.default
+            for _, source in ipairs(opts.sources.compat or {}) do
+                opts.sources.providers[source] = vim.tbl_deep_extend(
+                    "force",
+                    { name = source, module = "blink.compat.source" },
+                    opts.sources.providers[source] or {}
+                )
+                if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
+                    table.insert(enabled, source)
+                end
+            end
+            -- Unset custom prop to pass blink.cmp validation
+            opts.sources.compat = nil
+
+            require("blink.cmp").setup(opts)
+        end,
+    },
 }
