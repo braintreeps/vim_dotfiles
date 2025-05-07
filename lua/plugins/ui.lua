@@ -107,7 +107,7 @@ return {
         },
         opts = {
             defaults = {
-                file_ignore_patterns = { "node_modules/", ".git/refs/", ".git/logs", ".git/objects", "**/*.rbi" },
+                file_ignore_patterns = { "node_modules/", ".git/refs/", ".git/logs", ".git/objects", "sorbet/rbi/annotations/", "sorbet/rbi/dsl/", "sorbet/rbi/gems/" },
                 sorting_strategy = "ascending",
                 layout_config = {
                     prompt_position = 'top',
