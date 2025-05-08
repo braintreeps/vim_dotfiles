@@ -61,6 +61,36 @@ local function OpenBufferExplorer()
     })
 end
 
+local function scope_to_dir(prompt_bufnr, picker)
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+	local fb = require("telescope").extensions.file_browser
+	local current_line = action_state.get_current_line()
+
+	fb.file_browser({
+		files = false,
+		depth = false,
+		display_stat = { date = false, size = false, mode = false },
+		attach_mappings = function(prompt_bufnr)
+			actions.select_default:replace(function()
+				local entry_path = action_state.get_selected_entry().Path
+				local dir = entry_path:is_dir() and entry_path or entry_path:parent()
+				local relative = dir:make_relative(vim.fn.getcwd())
+				local absolute = dir:absolute()
+
+				picker({
+					results_title = relative .. "/",
+					cwd = absolute,
+					default_text = current_line,
+				})
+			end)
+
+			return true
+		end,
+	})
+
+end
+
 return {
     {
         "nvim-lualine/lualine.nvim",
@@ -174,13 +204,36 @@ return {
                     additional_args = function(_)
                         return { "--hidden" }
                     end,
+					mappings = {
+						i = {
+							["<C-t>"] = function(prompt_bufnr)
+								scope_to_dir(prompt_bufnr, require("telescope.builtin").live_grep)
+							end
+						}
+					}
                 },
                 find_files = {
                     hidden = true,
-                },
-                git_files = {
+					mappings = {
+						i = {
+							["<C-t>"] = function(prompt_bufnr)
+								scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files)
+							end
+						}
+					}
+				},
+				git_files = {
                     show_untracked = true,
-                },
+					file_ignore_patterns = { "node_modules", ".git", "**/*.rbi" },
+					hidden = true,
+					mappings = {
+						i = {
+							["<C-t>"] = function(prompt_bufnr)
+								scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files) -- intentional move to find_files to respect cwd option
+							end
+						}
+					}
+				},
             },
         },
     },
@@ -191,4 +244,12 @@ return {
             require("telescope").load_extension("ui-select")
         end,
     },
+	{
+        "nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		config = function(_, _opts)
+			require("telescope").load_extension("file_browser")
+		end
+
+	},
 }
