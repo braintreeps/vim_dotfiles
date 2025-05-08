@@ -73,7 +73,6 @@ return {
             open_files_do_not_replace_types = { "terminal", "qf", "Outline" },
             filesystem = {
                 bind_to_cwd = false,
-                follow_current_file = { enabled = true },
                 use_libuv_file_watcher = true,
                 filtered_items = {
                     hide_hidden = false,
