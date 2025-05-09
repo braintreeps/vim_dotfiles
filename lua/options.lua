@@ -14,3 +14,4 @@ vim.diagnostic.config({
     virtual_lines = { current_line = true },
 })
 vim.opt.autoread = false
+vim.opt.mouse=''
