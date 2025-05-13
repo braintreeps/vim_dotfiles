@@ -24,6 +24,7 @@ return {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
         cmd = "Mason",
+        tag = "v1.11.0",
         opts = {},
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
@@ -34,6 +35,7 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        tag = "v1.32.0",
         dependencies = { "williamboman/mason.nvim" },
         opts = {
             automatic_installation = true,
