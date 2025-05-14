@@ -28,7 +28,7 @@ return {
 			end
 		end,
         keys = {
-            { "<Leader>al", "<cmd>Copilot auth<cr>", desc = "[a]i [l]ogin (copilot)" },
+            { "<Leader>al", "<cmd>Copilot auth<cr>", desc = "Copilot: [a]i [l]ogin" },
         }
 	},
 	{
