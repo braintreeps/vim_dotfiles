@@ -74,7 +74,7 @@ return {
                 -- adding any nvim-cmp sources here will enable them
                 -- with blink.compat
                 compat = {},
-                default = { "copilot", "lazydev", "conventional_commits", "lsp", "path", "snippets", "buffer", "tmux", "emoji" },
+                default = { "copilot", "lazydev", "conventional_commits", "lsp", "path", "snippets", "buffer", "emoji" },
                 providers = {
                     copilot = {
                         name = "copilot",
@@ -86,17 +86,6 @@ return {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         score_offset = 100, -- show at a higher priority than lsp
-                    },
-                    tmux = {
-                        module = "blink-cmp-tmux",
-                        name = "tmux",
-                        opts = {
-                            all_panes = false,
-                            capture_history = false,
-                            -- only suggest completions from `tmux` if the `trigger_chars` are used
-                            triggered_only = false,
-                            trigger_chars = { "." },
-                        },
                     },
                     emoji = {
                         module = "blink-emoji",
