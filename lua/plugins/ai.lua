@@ -26,8 +26,10 @@ return {
 					return true
 				end
 			end
-		end
-
+		end,
+        keys = {
+            { "<Leader>al", "<cmd>Copilot auth<cr>", desc = "[a]i [l]ogin (copilot)" },
+        }
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
