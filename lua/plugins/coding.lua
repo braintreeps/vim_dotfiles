@@ -110,6 +110,11 @@ return {
                             return vim.bo.filetype == "gitcommit"
                         end,
                     },
+                    buffer = {
+                        enabled = function()
+                            return vim.bo.filetype ~= "markdown"
+                        end,
+                    },
                 },
             },
             keymap = {
