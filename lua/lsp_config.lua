@@ -43,6 +43,7 @@ function M.on_attach(_, bufnr)
         { desc = "LSP: jump to next [d]iagnostic" })
     set("n", "<Leader>e", vim.diagnostic.open_float, { desc = "LSP: diagnostic [e]xplain" })
     set("n", "<Leader>q", vim.diagnostic.setloclist, { desc = "LSP: add buffer diagnostics to [q]uickfix" })
+    set("n", "<Leader>dt", function () vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "[d]iagnostics [t]oggle" })
 
     -- Refactoring
     set("n", "<Leader>rn", vim.lsp.buf.rename, { desc = "LSP: [r]e[n]ame" })
