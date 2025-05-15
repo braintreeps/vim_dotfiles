@@ -48,32 +48,22 @@ return {
 		}
 	},
 	{ "tfnico/vim-gradle", event = LazyFileEvents },
-	{ "tpope/vim-projectionist" },
+	{
+        "tpope/vim-projectionist",
+        lazy = false,
+        priority = 12,
+    },
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-ragtag", event = LazyFileEvents },
 	{
 		"tpope/vim-rake",
+        lazy = false,
+        priority = 11,
 		keys = {
 			{ "<Leader>AA", "<cmd>A<CR>", desc = "Alternate file" },
 			{ "<Leader>AV", "<cmd>AV<CR>", desc = "Alternate w/ Vertical Split" },
 			{ "<Leader>AS", "<cmd>AS<CR>", desc = "Alternate w/ Horizontal Split" },
 		},
-		init = function()
-			vim.g["rails_projections"] = {
-				["script/*.rb"] = {
-					test = "spec/script/{}_spec.rb",
-				},
-				["spec/script/*_spec.rb"] = {
-					alternate = "script/{}.rb",
-				},
-				["app/lib/*.rb"] = {
-					test = "spec/lib/{}_spec.rb",
-				},
-				["lib/tasks/*.rake"] = {
-					test = "spec/lib/tasks/{}_rake_spec.rb",
-				},
-			}
-		end,
 	},
 	{ "tpope/vim-repeat" },
 	{ "tpope/vim-rhubarb", events = LazyFileEvents },
@@ -132,11 +122,32 @@ return {
 	{ "tpope/vim-markdown", ft = { "markdown" } },
 	{ "rodjek/vim-puppet", ft = { "puppet" } },
 	{ "tpope/vim-cucumber", ft = { "ruby" } },
-	{ "tpope/vim-rails", ft = { "ruby" } },
-	{ "rust-lang/rust.vim", ft = { "rust" } },
-	{ "jergason/scala.vim", ft = { "scala" } },
-	{ "derekwyatt/vim-scala", ft = { "scala" } },
-	{ "hashivim/vim-terraform", ft = { "terraform" } },
-	{ "leafgarland/typescript-vim", ft = { "typescript" } },
-	{ "lmeijvogel/vim-yaml-helper", ft = { "yaml" } },
+	{
+        "tpope/vim-rails",
+        lazy = false,
+        priority = 10,
+        ft = { "ruby" },
+        init = function ()
+            vim.g["rails_projections"] = {
+                ["script/*.rb"] = {
+                    test = "spec/script/{}_spec.rb",
+                },
+                ["spec/script/*_spec.rb"] = {
+                    alternate = "script/{}.rb",
+                },
+                ["app/lib/*.rb"] = {
+                    test = "spec/lib/{}_spec.rb",
+                },
+                ["lib/tasks/*.rake"] = {
+                    test = "spec/lib/tasks/{}_rake_spec.rb",
+                },
+            }
+        end
+    },
+    { "rust-lang/rust.vim", ft = { "rust" } },
+    { "jergason/scala.vim", ft = { "scala" } },
+    { "derekwyatt/vim-scala", ft = { "scala" } },
+    { "hashivim/vim-terraform", ft = { "terraform" } },
+    { "leafgarland/typescript-vim", ft = { "typescript" } },
+    { "lmeijvogel/vim-yaml-helper", ft = { "yaml" } },
 }
