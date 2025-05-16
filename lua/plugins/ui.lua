@@ -62,33 +62,32 @@ local function OpenBufferExplorer()
 end
 
 local function scope_to_dir(prompt_bufnr, picker)
-	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
-	local fb = require("telescope").extensions.file_browser
-	local current_line = action_state.get_current_line()
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+    local fb = require("telescope").extensions.file_browser
+    local current_line = action_state.get_current_line()
 
-	fb.file_browser({
-		files = false,
-		depth = false,
-		display_stat = { date = false, size = false, mode = false },
-		attach_mappings = function(prompt_bufnr)
-			actions.select_default:replace(function()
-				local entry_path = action_state.get_selected_entry().Path
-				local dir = entry_path:is_dir() and entry_path or entry_path:parent()
-				local relative = dir:make_relative(vim.fn.getcwd())
-				local absolute = dir:absolute()
+    fb.file_browser({
+        files = false,
+        depth = false,
+        display_stat = { date = false, size = false, mode = false },
+        attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+                local entry_path = action_state.get_selected_entry().Path
+                local dir = entry_path:is_dir() and entry_path or entry_path:parent()
+                local relative = dir:make_relative(vim.fn.getcwd())
+                local absolute = dir:absolute()
 
-				picker({
-					results_title = relative .. "/",
-					cwd = absolute,
-					default_text = current_line,
-				})
-			end)
+                picker({
+                    results_title = relative .. "/",
+                    cwd = absolute,
+                    default_text = current_line,
+                })
+            end)
 
-			return true
-		end,
-	})
-
+            return true
+        end,
+    })
 end
 
 return {
@@ -149,42 +148,42 @@ return {
                         end,
                         desc = "Delete Buffer",
                     },
-					-- stylua: ignore
-					{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+                    -- stylua: ignore
+                    { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
                 },
             },
         },
         -- stylua: ignore
         keys = {
             -- Misc keymaps
-            { "<Leader><Leader>", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-            { "<C-p>", vim.find_files_from_project_git_root, desc = "Find (git) files" },
-            { "<Leader>be", function() OpenBufferExplorer() end, desc = "Buffer Explorer" },
-            { "<Leader>gw", "<cmd>Telescope grep_string<CR>", desc = "Grep word in cursor" },
+            { "<Leader><Leader>", "<cmd>Telescope find_files<CR>",      desc = "Find files" },
+            { "<C-p>",            vim.find_files_from_project_git_root, desc = "Find (git) files" },
+            { "<Leader>be",       function() OpenBufferExplorer() end,  desc = "Buffer Explorer" },
+            { "<Leader>gw",       "<cmd>Telescope grep_string<CR>",     desc = "Grep word in cursor" },
             SwitchColorschemeKeyMap,
             -- "find" keymaps
-            { "<Leader>ff", vim.find_files_from_project_git_root, desc = "Find (git) files" },
-            { "<Leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find (grep)" },
-            { "<Leader>fb", function() OpenBufferExplorer() end, desc = "Find Buffers" },
-            { "<Leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Find Recent" },
-            { "<Leader>fh", "<cmd>Telescope man_pages<CR>", desc = "Find help pages" },
-            { "<Leader>fm", "<cmd>Telescope marks<CR>", desc = "Find marks" },
-            { "<Leader>fd", "<cmd>Telescope diagnostics bufnr=0<CR>", desc = "Document Diagnostics" },
-            { "<Leader>fD", "<cmd>Telescope diagnostics<CR>", desc = "Workspace Diagnostics" },
-            { "<Leader>fp", function() OpenPluginExplorer() end, desc = "Find Plugin File" },
+            { "<Leader>ff", vim.find_files_from_project_git_root,           desc = "Find (git) files" },
+            { "<Leader>fg", "<cmd>Telescope live_grep<CR>",                 desc = "Find (grep)" },
+            { "<Leader>fb", function() OpenBufferExplorer() end,            desc = "Find Buffers" },
+            { "<Leader>fr", "<cmd>Telescope oldfiles<CR>",                  desc = "Find Recent" },
+            { "<Leader>fh", "<cmd>Telescope man_pages<CR>",                 desc = "Find help pages" },
+            { "<Leader>fm", "<cmd>Telescope marks<CR>",                     desc = "Find marks" },
+            { "<Leader>fd", "<cmd>Telescope diagnostics bufnr=0<CR>",       desc = "Document Diagnostics" },
+            { "<Leader>fD", "<cmd>Telescope diagnostics<CR>",               desc = "Workspace Diagnostics" },
+            { "<Leader>fp", function() OpenPluginExplorer() end,            desc = "Find Plugin File" },
             -- "search" keymaps
-            { "<Leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
-            { '<Leader>s"', "<cmd>Telescope registers<CR>", desc = "Registers" },
-            { "<Leader>sa", "<cmd>Telescope autocommands<CR>", desc = "Auto commands" },
-            { "<Leader>sg", "<cmd>Telescope live_grep<CR>", desc = "Grep" },
+            { "<Leader>sk", "<cmd>Telescope keymaps<CR>",                   desc = "Keymaps" },
+            { '<Leader>s"', "<cmd>Telescope registers<CR>",                 desc = "Registers" },
+            { "<Leader>sa", "<cmd>Telescope autocommands<CR>",              desc = "Auto commands" },
+            { "<Leader>sg", "<cmd>Telescope live_grep<CR>",                 desc = "Grep" },
             { "<Leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Buffer Fuzzy Find" },
-            { "<Leader>sh", "<cmd>Telescope help_tags<CR>", desc = "Help Pages" },
-            { "<Leader>sC", "<cmd>Telescope commands<CR>", desc = "Commands" },
-            { "<Leader>sc", "<cmd>Telescope command_history<CR>", desc = "Command History" },
-            { "<Leader>so", "<cmd>Telescope vim_options<CR>", desc = "Options" },
-            { "<Leader>sw", "<cmd>Telescope grep_string<CR>", desc = "Word under cursor" },
-            { "<Leader>sw", "<cmd>Telescope grep_string<CR>", mode = "v", desc = "Selection" },
-            { "<Leader>sr", "<cmd>Telescope resume<CR>", desc = "Resume" },
+            { "<Leader>sh", "<cmd>Telescope help_tags<CR>",                 desc = "Help Pages" },
+            { "<Leader>sC", "<cmd>Telescope commands<CR>",                  desc = "Commands" },
+            { "<Leader>sc", "<cmd>Telescope command_history<CR>",           desc = "Command History" },
+            { "<Leader>so", "<cmd>Telescope vim_options<CR>",               desc = "Options" },
+            { "<Leader>sw", "<cmd>Telescope grep_string<CR>",               desc = "Word under cursor" },
+            { "<Leader>sw", "<cmd>Telescope grep_string<CR>",               mode = "v",                    desc = "Selection" },
+            { "<Leader>sr", "<cmd>Telescope resume<CR>",                    desc = "Resume" },
         },
         opts = {
             defaults = {
@@ -204,36 +203,36 @@ return {
                     additional_args = function(_)
                         return { "--hidden" }
                     end,
-					mappings = {
-						i = {
-							["<C-t>"] = function(prompt_bufnr)
-								scope_to_dir(prompt_bufnr, require("telescope.builtin").live_grep)
-							end
-						}
-					}
+                    mappings = {
+                        i = {
+                            ["<C-t>"] = function(prompt_bufnr)
+                                scope_to_dir(prompt_bufnr, require("telescope.builtin").live_grep)
+                            end
+                        }
+                    }
                 },
                 find_files = {
                     hidden = true,
-					mappings = {
-						i = {
-							["<C-t>"] = function(prompt_bufnr)
-								scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files)
-							end
-						}
-					}
-				},
-				git_files = {
+                    mappings = {
+                        i = {
+                            ["<C-t>"] = function(prompt_bufnr)
+                                scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files)
+                            end
+                        }
+                    }
+                },
+                git_files = {
                     show_untracked = true,
-					file_ignore_patterns = { "node_modules", ".git", "**/*.rbi" },
-					hidden = true,
-					mappings = {
-						i = {
-							["<C-t>"] = function(prompt_bufnr)
-								scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files) -- intentional move to find_files to respect cwd option
-							end
-						}
-					}
-				},
+                    file_ignore_patterns = { "node_modules", ".git", "**/*.rbi" },
+                    hidden = true,
+                    mappings = {
+                        i = {
+                            ["<C-t>"] = function(prompt_bufnr)
+                                scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files) -- intentional move to find_files to respect cwd option
+                            end
+                        }
+                    }
+                },
             },
         },
     },
@@ -244,12 +243,241 @@ return {
             require("telescope").load_extension("ui-select")
         end,
     },
-	{
+    {
         "nvim-telescope/telescope-file-browser.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-		config = function(_, _opts)
-			require("telescope").load_extension("file_browser")
-		end
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        config = function(_, _opts)
+            require("telescope").load_extension("file_browser")
+        end
 
-	},
+    },
+    {
+        "rebelot/heirline.nvim",
+        lazy = false,
+        dependencies = {
+            "nvim-lualine/lualine.nvim",
+            "nvim-tree/nvim-web-devicons",
+            {
+                "cosmicbuffalo/dropbar.nvim",
+                lazy = false,
+                opts = {
+                    menu = {
+                        -- turn this off to disable dynamic preview on menu movement
+                        -- dynamic previews can also be toggled per source (see below)
+                        -- preview = false,
+                    },
+                    bar = {
+                        -- turn off the automatic attachment behavior since it'll be
+                        -- handled by the component in heirline
+                        enable = false,
+                        sources = function(buf, _)
+                            local utils = require('dropbar.utils')
+                            local sources = require('dropbar.sources')
+                            if vim.bo[buf].ft == 'oil' then
+                                return {
+                                    sources.path
+                                }
+                            end
+                            if vim.bo[buf].ft == 'markdown' then
+                                return {
+                                    sources.path,
+                                    sources.markdown,
+                                }
+                            end
+                            if vim.bo[buf].buftype == 'terminal' then
+                                return {
+                                    sources.terminal,
+                                }
+                            end
+                            return {
+                                sources.path,
+                                utils.source.fallback({
+                                    sources.lsp,
+                                    -- sources.treesitter,
+                                }),
+                            }
+                        end
+                    },
+                    sources = {
+                        path = {
+                            -- Preview is turned off by default for the path source
+                            preview = false,
+                            -- This customizes the path source for oil buffers
+                            -- oil buffers will show the path relative to the
+                            -- git root, if available
+                            relative_to = function(buf, win)
+                                local bufname = vim.api.nvim_buf_get_name(buf)
+                                if vim.startswith(bufname, "oil://") then
+                                    local full_path = bufname:gsub('^%S+://', '', 1)
+                                    local git_root = vim.fs.find('.git',
+                                        { upward = true, path = full_path, type = 'directory' })
+                                    if git_root and #git_root > 0 then
+                                        local git_dir = vim.fs.dirname(git_root[1])
+                                        return vim.fs.dirname(git_dir)
+                                    end
+                                end
+
+                                local ok, cwd = pcall(vim.fn.getcwd, win)
+                                return ok and cwd or vim.fn.getcwd()
+                            end
+                        },
+                        lsp = {
+                            valid_symbols = {
+                                -- Customize this list to control what can show
+                                -- up as breadcrumbs in the dropbar winbar
+                                -- for lsp source
+                                'Module',
+                                'Namespace',
+                                'Class',
+                                'Method',
+                                'Function',
+                                'Constructor',
+                                'Array',
+                                'Object',
+                            }
+                        },
+                        treesitter = {
+                            valid_types = {
+                                -- TODO: This filtering doesn't actually work
+                                -- Customize this list to control what can show
+                                -- up as breadcrumbs in the dropbar winbar for
+                                -- treesitter source
+                                'class',
+                                'constructor',
+                                'do_statement',
+                                'function',
+                                'if_statement',
+                                'method',
+                                'namespace',
+                                'table',
+                                'type',
+                                'object',
+                            }
+                        }
+
+                    },
+                    icons = {
+                        -- Icons for dropbar can be customized here
+                        ui = {
+                            bar = {
+                                -- separator = " > ",
+                                separator = "  ",
+                                extends = "…",
+                            },
+                            menu = {
+                                -- indicator = "> ",
+                                indicator = " ",
+                                separator = " ",
+                            },
+                        },
+                    },
+                },
+                keys = {
+                    {
+                        "<leader>bo",
+                        function() require("dropbar.api").pick() end,
+                        desc = "Drop[b]ar - [O]pen Picker",
+                    },
+                },
+            },
+        },
+        opts = {
+            winbar_disabled_buftypes = { "nofile", "prompt", "help", "quickfix", "terminal" },
+            winbar_disabled_filetypes = { "^git.*", "fugitive", "Trouble", "dashboard", "neo-tree", "which-key", "lazygit" },
+            -- toggle this to remove the mode wapper on active winbar
+            enable_mode_wrapper = true,
+            -- customize mode color assignments here
+            -- (defaults are for inkline.nvim)
+            mode_colors = {
+                n = "orange",
+                i = "green",
+                v = "magenta",
+                V = "magenta",
+                ["\22"] = "magenta",
+                c = "gold",
+                s = "orange",
+                S = "orange",
+                ["\19"] = "orange",
+                R = "red",
+                r = "red",
+                ["!"] = "gray",
+                t = "teal",
+            },
+            -- customize heirline color mappings to colorscheme highlights here
+            -- (defaults are for inkline.nvim)
+            color_highlight_mappings = {
+                bright_bg = "Folded",
+                bright_fg = "Folded",
+                red = "DiagnosticError",
+                dark_red = "DiffDelete",
+                green = "String",
+                blue = "Function",
+                gray = "NonText",
+                orange = "Keyword",
+                yellow = "Todo",
+                purple = "Statement",
+                cyan = "Special",
+                diag_warn = "DiagnosticWarn",
+                diag_error = "DiagnosticError",
+                diag_hint = "DiagnosticHint",
+                diag_info = "DiagnosticInfo",
+                git_del = "diffDeleted",
+                git_add = "diffAdded",
+                git_change = "diffChanged",
+                modified = "CursorLineNr",
+            },
+            inactive_color = "#2d2d30",
+        },
+        config = function(_, opts)
+            local heirline_config = require("heirline_config")
+
+            local function setup_colors()
+                local h_map = opts.color_highlight_mappings
+                local h = heirline_config.get_highlight
+                return {
+                    bright_bg = h(h_map.bright_bg).bg,
+                    bright_fg = h(h_map.bright_fg).fg,
+                    red = h(h_map.red).fg,
+                    dark_red = h(h_map.dark_red).bg,
+                    green = h(h_map.green).fg,
+                    blue = h(h_map.blue).fg,
+                    gray = h(h_map.gray).fg,
+                    orange = h(h_map.orange).fg,
+                    yellow = h(h_map.yellow).bg,
+                    purple = h(h_map.purple).fg,
+                    cyan = h(h_map.cyan).fg,
+                    diag_warn = h(h_map.diag_warn).fg,
+                    diag_error = h(h_map.diag_error).fg,
+                    diag_hint = h(h_map.diag_hint).fg,
+                    diag_info = h(h_map.diag_info).fg,
+                    git_del = h(h_map.git_del).fg,
+                    git_add = h(h_map.git_add).fg,
+                    git_change = h(h_map.git_change).fg,
+                }
+            end
+            require("heirline").load_colors(setup_colors)
+
+            vim.api.nvim_create_augroup("Heirline", { clear = true })
+            vim.api.nvim_create_autocmd("ColorScheme", {
+                callback = function()
+                    utils.on_colorscheme(setup_colors)
+                end,
+                group = "Heirline",
+            })
+
+            require("heirline").setup({
+                winbar = heirline_config.build_winbar(opts),
+                opts = heirline_config.build_opts(opts),
+            })
+        end,
+        keys = {
+            {
+                "<leader>uW",
+                function()
+                    require("heirline_config").toggle_winbar()
+                end,
+                desc = "Toggle [U]I [W]inbar",
+            }
+        }
+    }
 }

@@ -16,3 +16,4 @@ vim.diagnostic.config({
 vim.opt.autoread = false
 vim.opt.mouse = ''
 vim.opt.undofile = true
+vim.g.disable_fancy_winbar = true
