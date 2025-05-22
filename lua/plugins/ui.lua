@@ -460,6 +460,7 @@ return {
             vim.api.nvim_create_augroup("Heirline", { clear = true })
             vim.api.nvim_create_autocmd("ColorScheme", {
                 callback = function()
+                    local utils = require("heirline.utils")
                     utils.on_colorscheme(setup_colors)
                 end,
                 group = "Heirline",
