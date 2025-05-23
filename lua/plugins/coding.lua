@@ -6,8 +6,8 @@ local Utils = require("config.utils")
 return {
     {
         "windwp/nvim-autopairs",
+        enabled = false, -- Toggle this in neovim-dotfiles-personal to turn on autopairs
         event = "InsertEnter",
-        opts = {},
     },
     {
         "numToStr/Comment.nvim",
