@@ -48,19 +48,13 @@ return {
 			},
 		},
 		build = "make tiktoken",
-		opts = function()
-			local user = vim.env.SSH_USERNAME or vim.env.USER or "User"
-			user = user:sub(1, 1):upper() .. user:sub(2)
-
-			return {
-				sticky = "#buffer",
-				highlight_headers = false,
-				separator = "---",
-				question_header = "#   " .. user .. " ",
-				answer_header = "##   Copilot ",
-				error_header = "> [!ERROR] Error",
-			}
-		end,
+        opts = {
+            sticky = "#buffer",
+            highlight_headers = false,
+            separator = "---",
+            answer_header = "##   Copilot ",
+            error_header = "> [!ERROR] Error",
+        },
 		keys = {
 			{ "<Leader>aa", "<cmd>CopilotChatToggle<CR>", desc = "Copilot: [a]i [a]sk", mode = { "n", "v" } },
 			{ "<Leader>ap", "<cmd>CopilotChatPrompts<CR>", desc = "Copilot: [a]i [p]rompt", mode = { "n", "v" } },
@@ -90,6 +84,10 @@ return {
 					vim.opt_local.number = false
 				end
 			})
+
+			local user = vim.env.SSH_USERNAME or vim.env.USER or "User"
+			user = user:sub(1, 1):upper() .. user:sub(2)
+            opts.question_header = "#   " .. user .. " "
 
 			chat.setup(opts)
 		end,
