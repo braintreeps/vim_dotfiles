@@ -29,6 +29,7 @@ end
 
 local function OpenBufferExplorer()
     require("telescope.builtin").buffers({
+        sort_mru = true,
         attach_mappings = function(prompt_bufnr, map)
             local action_state = require("telescope.actions.state")
             local bd = require("mini.bufremove").delete
