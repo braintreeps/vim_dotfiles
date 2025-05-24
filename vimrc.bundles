@@ -103,7 +103,8 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'samguyjones/vim-crosspaste'
 Plug 'nathanaelkane/vim-indent-guides'
 
-Plug 'github/copilot.vim'
+Plug 'github/copilot.vim', { 'branch': 'release' }
+Plug 'DanBradbury/copilot-chat.vim', {'branch': 'main'}
 
 if v:version >= 800 || has('nvim')
   Plug 'w0rp/ale'

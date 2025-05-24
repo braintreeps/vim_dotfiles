@@ -341,9 +341,21 @@ endif
 " Mappings
 " ---------------------
 "
-" [a]i [a]uto-[c]ompletions
+" Copilot: [a]i [a]uto-[c]ompletions
 map <silent> <leader>aac :call ToggleCopilotCompletions()<CR>
- 
+
+" Copilot: [a]i [a]sk
+noremap <silent> <leader>aa :call ToggleCopilotChat()<CR>
+
+" Copilot: [a]i [l]ogin
+noremap <silent> <leader>al :Copilot auth<CR>
+
+" Copilot: [a]i [m]odel selection
+noremap <silent> <leader>am :CopilotChatModels<CR>
+
+" Copilot: [a]i [e]xplain
+vmap <leader>ae <Plug>CopilotChatAddSelection
+
 " Functions
 " ---------------------
 
@@ -356,6 +368,22 @@ func! ToggleCopilotCompletions()
   else
     let g:copilot_enabled = 1
     echo "Copilot completions enabled"
+  endif
+endfunc
+
+func! ToggleCopilotChat()
+  if g:copilot_chat_active_buffer != -1
+    execute 'bd' g:copilot_chat_active_buffer
+  else
+    execute 'CopilotChatOpen'
+  endif
+endfunc
+
+func! GotoCopilotChat()
+  if g:copilot_chat_active_buffer != -1
+    execute 'CopilotChatFocus'
+  else
+    execute 'CopilotChatOpen'
   endif
 endfunc
 
@@ -401,6 +429,7 @@ map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
 map <silent> <leader>fm :Maps<CR>
+map <silent> <leader>sk :Maps<CR>
 
 map <silent> <C-p> :Files<CR>
 
