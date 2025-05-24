@@ -108,3 +108,11 @@ CrossPaste
 \qp - Send current block of text (from blank line before to semicolon after)
       prompting for text substitutions
 ```
+
+GenAI Chat (via Copilot)
+
+```
+\al - "[a]i [l]ogin" - auth to copilot
+\aa - "[a]sk [a]i" - open a copilot chat window (this is a toggle)
+\am - "[a]i [m]odel" - select a model
+```
