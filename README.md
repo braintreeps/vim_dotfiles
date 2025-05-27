@@ -65,6 +65,17 @@ or try out new plugins to optimize your personal workflows, head on over to the
 [`neovim-dotfiles-personal.scaffold`][neovim-dotfiles-personal.scaffold] repo to see how to easily integrate your
 customizations!
 
+### GitHub Copilot
+
+See [this Confluence](https://paypal.atlassian.net/wiki/spaces/~701219270873f820e4a768dc67670670c499d/pages/2246970746/Getting+started+with+neovim+and+Copilot+at+Braintree) for detailed setup instructions.
+
+#### Authenticate
+`:Copilot auth` or `\al`
+
+#### Tab completion
+To cycle between tab-completed suggestions, use `C-n` and `C-p` (Vim shorthand
+for Control n and Control p).
+
 ## ⚙️ Installation Guide
 
 - Back up your current Neovim files (if any):
