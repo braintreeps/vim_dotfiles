@@ -43,7 +43,8 @@ local function OpenBufferExplorer()
                         return pcall(vim.api.nvim_buf_delete, bufnr, { force = force })
                     elseif vim.fn.getbufvar(bufnr, "&modified") == 1 then
                         -- stylua: ignore
-                        local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname(bufnr)), "&Yes\n&No\n&Cancel")
+                        local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname(bufnr)),
+                            "&Yes\n&No\n&Cancel")
                         if choice == 1 then -- Yes
                             vim.api.nvim_buf_call(bufnr, function()
                                 vim.cmd("write")
@@ -251,7 +252,6 @@ return {
         config = function(_, _opts)
             require("telescope").load_extension("file_browser")
         end
-
     },
     {
         "rebelot/heirline.nvim",
@@ -260,7 +260,7 @@ return {
             "nvim-lualine/lualine.nvim",
             "nvim-tree/nvim-web-devicons",
             {
-                "cosmicbuffalo/dropbar.nvim",
+                "Bekaboo/dropbar.nvim",
                 lazy = false,
                 opts = {
                     menu = {
