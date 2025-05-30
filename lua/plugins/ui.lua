@@ -195,8 +195,47 @@ return {
                 layout_config = {
                     prompt_position = "top",
                     horizontal = {
-                        width = { padding = 0 },
-                        height = { padding = 0 },
+                        width = {
+                            padding = function(_, max_columns, _)
+                                -- On small terminals it's not worth spending
+                                -- space on the context of behind the picker, so
+                                -- make it full width.
+                                --
+                                -- But on larger terminals, it's desirable to
+                                -- show context so that people don't lose track
+                                -- of where they were. For example, it makes it
+                                -- easier to see what pane you trigger the
+                                -- picker from and treat the picker as a modal.
+                                -- Otherwise with the picker's split list/preview
+                                -- it's easy for the picker (e.g., when
+                                -- triggered from a right pane) to feel like
+                                -- you've been moved to the left pane, and then
+                                -- when a file/buffer is selected it's visually
+                                -- jarring/confusing when you end back up in the
+                                -- right pane.
+                                if max_columns <= 80 then
+                                    return 0
+                                else
+                                    return math.ceil(max_columns * 0.04 + 2)
+                                end
+                            end,
+                        },
+                        height = {
+                            padding = function(_, _, max_lines)
+                                -- On small terminals it's not worth spending
+                                -- space on the context of behind the picker, so
+                                -- make it full height.
+                                --
+                                -- But on larger terminals, it's desirable to
+                                -- show context so that people don't lose track
+                                -- of where they were.
+                                if max_lines <= 30 then
+                                    return 0
+                                else
+                                    return math.ceil(max_lines * 0.03 + 2)
+                                end
+                            end,
+                        },
                         preview_width = 0.5,
                     },
                 },
