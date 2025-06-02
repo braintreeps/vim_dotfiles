@@ -43,7 +43,7 @@ return {
 					'nvim-tree/nvim-web-devicons',
 				},
 				opts = {
-					file_types = { 'markdown', 'copilot-chat' },
+					file_types = { 'copilot-chat' },
 				},
 			},
 		},
