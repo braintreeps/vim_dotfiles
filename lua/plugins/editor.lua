@@ -24,6 +24,8 @@ return {
                 { "<leader>w", group = "Windows" },
                 { "<leader>x", group = "Diagnostics/Quickfix" },
                 { "<leader><tab>", group = "Tabs" },
+                { "zj", desc = "Move to next fold" },
+                { "zk", desc = "Move to previous fold" },
             },
         },
     },
