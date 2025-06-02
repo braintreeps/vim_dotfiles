@@ -13,6 +13,10 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
+-- Account for line wraps when moving the cursor up/down
+map("n", "k", "gk")
+map("n", "j", "gj")
+
 -- Paste over a selection without overwriting clipboard
 map("x", "p", function()
   return "pgv\"" .. vim.v.register .. "y"
