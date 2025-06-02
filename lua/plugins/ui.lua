@@ -521,5 +521,13 @@ return {
                 desc = "Toggle [U]I [W]inbar",
             }
         }
-    }
+    },
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        build = 'make',
+        config = function(_, _opts)
+            require("telescope").load_extension("fzf")
+        end,
+    },
 }
