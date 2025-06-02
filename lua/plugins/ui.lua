@@ -196,7 +196,7 @@ return {
                     prompt_position = "top",
                     horizontal = {
                         width = {
-                            padding = function(_, max_columns, _)
+                            padding = function(_self, max_columns, _max_lines)
                                 -- On small terminals it's not worth spending
                                 -- space on the context of behind the picker, so
                                 -- make it full width.
@@ -221,7 +221,7 @@ return {
                             end,
                         },
                         height = {
-                            padding = function(_, _, max_lines)
+                            padding = function(_self, _max_columns, max_lines)
                                 -- On small terminals it's not worth spending
                                 -- space on the context of behind the picker, so
                                 -- make it full height.
