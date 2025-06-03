@@ -8,6 +8,9 @@ map({'n', 'v'}, '<Leader>cc', '<cmd>normal gcc<cr>', { desc = "Comments the curr
 -- Remove trailing whitespace
 map('n', '<Leader>cw', '<cmd>%s/\\s\\+$//e<cr>', { desc = "Remove trailing whitespace" })
 
+-- For those who hold shift too long
+vim.api.nvim_create_user_command('W', 'w', {})
+
 -- More granular undo breakpoints
 map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
