@@ -1,4 +1,4 @@
-local LazyFileEvents = require("lazy_utils").LazyFileEvents
+local LazyFileEvents = require("config.utils.lazy").LazyFileEvents
 
 return {
 	-- Everything else!!!

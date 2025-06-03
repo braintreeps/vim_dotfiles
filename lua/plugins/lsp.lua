@@ -1,7 +1,7 @@
 -- LSP: configure the Language Server Protocol (LSP) client.
 
-local LazyFileEvents = require("lazy_utils").LazyFileEvents
-local lsp_servers = require("lsp_config").default_lsp_servers
+local LazyFileEvents = require("config.utils.lazy").LazyFileEvents
+local lsp_servers = require("config.lsp").default_lsp_servers
 
 return {
     {

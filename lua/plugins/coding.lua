@@ -1,7 +1,7 @@
 -- Coding: Faster coding with features such as snippets, autocompletion, and more.
 
-local LazyFileEvents = require("lazy_utils").LazyFileEvents
 local Utils = require("config.utils")
+local LazyFileEvents = Utils.lazy.LazyFileEvents
 
 return {
     {

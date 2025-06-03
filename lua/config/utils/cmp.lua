@@ -1,5 +1,4 @@
-local Utils = require("config.utils")
-
+-- Utility functions related to completion functionality
 local M = {}
 
 M.actions = {

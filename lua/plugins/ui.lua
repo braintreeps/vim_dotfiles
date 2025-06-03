@@ -1,12 +1,11 @@
 -- UI: Enhance the user interface with features such as status line, buffer line, indentation guides, dashboard, and icons.
-local Utils = require("lazy_utils")
-local SwitchColorschemeKeyMap = Utils.SwitchColorschemeKeyMap
+local Utils = require("config.utils")
 
 -- cache results of rev-parse
 local is_inside_work_tree = {}
 
 function vim.find_files_from_project_git_root()
-    local opts = Utils.opts("telescope.nvim").pickers.find_files
+    local opts = Utils.lazy.opts("telescope.nvim").pickers.find_files
     local cwd = vim.fn.getcwd()
     if is_inside_work_tree[cwd] == nil then
         vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -159,34 +158,34 @@ return {
         -- stylua: ignore
         keys = {
             -- Misc keymaps
-            { "<Leader><Leader>", "<cmd>Telescope find_files<CR>",      desc = "Find files" },
-            { "<C-p>",            vim.find_files_from_project_git_root, desc = "Find (git) files" },
-            { "<Leader>be",       function() OpenBufferExplorer() end,  desc = "Buffer Explorer" },
-            { "<Leader>gw",       "<cmd>Telescope grep_string<CR>",     desc = "Grep word in cursor" },
-            SwitchColorschemeKeyMap,
+            { "<Leader><Leader>", "<cmd>Telescope find_files<CR>",                desc = "Find files" },
+            { "<C-p>",            vim.find_files_from_project_git_root,           desc = "Find (git) files" },
+            { "<Leader>be",       function() OpenBufferExplorer() end,            desc = "Buffer Explorer" },
+            { "<Leader>gw",       "<cmd>Telescope grep_string<CR>",               desc = "Grep word in cursor" },
+            Utils.colors.SwitchColorschemeKeyMap,
             -- "find" keymaps
-            { "<Leader>ff", vim.find_files_from_project_git_root,           desc = "Find (git) files" },
-            { "<Leader>fg", "<cmd>Telescope live_grep<CR>",                 desc = "Find (grep)" },
-            { "<Leader>fb", function() OpenBufferExplorer() end,            desc = "Find Buffers" },
-            { "<Leader>fr", "<cmd>Telescope oldfiles<CR>",                  desc = "Find Recent" },
-            { "<Leader>fh", "<cmd>Telescope man_pages<CR>",                 desc = "Find help pages" },
-            { "<Leader>fm", "<cmd>Telescope marks<CR>",                     desc = "Find marks" },
-            { "<Leader>fd", "<cmd>Telescope diagnostics bufnr=0<CR>",       desc = "Document Diagnostics" },
-            { "<Leader>fD", "<cmd>Telescope diagnostics<CR>",               desc = "Workspace Diagnostics" },
-            { "<Leader>fp", function() OpenPluginExplorer() end,            desc = "Find Plugin File" },
+            { "<Leader>ff",       vim.find_files_from_project_git_root,           desc = "Find (git) files" },
+            { "<Leader>fg",       "<cmd>Telescope live_grep<CR>",                 desc = "Find (grep)" },
+            { "<Leader>fb",       function() OpenBufferExplorer() end,            desc = "Find Buffers" },
+            { "<Leader>fr",       "<cmd>Telescope oldfiles<CR>",                  desc = "Find Recent" },
+            { "<Leader>fh",       "<cmd>Telescope man_pages<CR>",                 desc = "Find help pages" },
+            { "<Leader>fm",       "<cmd>Telescope marks<CR>",                     desc = "Find marks" },
+            { "<Leader>fd",       "<cmd>Telescope diagnostics bufnr=0<CR>",       desc = "Document Diagnostics" },
+            { "<Leader>fD",       "<cmd>Telescope diagnostics<CR>",               desc = "Workspace Diagnostics" },
+            { "<Leader>fp",       function() OpenPluginExplorer() end,            desc = "Find Plugin File" },
             -- "search" keymaps
-            { "<Leader>sk", "<cmd>Telescope keymaps<CR>",                   desc = "Keymaps" },
-            { '<Leader>s"', "<cmd>Telescope registers<CR>",                 desc = "Registers" },
-            { "<Leader>sa", "<cmd>Telescope autocommands<CR>",              desc = "Auto commands" },
-            { "<Leader>sg", "<cmd>Telescope live_grep<CR>",                 desc = "Grep" },
-            { "<Leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Buffer Fuzzy Find" },
-            { "<Leader>sh", "<cmd>Telescope help_tags<CR>",                 desc = "Help Pages" },
-            { "<Leader>sC", "<cmd>Telescope commands<CR>",                  desc = "Commands" },
-            { "<Leader>sc", "<cmd>Telescope command_history<CR>",           desc = "Command History" },
-            { "<Leader>so", "<cmd>Telescope vim_options<CR>",               desc = "Options" },
-            { "<Leader>sw", "<cmd>Telescope grep_string<CR>",               desc = "Word under cursor" },
-            { "<Leader>sw", "<cmd>Telescope grep_string<CR>",               mode = "v",                    desc = "Selection" },
-            { "<Leader>sr", "<cmd>Telescope resume<CR>",                    desc = "Resume" },
+            { "<Leader>sk",       "<cmd>Telescope keymaps<CR>",                   desc = "Keymaps" },
+            { '<Leader>s"',       "<cmd>Telescope registers<CR>",                 desc = "Registers" },
+            { "<Leader>sa",       "<cmd>Telescope autocommands<CR>",              desc = "Auto commands" },
+            { "<Leader>sg",       "<cmd>Telescope live_grep<CR>",                 desc = "Grep" },
+            { "<Leader>sb",       "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Buffer Fuzzy Find" },
+            { "<Leader>sh",       "<cmd>Telescope help_tags<CR>",                 desc = "Help Pages" },
+            { "<Leader>sC",       "<cmd>Telescope commands<CR>",                  desc = "Commands" },
+            { "<Leader>sc",       "<cmd>Telescope command_history<CR>",           desc = "Command History" },
+            { "<Leader>so",       "<cmd>Telescope vim_options<CR>",               desc = "Options" },
+            { "<Leader>sw",       "<cmd>Telescope grep_string<CR>",               desc = "Word under cursor" },
+            { "<Leader>sw",       "<cmd>Telescope grep_string<CR>",               mode = "v",                        desc = "Selection" },
+            { "<Leader>sr",       "<cmd>Telescope resume<CR>",                    desc = "Resume" },
         },
         opts = {
             defaults = {
@@ -265,7 +264,7 @@ return {
                 },
                 git_files = {
                     show_untracked = true,
-                    file_ignore_patterns = { "node_modules", ".git", "**/*.rbi" },
+                    file_ignore_patterns = { "node_modules/", ".git/refs/", ".git/logs", ".git/objects", "**/*.rbi" },
                     hidden = true,
                     mappings = {
                         i = {
@@ -428,73 +427,17 @@ return {
             -- toggle this to remove the mode wapper on active winbar
             enable_mode_wrapper = true,
             -- customize mode color assignments here
-            -- (defaults are for inkline.nvim)
-            mode_colors = {
-                n = "orange",
-                i = "green",
-                v = "magenta",
-                V = "magenta",
-                ["\22"] = "magenta",
-                c = "gold",
-                s = "orange",
-                S = "orange",
-                ["\19"] = "orange",
-                R = "red",
-                r = "red",
-                ["!"] = "gray",
-                t = "teal",
-            },
+            -- (settings for inkline or tokyonight are automatically applied)
+            mode_colors = Utils.colors.get_mode_colors,
             -- customize heirline color mappings to colorscheme highlights here
-            -- (defaults are for inkline.nvim)
-            color_highlight_mappings = {
-                bright_bg = "Folded",
-                bright_fg = "Folded",
-                red = "DiagnosticError",
-                dark_red = "DiffDelete",
-                green = "String",
-                blue = "Function",
-                gray = "NonText",
-                orange = "Keyword",
-                yellow = "Todo",
-                purple = "Statement",
-                cyan = "Special",
-                diag_warn = "DiagnosticWarn",
-                diag_error = "DiagnosticError",
-                diag_hint = "DiagnosticHint",
-                diag_info = "DiagnosticInfo",
-                git_del = "diffDeleted",
-                git_add = "diffAdded",
-                git_change = "diffChanged",
-                modified = "CursorLineNr",
-            },
+            -- (settings for inkline or tokyonight are automatically applied)
+            color_highlight_mappings = Utils.colors.get_highlight_mappings,
             inactive_color = "#2d2d30",
         },
         config = function(_, opts)
-            local heirline_config = require("heirline_config")
-
-            local function setup_colors()
-                local h_map = opts.color_highlight_mappings
-                local h = heirline_config.get_highlight
-                return {
-                    bright_bg = h(h_map.bright_bg).bg,
-                    bright_fg = h(h_map.bright_fg).fg,
-                    red = h(h_map.red).fg,
-                    dark_red = h(h_map.dark_red).bg,
-                    green = h(h_map.green).fg,
-                    blue = h(h_map.blue).fg,
-                    gray = h(h_map.gray).fg,
-                    orange = h(h_map.orange).fg,
-                    yellow = h(h_map.yellow).bg,
-                    purple = h(h_map.purple).fg,
-                    cyan = h(h_map.cyan).fg,
-                    diag_warn = h(h_map.diag_warn).fg,
-                    diag_error = h(h_map.diag_error).fg,
-                    diag_hint = h(h_map.diag_hint).fg,
-                    diag_info = h(h_map.diag_info).fg,
-                    git_del = h(h_map.git_del).fg,
-                    git_add = h(h_map.git_add).fg,
-                    git_change = h(h_map.git_change).fg,
-                }
+            local heirline_config = require("config.heirline")
+            local setup_colors = function()
+                return Utils.colors.setup_heirline_colors(opts)
             end
             require("heirline").load_colors(setup_colors)
 
@@ -516,7 +459,7 @@ return {
             {
                 "<leader>uW",
                 function()
-                    require("heirline_config").toggle_winbar()
+                    require("config.heirline").toggle_winbar()
                 end,
                 desc = "Toggle [U]I [W]inbar",
             }

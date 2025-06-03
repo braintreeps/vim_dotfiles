@@ -1,6 +1,6 @@
 -- Editor: Provides functionality like a file explorer, search and replace, fuzzy finding, git integration.
 
-local LazyFileEvents = require("lazy_utils").LazyFileEvents
+local LazyFileEvents = require("config.utils.lazy").LazyFileEvents
 
 return {
     {

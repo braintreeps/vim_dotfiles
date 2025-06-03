@@ -1,11 +1,11 @@
-local Utils = require("lazy_utils")
+local Utils = require("config.utils")
 -- set up options and any personal options
-require("options")
+require("config.options")
 if Utils.config_path_exists("/lua/personal/options.lua") then
     require("personal.options")
 end
 
-require("keymaps")
+require("config.keymaps")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -43,7 +43,7 @@ require("lazy").setup({
 
 -- Set up LSPs
 vim.lsp.config("*", {
-    on_attach = require("lsp_config").on_attach,
+    on_attach = require("config.lsp").on_attach,
     capabilities = vim.lsp.protocol.make_client_capabilities(),
 })
 
@@ -58,10 +58,10 @@ vim.lsp.config("lua_ls", {
     },
 })
 
-vim.lsp.enable(require("lsp_config").default_lsp_servers)
+vim.lsp.enable(require("config.lsp").default_lsp_servers)
 
 -- Load auto commands
-require("autocmds")
+require("config.autocmds")
 
 -- Any post-plugin configurations can be added
 if Utils.config_path_exists("/lua/personal/init.lua") then

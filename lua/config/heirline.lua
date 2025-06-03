@@ -45,6 +45,16 @@ end
 
 function M.build_winbar(opts)
     local h_map = opts.color_highlight_mappings
+    local get_h_map
+
+    if type(h_map) == "function" then
+        get_h_map = h_map
+        h_map = get_h_map()
+    else
+        get_h_map = function()
+            return h_map
+        end
+    end
     local Align = { provider = "%=" }
     local Space = { provider = " " }
 
@@ -92,17 +102,17 @@ function M.build_winbar(opts)
                 return vim.bo.modified
             end,
             provider = " [+]",
-            hl = { fg = h(h_map.modified).fg, bold = true },
+            hl = { fg = h(get_h_map().modified).fg, bold = true },
         },
     }
 
     local FileNameModifier = {
         hl = function()
             if vim.bo.modified then
-                return { fg = h(h_map.modified).fg, bold = true, force = true }
+                return { fg = h(get_h_map().modified).fg, bold = true, force = true }
             end
 
-            return { fg = h(h_map.bright_fg).fg }
+            return { fg = h(get_h_map().bright_fg).fg }
         end,
     }
 
@@ -128,6 +138,16 @@ function M.build_winbar(opts)
 
     -- local component_separators = { left = "", right = "" }
     local section_separators = { left = "", right = "" }
+    local mode_colors = opts.mode_colors
+    local get_mode_colors
+    if type(mode_colors) == "function" then
+        get_mode_colors = mode_colors
+        mode_colors = get_mode_colors()
+    else
+        get_mode_colors = function()
+            return mode_colors
+        end
+    end
 
     -- The mode wrappers sync with lualine to add more visual indication
     -- for the current window and mode
@@ -135,9 +155,9 @@ function M.build_winbar(opts)
         init = function(self)
             self.mode = vim.fn.mode(1)
             self.short_mode = self.mode:sub(1, 1)
+            self.mode_colors = get_mode_colors()
         end,
         static = {
-            mode_colors = opts.mode_colors,
             inactive_color = opts.inactive_color,
         },
         {
@@ -163,9 +183,9 @@ function M.build_winbar(opts)
         init = function(self)
             self.mode = vim.fn.mode(1)
             self.short_mode = self.mode:sub(1, 1)
+            self.mode_colors = get_mode_colors()
         end,
         static = {
-            mode_colors = opts.mode_colors,
             inactive_color = opts.inactive_color,
         },
         {
