@@ -20,9 +20,11 @@ return {
 			},
 		},
 		opts = {
+            notify_on_error = true,
 			log_level = vim.log.levels.INFO,
 			formatters_by_ft = {
 				sql = { "sqlfluff" },
+                lua = { "stylua" },
 			},
 			formatters = {
 				sqlfluff = {

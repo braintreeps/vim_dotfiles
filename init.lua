@@ -41,24 +41,6 @@ require("lazy").setup({
     },
 })
 
--- Set up LSPs
-vim.lsp.config("*", {
-    on_attach = require("config.lsp").on_attach,
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
-})
-
--- Configure lua_ls to allow unused variables prefixed with '_'
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            diagnostics = {
-                unusedLocalExclude = { "_*" }, -- Allow variables/arguments starting with '_' to be unused
-            },
-        },
-    },
-})
-
-vim.lsp.enable(require("config.lsp").default_lsp_servers)
 
 -- Load auto commands
 require("config.autocmds")
