@@ -264,7 +264,6 @@ return {
                 },
                 git_files = {
                     show_untracked = true,
-                    file_ignore_patterns = { "node_modules/", ".git/refs/", ".git/logs", ".git/objects", "**/*.rbi" },
                     hidden = true,
                     mappings = {
                         i = {
