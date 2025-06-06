@@ -15,6 +15,10 @@ function M.on_attach(_client, bufnr, opts)
     --- @param rhs string|function
     --- @param opts? table
     local function set(modes, lhs, rhs, opts)
+        -- passing something other than a string will disable the keymap
+        if type(lhs) ~= "string" then
+            return
+        end
         local defaults = { noremap = true, silent = true, buffer = bufnr }
         local local_opts = vim.tbl_deep_extend("force", defaults, opts or {})
 
