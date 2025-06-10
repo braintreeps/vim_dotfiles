@@ -246,6 +246,7 @@ elseif filereadable('settings.gradle') || executable('./gradlew')
 endif
 
 let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:asyncomplete_auto_popup = 0
 
 function! s:setup_vim_lsp() abort
