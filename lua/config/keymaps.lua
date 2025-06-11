@@ -2,6 +2,9 @@ local map = vim.keymap.set
 -- Normal mode mapping for removing highlight from text search
 map('n', '<Leader>nh', '<cmd>nohls<cr>', { desc = "Removes text searching highlight" })
 
+-- Open dotfiles updater TUI
+map('n', '<Leader>e', function() require("config.dotfiles_updater").open() end, { desc = "Open dotfiles updater" })
+
 -- Normal and visual mode mapping for commenting lines
 map({'n', 'v'}, '<Leader>cc', '<cmd>normal gcc<cr>', { desc = "Comments the current or highlighted lines" })
 
