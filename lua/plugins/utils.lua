@@ -1,4 +1,49 @@
+local Utils = require("config.utils")
+local LazyFileEvents = Utils.lazy.LazyFileEvents
+
 return {
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        event = LazyFileEvents,
+        cmd = { "IBLEnable", "IBLDisable", "IBLToggle", "IBLEnableScope", "IBLDisableScope", "IBLToggleScope" },
+        keys = {
+            {
+                "<leader>uI",
+                function()
+                    require("ibl").setup_buffer(0, { enabled = not require("ibl.config").get_config(0).enabled })
+                end,
+                desc = "Toggle Indention Guides",
+            },
+        },
+        opts = function()
+            return {
+                indent = {
+                    char = "│",
+                    tab_char = "│",
+                },
+                scope = { show_start = false, show_end = false },
+                exclude = {
+                    filetypes = {
+                        "Trouble",
+                        "alpha",
+                        "dashboard",
+                        "help",
+                        "lazy",
+                        "mason",
+                        "neo-tree",
+                        "notify",
+                        "snacks_dashboard",
+                        "snacks_notif",
+                        "snacks_terminal",
+                        "snacks_win",
+                        "toggleterm",
+                        "trouble",
+                    },
+                },
+            }
+        end,
+    },
     {
         "folke/snacks.nvim",
         priority = 1000,
@@ -18,14 +63,6 @@ return {
 
 					]],
                 }
-            },
-            indent = {
-                filter = function(buf)
-                    return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype ~= "nofile"
-                end,
-                animate = {
-                    enabled = false,
-                },
             },
             lazygit = {
                 config = {
@@ -48,18 +85,7 @@ return {
             { "<leader>b.", function() Snacks.scratch() end,        desc = "New Scratch [b]uffer" },
             { "<leader>bS", function() Snacks.scratch.select() end, desc = "Scratch [b]uffer [S]elect" },
             { "<leader>uZ", function() Snacks.zen() end,            desc = "[Z]en mode" },
-            {
-                "<leader>uI",
-                function()
-                    if Snacks.indent.enabled then
-                        Snacks.indent.disable()
-                    else
-                        Snacks.indent.enable()
-                    end
-                end,
-                desc = "Toggle: [u]i [I]ndentation guides"
-            },
-        }
+        },
     },
     {
         "anuvyklack/windows.nvim",
