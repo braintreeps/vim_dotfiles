@@ -52,6 +52,12 @@ return {
         priority = 1000,
         lazy = false,
         keys = { SwitchColorschemeKeyMap },
+        ---@module "inkline.config"
+        ---@type inkline.Config
+        opts = {
+            transparent = true,
+            dim_inactive_windows = false,
+        },
         config = function(_, opts)
             require("inkline").setup(opts)
             vim.cmd.colorscheme("inkline")
