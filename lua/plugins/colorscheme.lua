@@ -57,6 +57,7 @@ return {
         opts = {
             transparent = true,
             dim_inactive_windows = false,
+            purple_comments = true,
         },
         config = function(_, opts)
             require("inkline").setup(opts)
