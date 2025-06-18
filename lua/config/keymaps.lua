@@ -19,6 +19,11 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
+-- Default yank to system clipboard
+map({"n", "v"}, "y", '"+y', { noremap = true, silent = true })
+map("n", "yy", '"+yy', { noremap = true, silent = true })
+map({"n", "v"}, "Y", '"+Y', { noremap = true, silent = true })
+
 -- Account for line wraps when moving the cursor up/down
 map("n", "k", "gk")
 map("n", "j", "gj")
