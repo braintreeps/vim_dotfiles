@@ -208,6 +208,13 @@ return {
             { "<leader>Z", "<cmd>ToggleFoldsAtCurrentIndentation<cr>", desc = "Toggle folds at current indentation level" },
         },
         config = function(_, opts)
+            -- Folding related options need to be set before ufo is loaded
+            vim.opt.foldcolumn = "1"
+            vim.opt.foldlevel = 99
+            vim.opt.foldlevelstart = 99
+            vim.opt.foldenable = true
+            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
             local handler = function(virtText, lnum, endLnum, width, truncate, ctx)
                 local newVirtText = {}
                 local totalLines = vim.api.nvim_buf_line_count(0)
