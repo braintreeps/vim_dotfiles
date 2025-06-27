@@ -1,3 +1,4 @@
+local Utils = require("config.utils")
 local M = {}
 
 -- Configuration
@@ -38,6 +39,8 @@ local config = {
         update = "u",      -- Key to trigger update
         refresh = "r",     -- Key to refresh status
         close = "q",       -- Key to close the updater
+        install_plugins = "i", -- Key to install plugin updates via lazy restore
+        update_all = "U",  -- Key to update dotfiles and auto-run lazy restore
     }
 }
 
@@ -53,6 +56,9 @@ local state = {
     current_branch = "",
     ahead_count = 0,
     behind_count = 0,
+    plugin_updates = {},
+    has_plugin_updates = false,
+    is_installing_plugins = false,
 }
 
 local cd_repo_path = "cd " .. config.repo_path .. " && "
@@ -314,6 +320,89 @@ local function get_remote_commits_not_in_local()
     return commits
 end
 
+local function get_installed_plugin_commit(plugin_name)
+    local lazy_config = require("lazy.core.config")
+    local plugin = lazy_config.plugins[plugin_name]
+
+    if not plugin or not plugin._.installed then
+        return nil
+    end
+
+    local Git = require("lazy.manage.git")
+    local info = Git.info(plugin.dir)
+
+    if info then
+        return info.commit
+    end
+
+    return nil
+end
+
+local function get_plugin_updates()
+    local plugin_updates = {}
+    local lockfile_path = config.repo_path .. "/lazy-lock.json"
+    local lockfile_data = Utils.lazy.read_lockfile(lockfile_path)
+
+    for plugin_name, lock_info in pairs(lockfile_data) do
+        local installed_commit = get_installed_plugin_commit(plugin_name)
+
+        if installed_commit and lock_info.commit then
+            if installed_commit ~= lock_info.commit then
+                table.insert(plugin_updates, {
+                    name = plugin_name,
+                    installed_commit = installed_commit:sub(1, 7),
+                    lockfile_commit = lock_info.commit:sub(1, 7),
+                    branch = lock_info.branch or "main",
+                })
+            end
+        end
+    end
+
+    return plugin_updates
+end
+
+local function install_plugin_updates()
+    state.is_installing_plugins = true
+    M.render()
+
+    local cmd = cd_repo_path .. "nvim --headless +'lua require(\"lazy\").restore({wait=true})' +qa"
+    local result, err = execute_command(cmd)
+
+    state.is_installing_plugins = false
+
+    if err or not result or result:match("error") or result:match("Error") then
+        vim.notify(
+            "Failed to install plugin updates: " .. (result or err or "Unknown error"),
+            vim.log.levels.ERROR,
+            { title = "Plugin Updates" }
+        )
+    else
+        vim.notify(
+            "Successfully restored plugins from lockfile!",
+            vim.log.levels.INFO,
+            { title = "Plugin Updates" }
+        )
+        -- Refresh plugin update status
+        state.plugin_updates = get_plugin_updates()
+        state.has_plugin_updates = #state.plugin_updates > 0
+    end
+
+    M.render()
+end
+
+local function update_dotfiles_and_plugins()
+    state.is_updating = true
+    M.render()
+
+    -- First update dotfiles
+    M.update_repo()
+
+    -- Then install plugin updates if the dotfiles update was successful
+    if not state.is_updating then -- update_repo sets this to false when done
+        install_plugin_updates()
+    end
+end
+
 -- Check if commits exist in the current branch
 local function are_commits_in_branch(commits, branch)
     local result = {}
@@ -347,7 +436,7 @@ local function get_repo_status()
     }
 end
 
-local function update_repo()
+function M.update_repo()
     state.is_updating = true
     M.render()
 
@@ -455,8 +544,10 @@ function M.create_window()
     local opts = { buffer = state.buffer, noremap = true, silent = true }
     vim.keymap.set("n", config.keys.close, M.close, opts)
     vim.keymap.set("n", "<Esc>", M.close, opts)
-    vim.keymap.set("n", config.keys.update, update_repo, opts)
+    vim.keymap.set("n", config.keys.update, M.update_repo, opts)
     vim.keymap.set("n", config.keys.refresh, M.refresh, opts)
+    vim.keymap.set("n", config.keys.install_plugins, install_plugin_updates, opts)
+    vim.keymap.set("n", config.keys.update_all, update_dotfiles_and_plugins, opts)
 
     -- Set buffer as non-modifiable
     vim.api.nvim_buf_set_option(state.buffer, "modifiable", false)
@@ -547,18 +638,30 @@ function M.render()
     if state.is_updating then
         table.insert(header, "  Updating dotfiles... Please wait.")
         table.insert(header, "")
-    elseif state.behind_count > 0 then
-        table.insert(header, "  Updates available! Press 'u' to update.")
+    elseif state.is_installing_plugins then
+        table.insert(header, "  Installing plugin updates... Please wait.")
+        table.insert(header, "")
+    elseif state.behind_count > 0 or state.has_plugin_updates then
+        local messages = {}
+        if state.behind_count > 0 then
+            table.insert(messages, "Dotfiles update")
+        end
+        if state.has_plugin_updates then
+            table.insert(messages, tostring(#state.plugin_updates) .. " plugin updates")
+        end
+        table.insert(header, "  " .. table.concat(messages, " and ") .. " available!")
         table.insert(header, "")
     else
-        table.insert(header, "  Your dotfiles are up to date with origin/" .. config.main_branch .. "!")
+        table.insert(header, "  Your dotfiles and plugins are up to date!")
         table.insert(header, "")
     end
 
     -- Add keybindings help
     local keybindings = {
         "  Keybindings:",
+        "    " .. config.keys.update_all .. " - Update dotfiles + install plugin updates",
         "    " .. config.keys.update .." - Update dotfiles",
+        "    " .. config.keys.install_plugins .. " - Install plugin updates (:Lazy restore)",
         "    " .. config.keys.refresh .. " - Refresh status",
         "    " .. config.keys.close .. " - Close window",
         "",
@@ -604,6 +707,26 @@ function M.render()
         table.insert(remote_commit_info, "  ")
     end
 
+    -- Add plugin updates info
+    local plugin_update_info = {}
+    if #state.plugin_updates > 0 then
+        table.insert(plugin_update_info, "  Plugin updates available:")
+        table.insert(plugin_update_info, "  " .. string.rep("─", 70))
+
+        for _, plugin in ipairs(state.plugin_updates) do
+            local line = "  "
+                .. plugin.name
+                .. " ("
+                .. plugin.installed_commit
+                .. " → "
+                .. plugin.lockfile_commit
+                .. ")"
+
+            table.insert(plugin_update_info, line)
+        end
+        table.insert(plugin_update_info, "  ")
+    end
+
     -- Add commit log header
     local log_title = state.log_type == "remote"
             and "  Commits from origin/" .. config.main_branch .. " not in your branch:"
@@ -636,6 +759,15 @@ function M.render()
     end
     if #remote_commit_info == 0 then
         remote_commit_line = #lines - 1
+    end
+
+    local plugin_update_line = #lines + 1
+    -- Add plugin update info
+    for _, line in ipairs(plugin_update_info) do
+        table.insert(lines, line)
+    end
+    if #plugin_update_info == 0 then
+        plugin_update_line = #lines - 1
     end
 
     -- Add log header
@@ -693,14 +825,18 @@ function M.render()
     end
 
     -- Highlight keybindings
-    for i = keybindings_start, keybindings_start + 2 do
+    for i = keybindings_start, keybindings_start + 4 do
         -- find key to get correct length for highlighting
         local key
         if i - keybindings_start == 0 then
             key = config.keys.update
         elseif i - keybindings_start == 1 then
-            key = config.keys.refresh
+            key = config.keys.install_plugins
         elseif i - keybindings_start == 2 then
+            key = config.keys.update_all
+        elseif i - keybindings_start == 3 then
+            key = config.keys.refresh
+        elseif i - keybindings_start == 4 then
             key = config.keys.close
         end
         vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Statement", i, 4, 4 + #key)
@@ -727,11 +863,30 @@ function M.render()
         remote_commit_line = remote_commit_line + #state.remote_commits + 1
     end
 
+    -- Highlight plugin update info
+    if #state.plugin_updates > 0 then
+        vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Title", plugin_update_line, 2, -1)
+
+        -- Highlight plugin names and commits
+        for i = 1, #state.plugin_updates do
+            local line_num = plugin_update_line + i
+            vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Directory", line_num, 2,
+                2 + #state.plugin_updates[i].name)
+            vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Constant", line_num,
+                2 + #state.plugin_updates[i].name + 2,
+                2 + #state.plugin_updates[i].name + 2 + #state.plugin_updates[i].installed_commit)
+            vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Directory", line_num,
+                2 + #state.plugin_updates[i].name + 2 + #state.plugin_updates[i].installed_commit + 5,
+                2 + #state.plugin_updates[i].name + 2 + #state.plugin_updates[i].installed_commit + 5 + #state.plugin_updates[i].lockfile_commit)
+        end
+        plugin_update_line = plugin_update_line + #state.plugin_updates + 1
+    end
+
     -- Highlight log header with a more distinctive color
-    vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Special", remote_commit_line, 2, -1)
+    vim.api.nvim_buf_add_highlight(state.buffer, ns_id, "Special", plugin_update_line, 2, -1)
 
     -- Highlight commit hashes and current commit indicator
-    local log_start = remote_commit_line + 3
+    local log_start = plugin_update_line + 3
     for i, commit in ipairs(state.commits) do
         local line_num = log_start + i - 1
 
@@ -829,6 +984,10 @@ function M.refresh()
 
     -- Get commit log
     state.commits, state.log_type = get_commit_log()
+
+    -- Get plugin updates
+    state.plugin_updates = get_plugin_updates()
+    state.has_plugin_updates = #state.plugin_updates > 0
 
     -- Render UI
     M.render()

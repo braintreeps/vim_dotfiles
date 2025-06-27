@@ -143,7 +143,7 @@ function M.get_plugin_source(plugin_name)
     error(debug_msg)
 end
 
-local function read_lockfile(path)
+function M.read_lockfile(path)
     if vim.fn.filereadable(path) == 0 then
         return {}
     end
@@ -309,7 +309,7 @@ function M.write_dual_lockfiles()
     local Config = require("lazy.core.config")
     local Git = require("lazy.manage.git")
     local main_lockfile = Config.options.lockfile
-    local existing_lockfile = read_lockfile(main_lockfile)
+    local existing_lockfile = M.read_lockfile(main_lockfile)
 
     local plugins_by_source = {}
 
