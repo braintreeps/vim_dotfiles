@@ -32,6 +32,10 @@ local lazy_spec = {
 if Utils.config_path_exists("/lua/personal/plugins") then
     -- lua indices start at 1, so we load our custom plugins after the base plugins
     table.insert(lazy_spec, 2, { import = "personal.plugins" })
+    -- Set up hooks to automatically manage dual lockfiles when lazy updates
+    vim.schedule(function()
+        require("config.utils.lazy").setup_lazy_hooks()
+    end)
 end
 
 require("lazy").setup({
@@ -40,7 +44,6 @@ require("lazy").setup({
         notify = false,
     },
 })
-
 
 -- Load auto commands
 require("config.autocmds")
