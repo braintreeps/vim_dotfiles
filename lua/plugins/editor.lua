@@ -14,7 +14,7 @@ return {
                 { "<leader>b", group = "Buffer" },
                 { "<leader>c", group = "Code / LSP", mode = { "n", "v" } },
                 { "<leader>cw", group = "Workspace" },
-                { "<leader>d", group = "Diagnostics"},
+                { "<leader>d", group = "Diagnostics" },
                 { "<leader>f", group = "Find" },
                 { "<leader>n", group = "Neotree" },
                 { "<leader>r", group = "Run tests" },

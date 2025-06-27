@@ -96,7 +96,39 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         dependencies = {
-            "nvim-tree/nvim-web-devicons",
+            {
+                "nvim-tree/nvim-web-devicons",
+                opts = {
+                    override_by_filename = {
+                        ["rakefile"] = {
+                            icon = "",
+                            color = "#ff4f3f",
+                            cterm_color = "52",
+                            name = "Rakefile",
+                        },
+                        ["Gemfile"] = {
+                            icon = "",
+                            color = "#ff4f3f",
+                            cterm_color = "52",
+                            name = "Rakefile",
+                        },
+                    },
+                    override_by_extension = {
+                        ["config.ru"] = {
+                            icon = "",
+                            color = "#ff4f3f",
+                            cterm_color = "52",
+                            name = "ConfigRu",
+                        },
+                        ["rb"] = {
+                            icon = "",
+                            color = "#ff4f3f",
+                            cterm_color = "52",
+                            name = "Rb",
+                        },
+                    },
+                },
+            },
             "AndreM222/copilot-lualine",
         },
         opts = function()
@@ -218,7 +250,15 @@ return {
         },
         opts = {
             defaults = {
-                file_ignore_patterns = { "node_modules/", ".git/refs/", ".git/logs", ".git/objects", "sorbet/rbi/annotations/", "sorbet/rbi/dsl/", "sorbet/rbi/gems/" },
+                file_ignore_patterns = {
+                    "node_modules/",
+                    ".git/refs/",
+                    ".git/logs",
+                    ".git/objects",
+                    "sorbet/rbi/annotations/",
+                    "sorbet/rbi/dsl/",
+                    "sorbet/rbi/gems/",
+                },
                 sorting_strategy = "ascending",
                 layout_config = {
                     prompt_position = "top",
@@ -277,9 +317,9 @@ return {
                         i = {
                             ["<C-t>"] = function(prompt_bufnr)
                                 scope_to_dir(prompt_bufnr, require("telescope.builtin").live_grep)
-                            end
-                        }
-                    }
+                            end,
+                        },
+                    },
                 },
                 find_files = {
                     hidden = true,
@@ -287,9 +327,9 @@ return {
                         i = {
                             ["<C-t>"] = function(prompt_bufnr)
                                 scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files)
-                            end
-                        }
-                    }
+                            end,
+                        },
+                    },
                 },
                 git_files = {
                     show_untracked = true,
@@ -298,9 +338,9 @@ return {
                         i = {
                             ["<C-t>"] = function(prompt_bufnr)
                                 scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files) -- intentional move to find_files to respect cwd option
-                            end
-                        }
-                    }
+                            end,
+                        },
+                    },
                 },
             },
         },
@@ -317,7 +357,7 @@ return {
         dependencies = { "nvim-telescope/telescope.nvim" },
         config = function(_, _opts)
             require("telescope").load_extension("file_browser")
-        end
+        end,
     },
     {
         "rebelot/heirline.nvim",
@@ -339,20 +379,20 @@ return {
                         -- handled by the component in heirline
                         enable = false,
                         sources = function(buf, _)
-                            local utils = require('dropbar.utils')
-                            local sources = require('dropbar.sources')
-                            if vim.bo[buf].ft == 'oil' then
+                            local utils = require("dropbar.utils")
+                            local sources = require("dropbar.sources")
+                            if vim.bo[buf].ft == "oil" then
                                 return {
-                                    sources.path
+                                    sources.path,
                                 }
                             end
-                            if vim.bo[buf].ft == 'markdown' then
+                            if vim.bo[buf].ft == "markdown" then
                                 return {
                                     sources.path,
                                     sources.markdown,
                                 }
                             end
-                            if vim.bo[buf].buftype == 'terminal' then
+                            if vim.bo[buf].buftype == "terminal" then
                                 return {
                                     sources.terminal,
                                 }
@@ -364,7 +404,7 @@ return {
                                     -- sources.treesitter,
                                 }),
                             }
-                        end
+                        end,
                     },
                     sources = {
                         path = {
@@ -376,9 +416,9 @@ return {
                             relative_to = function(buf, win)
                                 local bufname = vim.api.nvim_buf_get_name(buf)
                                 if vim.startswith(bufname, "oil://") then
-                                    local full_path = bufname:gsub('^%S+://', '', 1)
-                                    local git_root = vim.fs.find('.git',
-                                        { upward = true, path = full_path, type = 'directory' })
+                                    local full_path = bufname:gsub("^%S+://", "", 1)
+                                    local git_root =
+                                        vim.fs.find(".git", { upward = true, path = full_path, type = "directory" })
                                     if git_root and #git_root > 0 then
                                         local git_dir = vim.fs.dirname(git_root[1])
                                         return vim.fs.dirname(git_dir)
@@ -387,22 +427,22 @@ return {
 
                                 local ok, cwd = pcall(vim.fn.getcwd, win)
                                 return ok and cwd or vim.fn.getcwd()
-                            end
+                            end,
                         },
                         lsp = {
                             valid_symbols = {
                                 -- Customize this list to control what can show
                                 -- up as breadcrumbs in the dropbar winbar
                                 -- for lsp source
-                                'Module',
-                                'Namespace',
-                                'Class',
-                                'Method',
-                                'Function',
-                                'Constructor',
-                                'Array',
-                                'Object',
-                            }
+                                "Module",
+                                "Namespace",
+                                "Class",
+                                "Method",
+                                "Function",
+                                "Constructor",
+                                "Array",
+                                "Object",
+                            },
                         },
                         treesitter = {
                             valid_types = {
@@ -410,19 +450,18 @@ return {
                                 -- Customize this list to control what can show
                                 -- up as breadcrumbs in the dropbar winbar for
                                 -- treesitter source
-                                'class',
-                                'constructor',
-                                'do_statement',
-                                'function',
-                                'if_statement',
-                                'method',
-                                'namespace',
-                                'table',
-                                'type',
-                                'object',
-                            }
-                        }
-
+                                "class",
+                                "constructor",
+                                "do_statement",
+                                "function",
+                                "if_statement",
+                                "method",
+                                "namespace",
+                                "table",
+                                "type",
+                                "object",
+                            },
+                        },
                     },
                     icons = {
                         -- Icons for dropbar can be customized here
@@ -443,7 +482,9 @@ return {
                 keys = {
                     {
                         "<leader>bo",
-                        function() require("dropbar.api").pick() end,
+                        function()
+                            require("dropbar.api").pick()
+                        end,
                         desc = "Drop[b]ar - [O]pen Picker",
                     },
                 },
@@ -451,7 +492,15 @@ return {
         },
         opts = {
             winbar_disabled_buftypes = { "nofile", "prompt", "help", "quickfix", "terminal" },
-            winbar_disabled_filetypes = { "^git.*", "fugitive", "Trouble", "dashboard", "neo-tree", "which-key", "lazygit" },
+            winbar_disabled_filetypes = {
+                "^git.*",
+                "fugitive",
+                "Trouble",
+                "dashboard",
+                "neo-tree",
+                "which-key",
+                "lazygit",
+            },
             -- toggle this to remove the mode wapper on active winbar
             enable_mode_wrapper = true,
             -- customize mode color assignments here
@@ -460,7 +509,7 @@ return {
             -- customize heirline color mappings to colorscheme highlights here
             -- (settings for inkline or tokyonight are automatically applied)
             color_highlight_mappings = Utils.colors.get_highlight_mappings,
-            inactive_color = "#2d2d30",
+            inactive_color = "#1e2124",
         },
         config = function(_, opts)
             local heirline_config = require("config.heirline")
@@ -490,13 +539,13 @@ return {
                     require("config.heirline").toggle_winbar()
                 end,
                 desc = "Toggle [U]I [W]inbar",
-            }
-        }
+            },
+        },
     },
     {
-        'nvim-telescope/telescope-fzf-native.nvim',
+        "nvim-telescope/telescope-fzf-native.nvim",
         dependencies = { "nvim-telescope/telescope.nvim" },
-        build = 'make',
+        build = "make",
         config = function(_, _opts)
             require("telescope").load_extension("fzf")
         end,
