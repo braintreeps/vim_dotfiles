@@ -132,7 +132,82 @@ return {
             "AndreM222/copilot-lualine",
         },
         opts = function()
+            -- NOTE: This isn't personalizable without duplicating the entire function
+            local utils = require("lualine.utils.utils")
+            local highlight = require("lualine.highlight")
             local conf = require("lualine").get_config()
+            local diagnostics_message = require("lualine.component"):extend()
+
+            diagnostics_message.default = {
+                colors = {
+                    error = utils.extract_color_from_hllist({ "fg", "sp" }, { "DiagnosticError" }, "#e32636"),
+                    warning = utils.extract_color_from_hllist({ "fg", "sp" }, { "DiagnosticWarn" }, "#ffa500"),
+                    info = utils.extract_color_from_hllist({ "fg", "sp" }, { "DiagnosticInfo" }, "#ffffff"),
+                    hint = utils.extract_color_from_hllist({ "fg", "sp" }, { "DiagnosticHint" }, "#273faf"),
+                },
+            }
+            function diagnostics_message:init(options)
+                diagnostics_message.super:init(options)
+                self.options.colors =
+                    vim.tbl_extend("force", diagnostics_message.default.colors, self.options.colors or {})
+                self.highlights = { error = "", warn = "", info = "", hint = "" }
+                self.highlights.error = highlight.create_component_highlight_group(
+                    { fg = self.options.colors.error },
+                    "diagnostics_message_error",
+                    self.options
+                )
+                self.highlights.warn = highlight.create_component_highlight_group(
+                    { fg = self.options.colors.warn },
+                    "diagnostics_message_warn",
+                    self.options
+                )
+                self.highlights.info = highlight.create_component_highlight_group(
+                    { fg = self.options.colors.info },
+                    "diagnostics_message_info",
+                    self.options
+                )
+                self.highlights.hint = highlight.create_component_highlight_group(
+                    { fg = self.options.colors.hint },
+                    "diagnostics_message_hint",
+                    self.options
+                )
+
+            end
+
+            function diagnostics_message:update_status(_is_focused)
+                local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
+                local diagnostics = vim.diagnostic.get(0, { lnum = r - 1 })
+                if #diagnostics > 0 then
+                    table.sort(diagnostics, function(a, b)
+                        if a.col == b.col then
+                            return a.severity < b.severity
+                        else
+                            return a.col < b.col
+                        end
+                    end)
+
+                    local icons = { "󰅚 ", "󰀪 ", "󰋽 ", "󰌶 " }
+                    local hl =
+                        { self.highlights.error, self.highlights.warn, self.highlights.info, self.highlights.hint }
+
+                    local messages = {}
+                    for _, diag in ipairs(diagnostics) do
+                        -- Take only the first line of multi-line diagnostic messages
+                        local first_line = diag.message:match("^[^\r\n]*")
+                        local msg = icons[diag.severity]
+                            .. (diag.col + 1) .. ": "
+                            .. first_line
+                        table.insert(messages, msg)
+                    end
+
+                    -- Use the most severe diagnostic's highlight for the entire string
+                    local most_severe = diagnostics[1]
+                    return highlight.component_format_highlight(hl[most_severe.severity])
+                        .. table.concat(messages, "  ")
+                else
+                    return ""
+                end
+            end
 
             local new_conf = vim.tbl_deep_extend("force", conf, {
                 sections = {
@@ -148,6 +223,22 @@ return {
                             path = 1,
                             separator = { left = "" },
                             padding = { left = 0 }
+                        },
+                        {
+                            diagnostics_message,
+                            colors = {
+                                error = "#e32636",
+                                warn = "#ffa500",
+                                -- info = "#ffffff",
+                                -- hint = "#273faf",
+                            },
+                            fmt = function(str)
+                                local max_width = vim.o.columns - 80
+                                if #str > max_width then
+                                    return str:sub(1, max_width - 3) .. "..."
+                                end
+                                return str
+                            end,
                         },
                     },
                     lualine_x = {

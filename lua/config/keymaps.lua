@@ -40,3 +40,14 @@ end, { expr = true, noremap = true, desc = "Previous blank line (skip fold)" })
 map('n', '}', function()
   return vim.fn.foldclosed(vim.fn.search('^$', 'Wn')) == -1 and '}' or '}j'
 end, { expr = true, noremap = true, desc = "Next blank line (skip fold)"})
+
+map('n', '<leader>dv', function()
+    local current_config = vim.diagnostic.config()
+    local new_virtual_lines = not current_config.virtual_lines
+    vim.diagnostic.config({ virtual_lines = new_virtual_lines })
+    if new_virtual_lines then
+        vim.notify("Diagnostic virtual lines enabled", vim.log.levels.INFO, { title = "Diagnostics" })
+    else
+        vim.notify("Diagnostic virtual lines disabled", vim.log.levels.WARN, { title = "Diagnostics" })
+    end
+end, { noremap = true, desc = "[d]iagnotic [v]irtual lines toggle"})

@@ -11,7 +11,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.diagnostic.config({
     virtual_text = false,
-    virtual_lines = { current_line = true },
+    virtual_lines = false,
 })
 vim.opt.autoread = false
 vim.opt.mouse = ''
