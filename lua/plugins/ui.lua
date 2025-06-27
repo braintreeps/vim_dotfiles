@@ -106,11 +106,40 @@ return {
                 sections = {
                     lualine_c = {
                         {
+                            "filetype",
+                            icon_only = true,
+                            separator = { right = "" },
+                            padding = { left = 1, right = 0 }
+                        },
+                        {
                             "filename",
                             path = 1,
+                            separator = { left = "" },
+                            padding = { left = 0 }
                         },
                     },
-                    lualine_x = { "copilot", "encoding", "fileformat", "filetype" },
+                    lualine_x = {
+                        {
+                            function()
+                                local reg = vim.fn.reg_recording()
+                                if reg == "" then
+                                    return ""
+                                else
+                                    return "recording @" .. reg
+                                end
+                            end,
+                            color = { fg = "yellow" }
+                        },
+                        {
+                            "searchcount",
+                            color = { fg = "cyan" },
+                        },
+                        {
+                            "copilot",
+                            padding = { left = 1, right = 0 },
+                        },
+                        -- "lsp_status"
+                    },
                 },
             })
 
