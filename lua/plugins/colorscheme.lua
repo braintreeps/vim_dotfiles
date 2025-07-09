@@ -4,6 +4,8 @@
 local Utils = require("config.utils")
 local SwitchColorschemeKeyMap = Utils.colors.SwitchColorschemeKeyMap
 
+---@module "lazy"
+---@type LazyPluginSpec[]
 return {
     -- Util for persisting chosen colorscheme
     {
@@ -50,6 +52,7 @@ return {
     {
         "hectron/inkline.nvim",
         priority = 1000,
+        tag = "v1.0.0",
         lazy = false,
         keys = { SwitchColorschemeKeyMap },
         ---@module "inkline.config"
