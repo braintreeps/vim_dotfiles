@@ -94,6 +94,54 @@ end
 
 return {
     {
+        "folke/noice.nvim",
+        enabled = false, -- turn this on in your neovim-dotfiles-personal to enable fancy command and search lines, plus command visualization in the lualine
+        dependencies = { "rcarriga/nvim-notify" },
+        event = "VeryLazy",
+        opts = {
+            presets = {
+                bottom_search = false,
+                command_palette = true,
+                long_message_to_split = true,
+                inc_rename = true,
+                lsp_doc_border = true,
+            },
+        },
+    },
+    {
+        "rcarriga/nvim-notify",
+        enabled = false, -- turn this on in your neovim-dotfiles-personal to enable toast-like notifications in the top right corner of neovim
+        keys = {
+            {
+                "<leader>un",
+                function()
+                    require("notify").dismiss({ silent = true, pending = true })
+                end,
+                desc = "Dismiss All Notifications",
+            },
+            {
+                "<leader>uh",
+                function()
+                    require("telescope").extensions.notify.notify()
+                end,
+                desc = "Notification History",
+            },
+        },
+        opts = {
+            stages = "static",
+            timeout = 3000,
+            max_height = function()
+                return math.floor(vim.o.lines * 0.75)
+            end,
+            max_width = function()
+                return math.floor(vim.o.columns * 0.75)
+            end,
+            on_open = function(win)
+                vim.api.nvim_win_set_config(win, { zindex = 100 })
+            end,
+        },
+    },
+    {
         "nvim-lualine/lualine.nvim",
         dependencies = {
             {
@@ -171,7 +219,6 @@ return {
                     "diagnostics_message_hint",
                     self.options
                 )
-
             end
 
             function diagnostics_message:update_status(_is_focused)
@@ -194,9 +241,7 @@ return {
                     for _, diag in ipairs(diagnostics) do
                         -- Take only the first line of multi-line diagnostic messages
                         local first_line = diag.message:match("^[^\r\n]*")
-                        local msg = icons[diag.severity]
-                            .. (diag.col + 1) .. ": "
-                            .. first_line
+                        local msg = icons[diag.severity] .. (diag.col + 1) .. ": " .. first_line
                         table.insert(messages, msg)
                     end
 
@@ -216,13 +261,13 @@ return {
                             "filetype",
                             icon_only = true,
                             separator = { right = "" },
-                            padding = { left = 1, right = 0 }
+                            padding = { left = 1, right = 0 },
                         },
                         {
                             "filename",
                             path = 1,
                             separator = { left = "" },
-                            padding = { left = 0 }
+                            padding = { left = 0 },
                         },
                         {
                             diagnostics_message,
@@ -244,6 +289,20 @@ return {
                     lualine_x = {
                         {
                             function()
+                                local ok, noice = pcall(require, "noice")
+                                if ok then
+                                    return noice.api.status.command.get()
+                                end
+                                return ""
+                            end,
+                            cond = function()
+                                local ok, noice = pcall(require, "noice")
+                                return ok and noice.api.status.command.has()
+                            end,
+                            color = { fg = "#ff9e64" },
+                        },
+                        {
+                            function()
                                 local reg = vim.fn.reg_recording()
                                 if reg == "" then
                                     return ""
@@ -251,7 +310,7 @@ return {
                                     return "recording @" .. reg
                                 end
                             end,
-                            color = { fg = "yellow" }
+                            color = { fg = "yellow" },
                         },
                         {
                             "searchcount",
