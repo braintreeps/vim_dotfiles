@@ -123,11 +123,11 @@ return {
             keymap = {
                 -- Add personal keymaps to this portion of blink config
                 preset = "none",
-                ["<C-n>"] = { "show","select_next" },
+                ["<C-n>"] = { "show", "select_next" },
                 ["<C-p>"] = { "select_prev" },
                 ["<C-b>"] = { "scroll_documentation_up" },
                 ["<C-f>"] = { "scroll_documentation_down" },
-                ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' }, -- doesn't seem like this works
+                ["<C-space>"] = { "show", "show_documentation", "hide_documentation" }, -- doesn't seem like this works
                 ["<C-e>"] = { "cancel" },
                 ["<C-CR>"] = { "cancel", "fallback" },
                 ["<Tab>"] = {
@@ -149,6 +149,10 @@ return {
                 ["<M-k>"] = { "select_prev" },
                 ["<M-l>"] = { "select_and_accept", Utils.cmp.map({ "ai_accept" }) },
                 ["<M-;>"] = { "cancel" },
+            },
+            cmdline = {
+                keymap = { preset = "inherit" },
+                completion = { menu = { auto_show = true } },
             },
         },
         ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
