@@ -254,6 +254,29 @@ return {
                 end
             end
 
+            local updater_component = {
+                function()
+                    return require("updater").status.get_update_text("icon")
+                end,
+                cond = function()
+                    return require("updater").status.has_updates()
+                end,
+                color = function()
+                    local status = require("updater").status.get()
+                    -- Different colors based on update type
+                    if status.needs_update and status.has_plugin_updates then
+                        return { fg = "#f7768e" } -- Red for both types
+                    elseif status.needs_update then
+                        return { fg = "#ff9e64" } -- Orange for dotfiles
+                    else
+                        return { fg = "#9ece6a" } -- Green for plugins only
+                    end
+                end,
+                on_click = function()
+                    require("updater").open()
+                end,
+            }
+
             local new_conf = vim.tbl_deep_extend("force", conf, {
                 sections = {
                     lualine_c = {
@@ -320,6 +343,7 @@ return {
                             "copilot",
                             padding = { left = 1, right = 0 },
                         },
+                        updater_component,
                         -- "lsp_status"
                     },
                 },

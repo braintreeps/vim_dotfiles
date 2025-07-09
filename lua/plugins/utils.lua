@@ -109,5 +109,23 @@ return {
             { "<leader>ww", "<C-W>p",                               desc = "Other Window",                remap = true },
             { "<leader>wd", "<C-W>c",                               desc = "Delete Window",               remap = true },
         }
+    },
+    {
+        "cosmicbuffalo/updater.nvim",
+        event = "VimEnter", -- Needs to be loaded early so that it can check for updates on startup
+        opts = {
+            keymap = {
+                open = "<leader>e",
+            },
+            check_updates_on_startup = { enabled = true },
+            periodic_check = {
+                enabled = true,
+                frequency_minutes = 120,
+            }
+        },
+        cmd = { "UpdaterOpen", "UpdaterCheck", "UpdaterStartChecking", "UpdaterStopChecking" },
+        keys = {
+            { "<leader>e", "<Cmd>UpdaterOpen<CR>", desc = "Open Updater" },
+        }
     }
 }

@@ -9,22 +9,11 @@ autocmd("TextYankPost", {
     end,
 })
 
--- Check if neovim-dotfiles are up to date on startup
-autocmd("VimEnter", {
-    group = augroup("check_dotfiles_updates", { clear = true }),
-    callback = function()
-        -- Defer the check to ensure Neovim is fully loaded
-        vim.defer_fn(function()
-            require("config.dotfiles_updater").check_updates()
-        end, 1000)
-    end,
-})
-
 -- Redirect vim-plug commands to Lazy equivalents
 for plug_cmd, lazy_cmd in pairs({
     Plug = "",
     PlugInstall = "install",
-    PlugUpdate = "update", 
+    PlugUpdate = "update",
     PlugUpgrade = "update",
     PlugDiff = "log",
     PlugClean = "clean",
