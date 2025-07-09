@@ -15,18 +15,18 @@ map('n', '<Leader>cw', '<cmd>%s/\\s\\+$//e<cr>', { desc = "Remove trailing white
 vim.api.nvim_create_user_command('W', 'w', {})
 
 -- More granular undo breakpoints
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
+map("i", ",", ",<c-g>u", { desc = "Insert comma with undo breakpoint" })
+map("i", ".", ".<c-g>u", { desc = "Insert period with undo breakpoint" })
+map("i", ";", ";<c-g>u", { desc = "Insert semicolon with undo breakpoint" })
 
 -- Default yank to system clipboard
-map({"n", "v"}, "y", '"+y', { noremap = true, silent = true })
-map("n", "yy", '"+yy', { noremap = true, silent = true })
-map({"n", "v"}, "Y", '"+Y', { noremap = true, silent = true })
+map({"n", "v"}, "y", '"+y', { noremap = true, silent = true, desc = "Yank to system clipboard" })
+map("n", "yy", '"+yy', { noremap = true, silent = true, desc = "Yank line to system clipboard" })
+map({"n", "v"}, "Y", '"+Y', { noremap = true, silent = true, desc = "Yank to system clipboard (line)" })
 
 -- Account for line wraps when moving the cursor up/down
-map("n", "k", "gk")
-map("n", "j", "gj")
+map("n", "k", "gk", { desc = "Move up (account for line wraps)" })
+map("n", "j", "gj", { desc = "Move down (account for line wraps)" })
 
 -- Paste over a selection without overwriting clipboard
 map("x", "p", function()

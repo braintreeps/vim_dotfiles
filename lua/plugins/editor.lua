@@ -110,9 +110,6 @@ return {
         opts = {},
         lazy = false,
         keys = {
-            -- { "<Leader>ss", "<cmd>SessionSaveWithDefaults<CR>", desc = "[s]ession [s]ave" },
-            -- { "<Leader>sl", "<cmd>SessionLoadWithDefaults<CR>", desc = "[s]ession [l]oad" },
-            -- { "<Leader>sd", "<cmd>SessionDeleteWithDefaults<CR>", desc = "[s]ession [d]elete" },
             { "<Leader>qs", "<cmd>SessionSaveWithDefaults<CR>", desc = "Save Session" },
             { "<Leader>ql", "<cmd>SessionLoadWithDefaults<CR>", desc = "Load Session" },
             { "<Leader>qd", "<cmd>SessionDeleteWithDefaults<CR>", desc = "Delete Session" },

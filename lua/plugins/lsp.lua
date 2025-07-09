@@ -37,10 +37,10 @@ return {
         opts = {
             -- customize your keymap here, or disable a keymap by setting it to false
             keymap = {
-                go_to_declaration = "gD",
                 go_to_definition = "gd",
-                go_to_implementation = "gi",
+                go_to_declaration = "gD",
                 go_to_references = "gr",
+                go_to_implementation = "gi",
                 jump_to_prev_diagnostic = "[d",
                 jump_to_next_diagnostic = "]d",
 
