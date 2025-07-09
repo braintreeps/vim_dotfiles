@@ -1,21 +1,30 @@
 -- UI: Enhance the user interface with features such as status line, buffer line, indentation guides, dashboard, and icons.
 local Utils = require("config.utils")
 
--- cache results of rev-parse
-local is_inside_work_tree = {}
+local git_root_cache = {}
 
-function vim.find_files_from_project_git_root()
-    local opts = Utils.lazy.opts("telescope.nvim").pickers.find_files
+-- Find files from project root (git root if available, otherwise current directory)
+local function find_files_from_project_git_root()
+    local opts = Utils.lazy.opts("telescope.nvim").pickers.find_files or {}
     local cwd = vim.fn.getcwd()
-    if is_inside_work_tree[cwd] == nil then
-        vim.fn.system("git rev-parse --is-inside-work-tree")
-        is_inside_work_tree[cwd] = vim.v.shell_error == 0
+
+    local cache_key = cwd
+    if git_root_cache[cache_key] == nil then
+        local git_root = vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("%s+$", "")
+        if vim.v.shell_error == 0 and git_root ~= "" and vim.fn.isdirectory(git_root) == 1 then
+            git_root_cache[cache_key] = { is_git = true, root = git_root }
+        else
+            git_root_cache[cache_key] = { is_git = false, root = cwd }
+        end
     end
 
-    if is_inside_work_tree[cwd] then
-        require("telescope.builtin").git_files(opts)
+    local cache_entry = git_root_cache[cache_key]
+    local search_opts = vim.tbl_deep_extend("force", opts, { cwd = cache_entry.root })
+
+    if cache_entry.is_git then
+        require("telescope.builtin").git_files(search_opts)
     else
-        require("telescope.builtin").find_files(opts)
+        require("telescope.builtin").find_files(search_opts)
     end
 end
 
@@ -394,12 +403,12 @@ return {
         keys = {
             -- Misc keymaps
             { "<Leader><Leader>", "<cmd>Telescope find_files<CR>",                desc = "Find files" },
-            { "<C-p>",            vim.find_files_from_project_git_root,           desc = "Find (git) files" },
+            { "<C-p>",            function() find_files_from_project_git_root() end,  desc = "Find (git) files" },
             { "<Leader>be",       function() OpenBufferExplorer() end,            desc = "Buffer Explorer" },
             { "<Leader>gw",       "<cmd>Telescope grep_string<CR>",               desc = "Grep word in cursor" },
             Utils.colors.SwitchColorschemeKeyMap,
             -- "find" keymaps
-            { "<Leader>ff",       vim.find_files_from_project_git_root,           desc = "Find (git) files" },
+            { "<Leader>ff",       function() find_files_from_project_git_root() end,  desc = "Find (git) files" },
             { "<Leader>fg",       "<cmd>Telescope live_grep<CR>",                 desc = "Find (grep)" },
             { "<Leader>fb",       function() OpenBufferExplorer() end,            desc = "Find Buffers" },
             { "<Leader>fr",       "<cmd>Telescope oldfiles<CR>",                  desc = "Find Recent" },
