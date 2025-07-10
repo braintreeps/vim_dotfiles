@@ -528,3 +528,4 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 |--------|------|-------------|--------|
 | `<leader>rd` | `n` | [r]uby [d]ebug: binding.pry line under cursor | [`ftplugin/ruby.lua:2`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/ftplugin/ruby.lua#L2) |
 | `<leader>rs` | `n` | [r]uby [s]yntax: check the syntax of the current file | [`ftplugin/ruby.lua:3`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/ftplugin/ruby.lua#L3) |
+| `<leader>rD` | `n` | [r]uby [D]elete binding.pry lines in current buffer | [`ftplugin/ruby.lua:28`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/ftplugin/ruby.lua#L28) |
