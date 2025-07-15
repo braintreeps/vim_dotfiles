@@ -287,6 +287,7 @@ return {
             }
 
             local new_conf = vim.tbl_deep_extend("force", conf, {
+                theme = "inkline",
                 sections = {
                     lualine_c = {
                         {
