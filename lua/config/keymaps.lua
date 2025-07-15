@@ -51,3 +51,7 @@ map('n', '<leader>dv', function()
         vim.notify("Diagnostic virtual lines disabled", vim.log.levels.WARN, { title = "Diagnostics" })
     end
 end, { noremap = true, desc = "[d]iagnotic [v]irtual lines toggle"})
+
+map('n', '<leader>uw', function()
+    require("config.utils").toggle_option("wrap")
+end, { noremap = true, desc = "Toggle Wrap"})

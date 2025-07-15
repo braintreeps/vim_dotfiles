@@ -521,6 +521,9 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `,` | `i` | Insert comma with undo breakpoint | [`lua/config/keymaps.lua:18`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L18) |
 | `.` | `i` | Insert period with undo breakpoint | [`lua/config/keymaps.lua:19`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L19) |
 | `;` | `i` | Insert semicolon with undo breakpoint | [`lua/config/keymaps.lua:20`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L20) |
+| `p` | `x` | Paste (without overwrite register) | [`lua/config/keymaps.lua:32`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L32) |
+| `<leader>dv` | `n` | [d]iagnotic [v]irtual lines toggle | [`lua/config/keymaps.lua:44`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L44) |
+| `<leader>uw` | `n` | Toggle Wrap | [`lua/config/keymaps.lua:55`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L55) |
 
 ## Ruby
 
