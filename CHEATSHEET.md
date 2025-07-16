@@ -1,6 +1,6 @@
 # Braintree Keymap Cheatsheet
 
-Up to date as of: 2025-07-15
+Up to date as of: 2025-07-16
 
 This cheatsheet is automatically generated. It includes all keymaps from:
 
@@ -328,7 +328,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>bo` | `n` | Drop[b]ar - [O]pen Picker | [`lua/plugins/ui.lua:667`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L667) |
+| `<leader>bo` | `n` | Drop[b]ar - [O]pen Picker | [`lua/plugins/ui.lua:668`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L668) |
 
 ## Plugin: eyeliner.nvim
 
@@ -346,7 +346,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>uW` | `n` | Toggle [U]I [W]inbar | [`lua/plugins/ui.lua:720`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L720) |
+| `<leader>uW` | `n` | Toggle [U]I [W]inbar | [`lua/plugins/ui.lua:721`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L721) |
 
 ## Plugin: indent-blankline.nvim
 
@@ -364,8 +364,8 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>bd` | `n` | Delete Buffer | [`lua/plugins/ui.lua:377`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L377) |
-| `<leader>bD` | `n` | Delete Buffer (Force) | [`lua/plugins/ui.lua:398`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L398) |
+| `<leader>bd` | `n` | Delete Buffer | [`lua/plugins/ui.lua:378`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L378) |
+| `<leader>bD` | `n` | Delete Buffer (Force) | [`lua/plugins/ui.lua:399`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L399) |
 
 ## Plugin: neo-tree.nvim
 
@@ -409,61 +409,61 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader><leader>` | `n` | Find files | [`lua/plugins/ui.lua:405`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L405) |
-| `<C-p>` | `n` | Find (git) files | [`lua/plugins/ui.lua:406`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L406) |
-| `<leader>be` | `n` | Buffer Explorer | [`lua/plugins/ui.lua:407`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L407) |
-| `<leader>gw` | `n` | Grep word in cursor | [`lua/plugins/ui.lua:408`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L408) |
-| `<leader>ff` | `n` | Find (git) files | [`lua/plugins/ui.lua:411`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L411) |
-| `<leader>fg` | `n` | Find (grep) | [`lua/plugins/ui.lua:412`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L412) |
-| `<leader>fb` | `n` | Find Buffers | [`lua/plugins/ui.lua:413`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L413) |
-| `<leader>fr` | `n` | Find Recent | [`lua/plugins/ui.lua:414`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L414) |
-| `<leader>fh` | `n` | Find help pages | [`lua/plugins/ui.lua:415`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L415) |
-| `<leader>fm` | `n` | Find marks | [`lua/plugins/ui.lua:416`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L416) |
-| `<leader>fd` | `n` | Document Diagnostics | [`lua/plugins/ui.lua:417`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L417) |
-| `<leader>fD` | `n` | Workspace Diagnostics | [`lua/plugins/ui.lua:418`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L418) |
-| `<leader>fp` | `n` | Find Plugin File | [`lua/plugins/ui.lua:419`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L419) |
-| `<leader>sk` | `n` | Keymaps | [`lua/plugins/ui.lua:421`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L421) |
-| `<leader>sa` | `n` | Auto commands | [`lua/plugins/ui.lua:423`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L423) |
-| `<leader>sg` | `n` | Grep | [`lua/plugins/ui.lua:424`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L424) |
-| `<leader>sb` | `n` | Buffer Fuzzy Find | [`lua/plugins/ui.lua:425`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L425) |
-| `<leader>sh` | `n` | Help Pages | [`lua/plugins/ui.lua:426`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L426) |
-| `<leader>sC` | `n` | Commands | [`lua/plugins/ui.lua:427`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L427) |
-| `<leader>sc` | `n` | Command History | [`lua/plugins/ui.lua:428`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L428) |
-| `<leader>so` | `n` | Options | [`lua/plugins/ui.lua:429`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L429) |
-| `<leader>sw` | `n` `v` | Word under cursor/Selection | [`lua/plugins/ui.lua:430`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L430) |
-| `<leader>sr` | `n` | Resume | [`lua/plugins/ui.lua:432`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L432) |
-| `<Esc>` | `n` | Close telescope | Built in telescope default |
-| `?` | `n` | Show mappings for picker actions | Built in telescope default |
-| `G` | `n` | Select the last item | Built in telescope default |
-| `H` | `n` | Select High | Built in telescope default |
-| `L` | `n` | Select Low | Built in telescope default |
-| `M` | `n` | Select Middle | Built in telescope default |
+| `<leader><leader>` | `n` | Find files | [`lua/plugins/ui.lua:406`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L406) |
+| `<C-p>` | `n` | Find (git) files | [`lua/plugins/ui.lua:407`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L407) |
+| `<leader>be` | `n` | Buffer Explorer | [`lua/plugins/ui.lua:408`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L408) |
+| `<leader>gw` | `n` | Grep word in cursor | [`lua/plugins/ui.lua:409`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L409) |
+| `<leader>ff` | `n` | Find (git) files | [`lua/plugins/ui.lua:412`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L412) |
+| `<leader>fg` | `n` | Find (grep) | [`lua/plugins/ui.lua:413`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L413) |
+| `<leader>fb` | `n` | Find Buffers | [`lua/plugins/ui.lua:414`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L414) |
+| `<leader>fr` | `n` | Find Recent | [`lua/plugins/ui.lua:415`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L415) |
+| `<leader>fh` | `n` | Find help pages | [`lua/plugins/ui.lua:416`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L416) |
+| `<leader>fm` | `n` | Find marks | [`lua/plugins/ui.lua:417`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L417) |
+| `<leader>fd` | `n` | Document Diagnostics | [`lua/plugins/ui.lua:418`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L418) |
+| `<leader>fD` | `n` | Workspace Diagnostics | [`lua/plugins/ui.lua:419`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L419) |
+| `<leader>fp` | `n` | Find Plugin File | [`lua/plugins/ui.lua:420`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L420) |
+| `<leader>sk` | `n` | Keymaps | [`lua/plugins/ui.lua:422`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L422) |
+| `<leader>sa` | `n` | Auto commands | [`lua/plugins/ui.lua:424`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L424) |
+| `<leader>sg` | `n` | Grep | [`lua/plugins/ui.lua:425`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L425) |
+| `<leader>sb` | `n` | Buffer Fuzzy Find | [`lua/plugins/ui.lua:426`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L426) |
+| `<leader>sh` | `n` | Help Pages | [`lua/plugins/ui.lua:427`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L427) |
+| `<leader>sC` | `n` | Commands | [`lua/plugins/ui.lua:428`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L428) |
+| `<leader>sc` | `n` | Command History | [`lua/plugins/ui.lua:429`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L429) |
+| `<leader>so` | `n` | Options | [`lua/plugins/ui.lua:430`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L430) |
+| `<leader>sw` | `n` `v` | Word under cursor/Selection | [`lua/plugins/ui.lua:431`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L431) |
+| `<leader>sr` | `n` | Resume | [`lua/plugins/ui.lua:433`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L433) |
 | `d` | `n` | Delete buffer (in buffer explorer) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
-| `gg` | `n` | Select the first item | Built in telescope default |
+| `<C-t>` | `i` `n` | Scope to directory (with picker open) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
+| `<C-n>` | `i` | Next item | Built in telescope default |
+| `<Down>` | `i` | Next item | Built in telescope default |
+| `<C-p>` | `i` | Previous item | Built in telescope default |
+| `<Up>` | `i` | Previous item | Built in telescope default |
 | `j` | `n` | Next item | Built in telescope default |
 | `k` | `n` | Previous item | Built in telescope default |
-| `<C-/>` | `i` | Show mappings for picker actions | Built in telescope default |
-| `<C-c>` | `i` | Close telescope | Built in telescope default |
+| `H` | `n` | Select High | Built in telescope default |
+| `M` | `n` | Select Middle | Built in telescope default |
+| `L` | `n` | Select Low | Built in telescope default |
+| `gg` | `n` | Select the first item | Built in telescope default |
+| `G` | `n` | Select the last item | Built in telescope default |
+| `<CR>` | `i` `n` | Confirm selection | Built in telescope default |
+| `<C-x>` | `i` `n` | Go to file selection as a split | Built in telescope default |
+| `<C-v>` | `i` `n` | Go to file selection as a vsplit | Built in telescope default |
+| `<C-u>` | `i` `n` | Scroll up in preview window | Built in telescope default |
 | `<C-d>` | `i` `n` | Scroll down in preview window | Built in telescope default |
 | `<C-f>` | `i` `n` | Scroll left in preview window | Built in telescope default |
 | `<C-k>` | `i` `n` | Scroll right in preview window | Built in telescope default |
-| `<C-n>` | `i` | Next item | Built in telescope default |
-| `<C-p>` | `i` | Previous item | Built in telescope default |
-| `<C-q>` | `i` `n` | Send all items not filtered to quickfixlist | Built in telescope default |
-| `<C-r><C-a>` | `i` | Insert cWORD in original window into prompt | Built in telescope default |
-| `<C-r><C-w>` | `i` | Insert cword in original window into prompt | Built in telescope default |
-| `<C-t>` | `i` `n` | Scope to directory (with picker open) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
-| `<C-u>` | `i` `n` | Scroll up in preview window | Built in telescope default |
-| `<C-v>` | `i` `n` | Go to file selection as a vsplit | Built in telescope default |
-| `<C-x>` | `i` `n` | Go to file selection as a split | Built in telescope default |
-| `<CR>` | `i` `n` | Confirm selection | Built in telescope default |
-| `<Down>` | `i` | Next item | Built in telescope default |
 | `<M-f>` | `i` `n` | Scroll left in results window | Built in telescope default |
 | `<M-k>` | `i` `n` | Scroll right in results window | Built in telescope default |
-| `<M-q>` | `i` `n` | Send all selected items to qflist | Built in telescope default |
-| `<S-Tab>` | `i` `n` | Toggle selection and move to prev selection | Built in telescope default |
+| `<C-/>` | `i` | Show mappings for picker actions | Built in telescope default |
+| `?` | `n` | Show mappings for picker actions | Built in telescope default |
+| `<C-c>` | `i` | Close telescope | Built in telescope default |
+| `<Esc>` | `n` | Close telescope | Built in telescope default |
 | `<Tab>` | `i` `n` | Toggle selection and move to next selection | Built in telescope default |
-| `<Up>` | `i` | Previous item | Built in telescope default |
+| `<S-Tab>` | `i` `n` | Toggle selection and move to prev selection | Built in telescope default |
+| `<C-q>` | `i` `n` | Send all items not filtered to quickfixlist | Built in telescope default |
+| `<M-q>` | `i` `n` | Send all selected items to qflist | Built in telescope default |
+| `<C-r><C-w>` | `i` | Insert cword in original window into prompt | Built in telescope default |
+| `<C-r><C-a>` | `i` | Insert cWORD in original window into prompt | Built in telescope default |
 
 ## Plugin: updater.nvim
 
@@ -492,6 +492,112 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `<leader>rb` | `n` | Run buffer | [`lua/plugins/legacy.lua:34`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L34) |
 | `<leader>rf` | `n` | Run focused | [`lua/plugins/legacy.lua:35`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L35) |
 | `<leader>rl` | `n` | Run last test again | [`lua/plugins/legacy.lua:36`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L36) |
+
+## Plugin: vim-unimpaired
+
+| Keymap | Mode | Description | Source |
+|--------|------|-------------|--------|
+| `[a` | `n` | Previous file in argument list | vim-unimpaired built in default |
+| `]a` | `n` | Next file in argument list | vim-unimpaired built in default |
+| `[A` | `n` | First file in argument list | vim-unimpaired built in default |
+| `]A` | `n` | Last file in argument list | vim-unimpaired built in default |
+| `[b` | `n` | Previous buffer | vim-unimpaired built in default |
+| `]b` | `n` | Next buffer | vim-unimpaired built in default |
+| `[B` | `n` | First buffer | vim-unimpaired built in default |
+| `]B` | `n` | Last buffer | vim-unimpaired built in default |
+| `[l` | `n` | Previous location list item | vim-unimpaired built in default |
+| `]l` | `n` | Next location list item | vim-unimpaired built in default |
+| `[L` | `n` | First location list item | vim-unimpaired built in default |
+| `]L` | `n` | Last location list item | vim-unimpaired built in default |
+| `[<C-L>` | `n` | Previous location file | vim-unimpaired built in default |
+| `]<C-L>` | `n` | Next location file | vim-unimpaired built in default |
+| `[q` | `n` | Previous quickfix item | vim-unimpaired built in default |
+| `]q` | `n` | Next quickfix item | vim-unimpaired built in default |
+| `[Q` | `n` | First quickfix item | vim-unimpaired built in default |
+| `]Q` | `n` | Last quickfix item | vim-unimpaired built in default |
+| `[<C-Q>` | `n` | Previous quickfix file | vim-unimpaired built in default |
+| `]<C-Q>` | `n` | Next quickfix file | vim-unimpaired built in default |
+| `[t` | `n` | Previous tag | vim-unimpaired built in default |
+| `]t` | `n` | Next tag | vim-unimpaired built in default |
+| `[T` | `n` | First tag | vim-unimpaired built in default |
+| `]T` | `n` | Last tag | vim-unimpaired built in default |
+| `[<C-T>` | `n` | Previous preview tag | vim-unimpaired built in default |
+| `]<C-T>` | `n` | Next preview tag | vim-unimpaired built in default |
+| `[f` | `n` | Previous file in directory | vim-unimpaired built in default |
+| `]f` | `n` | Next file in directory | vim-unimpaired built in default |
+| `[n` | `n` | Previous SCM conflict marker | vim-unimpaired built in default |
+| `]n` | `n` | Next SCM conflict marker | vim-unimpaired built in default |
+| `[<Space>` | `n` | Add blank lines above | vim-unimpaired built in default |
+| `]<Space>` | `n` | Add blank lines below | vim-unimpaired built in default |
+| `[e` | `n` `v` | Exchange line up/Exchange selection up | vim-unimpaired built in default |
+| `]e` | `n` `v` | Exchange line down/Exchange selection down | vim-unimpaired built in default |
+| `[ob` | `n` | Set background=dark | vim-unimpaired built in default |
+| `]ob` | `n` | Set background=light | vim-unimpaired built in default |
+| `yob` | `n` | Toggle background | vim-unimpaired built in default |
+| `[oc` | `n` | Enable cursorline | vim-unimpaired built in default |
+| `]oc` | `n` | Disable cursorline | vim-unimpaired built in default |
+| `yoc` | `n` | Toggle cursorline | vim-unimpaired built in default |
+| `[od` | `n` | Enable diff | vim-unimpaired built in default |
+| `]od` | `n` | Disable diff | vim-unimpaired built in default |
+| `yod` | `n` | Toggle diff | vim-unimpaired built in default |
+| `[oh` | `n` | Enable hlsearch | vim-unimpaired built in default |
+| `]oh` | `n` | Disable hlsearch | vim-unimpaired built in default |
+| `yoh` | `n` | Toggle hlsearch | vim-unimpaired built in default |
+| `[oi` | `n` | Enable ignorecase | vim-unimpaired built in default |
+| `]oi` | `n` | Disable ignorecase | vim-unimpaired built in default |
+| `yoi` | `n` | Toggle ignorecase | vim-unimpaired built in default |
+| `[ol` | `n` | Enable list | vim-unimpaired built in default |
+| `]ol` | `n` | Disable list | vim-unimpaired built in default |
+| `yol` | `n` | Toggle list | vim-unimpaired built in default |
+| `[on` | `n` | Enable number | vim-unimpaired built in default |
+| `]on` | `n` | Disable number | vim-unimpaired built in default |
+| `yon` | `n` | Toggle number | vim-unimpaired built in default |
+| `[or` | `n` | Enable relativenumber | vim-unimpaired built in default |
+| `]or` | `n` | Disable relativenumber | vim-unimpaired built in default |
+| `yor` | `n` | Toggle relativenumber | vim-unimpaired built in default |
+| `[os` | `n` | Enable spell | vim-unimpaired built in default |
+| `]os` | `n` | Disable spell | vim-unimpaired built in default |
+| `yos` | `n` | Toggle spell | vim-unimpaired built in default |
+| `[ot` | `n` | Enable colorcolumn | vim-unimpaired built in default |
+| `]ot` | `n` | Disable colorcolumn | vim-unimpaired built in default |
+| `yot` | `n` | Toggle colorcolumn | vim-unimpaired built in default |
+| `[ou` | `n` | Enable cursorcolumn | vim-unimpaired built in default |
+| `]ou` | `n` | Disable cursorcolumn | vim-unimpaired built in default |
+| `you` | `n` | Toggle cursorcolumn | vim-unimpaired built in default |
+| `[ov` | `n` | Enable virtualedit | vim-unimpaired built in default |
+| `]ov` | `n` | Disable virtualedit | vim-unimpaired built in default |
+| `yov` | `n` | Toggle virtualedit | vim-unimpaired built in default |
+| `[ow` | `n` | Enable wrap | vim-unimpaired built in default |
+| `]ow` | `n` | Disable wrap | vim-unimpaired built in default |
+| `yow` | `n` | Toggle wrap | vim-unimpaired built in default |
+| `[ox` | `n` | Enable crosshairs | vim-unimpaired built in default |
+| `]ox` | `n` | Disable crosshairs | vim-unimpaired built in default |
+| `yox` | `n` | Toggle crosshairs | vim-unimpaired built in default |
+| `>p` | `n` | Paste after with increased indent | vim-unimpaired built in default |
+| `>P` | `n` | Paste before with increased indent | vim-unimpaired built in default |
+| `<p` | `n` | Paste after with decreased indent | vim-unimpaired built in default |
+| `<P` | `n` | Paste before with decreased indent | vim-unimpaired built in default |
+| `=p` | `n` | Paste after with reindent | vim-unimpaired built in default |
+| `=P` | `n` | Paste before with reindent | vim-unimpaired built in default |
+| `[op` | `n` | Paste line above with paste mode | vim-unimpaired built in default |
+| `]op` | `n` | Paste line below with paste mode | vim-unimpaired built in default |
+| `yop` | `n` | Paste at cursor with paste mode | vim-unimpaired built in default |
+| `[x` | `n` `v` | XML encode (motion)/XML encode selection | vim-unimpaired built in default |
+| `]x` | `n` `v` | XML decode (motion)/XML decode selection | vim-unimpaired built in default |
+| `[xx` | `n` | XML encode line | vim-unimpaired built in default |
+| `]xx` | `n` | XML decode line | vim-unimpaired built in default |
+| `[u` | `n` `v` | URL encode (motion)/URL encode selection | vim-unimpaired built in default |
+| `]u` | `n` `v` | URL decode (motion)/URL decode selection | vim-unimpaired built in default |
+| `[uu` | `n` | URL encode line | vim-unimpaired built in default |
+| `]uu` | `n` | URL decode line | vim-unimpaired built in default |
+| `[y` | `n` `v` | C string encode (motion)/C string encode selection | vim-unimpaired built in default |
+| `]y` | `n` `v` | C string decode (motion)/C string decode selection | vim-unimpaired built in default |
+| `[yy` | `n` | C string encode line | vim-unimpaired built in default |
+| `]yy` | `n` | C string decode line | vim-unimpaired built in default |
+| `[C` | `n` `v` | C string encode (motion)/C string encode selection | vim-unimpaired built in default |
+| `]C` | `n` `v` | C string decode (motion)/C string decode selection | vim-unimpaired built in default |
+| `[CC` | `n` | C string encode line | vim-unimpaired built in default |
+| `]CC` | `n` | C string decode line | vim-unimpaired built in default |
 
 ## Plugin: vimux
 
