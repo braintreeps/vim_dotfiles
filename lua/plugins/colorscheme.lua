@@ -61,6 +61,7 @@ return {
             transparent = true,
             dim_inactive_windows = false,
             purple_comments = true,
+            style = "retro",
         },
         config = function(_, opts)
             require("inkline").setup(opts)
