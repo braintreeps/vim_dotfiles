@@ -1,6 +1,6 @@
 # Braintree Keymap Cheatsheet
 
-Up to date as of: 2025-07-16
+Up to date as of: 2025-07-18
 
 This cheatsheet is automatically generated. It includes all keymaps from:
 

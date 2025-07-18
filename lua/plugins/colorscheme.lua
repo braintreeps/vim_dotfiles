@@ -52,7 +52,7 @@ return {
     {
         "hectron/inkline.nvim",
         priority = 1000,
-        tag = "v2.0.0",
+        tag = "v2.1.0",
         lazy = false,
         keys = { SwitchColorschemeKeyMap },
         ---@module "inkline.config"
