@@ -152,7 +152,7 @@ return {
             },
             cmdline = {
                 keymap = { preset = "inherit" },
-                completion = { menu = { auto_show = true } },
+                completion = { menu = { auto_show = false } }, -- Toggle this to automatically show completion menu on cmdline
             },
         },
         ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
