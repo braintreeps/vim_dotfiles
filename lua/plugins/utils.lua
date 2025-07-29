@@ -1,6 +1,18 @@
 local Utils = require("config.utils")
 local LazyFileEvents = Utils.lazy.LazyFileEvents
 
+local open_lazygit_with_tracked_window = function()
+    Utils.set_tracked_window()
+    Snacks.lazygit()
+end
+
+local remote_q = 'nvim --server "$NVIM" --remote-send "q"'
+local remote_open_with_tracked_window = 'nvim --server "$NVIM" --remote-send "<C-\\><C-N>:lua require(\\"config.utils\\").open_in_tracked_window(\\"{{filename}}\\")<CR>"'
+local remote_goto_line = 'nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
+local remote_q_open = remote_q .. ' && ' .. remote_open_with_tracked_window
+local lazygit_edit_command = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (' .. remote_q_open .. ')'
+local lazygit_edit_at_line_command = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (' .. remote_q_open .. ' && ' .. remote_goto_line .. ')'
+
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -67,10 +79,8 @@ return {
             lazygit = {
                 config = {
                     os = {
-                        edit =
-                        '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
-                        editAtLine =
-                        '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" &&  nvim --server "$NVIM" --remote {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")',
+                        edit = lazygit_edit_command,
+                        editAtLine = lazygit_edit_at_line_command,
                         editAtLineAndWait = 'nvim +{{line}} {{filename}}',
                         openDirInEditor =
                         '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
@@ -80,7 +90,7 @@ return {
             zen = {},
         },
         keys = {
-            { "<leader>gg", function() Snacks.lazygit() end,        desc = "Lazygit" },
+            { "<leader>gg", function() open_lazygit_with_tracked_window() end, desc = "Lazygit" },
             { "<leader>gb", function() Snacks.git.blame_line() end, desc = "[G]it [B]lame" },
             { "<leader>b.", function() Snacks.scratch() end,        desc = "New Scratch [b]uffer" },
             { "<leader>bS", function() Snacks.scratch.select() end, desc = "Scratch [b]uffer [S]elect" },
