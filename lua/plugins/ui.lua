@@ -81,6 +81,8 @@ local function scope_to_dir(prompt_bufnr, picker)
     fb.file_browser({
         files = false,
         depth = false,
+        follow_symlinks = true,
+        no_ignore = true,
         display_stat = { date = false, size = false, mode = false },
         attach_mappings = function(prompt_bufnr)
             actions.select_default:replace(function()
