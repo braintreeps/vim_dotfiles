@@ -70,7 +70,7 @@
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "typescript-vim": { "branch": "master", "commit": "4740441db1e070ef8366c888c658000dd032e4cb" },
-  "updater.nvim": { "branch": "main", "commit": "2fb4f5626bd7a58673a7afb3f54afd58b39df0a9" },
+  "updater.nvim": { "branch": "main", "commit": "1894ed4e4135240a935af28efc16779d71f2229c" },
   "vibrantink2": { "branch": "master", "commit": "a6ec4aa432a16a0e10d5ee274a35e88fc65d00d0" },
   "vim-abolish": { "branch": "master", "commit": "dcbfe065297d31823561ba787f51056c147aa682" },
   "vim-ansible-yaml": { "branch": "master", "commit": "a6f92d17ff01b2e63d6c9fdbb7f7e13c7fd41d14" },
