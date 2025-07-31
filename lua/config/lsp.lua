@@ -5,7 +5,14 @@ local M = {}
 M.default_lsp_servers = {
     "bashls",
     "lua_ls",
-    "ruby_lsp"
+    "ruby_lsp",
+    "jdtls"
+}
+
+--- List of servers that will not be automatically enabled
+---@type string[]
+M.manually_started_lsp_servers = {
+    "jdtls"
 }
 
 function M.on_attach(_client, bufnr, opts)

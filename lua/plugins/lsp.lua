@@ -3,6 +3,7 @@ local Utils = require("config.utils")
 local LazyFileEvents = Utils.lazy.LazyFileEvents
 local LspConfig = require("config.lsp")
 local lsp_servers = LspConfig.default_lsp_servers
+local lsp_servers_automatic_enable = { exclude = LspConfig.manually_started_lsp_servers }
 
 return {
     {
@@ -128,7 +129,7 @@ return {
             -- This handles automatic setup with default configs for all
             -- installed lsp servers
             require("mason-lspconfig").setup({
-                automatic_enable = true,
+                automatic_enable = lsp_servers_automatic_enable,
             })
             -- This handles automatic installation and updates of configured lsp
             -- severs
