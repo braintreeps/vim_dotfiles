@@ -19,3 +19,7 @@ vim.opt.undofile = true
 vim.g.disable_fancy_winbar = true
 
 vim.g.clipboard = "osc52"
+
+--- Otherwise the gutter column bounces around as the LSP decides whether to
+--- show diagnostics or not (which can change across edit modes).
+vim.opt.signcolumn = "yes"
