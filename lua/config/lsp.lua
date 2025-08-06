@@ -108,7 +108,7 @@ function M.on_attach(_client, bufnr, opts)
         vim.lsp.buf.format,
         { desc = "LSP: [c]ode [f]ormat" }
     )
-    -- -- Diagnostics
+    -- Diagnostics
     set(
         "n",
         opts.keymap.jump_to_prev_diagnostic,
