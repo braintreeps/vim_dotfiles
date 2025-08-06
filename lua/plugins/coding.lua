@@ -151,7 +151,10 @@ return {
                 ["<M-;>"] = { "cancel" },
             },
             cmdline = {
-                keymap = { preset = "inherit" },
+                keymap = {
+                    preset = "inherit",
+                    ["<Tab>"] = { "fallback" },
+                },
                 completion = { menu = { auto_show = false } }, -- Toggle this to automatically show completion menu on cmdline
             },
         },
