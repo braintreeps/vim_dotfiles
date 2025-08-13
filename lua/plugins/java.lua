@@ -1,6 +1,3 @@
--- requires:
--- $ mise install java@11.0.2
--- $ mise install java@21.0.2
 return {
     "mfussenegger/nvim-jdtls",
     ft = "java",
@@ -8,7 +5,7 @@ return {
         local function setup_jdtls()
             local jdtls_dir = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/jdtls/")
             local jvmArg = "-javaagent:" .. jdtls_dir .. "lombok.jar"
-            local java_21_path = vim.fn.expand("$HOME/.local/share/mise/installs/java/21.0.2/bin/java")
+            local java_21_path = vim.fn.system("mise where java@21"):gsub("%s+", "") .. "/bin/java"
 
             local config = {
                 cmd = { jdtls_dir .. "bin/jdtls", "--java-executable=" .. java_21_path, "--jvm-arg=" .. jvmArg },
@@ -30,11 +27,15 @@ return {
                         runtimes = {
                             {
                                 name = "JavaSE-11",
-                                path = vim.fn.expand("$HOME/.local/share/mise/installs/java/11.0.2/bin/java"),
+                                path = vim.fn.system("mise where java@11"):gsub("%s+", "") .. "/bin/java",
+                            },
+                            {
+                                name = "JavaSE-17",
+                                path = vim.fn.system("mise where java@17"):gsub("%s+", "") .. "/bin/java",
                             },
                             {
                                 name = "JavaSE-21",
-                                path = vim.fn.expand("$HOME/.local/share/mise/installs/java/21.0.2/bin/java"),
+                                path = java_21_path,
                             },
                         },
                     },
