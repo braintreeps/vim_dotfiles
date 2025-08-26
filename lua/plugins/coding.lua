@@ -143,6 +143,23 @@ return {
                     "fallback",
                 },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
+                -- Arrow keys for cycling through suggestions when menu is open
+                ["<Down>"] = {
+                    function(cmp)
+                        if cmp.is_visible() then
+                            return cmp.select_next()
+                        end
+                    end,
+                    "fallback",
+                },
+                ["<Up>"] = {
+                    function(cmp)
+                        if cmp.is_visible() then
+                            return cmp.select_prev()
+                        end
+                    end,
+                    "fallback",
+                },
                 -- Homerow alt-mappings
                 ["<M-h>"] = { "show_documentation", "hide_documentation" },
                 ["<M-j>"] = { "show", "select_next" },
