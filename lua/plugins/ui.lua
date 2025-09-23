@@ -377,7 +377,7 @@ return {
                 build = "make",
             },
             {
-                "echasnovski/mini.bufremove",
+                "nvim-mini/mini.bufremove",
                 keys = {
                     {
                         "<leader>bd",
