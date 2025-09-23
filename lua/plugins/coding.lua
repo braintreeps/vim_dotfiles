@@ -197,8 +197,28 @@ return {
     },
     {
         "junegunn/vim-easy-align",
+        ft = "markdown",
         keys = {
             { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" }, desc = "Easy Align" },
         },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "markdown",
+                callback = function()
+                    vim.keymap.set(
+                        "v",
+                        "<tab>",
+                        ":EasyAlign*<Bar><CR>",
+                        { buffer = true, desc = "Align markdown table" }
+                    )
+                    vim.keymap.set(
+                        "n",
+                        "<Bar>",
+                        "vip :EasyAlign*<Bar><CR>",
+                        { buffer = true, desc = "Select and align markdown table" }
+                    )
+                end,
+            })
+        end,
     },
 }
