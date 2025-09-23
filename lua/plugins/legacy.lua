@@ -36,7 +36,6 @@ return {
 			{ "<Leader>rl", "<cmd>wa<CR> <cmd>TestLast<CR>", desc = "Run last test again" },
 		},
 	},
-	{ "junegunn/vim-easy-align", event = LazyFileEvents }, -- Used to align text; this should be driven by an LSP
 	{ "kshenoy/vim-signature", event = LazyFileEvents }, -- Used to add/remove/go-to marks
 	{ "kana/vim-textobj-user", lazy = true }, -- used to create custom text objects; TODO mark for deletion
 	{ "mattn/emmet-vim", lazy = true }, -- used for a expanding abbreviations/adding tags to HTML; TODO mark for deletion
