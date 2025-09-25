@@ -1,6 +1,6 @@
 # Braintree Keymap Cheatsheet
 
-Up to date as of: 2025-08-18
+Up to date as of: 2025-09-25
 
 This cheatsheet is automatically generated. It includes all keymaps from:
 
@@ -150,7 +150,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<Esc>` | `i` | Exit insert mode | <sub>Built-in Neovim default</sub> |
+| `<Esc>` | `i` | Escape and Clear hlsearch | [`lua/config/keymaps.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua) |
 | `<C-h>` | `i` | Backspace | <sub>Built-in Neovim default</sub> |
 | `<C-u>` | `i` | Delete to beginning of line | <sub>Built-in Neovim default</sub> |
 | `<C-w>` | `i` | Delete word before cursor | <sub>Built-in Neovim default</sub> |
@@ -275,12 +275,12 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `<C-e>` | `i` | Cancel | [`lua/plugins/coding.lua:131`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L131) |
 | `<C-CR>` | `i` | Cancel/Fallback | [`lua/plugins/coding.lua:132`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L132) |
 | `<S-Tab>` | `i` | Snippet Backward/Fallback | [`lua/plugins/coding.lua:145`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L145) |
-| `<M-h>` | `i` | Show Documentation/Hide Documentation | [`lua/plugins/coding.lua:147`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L147) |
-| `<M-j>` | `i` | Show/Select Next | [`lua/plugins/coding.lua:148`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L148) |
-| `<M-k>` | `i` | Select Prev | [`lua/plugins/coding.lua:149`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L149) |
-| `<M-l>` | `i` | Select And accept/Utils.cmp.map({ Ai Accept | [`lua/plugins/coding.lua:150`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L150) |
-| `<M-;>` | `i` | Cancel | [`lua/plugins/coding.lua:151`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L151) |
-| `<Tab>` | `i` | Fallback | [`lua/plugins/coding.lua:156`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L156) |
+| `<M-h>` | `i` | Show Documentation/Hide Documentation | [`lua/plugins/coding.lua:164`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L164) |
+| `<M-j>` | `i` | Show/Select Next | [`lua/plugins/coding.lua:165`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L165) |
+| `<M-k>` | `i` | Select Prev | [`lua/plugins/coding.lua:166`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L166) |
+| `<M-l>` | `i` | Select And accept/Utils.cmp.map({ Ai Accept | [`lua/plugins/coding.lua:167`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L167) |
+| `<M-;>` | `i` | Cancel | [`lua/plugins/coding.lua:168`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L168) |
+| `<Tab>` | `i` | Fallback | [`lua/plugins/coding.lua:173`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L173) |
 
 ## Copilot
 
@@ -329,7 +329,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>bo` | `n` | Drop[b]ar - [O]pen Picker | [`lua/plugins/ui.lua:670`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L670) |
+| `<leader>bo` | `n` | Drop[b]ar - [O]pen Picker | [`lua/plugins/ui.lua:673`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L673) |
 
 ## Plugin: eyeliner.nvim
 
@@ -347,7 +347,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>uW` | `n` | Toggle [U]I [W]inbar | [`lua/plugins/ui.lua:723`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L723) |
+| `<leader>uW` | `n` | Toggle [U]I [W]inbar | [`lua/plugins/ui.lua:726`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L726) |
 
 ## Plugin: indent-blankline.nvim
 
@@ -373,8 +373,8 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>bd` | `n` | Delete Buffer | [`lua/plugins/ui.lua:380`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L380) |
-| `<leader>bD` | `n` | Delete Buffer (Force) | [`lua/plugins/ui.lua:401`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L401) |
+| `<leader>bd` | `n` | Delete Buffer | [`lua/plugins/ui.lua:383`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L383) |
+| `<leader>bD` | `n` | Delete Buffer (Force) | [`lua/plugins/ui.lua:404`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L404) |
 
 ## Plugin: neo-tree.nvim
 
@@ -418,29 +418,29 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader><leader>` | `n` | Find files | [`lua/plugins/ui.lua:408`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L408) |
-| `<C-p>` | `n` | Find (git) files | [`lua/plugins/ui.lua:409`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L409) |
-| `<leader>be` | `n` | Buffer Explorer | [`lua/plugins/ui.lua:410`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L410) |
-| `<leader>gw` | `n` | Grep word in cursor | [`lua/plugins/ui.lua:411`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L411) |
-| `<leader>ff` | `n` | Find (git) files | [`lua/plugins/ui.lua:414`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L414) |
-| `<leader>fg` | `n` | Find (grep) | [`lua/plugins/ui.lua:415`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L415) |
-| `<leader>fb` | `n` | Find Buffers | [`lua/plugins/ui.lua:416`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L416) |
-| `<leader>fr` | `n` | Find Recent | [`lua/plugins/ui.lua:417`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L417) |
-| `<leader>fh` | `n` | Find help pages | [`lua/plugins/ui.lua:418`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L418) |
-| `<leader>fm` | `n` | Find marks | [`lua/plugins/ui.lua:419`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L419) |
-| `<leader>fd` | `n` | Document Diagnostics | [`lua/plugins/ui.lua:420`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L420) |
-| `<leader>fD` | `n` | Workspace Diagnostics | [`lua/plugins/ui.lua:421`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L421) |
-| `<leader>fp` | `n` | Find Plugin File | [`lua/plugins/ui.lua:422`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L422) |
-| `<leader>sk` | `n` | Keymaps | [`lua/plugins/ui.lua:424`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L424) |
-| `<leader>sa` | `n` | Auto commands | [`lua/plugins/ui.lua:426`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L426) |
-| `<leader>sg` | `n` | Grep | [`lua/plugins/ui.lua:427`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L427) |
-| `<leader>sb` | `n` | Buffer Fuzzy Find | [`lua/plugins/ui.lua:428`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L428) |
-| `<leader>sh` | `n` | Help Pages | [`lua/plugins/ui.lua:429`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L429) |
-| `<leader>sC` | `n` | Commands | [`lua/plugins/ui.lua:430`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L430) |
-| `<leader>sc` | `n` | Command History | [`lua/plugins/ui.lua:431`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L431) |
-| `<leader>so` | `n` | Options | [`lua/plugins/ui.lua:432`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L432) |
-| `<leader>sw` | `n` `v` | Word under cursor/Selection | [`lua/plugins/ui.lua:433`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L433) |
-| `<leader>sr` | `n` | Resume | [`lua/plugins/ui.lua:435`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L435) |
+| `<leader><leader>` | `n` | Find files | [`lua/plugins/ui.lua:411`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L411) |
+| `<C-p>` | `n` | Find (git) files | [`lua/plugins/ui.lua:412`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L412) |
+| `<leader>be` | `n` | Buffer Explorer | [`lua/plugins/ui.lua:413`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L413) |
+| `<leader>gw` | `n` | Grep word in cursor | [`lua/plugins/ui.lua:414`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L414) |
+| `<leader>ff` | `n` | Find (git) files | [`lua/plugins/ui.lua:417`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L417) |
+| `<leader>fg` | `n` | Find (grep) | [`lua/plugins/ui.lua:418`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L418) |
+| `<leader>fb` | `n` | Find Buffers | [`lua/plugins/ui.lua:419`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L419) |
+| `<leader>fr` | `n` | Find Recent | [`lua/plugins/ui.lua:420`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L420) |
+| `<leader>fh` | `n` | Find help pages | [`lua/plugins/ui.lua:421`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L421) |
+| `<leader>fm` | `n` | Find marks | [`lua/plugins/ui.lua:422`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L422) |
+| `<leader>fd` | `n` | Document Diagnostics | [`lua/plugins/ui.lua:423`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L423) |
+| `<leader>fD` | `n` | Workspace Diagnostics | [`lua/plugins/ui.lua:424`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L424) |
+| `<leader>fp` | `n` | Find Plugin File | [`lua/plugins/ui.lua:425`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L425) |
+| `<leader>sk` | `n` | Keymaps | [`lua/plugins/ui.lua:427`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L427) |
+| `<leader>sa` | `n` | Auto commands | [`lua/plugins/ui.lua:429`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L429) |
+| `<leader>sg` | `n` | Grep | [`lua/plugins/ui.lua:430`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L430) |
+| `<leader>sb` | `n` | Buffer Fuzzy Find | [`lua/plugins/ui.lua:431`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L431) |
+| `<leader>sh` | `n` | Help Pages | [`lua/plugins/ui.lua:432`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L432) |
+| `<leader>sC` | `n` | Commands | [`lua/plugins/ui.lua:433`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L433) |
+| `<leader>sc` | `n` | Command History | [`lua/plugins/ui.lua:434`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L434) |
+| `<leader>so` | `n` | Options | [`lua/plugins/ui.lua:435`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L435) |
+| `<leader>sw` | `n` `v` | Word under cursor/Selection | [`lua/plugins/ui.lua:436`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L436) |
+| `<leader>sr` | `n` | Resume | [`lua/plugins/ui.lua:438`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L438) |
 | `d` | `n` | Delete buffer (in buffer explorer) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
 | `<C-t>` | `i` `n` | Scope to directory (with picker open) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
 | `<C-n>` | `i` | Next item | Built in telescope default |
@@ -484,15 +484,15 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>gh` | `n` | Show URL to view the file under cursor on GitHub | [`lua/plugins/legacy.lua:47`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L47) |
+| `<leader>gh` | `n` | Show URL to view the file under cursor on GitHub | [`lua/plugins/legacy.lua:46`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L46) |
 
 ## Plugin: vim-rake
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>AA` | `n` | Alternate file | [`lua/plugins/legacy.lua:63`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L63) |
-| `<leader>AV` | `n` | Alternate w/ Vertical Split | [`lua/plugins/legacy.lua:64`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L64) |
-| `<leader>AS` | `n` | Alternate w/ Horizontal Split | [`lua/plugins/legacy.lua:65`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L65) |
+| `<leader>AA` | `n` | Alternate file | [`lua/plugins/legacy.lua:62`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L62) |
+| `<leader>AV` | `n` | Alternate w/ Vertical Split | [`lua/plugins/legacy.lua:63`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L63) |
+| `<leader>AS` | `n` | Alternate w/ Horizontal Split | [`lua/plugins/legacy.lua:64`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L64) |
 
 ## Plugin: vim-test
 
@@ -633,12 +633,27 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `,` | `i` | Insert comma with undo breakpoint | [`lua/config/keymaps.lua:18`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L18) |
-| `.` | `i` | Insert period with undo breakpoint | [`lua/config/keymaps.lua:19`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L19) |
-| `;` | `i` | Insert semicolon with undo breakpoint | [`lua/config/keymaps.lua:20`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L20) |
-| `p` | `x` | Paste (without overwrite register) | [`lua/config/keymaps.lua:32`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L32) |
-| `<leader>dv` | `n` | [d]iagnotic [v]irtual lines toggle | [`lua/config/keymaps.lua:44`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L44) |
-| `<leader>uw` | `n` | Toggle Wrap | [`lua/config/keymaps.lua:55`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L55) |
+| `<leader>nh` | `n` | Removes text searching highlight | [`lua/config/keymaps.lua:3`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L3) |
+| `<esc>` | `i` | Escape and Clear hlsearch | [`lua/config/keymaps.lua:5`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L5) |
+| `<leader>l` | `n` | Lazy | [`lua/config/keymaps.lua:7`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L7) |
+| `<leader>cc` | `n` | Comments the current or highlighted lines | [`lua/config/keymaps.lua:15`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L15) |
+| `<leader>cw` | `n` | Remove trailing whitespace | [`lua/config/keymaps.lua:18`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L18) |
+| `,` | `i` | Insert comma with undo breakpoint | [`lua/config/keymaps.lua:24`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L24) |
+| `.` | `i` | Insert period with undo breakpoint | [`lua/config/keymaps.lua:25`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L25) |
+| `;` | `i` | Insert semicolon with undo breakpoint | [`lua/config/keymaps.lua:26`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L26) |
+| `p` | `x` | Paste (without overwrite register) | [`lua/config/keymaps.lua:38`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L38) |
+| `<leader>dv` | `n` | [d]iagnotic [v]irtual lines toggle | [`lua/config/keymaps.lua:50`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L50) |
+| `<leader>uw` | `n` | Toggle Wrap | [`lua/config/keymaps.lua:62`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L62) |
+| `<leader>bb` | `n` | Switch to Other Buffer | [`lua/config/keymaps.lua:67`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L67) |
+| `<leader>qq` | `n` | Quit All | [`lua/config/keymaps.lua:69`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L69) |
+| `<leader>va` | `n` | Select All | [`lua/config/keymaps.lua:71`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L71) |
+| `<leader>vp` | `n` | Select Pasted Text | [`lua/config/keymaps.lua:73`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L73) |
+| `<leader>-` | `n` | Split Window Below | [`lua/config/keymaps.lua:75`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L75) |
+| `<leader>\|` | `n` | Split Window Right | [`lua/config/keymaps.lua:76`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L76) |
+| `zh` | `n` | Half screen to the left | [`lua/config/keymaps.lua:78`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L78) |
+| `zl` | `n` | Half screen to the right | [`lua/config/keymaps.lua:79`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L79) |
+| `<leader>fn` | `n` | New File | [`lua/config/keymaps.lua:84`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L84) |
+| `<leader>fx` | `n` | Make executable | [`lua/config/keymaps.lua:86`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L86) |
 
 ## Ruby
 
