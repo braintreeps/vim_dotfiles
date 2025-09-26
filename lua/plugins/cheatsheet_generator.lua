@@ -156,8 +156,8 @@ return {
                 ["telescope.nvim"] = {
                     -- Telescope keymap customizations
                     { keymap = "d", mode = "n", desc = "Delete buffer (in buffer explorer)", source = "lua/plugins/ui.lua" },
-                    { keymap = "<C-t>", mode = "i", desc = "Scope to directory (with picker open)", source = "lua/plugins/ui.lua" },
-                    { keymap = "<C-t>", mode = "n", desc = "Scope to directory (with picker open)", source = "lua/plugins/ui.lua" },
+                    { keymap = "<C-e>", mode = "i", desc = "Scope to directory (with picker open)", source = "lua/plugins/ui.lua" },
+                    { keymap = "<C-e>", mode = "n", desc = "Scope to directory (with picker open)", source = "lua/plugins/ui.lua" },
 
                     -- Built in telescope keymaps
                     { keymap = "<C-n>", mode = "i", desc = "Next item", source = "Built in telescope default" },
@@ -173,6 +173,8 @@ return {
                     { keymap = "G", mode = "n", desc = "Select the last item", source = "Built in telescope default" },
                     { keymap = "<CR>", mode = "i", desc = "Confirm selection", source = "Built in telescope default" },
                     { keymap = "<CR>", mode = "n", desc = "Confirm selection", source = "Built in telescope default" },
+                    { keymap = "<C-t>", mode = "i", desc = "Go to file selection in a new tab", source = "Built in telescope default" },
+                    { keymap = "<C-t>", mode = "n", desc = "Go to file selection in a new tab", source = "Built in telescope default" },
                     { keymap = "<C-x>", mode = "i", desc = "Go to file selection as a split", source = "Built in telescope default" },
                     { keymap = "<C-x>", mode = "n", desc = "Go to file selection as a split", source = "Built in telescope default" },
                     { keymap = "<C-v>", mode = "i", desc = "Go to file selection as a vsplit", source = "Built in telescope default" },

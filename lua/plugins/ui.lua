@@ -504,7 +504,7 @@ return {
                     end,
                     mappings = {
                         i = {
-                            ["<C-t>"] = function(prompt_bufnr)
+                            ["<C-e>"] = function(prompt_bufnr)
                                 scope_to_dir(prompt_bufnr, require("telescope.builtin").live_grep)
                             end,
                         },
@@ -514,7 +514,7 @@ return {
                     hidden = true,
                     mappings = {
                         i = {
-                            ["<C-t>"] = function(prompt_bufnr)
+                            ["<C-e>"] = function(prompt_bufnr)
                                 scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files)
                             end,
                         },
@@ -525,7 +525,7 @@ return {
                     hidden = true,
                     mappings = {
                         i = {
-                            ["<C-t>"] = function(prompt_bufnr)
+                            ["<C-e>"] = function(prompt_bufnr)
                                 scope_to_dir(prompt_bufnr, require("telescope.builtin").find_files) -- intentional move to find_files to respect cwd option
                             end,
                         },

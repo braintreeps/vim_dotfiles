@@ -442,7 +442,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `<leader>sw` | `n` `v` | Word under cursor/Selection | [`lua/plugins/ui.lua:436`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L436) |
 | `<leader>sr` | `n` | Resume | [`lua/plugins/ui.lua:438`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L438) |
 | `d` | `n` | Delete buffer (in buffer explorer) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
-| `<C-t>` | `i` `n` | Scope to directory (with picker open) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
+| `<C-e>` | `i` `n` | Scope to directory (with picker open) | [`lua/plugins/ui.lua`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua) |
 | `<C-n>` | `i` | Next item | Built in telescope default |
 | `<Down>` | `i` | Next item | Built in telescope default |
 | `<C-p>` | `i` | Previous item | Built in telescope default |
@@ -455,6 +455,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `gg` | `n` | Select the first item | Built in telescope default |
 | `G` | `n` | Select the last item | Built in telescope default |
 | `<CR>` | `i` `n` | Confirm selection | Built in telescope default |
+| `<C-t>` | `i` `n` | Go to file selection in a new tab | Built in telescope default |
 | `<C-x>` | `i` `n` | Go to file selection as a split | Built in telescope default |
 | `<C-v>` | `i` `n` | Go to file selection as a vsplit | Built in telescope default |
 | `<C-u>` | `i` `n` | Scroll up in preview window | Built in telescope default |

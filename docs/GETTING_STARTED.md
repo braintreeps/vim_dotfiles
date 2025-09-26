@@ -63,8 +63,8 @@ Once you're comfortable with the basics:
   - *Example: Search "login" to find all login-related code*
 - **`<Leader>sr`** - Resume your last search
   - *Search for something, scroll through results and pick one, then hit this keymap to get right back to your search results*
-- **`<C-t>`** - Scope your search
-  - *(hold down `control`, then press `t`, **WHILE** a search picker is open, then fuzzy find a directory to scope to)*
+- **`<C-e>`** - Scope your search (_[e]nter directory_)
+  - *(hold down `control`, then press `e`, **WHILE** a search picker is open, then fuzzy find a directory to scope to)*
   - *Example: Search for a method name only in `/app` or only in `/spec`*
 - **`<Leader>sb`** - Fuzzy find text in your current file
   - *like a more typo-tolerant `/`, with previews and line numbers!*
