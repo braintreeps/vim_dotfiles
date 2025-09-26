@@ -7,7 +7,7 @@ Welcome to the Braintree Neovim configuration! These dotfiles incorporate many o
 - 💤[`lazy.nvim`][lazy.nvim] for managing plugins, and lazy-loading them.
 - 🔏 `Lockfile` for plugins to ensure compatibility.
 - 🆕 Use modern, maintained Neovim-variants of traditional Vim plugins.
-- 💻 Leverage advanced tooling, such as LSPs, Treesitter and many more things!
+- 💻 Leverage advanced tooling, such as [LSPs](./docs/LSP_GUIDE.md), [Treesitter](./docs/TREESITTER.md) and many more things!
 
 ## 🤩 Getting started
 

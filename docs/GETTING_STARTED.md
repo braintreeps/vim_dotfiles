@@ -108,6 +108,16 @@ For more information on getting started with LSPs, check out our [LSP Guide](./L
 
 These features work automatically once you open a code file:
 
+## Better Syntax Highlighting (Treesitter)
+
+[Treesitter](https://tree-sitter.github.io/tree-sitter/) is a parser generator
+tool for source code. Unlike traditional vim syntax highlighting that relies on
+complex regular expressions, treesitter creates an actual parse tree of your
+code, enabling much more accurate and context-aware highlighting along with
+other features.
+
+For more information on treesitter, check out our [Treesitter Guide](./TREESITTER.md)
+
 ### Understanding Code
 - **`gd`** - Jump to where something is defined
   - *Click on a function name, press `gd` to see the actual function*
