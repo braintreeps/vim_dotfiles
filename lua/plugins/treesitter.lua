@@ -140,4 +140,29 @@ return {
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "BufReadPost",
+        opts = {
+            mode = "cursor",
+            max_lines = 6,
+            multiline_threshold = 3,
+            trim_scope = "inner",
+        },
+        keys = {
+            {
+                "<leader>ut",
+                function()
+                    local tsc = require("treesitter-context")
+                    tsc.toggle()
+                    if tsc.enabled() then
+                        vim.notify("Enabled Treesitter Context", vim.log.levels.INFO)
+                    else
+                        vim.notify("Disabled Treesitter Context", vim.log.levels.WARN)
+                    end
+                end,
+                desc = "Toggle Treesitter Context",
+            },
+        },
+    },
 }

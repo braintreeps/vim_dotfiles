@@ -1,6 +1,6 @@
 # Braintree Keymap Cheatsheet
 
-Up to date as of: 2025-09-25
+Up to date as of: 2025-09-26
 
 This cheatsheet is automatically generated. It includes all keymaps from:
 
@@ -388,6 +388,12 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
 | `<leader>un` | `n` | Dismiss All Notifications | [`lua/plugins/ui.lua:127`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/ui.lua#L127) |
+
+## Plugin: nvim-treesitter-context
+
+| Keymap | Mode | Description | Source |
+|--------|------|-------------|--------|
+| `<leader>ut` | `n` | Toggle Treesitter Context | [`lua/plugins/treesitter.lua:154`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/treesitter.lua#L154) |
 
 ## Plugin: nvim-ufo
 
