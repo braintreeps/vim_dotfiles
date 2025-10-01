@@ -74,7 +74,7 @@ return {
 	╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝
 
 					]],
-                }
+                },
             },
             lazygit = {
                 config = {
@@ -131,7 +131,7 @@ return {
             periodic_check = {
                 enabled = true,
                 frequency_minutes = 120,
-            }
+            },
         },
         cmd = { "UpdaterOpen", "UpdaterCheck", "UpdaterStartChecking", "UpdaterStopChecking" },
         keys = {
@@ -171,6 +171,34 @@ return {
             { "<leader>mp", ":MarkdownPreview<CR>", desc = "Start Markdown Preview" },
             { "<leader>ms", ":MarkdownPreviewStop<CR>", desc = "Stop Markdown Preview" },
             { "<leader>mt", ":MarkdownPreviewToggle<CR>", desc = "Toggle Markdown Preview" },
+        },
+    },
+    {
+        "ruifm/gitlinker.nvim",
+        keys = {
+            {
+                "<leader>gy",
+                function()
+                    require("gitlinker").get_buf_range_url("n")
+                end,
+                desc = "Copy GitHub link",
+                mode = { "n" },
+            },
+            {
+                "<leader>gy",
+                function()
+                    require("gitlinker").get_buf_range_url("v")
+                end,
+                desc = "Copy GitHub link",
+                mode = { "v" },
+            },
+            {
+                "<leader>gY",
+                function()
+                    require("gitlinker").get_repo_url()
+                end,
+                desc = "Copy GitHub Repo link",
+            },
         },
     },
 }

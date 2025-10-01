@@ -99,3 +99,72 @@ function copy_path()
 end
 map("n", "<leader>fy", copy_relative_path, { desc = "Copy Relative Path" })
 map("n", "<leader>fY", copy_path, { desc = "Copy Path" })
+
+local function copy_github_pr_url()
+    -- Get remote URL
+    local handle = io.popen("git remote get-url origin 2>/dev/null")
+    local remote_url = handle:read("*a"):gsub("%s+$", "")
+    handle:close()
+
+    if remote_url == "" then
+        vim.notify("No git remote found", vim.log.levels.ERROR)
+        return
+    end
+
+    -- Extract owner/repo
+    local owner, repo = remote_url:match("[:/]([^/]+)/([^%.]+)%.git$")
+    if not owner or not repo then
+        vim.notify("Could not parse remote URL", vim.log.levels.ERROR)
+        return
+    end
+
+    -- Get current branch
+    handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+    local branch = handle:read("*a"):gsub("%s+$", "")
+    handle:close()
+
+    if branch == "" then
+        vim.notify("No git branch found", vim.log.levels.ERROR)
+        return
+    end
+
+    local url = string.format("https://github.com/%s/%s/pull/new/%s", owner, repo, branch)
+
+    vim.fn.setreg("+", url)
+    vim.notify("Copied PR URL to clipboard: " .. url)
+end
+map("n", "<leader>gp", copy_github_pr_url, { desc = "Copy GitHub PR URL for current branch", silent = true })
+
+local function copy_merged_pr_url()
+    local file = vim.fn.expand("%")
+    local line = vim.fn.line(".")
+
+    -- Get the commit SHA for the current line using git blame
+    local sha = vim.fn.systemlist(
+        "git blame -L "
+            .. vim.fn.line(".")
+            .. ","
+            .. vim.fn.line(".")
+            .. " "
+            .. vim.fn.expand("%")
+            .. ' --porcelain | cut -d " " -f 1'
+    )[1]
+
+    if sha and sha ~= "" then
+        -- Get the PR number associated with the commit SHA using gh
+        local pr_number = vim.fn.systemlist(
+            'gh pr list --search "' .. sha .. '" --state "merged" --json number --jq ".[0].number"'
+        )[1]
+        if pr_number and pr_number ~= "" then
+            local pr_url = vim.fn.system("gh browse " .. pr_number .. " -n")
+            vim.notify("PR URL: " .. pr_url)
+            vim.fn.setreg("+", pr_url)
+        else
+            vim.notify("No PR found for this commit.", vim.log.levels.WARN)
+        end
+    else
+        vim.notify("No commit found for this line.", vim.log.levels.WARN)
+    end
+end
+--stylua: ignore
+map("n", "<leader>gP", copy_merged_pr_url, { desc = "Copy GitHub PR URL for line blame (gh cli)", silent = true })

@@ -1,6 +1,6 @@
 # Braintree Keymap Cheatsheet
 
-Up to date as of: 2025-09-26
+Up to date as of: 2025-09-30
 
 This cheatsheet is automatically generated. It includes all keymaps from:
 
@@ -335,13 +335,30 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>uf` | `n` | Toggle f/T highlight | [`lua/plugins/editor.lua:315`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L315) |
+| `<leader>uf` | `n` | Toggle f/T highlight | [`lua/plugins/editor.lua:326`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L326) |
+
+## Plugin: gitlinker.nvim
+
+| Keymap | Mode | Description | Source |
+|--------|------|-------------|--------|
+| `<leader>gy` | `n` `v` | Copy GitHub link | [`lua/plugins/utils.lua:179`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/utils.lua#L179) |
+| `<leader>gY` | `n` | Copy GitHub Repo link | [`lua/plugins/utils.lua:181`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/utils.lua#L181) |
 
 ## Plugin: gitsigns.nvim
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>bl` | `n` | [b]lame [l]ine | [`lua/plugins/editor.lua:41`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L41) |
+| `<leader>bl` | `n` | Toggle Line Blame | [`lua/plugins/editor.lua:41`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L41) |
+| `<leader>gB` | `n` | Toggle Line Blame | [`lua/plugins/editor.lua:42`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L42) |
+| `]h` | `n` | Next git hunk | [`lua/plugins/editor.lua:43`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L43) |
+| `ih` | `n` | Select git hunk | [`lua/plugins/editor.lua:45`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L45) |
+| `<leader>gr` | `n` | [g]it [r]eset hunk | [`lua/plugins/editor.lua:46`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L46) |
+| `<leader>gR` | `n` | [g]it [R]eset buffer | [`lua/plugins/editor.lua:47`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L47) |
+| `<leader>gs` | `n` | [g]it [s]tage hunk | [`lua/plugins/editor.lua:48`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L48) |
+| `<leader>gS` | `n` | [g]it [S]tage buffer | [`lua/plugins/editor.lua:49`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L49) |
+| `<leader>gu` | `n` | [g]it [u]nstage hunk | [`lua/plugins/editor.lua:50`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L50) |
+| `<leader>gd` | `n` | [g]it [d]iff this | [`lua/plugins/editor.lua:51`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L51) |
+| `<leader>gD` | `n` | [g]it [D]iff this ~ | [`lua/plugins/editor.lua:52`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L52) |
 
 ## Plugin: heirline.nvim
 
@@ -380,8 +397,8 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>nt` | `n` | Neotree toggle | [`lua/plugins/editor.lua:72`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L72) |
-| `<leader>nf` | `n` | Neotree focus file | [`lua/plugins/editor.lua:73`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L73) |
+| `<leader>nt` | `n` | Neotree toggle | [`lua/plugins/editor.lua:83`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L83) |
+| `<leader>nf` | `n` | Neotree focus file | [`lua/plugins/editor.lua:84`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L84) |
 
 ## Plugin: nvim-notify
 
@@ -399,16 +416,16 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>z` | `n` | Toggle fold | [`lua/plugins/editor.lua:203`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L203) |
-| `<leader>Z` | `n` | Toggle folds at current indentation level | [`lua/plugins/editor.lua:205`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L205) |
+| `<leader>z` | `n` | Toggle fold | [`lua/plugins/editor.lua:214`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L214) |
+| `<leader>Z` | `n` | Toggle folds at current indentation level | [`lua/plugins/editor.lua:216`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L216) |
 
 ## Plugin: resession.nvim
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>qs` | `n` | Save Session | [`lua/plugins/editor.lua:113`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L113) |
-| `<leader>ql` | `n` | Load Session | [`lua/plugins/editor.lua:114`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L114) |
-| `<leader>qd` | `n` | Delete Session | [`lua/plugins/editor.lua:115`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L115) |
+| `<leader>qs` | `n` | Save Session | [`lua/plugins/editor.lua:124`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L124) |
+| `<leader>ql` | `n` | Load Session | [`lua/plugins/editor.lua:125`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L125) |
+| `<leader>qd` | `n` | Delete Session | [`lua/plugins/editor.lua:126`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L126) |
 
 ## Plugin: snacks.nvim
 
@@ -500,6 +517,14 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `<leader>AA` | `n` | Alternate file | [`lua/plugins/legacy.lua:62`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L62) |
 | `<leader>AV` | `n` | Alternate w/ Vertical Split | [`lua/plugins/legacy.lua:63`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L63) |
 | `<leader>AS` | `n` | Alternate w/ Horizontal Split | [`lua/plugins/legacy.lua:64`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L64) |
+
+## Plugin: vim-swap
+
+| Keymap | Mode | Description | Source |
+|--------|------|-------------|--------|
+| `g>` | `n` | Swap with next | [`lua/plugins/legacy.lua:101`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L101) |
+| `g<` | `n` | Swap with previous | [`lua/plugins/legacy.lua:102`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L102) |
+| `gs` | `n` | Swap interactive | [`lua/plugins/legacy.lua:103`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/legacy.lua#L103) |
 
 ## Plugin: vim-test
 
@@ -661,6 +686,11 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 | `zl` | `n` | Half screen to the right | [`lua/config/keymaps.lua:79`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L79) |
 | `<leader>fn` | `n` | New File | [`lua/config/keymaps.lua:84`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L84) |
 | `<leader>fx` | `n` | Make executable | [`lua/config/keymaps.lua:86`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L86) |
+| `<leader>fy` | `n` | Copy Relative Path | [`lua/config/keymaps.lua:98`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L98) |
+| `<leader>fY` | `n` | Copy Path | [`lua/config/keymaps.lua:99`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L99) |
+| `<leader>gp` | `n` | Copy GitHub PR URL for current branch | [`lua/config/keymaps.lua:134`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L134) |
+| `<leader>gP` | `n` | Copy GitHub PR URL for line blame (gh cli) | [`lua/config/keymaps.lua:168`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/config/keymaps.lua#L168) |
+| `v` | `v` | Align markdown table | [`lua/plugins/coding.lua:208`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/coding.lua#L208) |
 
 ## Ruby
 

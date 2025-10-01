@@ -94,8 +94,16 @@ return {
 	{ "bkad/CamelCaseMotion", event = LazyFileEvents },
 	{ "romainl/vim-qf", lazy = true },
 
-	{ "machakann/vim-swap" },
-	{ "wellle/targets.vim" },
+    {
+        -- Swap delimeted items
+        "machakann/vim-swap",
+        keys = {
+            { "g>", desc = "Swap with next" },
+            { "g<", desc = "Swap with previous" },
+            { "gs", desc = "Swap interactive" },
+        },
+    },
+    { "wellle/targets.vim" },
 
 	-- Language-specific plugins
 	{ "chase/vim-ansible-yaml", ft = { "ansible" } },
@@ -126,7 +134,7 @@ return {
         lazy = false,
         priority = 10,
         ft = { "ruby" },
-        init = function ()
+        init = function()
             vim.g["rails_projections"] = {
                 ["script/*.rb"] = {
                     test = "spec/script/{}_spec.rb",
@@ -141,7 +149,7 @@ return {
                     test = "spec/lib/tasks/{}_rake_spec.rb",
                 },
             }
-        end
+        end,
     },
     { "rust-lang/rust.vim", ft = { "rust" } },
     { "jergason/scala.vim", ft = { "scala" } },
