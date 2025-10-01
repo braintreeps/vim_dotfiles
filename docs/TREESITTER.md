@@ -42,7 +42,31 @@ This config comes pre-configured with treesitter parsers for common languages in
 - **`:TSBufToggle highlight`** - Toggle treesitter highlighting for current buffer
 
 ### Installing Parsers
-You can either install manually
+
+#### **Recommended way**
+
+If you haven't already, create a
+[personal scaffold](https://github.com/PayPal-Braintree/neovim-dotfiles-personal.scaffold)
+and add a spec in there with the languages that you want to add, as well as any
+other configuration
+```lua
+-- EXAMPLE
+{
+  "nvim-treesitter/nvim-treesitter",
+  opts = {
+    ensure_installed = {
+      "cue",
+    },
+    textobjects = {
+      move = {
+        goto_next_start = { ["]m"] = "@function.outer" }
+      },
+    },
+  },
+},
+```
+
+You can also install manually
 1. Install a parser: `:TSInstall <language>`
    - Example: `:TSInstall go` for Go language support
 2. Check installation: `:TSInstallInfo`
