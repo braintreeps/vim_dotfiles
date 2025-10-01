@@ -80,6 +80,8 @@ map("n", "zl", "zL", { desc = "Half screen to the right" })
 -- keep cursor centered when moving half page up/down
 map("n", "<C-d>", "<C-d>zz^", { desc = "Scroll Down" })
 map("n", "<C-u>", "<C-u>zz^", { desc = "Scroll Up" })
+-- keep PageDown from scrolling further than necessary
+map("n", "<PageDown>", "<C-d>zz", { desc = "Page down" })
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 -- create executables
