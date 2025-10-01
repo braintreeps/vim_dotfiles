@@ -4,19 +4,27 @@ local M = {}
 function M.open_colorscheme_picker()
     -- We need to use the picker function out of this plugin in order to get the
     -- persistence logic on selection of a new colorscheme
-    require("telescope-colorscheme-persist").picker()
+    if require("config.utils.lazy").get_plugin("telescope-colorscheme-persist") then
+        require("telescope-colorscheme-persist").picker()
+    else
+        require("telescope.builtin").colorscheme()
+    end
 end
 
 M.SwitchColorschemeKeyMap = { "<leader>uC", M.open_colorscheme_picker, desc = "Colorscheme with preview" }
 
 function M.current_colorscheme(persisted)
-    local current_persisted = require("telescope-colorscheme-persist").get_colorscheme()
     local current = vim.g.colors_name
-    if persisted then
-        return current_persisted
-    else
-        return current
+
+    if require("config.utils.lazy").get_plugin("telescope-colorscheme-persist") then
+        local current_persisted = require("telescope-colorscheme-persist").get_colorscheme()
+
+        if persisted then
+            return current_persisted
+        end
     end
+
+    return current
 end
 
 function M.get_mode_colors()
@@ -58,7 +66,6 @@ function M.get_mode_colors()
         ["tokyonight-moon"] = tokyonight_colors,
         ["tokyonight-storm"] = tokyonight_colors,
         ["tokyonight-night"] = tokyonight_colors,
-
     }
     return defaults[current_colorscheme] or defaults.inkline
 end
@@ -114,7 +121,6 @@ function M.get_highlight_mappings()
         ["tokyonight-moon"] = tokyonight_highlight_mappings,
         ["tokyonight-storm"] = tokyonight_highlight_mappings,
         ["tokyonight-night"] = tokyonight_highlight_mappings,
-
     }
     return defaults[current_colorscheme] or defaults.inkline
 end

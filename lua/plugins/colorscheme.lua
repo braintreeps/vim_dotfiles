@@ -9,13 +9,13 @@ local SwitchColorschemeKeyMap = Utils.colors.SwitchColorschemeKeyMap
 return {
     -- Util for persisting chosen colorscheme
     {
-        "cosmicbuffalo/telescope-colorscheme-persist.nvim",
+        "tingey21/telescope-colorscheme-persist.nvim",
         dependencies = { "nvim-telescope/telescope.nvim" },
         lazy = false,
         opts = {
             -- The default keybind needs to be disabled to avoid conflicts with
             -- lazy.nvim's lazy loading behavior using `keys` settings in specs
-            keybind = false
+            keybind = false,
         },
         keys = { SwitchColorschemeKeyMap },
     },
