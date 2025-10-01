@@ -8,7 +8,7 @@ local lsp_servers_automatic_enable = { exclude = LspConfig.manually_started_lsp_
 return {
     {
         "neovim/nvim-lspconfig",
-        lazy = false,
+        event = "VeryLazy",
         dependencies = {
             {
                 "j-hui/fidget.nvim",
@@ -29,7 +29,7 @@ return {
                 keys = {
                     { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
                 },
-                opts = {}
+                opts = {},
             },
             { "mason-org/mason-lspconfig.nvim", tag = "v2.0.0" },
             "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -84,7 +84,7 @@ return {
                     },
                 },
             },
-            setup = {} -- add custom setup functions for servers here
+            setup = {}, -- add custom setup functions for servers here
         },
         config = function(_, opts)
             local servers = opts.servers
@@ -152,8 +152,8 @@ return {
         opts = {
             library = {
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                { path = "snacks.nvim",        words = { "Snacks" } },
-                { path = "lazy.nvim",          words = { "LazyVim" } },
+                { path = "snacks.nvim", words = { "Snacks" } },
+                { path = "lazy.nvim", words = { "LazyVim" } },
             },
         },
     },

@@ -15,7 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out,                            "WarningMsg" },
+            { out, "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -35,7 +35,7 @@ if Utils.config_path_exists("/lua/personal/plugins") then
     -- Set up hooks to automatically manage dual lockfiles when lazy updates
     -- This should run synchronously in headless mode to ensure we don't hang
     -- waiting for for the event loop to run scheduled tasks
-    if  #vim.api.nvim_list_uis() == 0 then -- headless mode
+    if #vim.api.nvim_list_uis() == 0 then -- headless mode
         require("config.utils.lazy").setup_lazy_hooks()
     else
         vim.schedule(function()
@@ -48,6 +48,17 @@ require("lazy").setup({
     spec = lazy_spec,
     change_detection = {
         notify = false,
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
     },
 })
 

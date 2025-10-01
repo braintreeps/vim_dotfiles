@@ -7,11 +7,16 @@ local open_lazygit_with_tracked_window = function()
 end
 
 local remote_q = 'nvim --server "$NVIM" --remote-send "q"'
-local remote_open_with_tracked_window = 'nvim --server "$NVIM" --remote-send "<C-\\><C-N>:lua require(\\"config.utils\\").open_in_tracked_window(\\"{{filename}}\\")<CR>"'
+local remote_open_with_tracked_window =
+    'nvim --server "$NVIM" --remote-send "<C-\\><C-N>:lua require(\\"config.utils\\").open_in_tracked_window(\\"{{filename}}\\")<CR>"'
 local remote_goto_line = 'nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
-local remote_q_open = remote_q .. ' && ' .. remote_open_with_tracked_window
-local lazygit_edit_command = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (' .. remote_q_open .. ')'
-local lazygit_edit_at_line_command = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (' .. remote_q_open .. ' && ' .. remote_goto_line .. ')'
+local remote_q_open = remote_q .. " && " .. remote_open_with_tracked_window
+local lazygit_edit_command = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (' .. remote_q_open .. ")"
+local lazygit_edit_at_line_command = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || ('
+    .. remote_q_open
+    .. " && "
+    .. remote_goto_line
+    .. ")"
 
 return {
     {
@@ -81,20 +86,41 @@ return {
                     os = {
                         edit = lazygit_edit_command,
                         editAtLine = lazygit_edit_at_line_command,
-                        editAtLineAndWait = 'nvim +{{line}} {{filename}}',
-                        openDirInEditor =
-                        '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
-                    }
-                }
+                        editAtLineAndWait = "nvim +{{line}} {{filename}}",
+                        openDirInEditor = '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
+                    },
+                },
             },
-            zen = {},
         },
         keys = {
-            { "<leader>gg", function() open_lazygit_with_tracked_window() end, desc = "Lazygit" },
-            { "<leader>gb", function() Snacks.git.blame_line() end, desc = "[G]it [B]lame" },
-            { "<leader>b.", function() Snacks.scratch() end,        desc = "New Scratch [b]uffer" },
-            { "<leader>bS", function() Snacks.scratch.select() end, desc = "Scratch [b]uffer [S]elect" },
-            { "<leader>uZ", function() Snacks.zen() end,            desc = "[Z]en mode" },
+            {
+                "<leader>gg",
+                function()
+                    open_lazygit_with_tracked_window()
+                end,
+                desc = "Lazygit",
+            },
+            {
+                "<leader>gb",
+                function()
+                    Snacks.git.blame_line()
+                end,
+                desc = "[G]it [B]lame",
+            },
+            {
+                "<leader>b.",
+                function()
+                    Snacks.scratch()
+                end,
+                desc = "New Scratch [b]uffer",
+            },
+            {
+                "<leader>bS",
+                function()
+                    Snacks.scratch.select()
+                end,
+                desc = "Scratch [b]uffer [S]elect",
+            },
         },
     },
     {
@@ -110,15 +136,25 @@ return {
             require("windows").setup()
         end,
         keys = {
-            { "<leader>wm", "<Cmd>WindowsMaximize<CR>",             desc = "Maximize window (toggle)" },
+            { "<leader>wm", "<Cmd>WindowsMaximize<CR>", desc = "Maximize window (toggle)" },
             { "<leader>wh", "<Cmd>WindowsMaximizeHorizontally<CR>", desc = "Maximize window horizontally" },
-            { "<leader>wv", "<Cmd>WindowsMaximizeVertically<CR>",   desc = "Maximize window vertically" },
-            { "<leader>we", "<Cmd>WindowsEqualize<CR>",             desc = "Equalize windows" },
-            { "<leader>wa", "<Cmd>WindowsToggleAutowidth<CR>",      desc = "Toggle window autowidth" },
-            { "<C-w>a",     "<Cmd>WindowsToggleAutowidth<CR>",      desc = "Toggle window autowidth" },
-            { "<leader>ww", "<C-W>p",                               desc = "Other Window",                remap = true },
-            { "<leader>wd", "<C-W>c",                               desc = "Delete Window",               remap = true },
-        }
+            { "<leader>wv", "<Cmd>WindowsMaximizeVertically<CR>", desc = "Maximize window vertically" },
+            { "<leader>we", "<Cmd>WindowsEqualize<CR>", desc = "Equalize windows" },
+            { "<leader>wa", "<Cmd>WindowsToggleAutowidth<CR>", desc = "Toggle window autowidth" },
+            { "<C-w>a", "<Cmd>WindowsToggleAutowidth<CR>", desc = "Toggle window autowidth" },
+            {
+                "<leader>ww",
+                "<C-W>p",
+                desc = "Other Window",
+                remap = true,
+            },
+            {
+                "<leader>wd",
+                "<C-W>c",
+                desc = "Delete Window",
+                remap = true,
+            },
+        },
     },
     {
         "cosmicbuffalo/updater.nvim",
