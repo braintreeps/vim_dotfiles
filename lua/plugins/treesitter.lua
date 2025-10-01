@@ -99,6 +99,7 @@ return {
             ensure_installed = {
                 "bash",
                 "cmake",
+                "cue",
                 "diff",
                 "dockerfile",
                 "embedded_template",
