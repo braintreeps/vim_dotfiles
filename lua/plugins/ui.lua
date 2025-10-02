@@ -441,9 +441,14 @@ return {
             defaults = {
                 file_ignore_patterns = {
                     "node_modules/",
-                    ".git/refs/",
-                    ".git/logs",
-                    ".git/objects",
+                    "%.git/refs/",
+                    "%.git/logs/",
+                    "%.git/objects/",
+                    "%.git/hooks/.*%.sample$",
+                    "%.git/rr%-cache/",
+                    "%.git/packed%-refs.*",
+                    "%.git/.*HEAD$",
+                    "tmp/cache/",
                     "sorbet/rbi/annotations/",
                     "sorbet/rbi/dsl/",
                     "sorbet/rbi/gems/",
