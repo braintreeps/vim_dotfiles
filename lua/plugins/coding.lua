@@ -35,7 +35,7 @@ return {
                 opts = {},
             },
         },
-        event = "InsertEnter",
+        event = { "InsertEnter", "CmdlineEnter" },
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config

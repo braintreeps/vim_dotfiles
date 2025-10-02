@@ -4,7 +4,7 @@ local M = {}
 function M.open_colorscheme_picker()
     -- We need to use the picker function out of this plugin in order to get the
     -- persistence logic on selection of a new colorscheme
-    if require("config.utils.lazy").get_plugin("telescope-colorscheme-persist") then
+    if require("config.utils.lazy").get_plugin("telescope-colorscheme-persist.nvim") then
         require("telescope-colorscheme-persist").picker()
     else
         require("telescope.builtin").colorscheme()

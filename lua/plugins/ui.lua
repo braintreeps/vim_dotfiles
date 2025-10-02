@@ -154,6 +154,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
+        event = "VeryLazy",
         dependencies = {
             {
                 "nvim-tree/nvim-web-devicons",
@@ -372,10 +373,9 @@ return {
         tag = "0.1.8",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-            },
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            "nvim-telescope/telescope-ui-select.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
             {
                 "nvim-mini/mini.bufremove",
                 keys = {
@@ -538,24 +538,18 @@ return {
                 },
             },
         },
-    },
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-        config = function(_, _opts)
-            require("telescope").load_extension("ui-select")
-        end,
-    },
-    {
-        "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-        config = function(_, _opts)
-            require("telescope").load_extension("file_browser")
+        config = function(_, opts)
+            local telescope = require("telescope")
+            telescope.setup(opts)
+
+            telescope.load_extension("fzf")
+            telescope.load_extension("ui-select")
+            telescope.load_extension("file_browser")
         end,
     },
     {
         "rebelot/heirline.nvim",
-        lazy = false,
+        event = "VeryLazy",
         dependencies = {
             "nvim-lualine/lualine.nvim",
             "nvim-tree/nvim-web-devicons",
@@ -735,13 +729,5 @@ return {
                 desc = "Toggle [U]I [W]inbar",
             },
         },
-    },
-    {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-        build = "make",
-        config = function(_, _opts)
-            require("telescope").load_extension("fzf")
-        end,
     },
 }
