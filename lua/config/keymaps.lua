@@ -168,3 +168,14 @@ local function copy_merged_pr_url()
 end
 --stylua: ignore
 map("n", "<leader>gP", copy_merged_pr_url, { desc = "Copy GitHub PR URL for line blame (gh cli)", silent = true })
+
+-- Toggle Treesitter highlighting
+map("n", "<leader>uT", function()
+    if vim.b.ts_highlight then
+        vim.treesitter.stop()
+        vim.notify("Disabled Treesitter Highlighting")
+    else
+        vim.treesitter.start()
+        vim.notify("Enabled Treesitter Highlighting")
+    end
+end, { noremap = true, desc = "Toggle Treesitter Highlighting" })
