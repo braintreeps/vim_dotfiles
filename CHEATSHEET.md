@@ -335,7 +335,7 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>uf` | `n` | Toggle f/T highlight | [`lua/plugins/editor.lua:326`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L326) |
+| `<leader>uf` | `n` | Toggle f/T highlight | [`cosmicbuffalo/lazy_jumpliner_recipe`](https://github.com/cosmicbuffalo/lazy_jumpliner_recipe/blob/main/lazy.lua#L13) |
 
 ## Plugin: gitlinker.nvim
 
@@ -417,8 +417,8 @@ This cheatsheet is automatically generated. It includes all keymaps from:
 
 | Keymap | Mode | Description | Source |
 |--------|------|-------------|--------|
-| `<leader>z` | `n` | Toggle fold | [`lua/plugins/editor.lua:214`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L214) |
-| `<leader>Z` | `n` | Toggle folds at current indentation level | [`lua/plugins/editor.lua:216`](https://github.com/PayPal-Braintree/neovim-dotfiles/blob/main/lua/plugins/editor.lua#L216) |
+| `<leader>z` | `n` | Toggle fold | [`cosmicbuffalo/lazy_ufo_recipe`](https://github.com/cosmicbuffalo/lazy_ufo_recipe/blob/main/lazy.lua#L49) |
+| `<leader>Z` | `n` | Toggle folds at current indentation level | [`cosmicbuffalo/lazy_ufo_recipe`](https://github.com/cosmicbuffalo/lazy_ufo_recipe/blob/main/lazy.lua#L51) |
 
 ## Plugin: resession.nvim
 

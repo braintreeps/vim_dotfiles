@@ -237,4 +237,14 @@ return {
             },
         },
     },
+    {
+        "cosmicbuffalo/super_lazy.nvim",
+        lazy = false,
+        opts = {
+            lockfile_repo_dirs = {
+                vim.fn.stdpath("config"),
+                vim.fn.stdpath("config") .. "/lua/personal",
+            }
+        }
+    },
 }
