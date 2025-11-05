@@ -104,6 +104,7 @@
   "vim-jsonnet": { "branch": "master", "commit": "4ebc6619ddce5d032a985b42a9864154c3d20e4a" },
   "vim-jsx": { "branch": "master", "commit": "8879e0d9c5ba0e04ecbede1c89f63b7a0efa24af" },
   "vim-markdown": { "branch": "master", "commit": "f9f845f28f4da33a7655accb22f4ad21f7d9fb66" },
+  "vim-matchup": { "branch": "master", "commit": "ca538c3bb02836510526ff7d07cf7e4c8e9a3b90" },
   "vim-projectionist": { "branch": "master", "commit": "5ff7bf79a6ef741036d2038a226bcb5f8b1cd296" },
   "vim-puppet": { "branch": "master", "commit": "10bf0b27c5be81ee26c3a0d32e39b270f95329ce" },
   "vim-qf": { "branch": "master", "commit": "7cafff6a9e0a1b54364b26a87f1efe749f8fb96b" },
