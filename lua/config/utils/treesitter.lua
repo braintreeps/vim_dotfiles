@@ -3,6 +3,46 @@ local M = {}
 M._installed = nil ---@type table<string,boolean>?
 M._queries = {} ---@type table<string,boolean>
 
+M.ensure_installed = {
+    "bash",
+    "cmake",
+    "cue",
+    "diff",
+    "dockerfile",
+    "embedded_template",
+    "git_config",
+    "git_rebase",
+    "gitignore",
+    "go",
+    "groovy",
+    "hcl",
+    "html",
+    "http",
+    "java",
+    "javascript",
+    "jq",
+    "json",
+    "kotlin",
+    "lua",
+    "luadoc",
+    "markdown",
+    "markdown_inline",
+    "properties",
+    "proto",
+    "puppet",
+    "python",
+    "ruby",
+    "rust",
+    "sql",
+    "ssh_config",
+    "terraform",
+    "toml",
+    "typescript",
+    "vim",
+    "vimdoc",
+    "yaml",
+}
+
 ---@param update boolean?
 function M.get_installed(update)
     if update then
@@ -115,7 +155,7 @@ function M.ensure_treesitter_cli(cb)
     local mr = require("mason-registry")
     mr.refresh(function()
         local p = mr.get_package("tree-sitter-cli")
-        if not p:is_installed() then
+        if not p:is_installed() and not p:is_installing() then
             vim.notify("Installing `tree-sitter-cli` with `mason.nvim`...")
             p:install(
                 nil,

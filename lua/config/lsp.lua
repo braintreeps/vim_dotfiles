@@ -1,20 +1,5 @@
 local M = {}
 
---- List of servers to automatically install, configure, and enable.
----@type string[]
-M.default_lsp_servers = {
-    "bashls",
-    "lua_ls",
-    "ruby_lsp",
-    "jdtls"
-}
-
---- List of servers that will not be automatically enabled
----@type string[]
-M.manually_started_lsp_servers = {
-    "jdtls"
-}
-
 function M.on_attach(_client, bufnr, opts)
     --- Sets keymaps with default options
     --- @param modes string|string[]

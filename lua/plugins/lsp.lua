@@ -2,14 +2,100 @@
 local Utils = require("config.utils")
 local LazyFileEvents = Utils.lazy.LazyFileEvents
 local LspConfig = require("config.lsp")
-local lsp_servers = LspConfig.default_lsp_servers
-local lsp_servers_automatic_enable = { exclude = LspConfig.manually_started_lsp_servers }
+
+local function install_gem(gem_name)
+    local gemfile = vim.fn.findfile("Gemfile", ".;")
+    if gemfile == "" then
+        return
+    end
+
+    local progress = require("fidget.progress")
+    local cwd = vim.fn.fnamemodify(gemfile, ":h")
+    local handle = progress.handle.create({
+        title = gem_name,
+        message = "bundle install...",
+        lsp_client = { name = gem_name },
+    })
+
+    local output = {}
+    -- Run bundle install first
+    vim.fn.jobstart("bundle install", {
+        cwd = cwd,
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_stdout = function(_, data)
+            if data then
+                for _, line in ipairs(data) do
+                    if line ~= "" then
+                        table.insert(output, line)
+                        handle.message = line
+                    end
+                end
+            end
+        end,
+        on_stderr = function(_, data)
+            if data then
+                for _, line in ipairs(data) do
+                    if line ~= "" then
+                        table.insert(output, line)
+                        handle.message = line
+                    end
+                end
+            end
+        end,
+        on_exit = function(_, exit_code)
+            if exit_code == 0 then
+                -- After bundle install succeeds, run gem install
+                handle.message = "gem install " .. gem_name .. "..."
+                vim.fn.jobstart("gem install " .. gem_name, {
+                    cwd = cwd,
+                    stdout_buffered = true,
+                    stderr_buffered = true,
+                    on_stdout = function(_, data)
+                        if data then
+                            for _, line in ipairs(data) do
+                                if line ~= "" then
+                                    table.insert(output, line)
+                                    handle.message = line
+                                end
+                            end
+                        end
+                    end,
+                    on_stderr = function(_, data)
+                        if data then
+                            for _, line in ipairs(data) do
+                                if line ~= "" then
+                                    table.insert(output, line)
+                                    handle.message = line
+                                end
+                            end
+                        end
+                    end,
+                    on_exit = function(_, gem_exit_code)
+                        if gem_exit_code == 0 then
+                            handle:finish()
+                            vim.notify("gem install " .. gem_name .. " succeeded:\n" .. table.concat(output, "\n"), vim.log.levels.DEBUG)
+                        else
+                            handle:cancel()
+                            vim.notify("gem install " .. gem_name .. " failed:\n" .. table.concat(output, "\n"), vim.log.levels.WARN)
+                        end
+                    end,
+                })
+            else
+                handle:cancel()
+                vim.notify("bundle install failed:\n" .. table.concat(output, "\n"), vim.log.levels.WARN)
+            end
+        end,
+    })
+end
 
 return {
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        event = LazyFileEvents,
         dependencies = {
+            "mason.nvim",
+            { "mason-org/mason-lspconfig.nvim", config = function() end },
             {
                 "j-hui/fidget.nvim",
                 opts = {
@@ -20,19 +106,6 @@ return {
                     },
                 },
             },
-
-            {
-                "mason-org/mason.nvim",
-                cmd = "Mason",
-                tag = "v2.0.0",
-                lazy = false,
-                keys = {
-                    { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
-                },
-                opts = {},
-            },
-            { "mason-org/mason-lspconfig.nvim", tag = "v2.0.0" },
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
             "saghen/blink.cmp",
         },
         opts = {
@@ -71,6 +144,7 @@ return {
                 underline = { severity = vim.diagnostic.severity.ERROR },
             },
             servers = {
+                stylua = { enabled = false },
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -83,10 +157,29 @@ return {
                         },
                     },
                 },
+                ruby_lsp = {
+                    mason = false, -- ruby lsp is installed via bundler or gem
+                },
+                rubocop = {
+                    mason = false, -- rubocop is installed via bundler or gem
+                },
+                bashls = true,
+                jdtls = {
+                    enabled = false, -- This lsp server needs to be manually enabled
+                },
             },
-            setup = {}, -- add custom setup functions for servers here
+            setup = {
+                ruby_lsp = function(_, _)
+                    install_gem("ruby-lsp")
+                    return false -- Let the default setup handle the rest
+                end,
+                rubocop = function(_, _)
+                    install_gem("rubocop")
+                    return false -- Let the default setup handle the rest
+                end,
+            }, -- add custom setup functions for servers here
         },
-        config = function(_, opts)
+        config = vim.schedule_wrap(function(_, opts)
             local servers = opts.servers
             local blink = require("blink.cmp")
             local capabilities = vim.tbl_deep_extend(
@@ -100,50 +193,89 @@ return {
             -- Pass opts to the on_attach function to be able to customize keymaps
             Utils.lsp.setup_on_attach(function(client, buf)
                 LspConfig.on_attach(client, buf, opts)
-                -- handling for custom setup functions
-                local server = client.name
-                local server_opts = vim.tbl_deep_extend("force", {
-                    capabilities = vim.deepcopy(capabilities),
-                }, servers[server] or {})
-                if server_opts.enabled == false then
-                    return
-                end
-                if opts.setup[server] then
-                    if opts.setup[server](server, server_opts) then
-                        return
-                    end
-                elseif opts.setup["*"] then
-                    if opts.setup["*"](server, server_opts) then
-                        return
-                    end
-                end
             end)
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, lsp_servers)
-            -- add stylua and pin to latest version compatible with our version
-            -- of linux (TODO: refactor to move to options
-            vim.list_extend(ensure_installed, { { "stylua", version = "v0.20.0" } })
+            local mason_all = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
+            local automatic_enable_exclude = {}
 
-            -- This handles automatic setup with default configs for all
-            -- installed lsp servers
-            require("mason-lspconfig").setup({
-                automatic_enable = lsp_servers_automatic_enable,
-            })
-            -- This handles automatic installation and updates of configured lsp
-            -- severs
-            require("mason-tool-installer").setup({
-                ensure_installed = ensure_installed,
-                auto_update = true,
-            })
+            -- We'll call this for each of our configured lsp servers
+            local function configure(server)
+                local server_opts = opts.servers[server]
+                server_opts = server_opts == true and {} or (not server_opts) and { enabled = false } or server_opts
+                server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities) }, server_opts)
 
-            -- override any default config for servers with user options
-            -- (handles customized server config in case where custom setup
-            -- functions aren't used)
-            for server_name, config in pairs(servers) do
-                vim.lsp.config(server_name, config)
+                -- if we don't want to install a server with mason, we can set mason = false in its opts
+                local use_mason = server_opts.mason ~= false and vim.tbl_contains(mason_all, server)
+                vim.notify("server: " .. server .. " use_mason: " .. vim.inspect(use_mason))
+                -- we can separately prevent a server from being automatically enabled while still installing it with mason
+                if server_opts.enabled == false then
+                    automatic_enable_exclude[#automatic_enable_exclude + 1] = server
+                    return use_mason
+                end
+
+                -- in addition to installing our lsp server, we call any custom setup functions here
+                local setup = opts.setup[server] or opts.setup["*"]
+                if setup and setup(server, server_opts) then
+                    -- we already called the setup function for this server, so prevent mason from calling it again
+                    automatic_enable_exclude[#automatic_enable_exclude + 1] = server
+                else
+                    vim.lsp.config(server, server_opts)
+                    -- if we're using mason to install the server, mason will also handle enabling it
+                    -- if not, we enable it outside mason here
+                    if not use_mason then
+                        vim.lsp.enable(server)
+                        automatic_enable_exclude[#automatic_enable_exclude + 1] = server
+                    end
+                end
+                return use_mason
             end
+
+            local ensure_installed = vim.tbl_filter(configure, vim.tbl_keys(opts.servers))
+
+            require("mason-lspconfig").setup({
+                ensure_installed = ensure_installed,
+                automatic_enable = { exclude = automatic_enable_exclude },
+            })
+        end),
+    },
+    {
+        "mason-org/mason.nvim",
+        cmd = "Mason",
+        keys = {
+            { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
+        },
+        build = ":MasonUpdate",
+        opts_extend = { "ensure_installed" },
+        opts = {
+            ensure_installed = {
+                "tree-sitter-cli",
+                "stylua",
+                "shfmt",
+            },
+        },
+        config = function(_, opts)
+            require("mason").setup(opts)
+            local mr = require("mason-registry")
+
+            mr:on("package:install:success", function()
+                vim.defer_fn(function()
+                    -- trigger FileType event to possibly load this newly installed LSP server
+                    require("lazy.core.handler.event").trigger({
+                        event = "FileType",
+                        buf = vim.api.nvim_get_current_buf(),
+                    })
+                end, 100)
+            end)
+
+            mr.refresh(function()
+                for _, tool in ipairs(opts.ensure_installed) do
+                    local p = mr.get_package(tool)
+                    if not p:is_installed() and not p:is_installing() then
+                        p:install()
+                    end
+                end
+            end)
         end,
     },
     {

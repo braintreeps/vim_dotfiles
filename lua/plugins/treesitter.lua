@@ -8,6 +8,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+        priority = 1000,
         branch = "main",
         build = function()
             local TS = require("nvim-treesitter")
@@ -25,6 +26,7 @@ return {
         event = { "VeryLazy" },
         cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
         dependencies = {
+            "mason-org/mason.nvim",
             "RRethy/nvim-treesitter-endwise",
             "RRethy/vim-illuminate",
             { "andymass/vim-matchup", opts = {}, lazy = false },
@@ -53,46 +55,7 @@ return {
             endwise = {
                 enable = true,
             },
-            ensure_installed = {
-                "bash",
-                "cmake",
-                "cue",
-                "diff",
-                "dockerfile",
-                "embedded_template",
-                "git_config",
-                "git_rebase",
-                "gitcommit",
-                "gitignore",
-                "go",
-                "groovy",
-                "hcl",
-                "html",
-                "http",
-                "java",
-                "javascript",
-                "jq",
-                "json",
-                "kotlin",
-                "lua",
-                "luadoc",
-                "markdown",
-                "markdown_inline",
-                "properties",
-                "proto",
-                "puppet",
-                "python",
-                "ruby",
-                "rust",
-                "sql",
-                "ssh_config",
-                "terraform",
-                "toml",
-                "typescript",
-                "vim",
-                "vimdoc",
-                "yaml",
-            },
+            ensure_installed = Utils.treesitter.ensure_installed,
         },
         config = function(_, opts)
             local TS = require("nvim-treesitter")
