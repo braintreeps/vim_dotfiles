@@ -116,6 +116,7 @@ function M.build_winbar(opts)
         end,
     }
 
+    -- stylua: ignore
     FileNameBlock = utils.insert(
         FileNameBlock,
         FileIcon,
@@ -263,12 +264,12 @@ end
 function M.toggle_winbar()
     if vim.g.disable_fancy_winbar then
         vim.g.disable_fancy_winbar = false
-        vim.api.nvim_exec_autocmds('VimEnter', {})
+        vim.api.nvim_exec_autocmds("VimEnter", {})
         vim.notify("Fancy winbar enabled", vim.log.levels.INFO, { title = "heirline.nvim" })
     else
         vim.g.disable_fancy_winbar = true
-        vim.api.nvim_exec_autocmds('VimEnter', {})
-        vim.notify("Fancy winbar disabled",vim.log.levels.WARN, { title = "heirline.nvim" })
+        vim.api.nvim_exec_autocmds("VimEnter", {})
+        vim.notify("Fancy winbar disabled", vim.log.levels.WARN, { title = "heirline.nvim" })
     end
 end
 

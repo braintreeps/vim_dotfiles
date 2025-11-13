@@ -244,7 +244,7 @@ return {
             lockfile_repo_dirs = {
                 vim.fn.stdpath("config"),
                 vim.fn.stdpath("config") .. "/lua/personal",
-            }
-        }
+            },
+        },
     },
 }

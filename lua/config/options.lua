@@ -10,7 +10,7 @@ vim.opt.smartindent = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.autoread = false
-vim.opt.mouse = ''
+vim.opt.mouse = ""
 vim.opt.undofile = true
 vim.g.disable_fancy_winbar = true
 

@@ -8,7 +8,7 @@ function M.setup_on_attach(on_attach_fn)
             if client then
                 on_attach_fn(client, buffer)
             end
-        end
+        end,
     })
 end
 

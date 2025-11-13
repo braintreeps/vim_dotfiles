@@ -1,6 +1,16 @@
 -- mnemonic: ruby-debug
-vim.keymap.set("", "<LocalLeader>rd", "Orequire 'pry'; require 'pry-byebug'; binding.pry<ESC>", { desc = "[r]uby [d]ebug: binding.pry line under cursor" })
-vim.keymap.set("n", "<silent> <LocalLeader>rs", ":!ruby -c %<CR>", { desc = "[r]uby [s]yntax: check the syntax of the current file" })
+vim.keymap.set(
+    "",
+    "<LocalLeader>rd",
+    "Orequire 'pry'; require 'pry-byebug'; binding.pry<ESC>",
+    { desc = "[r]uby [d]ebug: binding.pry line under cursor" }
+)
+vim.keymap.set(
+    "n",
+    "<LocalLeader>rs",
+    ":!ruby -c %<CR>",
+    { desc = "[r]uby [s]yntax: check the syntax of the current file", silent = true }
+)
 
 local function remove_binding_pry()
     local buf = vim.api.nvim_get_current_buf()
@@ -25,4 +35,9 @@ local function remove_binding_pry()
     end
 end
 
-vim.keymap.set("n", "<LocalLeader>rD", remove_binding_pry, { desc = "[r]uby [D]elete binding.pry lines in current buffer" })
+vim.keymap.set(
+    "n",
+    "<LocalLeader>rD",
+    remove_binding_pry,
+    { desc = "[r]uby [D]elete binding.pry lines in current buffer" }
+)

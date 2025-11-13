@@ -11,6 +11,7 @@ return {
                 },
             },
             manual_keymaps = {
+                -- stylua: ignore
                 ["vim-unimpaired"] = {
                     -- Navigation
                     { keymap = "[a", mode = "n", desc = "Previous file in argument list", source = "vim-unimpaired built in default" },
@@ -153,6 +154,7 @@ return {
                     { keymap = "]C", mode = "v", desc = "C string decode selection", source = "vim-unimpaired built in default" },
 
                 },
+                -- stylua: ignore
                 ["telescope.nvim"] = {
                     -- Telescope keymap customizations
                     { keymap = "d", mode = "n", desc = "Delete buffer (in buffer explorer)", source = "lua/plugins/ui.lua" },
@@ -206,8 +208,8 @@ return {
                     { keymap = "<C-r><C-w>", mode = "i", desc = "Insert cword in original window into prompt", source = "Built in telescope default" },
                     { keymap = "<C-r><C-a>", mode = "i", desc = "Insert cWORD in original window into prompt", source = "Built in telescope default" },
 
-                }
-            }
+                },
+            },
         },
         cmd = { "CheatsheetGenerate", "CheatsheetInstallHook" },
     },

@@ -9,7 +9,7 @@ return {
 
             local config = {
                 cmd = { jdtls_dir .. "bin/jdtls", "--java-executable=" .. java_21_path, "--jvm-arg=" .. jvmArg },
-                root_dir = vim.fs.dirname(vim.fs.find({".gradlew", ".git", "mvnw"}, { upward = true })[1]),
+                root_dir = vim.fs.dirname(vim.fs.find({ ".gradlew", ".git", "mvnw" }, { upward = true })[1]),
                 settings = {
                     java = {
                         completion = {
