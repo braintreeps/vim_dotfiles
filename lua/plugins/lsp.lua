@@ -74,10 +74,10 @@ local function install_gem(gem_name)
                     on_exit = function(_, gem_exit_code)
                         if gem_exit_code == 0 then
                             handle:finish()
-                            vim.notify("gem install " .. gem_name .. " succeeded:\n" .. table.concat(output, "\n"), vim.log.levels.DEBUG)
+                            vim.api.nvim_out_write("gem install " .. gem_name .. " succeeded:\n" .. table.concat(output, "\n"))
                         else
                             handle:cancel()
-                            vim.notify("gem install " .. gem_name .. " failed:\n" .. table.concat(output, "\n"), vim.log.levels.WARN)
+                            vim.api.nvim_out_write("gem install " .. gem_name .. " failed:\n" .. table.concat(output, "\n"))
                         end
                     end,
                 })
@@ -207,7 +207,6 @@ return {
 
                 -- if we don't want to install a server with mason, we can set mason = false in its opts
                 local use_mason = server_opts.mason ~= false and vim.tbl_contains(mason_all, server)
-                vim.notify("server: " .. server .. " use_mason: " .. vim.inspect(use_mason))
                 -- we can separately prevent a server from being automatically enabled while still installing it with mason
                 if server_opts.enabled == false then
                     automatic_enable_exclude[#automatic_enable_exclude + 1] = server
