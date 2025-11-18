@@ -41,7 +41,7 @@ return {
             { "<Leader>bl", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Toggle Line Blame" },
             { "<leader>gB", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "Toggle Line Blame" },
             { "]h", "<cmd>Gitsigns next_hunk<CR>", desc = "Next git hunk" },
-            { "]h", "<cmd>Gitsigns prev_hunk<CR>", desc = "Prev git hunk" },
+            { "[h", "<cmd>Gitsigns prev_hunk<CR>", desc = "Prev git hunk" },
             { "ih", ":<C-U>Gitsigns select_hunk<CR>", desc = "Select git hunk", mode = { "o", "x" } },
             { "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", desc = "[g]it [r]eset hunk" },
             { "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", desc = "[g]it [R]eset buffer" },
@@ -50,6 +50,7 @@ return {
             { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "[g]it [u]nstage hunk" },
             { "<leader>gd", "<cmd>Gitsigns diffthis<CR>", desc = "[g]it [d]iff this" },
             { "<leader>gD", '<cmd>Gitsigns diffthis "~"<CR>', desc = "[g]it [D]iff this ~" },
+            { "<leader>gi", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "[g]it [i]nspect hunk"},
         },
     },
     {
