@@ -97,7 +97,6 @@
   "vim-go": { "branch": "master", "commit": "dc07b9082fecd47f8ebef5f2684758e570f66377" },
   "vim-gradle": { "branch": "master", "commit": "508629fa2a3be1b2052e4e553593f60d12dfc090" },
   "vim-graphql": { "branch": "master", "commit": "6108ce33b6059bb3849880fc7e245c2cb81f10e1" },
-  "vim-illuminate": { "branch": "master", "commit": "0d1e93684da00ab7c057410fecfc24f434698898" },
   "vim-java-unused-imports": { "branch": "master", "commit": "8b5530454384604294ff37d3b8659ff02c7740f1" },
   "vim-javascript": { "branch": "master", "commit": "b26c9edb3563e02f5c0b20580f7cf9743e95b157" },
   "vim-jsonnet": { "branch": "master", "commit": "4ebc6619ddce5d032a985b42a9864154c3d20e4a" },

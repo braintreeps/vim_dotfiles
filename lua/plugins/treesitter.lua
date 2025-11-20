@@ -28,7 +28,6 @@ return {
         dependencies = {
             "mason-org/mason.nvim",
             "RRethy/nvim-treesitter-endwise",
-            "RRethy/vim-illuminate",
             { "andymass/vim-matchup", opts = {}, lazy = false },
         },
         opts_extend = { "ensure_installed" },
