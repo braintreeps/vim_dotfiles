@@ -168,6 +168,7 @@ return {
                 enabled = true,
                 frequency_minutes = 120,
             },
+            excluded_filetypes = { "gitcommit", "gitrebase" },
         },
         cmd = { "UpdaterOpen", "UpdaterCheck", "UpdaterStartChecking", "UpdaterStopChecking" },
         keys = {
