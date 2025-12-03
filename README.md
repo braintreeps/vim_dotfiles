@@ -60,7 +60,7 @@ mv ~/.config/nvim{,.bak}
 - Clone the dotfiles
 
 ```sh
-git clone https://github.com/PayPal-Braintree/neovim-dotfiles ~/.config/nvim
+git clone git@github.com:PayPal-Braintree/neovim-dotfiles.git ~/.config/nvim
 ```
 
 - Start Neovim!
