@@ -19,3 +19,5 @@ vim.g.clipboard = "osc52"
 --- Otherwise the gutter column bounces around as the LSP decides whether to
 --- show diagnostics or not (which can change across edit modes).
 vim.opt.signcolumn = "yes"
+
+vim.g.ruby_indent_assignment_style = "variable"
