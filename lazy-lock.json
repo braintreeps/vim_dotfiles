@@ -67,7 +67,7 @@
   "snacks.nvim": { "branch": "main", "commit": "dec29f55666f8f4545835636077a86b150faf630" },
   "splitjoin.vim": { "branch": "main", "commit": "01d932de8408284363e4b6be0be669373023720f" },
   "statuscol.nvim": { "branch": "main", "commit": "c46172d0911aa5d49ba5f39f4351d1bb7aa289cc", "source": "lazy_ufo_recipe" },
-  "super_lazy.nvim": { "branch": "main", "commit": "c4a99605cf884d58985d6095bf92e8b9587f76ea" },
+  "super_lazy.nvim": { "branch": "main", "commit": "cf0d0c7c246c7a3eaa3ba1125ef9033cc828d616" },
   "tabular": { "branch": "master", "commit": "12437cd1b53488e24936ec4b091c9324cafee311" },
   "targets.vim": { "branch": "master", "commit": "6325416da8f89992b005db3e4517aaef0242602e" },
   "telescope-colorscheme-persist.nvim": { "branch": "master", "commit": "534fc370ab67df14efee9c6ac4440015ac197ef6" },
