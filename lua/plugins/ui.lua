@@ -294,6 +294,9 @@ return {
 
             local new_conf = vim.tbl_deep_extend("force", conf, {
                 theme = "inkline",
+                options = {
+                    ignore_focus = { "neo-tree" },
+                },
                 sections = {
                     lualine_c = {
                         {
@@ -313,16 +316,7 @@ return {
                             colors = {
                                 error = "#e32636",
                                 warn = "#ffa500",
-                                -- info = "#ffffff",
-                                -- hint = "#273faf",
                             },
-                            fmt = function(str)
-                                local max_width = vim.o.columns - 80
-                                if #str > max_width then
-                                    return str:sub(1, max_width - 3) .. "..."
-                                end
-                                return str
-                            end,
                         },
                     },
                     lualine_x = {

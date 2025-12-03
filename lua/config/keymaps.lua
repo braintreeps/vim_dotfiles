@@ -55,14 +55,16 @@ end, { expr = true, noremap = true, desc = "Next blank line (skip fold)" })
 
 map("n", "<leader>dv", function()
     local current_config = vim.diagnostic.config()
-    local new_virtual_lines = not current_config.virtual_lines
-    vim.diagnostic.config({ virtual_lines = new_virtual_lines })
-    if new_virtual_lines then
-        vim.notify("Diagnostic virtual lines enabled", vim.log.levels.INFO, { title = "Diagnostics" })
+    local virtual_text = not current_config.virtual_text
+
+    vim.diagnostic.config({ virtual_text = virtual_text })
+
+    if virtual_text then
+        vim.notify("Diagnostic virtual text enabled", vim.log.levels.INFO, { title = "Diagnostics" })
     else
-        vim.notify("Diagnostic virtual lines disabled", vim.log.levels.WARN, { title = "Diagnostics" })
+        vim.notify("Diagnostic virtual text disabled", vim.log.levels.WARN, { title = "Diagnostics" })
     end
-end, { noremap = true, desc = "[d]iagnotic [v]irtual lines toggle" })
+end, { noremap = true, desc = "[d]iagnotic [v]irtual text toggle" })
 
 -- Toggle wrap
 map("n", "<leader>uw", function()
