@@ -36,6 +36,7 @@
   "lualine.nvim": { "branch": "master", "commit": "47f91c416daef12db467145e16bed5bbfe00add8" },
   "mako.vim": { "branch": "master", "commit": "603bf2dd47a9a53a218660308d7df16598c667f4" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
+  "mason-lock.nvim": { "branch": "main", "commit": "e50fcea70584b0b9cf302492feca2c9c6e29a6c4" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "0b9bb925c000ae649ff7e7149c8cd00031f4b539" },
   "mason.nvim": { "branch": "main", "commit": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800" },
   "matchit.zip": { "branch": "master", "commit": "ced6c409c9beeb0b4142d21906606bd194411d1d" },

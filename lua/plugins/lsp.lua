@@ -126,11 +126,7 @@ local function install_gem(gem_name)
                     save_cache(cache)
                     if #gem_output > 0 then
                         debug_log(
-                            string.format(
-                                "gem install %s succeeded:\n%s",
-                                gem_name,
-                                table.concat(gem_output, "\n")
-                            )
+                            string.format("gem install %s succeeded:\n%s", gem_name, table.concat(gem_output, "\n"))
                         )
                     end
                 else
@@ -412,21 +408,28 @@ return {
     {
         "mason-org/mason.nvim",
         cmd = "Mason",
+        dependencies = {
+            {
+                "cosmicbuffalo/mason-lock.nvim",
+                opts = {
+                    lockfile_scope = "ensure_installed", -- only the three core packages below will be included in the lockfile
+                    ensure_installed = {
+                        { "tree-sitter-cli", version = "v0.25.10" },
+                        "stylua",
+                        "shfmt",
+                    },
+                },
+            },
+        },
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
         },
         build = ":MasonUpdate",
         opts_extend = { "ensure_installed" },
-        opts = {
-            ensure_installed = {
-                "tree-sitter-cli",
-                "stylua",
-                "shfmt",
-            },
-        },
         config = function(_, opts)
             require("mason").setup(opts)
             local mr = require("mason-registry")
+            local ml = require("mason-lock")
 
             mr:on("package:install:success", function()
                 vim.defer_fn(function()
@@ -439,8 +442,9 @@ return {
             end)
 
             mr.refresh(function()
-                for _, tool in ipairs(opts.ensure_installed) do
-                    local p = mr.get_package(tool)
+                for _, tool in ipairs(ml.ensure_installed()) do
+                    local tool_name = type(tool) == "table" and tool[1] or tool
+                    local p = mr.get_package(tool_name)
                     if not p:is_installed() and not p:is_installing() then
                         p:install()
                     end
