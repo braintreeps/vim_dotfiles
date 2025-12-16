@@ -52,7 +52,7 @@ return {
     {
         "hectron/inkline.nvim",
         priority = 1000,
-        tag = "v2.1.1",
+        tag = "v2.1.2",
         lazy = false,
         keys = { SwitchColorschemeKeyMap },
         ---@module "inkline.config"
@@ -62,6 +62,10 @@ return {
             dim_inactive_windows = false,
             purple_comments = true,
             style = "retro",
+            on_highlights = function(hl, c)
+                hl["@markup.link"] = { fg = c.yellow }
+                return hl
+            end,
         },
         config = function(_, opts)
             require("inkline").setup(opts)
