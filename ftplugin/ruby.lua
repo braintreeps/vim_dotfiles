@@ -41,3 +41,18 @@ vim.keymap.set(
     remove_binding_pry,
     { desc = "[r]uby [D]elete binding.pry lines in current buffer" }
 )
+
+local function test_context()
+    vim.cmd("wall")
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("RubyBlockSpecParentContext")
+    vim.cmd("TestNearest")
+    vim.api.nvim_win_set_cursor(0, pos)
+end
+
+vim.keymap.set(
+    "",
+    "<LocalLeader>rc",
+    test_context,
+    { desc = "Run context", silent = true }
+)

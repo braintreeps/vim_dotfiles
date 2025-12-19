@@ -11,7 +11,12 @@ return {
     --	  'google/vim-codefmt',
     --	  dependencies = { 'google/vim-glaive', 'google/vim-maktaba' },
     --  },
-    -- 'dewyze/vim-ruby-block-helpers', -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
+    --
+    {
+        -- TODO can this be substituted with something that `mini.nvim` offers, or Treesitter text objects?
+        "dewyze/vim-ruby-block-helpers",
+        ft = { "ruby" },
+    },
     {
         "janko-m/vim-test",
         dependencies = {
@@ -32,6 +37,7 @@ return {
                 end,
             },
         },
+        cmd = { "TestNearest", "TestFile", "TestLast" },
         keys = {
             { "<Leader>rb", "<cmd>wa<CR> <cmd>TestFile<CR>", desc = "Run buffer" },
             { "<Leader>rf", "<cmd>wa<CR> <cmd>TestNearest<CR>", desc = "Run focused" },
