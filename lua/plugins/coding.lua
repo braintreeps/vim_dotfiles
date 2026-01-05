@@ -58,8 +58,17 @@ return {
                     },
                 },
                 menu = {
-                    auto_show = function()
-                        return vim.bo.filetype ~= "markdown"
+                    auto_show = function(context)
+                        if vim.bo.filetype == "markdown" then
+                            -- friendly-snippets are too noisy in markdown files because there are a lot of short
+                            -- prefixes (e.g., "u" for "url" and "l" for "link"), so only show the menu when enough
+                            -- characters have been typed.
+                            --
+                            -- See https://github.com/rafamadriz/friendly-snippets/blob/main/snippets/markdown.json
+                            return  #context.get_keyword() >= 3
+                        else
+                            return true
+                        end
                     end,
                     draw = {
                         treesitter = { "lsp" },
