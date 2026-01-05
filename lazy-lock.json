@@ -23,6 +23,7 @@
   "eyeliner.nvim": { "branch": "main", "commit": "254275024bb015cd4f07b49623208416c30f5efe", "source": "lazy_jumpliner_recipe" },
   "fidget.nvim": { "branch": "main", "commit": "e32b672d8fd343f9d6a76944fedb8c61d7d8111a" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
+  "gem_install.nvim": { "branch": "main", "commit": "325af601cc90cd9448a4d2e1d3d47aed3a6b9e9f" },
   "gitlinker.nvim": { "branch": "master", "commit": "cc59f732f3d043b626c8702cb725c82e54d35c25" },
   "gitsigns.nvim": { "branch": "main", "commit": "5813e4878748805f1518cee7abb50fd7205a3a48" },
   "groovyindent-unix": { "branch": "master", "commit": "d6fca576272cc13fd747ff47a82b75b9e9586866" },
