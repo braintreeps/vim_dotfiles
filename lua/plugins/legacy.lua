@@ -85,7 +85,7 @@ return {
     { "vim-scripts/matchit.zip", lazy = true },
     {
         "tweekmonster/wstrip.vim",
-        ft = { "ruby", "lua", "java", "python", "c", "cpp", "sql", "puppet", "rust" },
+        ft = { "ruby", "lua", "java", "python", "c", "cpp", "sql", "puppet", "rust", "go" },
         config = function(plugin, _)
             vim.g.wstrip_highlight = 0
 
@@ -129,7 +129,24 @@ return {
     { "tpope/vim-sexp-mappings-for-regular-people", ft = { "clojure" } },
     { "kchmck/vim-coffee-script", ft = { "coffee" } },
     { "elixir-lang/vim-elixir", ft = { "elixir" } },
-    { "fatih/vim-go", ft = { "go" }, build = ":GoInstallBinaries" },
+    {
+        "fatih/vim-go",
+        ft = { "go" },
+        build = ":GoInstallBinaries",
+        init = function()
+            -- Disable features that conflict with gopls
+            vim.g.go_def_mapping_enabled = 0 -- Let gopls handle gd
+            vim.g.go_doc_keywordprg_enabled = 0 -- Let gopls handle K
+            vim.g.go_fmt_autosave = 0 -- Let conform.nvim handle formatting
+            vim.g.go_imports_autosave = 0 -- Let conform.nvim handle imports
+            vim.g.go_code_completion_enabled = 0 -- Let blink.cmp handle completion
+            -- Keep useful vim-go features like :GoCoverage, :GoTest, etc.
+            vim.g.go_highlight_types = 1
+            vim.g.go_highlight_fields = 1
+            vim.g.go_highlight_functions = 1
+            vim.g.go_highlight_function_calls = 1
+        end,
+    },
     { "jparise/vim-graphql", ft = { "graphql" } }, -- TODO can this be deprecated for Treesitter?
     { "akhaku/vim-java-unused-imports", ft = { "java" } },
     { "pangloss/vim-javascript", ft = { "javascript", "jsx" } },

@@ -18,6 +18,7 @@ Think of it as having a programming language expert looking over your shoulder, 
 This config comes pre-configured with LSP support for:
 
 - **Bash/Shell scripts** (`bashls`)
+- **Go** (`gopls`) - for Go development
 - **Lua** (`lua_ls`) - for Neovim configuration
 - **Ruby** (`ruby_lsp`) - for Ruby/Rails development
 

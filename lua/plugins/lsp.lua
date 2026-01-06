@@ -79,6 +79,17 @@ return {
                     mason = false, -- rubocop is installed via bundler or gem
                 },
                 bashls = true,
+                gopls = {
+                    settings = {
+                        gopls = {
+                            analyses = {
+                                unusedparams = true,
+                            },
+                            staticcheck = true,
+                            gofumpt = true,
+                        },
+                    },
+                },
                 jdtls = {
                     enabled = false, -- This lsp server needs to be manually enabled
                 },
@@ -165,6 +176,8 @@ return {
                         { "tree-sitter-cli", version = "v0.25.10" },
                         "stylua",
                         "shfmt",
+                        "goimports",
+                        "gofumpt",
                     },
                 },
             },
