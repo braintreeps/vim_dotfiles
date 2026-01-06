@@ -21,7 +21,7 @@ return {
                 },
             },
             "saghen/blink.cmp",
-            "cosmicbuffalo/gem_install.nvim"
+            "cosmicbuffalo/gem_install.nvim",
         },
         opts = {
             -- customize your keymap here, or disable a keymap by setting it to false

@@ -27,10 +27,10 @@ map("i", ";", ";<c-g>u", { desc = "Insert semicolon with undo breakpoint" })
 
 -- Default yank to system clipboard
 map({ "n", "v" }, "y", function()
-    return vim.v.register == '"' and '"+y' or 'y'
+    return vim.v.register == '"' and '"+y' or "y"
 end, { expr = true, noremap = true, silent = true, desc = "Yank to system clipboard" })
 map("n", "yy", function()
-    return vim.v.register == '"' and '"+yy' or 'yy'
+    return vim.v.register == '"' and '"+yy' or "yy"
 end, { expr = true, noremap = true, silent = true, desc = "Yank line to system clipboard" })
 map("n", "Y", function()
     return vim.v.register == '"' and '"+y$' or "y$"

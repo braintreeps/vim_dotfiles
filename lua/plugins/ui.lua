@@ -530,7 +530,7 @@ return {
                 },
                 buffers = {
                     initial_mode = "normal",
-                }
+                },
             },
         },
         config = function(_, opts)

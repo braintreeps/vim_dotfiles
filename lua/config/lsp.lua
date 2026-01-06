@@ -1,5 +1,6 @@
 local M = {}
 
+-- stylua: ignore
 function M.on_attach(_client, bufnr, opts)
     --- Sets keymaps with default options
     --- @param modes string|string[]
@@ -48,7 +49,6 @@ function M.on_attach(_client, bufnr, opts)
         vim.lsp.buf.references,
         { desc = "LSP: [g]o to [r]eferences" }
     )
-
 
     -- Information
     set(

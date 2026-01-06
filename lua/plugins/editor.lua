@@ -50,7 +50,7 @@ return {
             { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "[g]it [u]nstage hunk" },
             { "<leader>gd", "<cmd>Gitsigns diffthis<CR>", desc = "[g]it [d]iff this" },
             { "<leader>gD", '<cmd>Gitsigns diffthis "~"<CR>', desc = "[g]it [D]iff this ~" },
-            { "<leader>gi", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "[g]it [i]nspect hunk"},
+            { "<leader>gi", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "[g]it [i]nspect hunk" },
         },
     },
     {

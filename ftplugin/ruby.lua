@@ -50,9 +50,4 @@ local function test_context()
     vim.api.nvim_win_set_cursor(0, pos)
 end
 
-vim.keymap.set(
-    "",
-    "<LocalLeader>rc",
-    test_context,
-    { desc = "Run context", silent = true }
-)
+vim.keymap.set("", "<LocalLeader>rc", test_context, { desc = "Run context", silent = true })
