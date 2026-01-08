@@ -248,4 +248,7 @@ return {
             },
         },
     },
+    {
+        "cosmicbuffalo/root_swapper.nvim",
+    },
 }

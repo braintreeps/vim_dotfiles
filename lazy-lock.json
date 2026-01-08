@@ -64,6 +64,7 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2", "source": "lazy_ufo_recipe" },
   "render-markdown.nvim": { "branch": "main", "commit": "73a6ebc842cf81926eb1d424820b800f6f6a1227" },
   "resession.nvim": { "branch": "master", "commit": "05adc14db5c2d0eae064765101dd5e9c594c7851" },
+  "root_swapper.nvim": { "branch": "main", "commit": "d2d2007f446b9c70e0b078a14628dbef8af1b47c" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
   "scala.vim": { "branch": "master", "commit": "a820be156e39d986f59ca0478efb4e41143edbe0" },
   "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
