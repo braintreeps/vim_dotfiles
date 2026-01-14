@@ -251,4 +251,17 @@ return {
     {
         "cosmicbuffalo/root_swapper.nvim",
     },
+
+    {
+        -- provides indentation-related textobjects
+        -- try it out with `vai` or `vii`
+        "nvim-mini/mini.indentscope",
+        version = "*",
+        event = "VeryLazy",
+        init = function()
+            -- this globally disables the highlighting feature of the plugin
+            vim.g.miniindentscope_disable = true
+        end,
+        opts = {},
+    },
 }

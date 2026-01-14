@@ -65,7 +65,7 @@ return {
                             -- characters have been typed.
                             --
                             -- See https://github.com/rafamadriz/friendly-snippets/blob/main/snippets/markdown.json
-                            return  #context.get_keyword() >= 3
+                            return #context.get_keyword() >= 3
                         else
                             return true
                         end
