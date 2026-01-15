@@ -134,9 +134,9 @@ return {
         ft = { "go" },
         build = ":GoInstallBinaries",
         init = function()
-            -- Disable features that conflict with gopls
-            vim.g.go_def_mapping_enabled = 0 -- Let gopls handle gd
-            vim.g.go_doc_keywordprg_enabled = 0 -- Let gopls handle K
+            -- Disable features that we have other plugins for
+            vim.g.go_def_mapping_enabled = 0 -- Let nvim-lspconfig handle gd
+            vim.g.go_doc_keywordprg_enabled = 0 -- Let nvim-lspconfig handle K
             vim.g.go_fmt_autosave = 0 -- Let conform.nvim handle formatting
             vim.g.go_imports_autosave = 0 -- Let conform.nvim handle imports
             vim.g.go_code_completion_enabled = 0 -- Let blink.cmp handle completion

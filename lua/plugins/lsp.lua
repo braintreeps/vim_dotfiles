@@ -81,6 +81,7 @@ return {
                 },
                 bashls = true,
                 gopls = {
+                    cmd = { "gopls", "-remote=auto" },
                     settings = {
                         gopls = {
                             analyses = {
