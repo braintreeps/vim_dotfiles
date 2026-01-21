@@ -197,6 +197,19 @@ return {
             max_lines = 6,
             multiline_threshold = 3,
             trim_scope = "inner",
+            -- Upper block separators (not great because of the background and indent guides)
+            -- separator = "▔", -- 1/8
+            -- separator = "▀", -- 1/2
+
+            -- Lower block separators
+            separator = "▁", -- 1/8
+            -- separator = "▂", -- 1/4
+            -- separator = "▃", -- 3/8
+            -- separator = "▄", -- 1/2
+            -- separator = "▅", -- 5/8
+
+            -- Full height separator
+            -- separator = "█",
         },
         keys = {
             {
