@@ -28,38 +28,43 @@ return {
             {
                 "<leader>uI",
                 function()
-                    require("ibl").setup_buffer(0, { enabled = not require("ibl.config").get_config(0).enabled })
+                    local new_state = not require("ibl.config").get_config(0).enabled
+                    require("ibl").update({ enabled = new_state })
+                    if new_state then
+                        vim.notify("Enabled indentation guides")
+                    else
+                        vim.notify("Disabled indentation guides")
+                    end
                 end,
                 desc = "Toggle Indention Guides",
             },
         },
-        opts = function()
-            return {
-                indent = {
-                    char = "│",
-                    tab_char = "│",
+        opts = {
+            enabled = false,
+            indent = {
+                char = "│",
+                tab_char = "│",
+            },
+            scope = { show_start = false, show_end = false },
+            exclude = {
+                filetypes = {
+                    "Trouble",
+                    "alpha",
+                    "dashboard",
+                    "help",
+                    "lazy",
+                    "mason",
+                    "neo-tree",
+                    "notify",
+                    "snacks_dashboard",
+                    "snacks_notif",
+                    "snacks_terminal",
+                    "snacks_win",
+                    "toggleterm",
+                    "trouble",
                 },
-                scope = { show_start = false, show_end = false },
-                exclude = {
-                    filetypes = {
-                        "Trouble",
-                        "alpha",
-                        "dashboard",
-                        "help",
-                        "lazy",
-                        "mason",
-                        "neo-tree",
-                        "notify",
-                        "snacks_dashboard",
-                        "snacks_notif",
-                        "snacks_terminal",
-                        "snacks_win",
-                        "toggleterm",
-                        "trouble",
-                    },
-                },
-            }
-        end,
+            },
+        },
     },
     {
         "folke/snacks.nvim",
@@ -67,6 +72,9 @@ return {
         lazy = false,
         ---@type snacks.Config
         opts = {
+            indent = {
+                enabled = false,
+            },
             dashboard = {
                 enabled = false,
                 preset = {
