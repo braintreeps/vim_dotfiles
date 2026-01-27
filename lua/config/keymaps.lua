@@ -6,11 +6,6 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsea
 -- open lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
--- Open dotfiles updater TUI
-map("n", "<Leader>e", function()
-    require("config.dotfiles_updater").open()
-end, { desc = "Open dotfiles updater" })
-
 -- Normal and visual mode mapping for commenting lines
 map({ "n", "v" }, "<Leader>cc", "<cmd>normal gcc<cr>", { desc = "Comments the current or highlighted lines" })
 

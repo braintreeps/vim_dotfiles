@@ -5,23 +5,24 @@ local LspConfig = require("config.lsp")
 
 return {
     {
+        "j-hui/fidget.nvim",
+        event = "VeryLazy",
+        opts = {
+            notification = {
+                window = {
+                    winblend = 0, -- transparent background
+                },
+            },
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         event = LazyFileEvents,
         dependencies = {
             "mason.nvim",
             { "mason-org/mason-lspconfig.nvim", config = function() end },
-            {
-                "j-hui/fidget.nvim",
-                opts = {
-                    notification = {
-                        window = {
-                            winblend = 0, -- transparent background
-                        },
-                    },
-                },
-            },
             "saghen/blink.cmp",
-            "cosmicbuffalo/gem_install.nvim",
+            { "cosmicbuffalo/gem_install.nvim", opts = {} },
         },
         opts = {
             -- customize your keymap here, or disable a keymap by setting it to false
@@ -171,14 +172,15 @@ return {
             {
                 "cosmicbuffalo/mason-lock.nvim",
                 opts = {
-                    lockfile_scope = "ensure_installed", -- only the three core packages below will be included in the lockfile
-                    ensure_installed = {
+                    lockfile_scope = "locked_packages", -- only the three core packages below will be included in the lockfile
+                    locked_packages = {
                         { "tree-sitter-cli", version = "v0.25.10" },
                         "stylua",
                         "shfmt",
                         "goimports",
                         "gofumpt",
                     },
+                    silent = true,
                 },
             },
         },
@@ -203,7 +205,7 @@ return {
             end)
 
             mr.refresh(function()
-                for _, tool in ipairs(ml.ensure_installed()) do
+                for _, tool in ipairs(ml.locked_packages()) do
                     local tool_name = type(tool) == "table" and tool[1] or tool
                     local p = mr.get_package(tool_name)
                     if not p:is_installed() and not p:is_installing() then

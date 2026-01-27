@@ -20,6 +20,12 @@ local lazygit_edit_at_line_command = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{fil
 
 return {
     {
+        -- Pin lazy.nvim to stable releases and prevent accidental updates via `U`
+        "folke/lazy.nvim",
+        version = "*", -- only stable releases
+        pin = true, -- never update unless explicitly unpinned
+    },
+    {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         event = LazyFileEvents,
@@ -171,9 +177,9 @@ return {
             keymap = {
                 open = "<leader>e",
             },
-            check_updates_on_startup = { enabled = true },
+            check_updates_on_startup = { enabled = false }, -- disable update checks by default
             periodic_check = {
-                enabled = true,
+                enabled = false, -- disable update checks by default
                 frequency_minutes = 120,
             },
             excluded_filetypes = { "gitcommit", "gitrebase" },
@@ -254,6 +260,7 @@ return {
                 vim.fn.stdpath("config"),
                 vim.fn.stdpath("config") .. "/lua/personal",
             },
+            silent = true, -- suppresses fidget displays
         },
     },
     {

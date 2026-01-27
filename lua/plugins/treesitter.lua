@@ -59,6 +59,60 @@ return {
         config = function(_, opts)
             local TS = require("nvim-treesitter")
 
+            -- Patch treesitter logger to use fidget directly
+            local ok, log = pcall(require, "nvim-treesitter.log")
+            if ok and log then
+                local fidget = require("fidget.notification")
+                local original_new = log.new
+
+                log.new = function(ctx)
+                    local logger = original_new(ctx)
+                    local prefix = "[nvim-treesitter/" .. ctx .. "]"
+
+                    logger.info = function(self, fmt, ...)
+                        fidget.notify(prefix .. ": " .. string.format(fmt, ...), vim.log.levels.INFO, {
+                            group = "treesitter",
+                            annote = ctx,
+                        })
+                    end
+                    logger.warn = function(self, fmt, ...)
+                        fidget.notify(prefix .. " warning: " .. string.format(fmt, ...), vim.log.levels.WARN, {
+                            group = "treesitter",
+                            annote = ctx,
+                        })
+                    end
+                    logger.error = function(self, fmt, ...)
+                        fidget.notify(prefix .. " error: " .. string.format(fmt, ...), vim.log.levels.ERROR, {
+                            group = "treesitter",
+                            annote = ctx,
+                        })
+                    end
+
+                    return logger
+                end
+
+                -- Patch module-level log functions too
+                local module_prefix = "[nvim-treesitter]"
+                log.info = function(fmt, ...)
+                    fidget.notify(module_prefix .. ": " .. string.format(fmt, ...), vim.log.levels.INFO, {
+                        group = "treesitter",
+                        annote = "install",
+                    })
+                end
+                log.warn = function(fmt, ...)
+                    fidget.notify(module_prefix .. " warning: " .. string.format(fmt, ...), vim.log.levels.WARN, {
+                        group = "treesitter",
+                        annote = "install",
+                    })
+                end
+                log.error = function(fmt, ...)
+                    fidget.notify(module_prefix .. " error: " .. string.format(fmt, ...), vim.log.levels.ERROR, {
+                        group = "treesitter",
+                        annote = "install",
+                    })
+                end
+            end
+
             setmetatable(require("nvim-treesitter.install"), {
                 __newindex = function(_, k)
                     if k == "compilers" then
