@@ -1,3 +1,4 @@
+vim.bo.syntax = "ruby"
 -- mnemonic: ruby-debug
 vim.keymap.set(
     "",
